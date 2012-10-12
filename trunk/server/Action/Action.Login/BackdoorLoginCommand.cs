@@ -15,7 +15,7 @@ namespace Action.Login
 
         protected override void OnExecute(int data)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

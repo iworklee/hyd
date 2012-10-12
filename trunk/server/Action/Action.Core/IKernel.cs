@@ -5,7 +5,9 @@ using System.Text;
 
 namespace Action.Core
 {
-    public class Class1
+    public interface IKernel
     {
+        void Response(object data);
+        void Save();
     }
 }

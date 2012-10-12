@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
-  <includeClasses/>
+  <includeClasses>
+    <classEntry path="res.ResLoaderManager"/>
+    <classEntry path="res.vo.ResBitmapVO"/>
+    <classEntry path="res.interfaces.IResVO"/>
+    <classEntry path="res.vo.ResSwfVO"/>
+    <classEntry path="res.vo.ResVO"/>
+    <classEntry path="res.vo.ResXmlVO"/>
+  </includeClasses>
   <includeResources/>
   <namespaceManifests/>
 </flexLibProperties>

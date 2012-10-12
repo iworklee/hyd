@@ -33,7 +33,7 @@ namespace Action.Engine.Command
         /// <summary>
         /// 执行命令
         /// </summary>
-        /// <param name="args"></param>
-        void Execute(object input);
+        /// <param name="data"></param>
+        void Execute(object data);
     }
 }

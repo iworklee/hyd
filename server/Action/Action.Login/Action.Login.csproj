@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0348CA5E-C60B-424D-999C-55A153A637E1}</ProjectGuid>
+    <ProjectGuid>{EE199967-9BD1-41E8-9465-9E3B60C33E58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Action.Engine</RootNamespace>
-    <AssemblyName>Action.Engine</AssemblyName>
+    <RootNamespace>Action.Login</RootNamespace>
+    <AssemblyName>Action.Login</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,15 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command\BaseCommand.cs" />
-    <Compile Include="Command\CommandFactory.cs" />
-    <Compile Include="Command\ICommand.cs" />
+    <Compile Include="BackdoorLoginCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Action.Core\Action.Core.csproj">
       <Project>{4528F2B2-5546-4F67-9B13-D75E1058876E}</Project>
       <Name>Action.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Action.Engine\Action.Engine.csproj">
+      <Project>{0348CA5E-C60B-424D-999C-55A153A637E1}</Project>
+      <Name>Action.Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

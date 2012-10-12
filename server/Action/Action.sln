@@ -5,6 +5,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Action.Core", "Action.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Action.Engine", "Action.Engine\Action.Engine.csproj", "{0348CA5E-C60B-424D-999C-55A153A637E1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{E3994E17-EA3D-4139-A8EC-AAF34743DFD2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{B84861F9-B0A9-49F5-8261-5A6FE783B2F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Action.Login", "Action.Login\Action.Login.csproj", "{EE199967-9BD1-41E8-9465-9E3B60C33E58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,9 +41,24 @@ Global
 		{0348CA5E-C60B-424D-999C-55A153A637E1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0348CA5E-C60B-424D-999C-55A153A637E1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0348CA5E-C60B-424D-999C-55A153A637E1}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4528F2B2-5546-4F67-9B13-D75E1058876E} = {E3994E17-EA3D-4139-A8EC-AAF34743DFD2}
+		{0348CA5E-C60B-424D-999C-55A153A637E1} = {E3994E17-EA3D-4139-A8EC-AAF34743DFD2}
+		{EE199967-9BD1-41E8-9465-9E3B60C33E58} = {B84861F9-B0A9-49F5-8261-5A6FE783B2F9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = .

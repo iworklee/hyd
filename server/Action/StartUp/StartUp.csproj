@@ -67,6 +67,12 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Config\log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\log4net.unix.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Action.Engine\Action.Engine.csproj">

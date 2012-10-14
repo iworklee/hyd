@@ -5,6 +5,7 @@ using System.Text;
 using SuperSocket.SocketEngine.Configuration;
 using SuperSocket.SocketEngine;
 using System.Configuration;
+using SuperSocket.Common;
 
 namespace StartUp
 {
@@ -12,6 +13,8 @@ namespace StartUp
     {
         static void Main(string[] args)
         {
+            LogUtil.Setup();
+
             SocketServiceConfig serverConfig = ConfigurationManager.GetSection("socketServer") as SocketServiceConfig;
             if (!SocketServerManager.Initialize(serverConfig))
             {

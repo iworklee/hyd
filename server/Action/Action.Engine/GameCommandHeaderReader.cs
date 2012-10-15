@@ -16,21 +16,26 @@ namespace Action.Engine
         //private int currentIndex = 0;
         //private const int MAX_LENGTH = 5;
         private int cmdId = 0;
-        private int pkgLen = 0;
+        private int dataLen = 0;
 
         public IAppServer AppServer { get; private set; }
 
         public int LeftBufferSize { get { return currentReceived; } }
+
+        public GameCommandDataReader DataReader { get; private set; }
 
         public ICommandReader<BinaryCommandInfo> NextCommandReader { get; private set; }
 
         public GameCommandHeaderReader(IAppServer appServer)
         {
             AppServer = appServer;
+            DataReader = new GameCommandDataReader(this);
         }
 
         public BinaryCommandInfo FindCommandInfo(IAppSession session, byte[] readBuffer, int offset, int length, bool isReusableBuffer, out int left)
         {
+            NextCommandReader = this;
+
             left = 0;
 
             if (currentReceived + length <= buffer.Length)
@@ -44,18 +49,21 @@ namespace Action.Engine
             else
             {
                 Array.Copy(readBuffer, offset, buffer, currentReceived, buffer.Length - currentReceived);
-                left = length - buffer.Length + currentReceived;
+                left = length - (buffer.Length - currentReceived);
             }
 
             currentReceived = 0;
 
             cmdId = BitConverter.ToInt32(buffer, 0);
 
-            pkgLen = BitConverter.ToInt32(buffer, 4);
+            dataLen = BitConverter.ToInt32(buffer, 4);
 
-            if (pkgLen > 0)
+            if (dataLen > 0)
             {
-                return new BinaryCommandInfo(cmdId.ToString(), new byte[pkgLen]);
+                DataReader.CommandId = cmdId;
+                DataReader.DataLength = dataLen;
+                NextCommandReader = DataReader;
+                return null;
             }
             else
             {

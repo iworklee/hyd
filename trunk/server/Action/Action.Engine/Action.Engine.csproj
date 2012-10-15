@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.ProtocolBuffers">
+      <HintPath>..\Reference\protobuf-csharp-port\2.4.1\Google.ProtocolBuffers.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.ProtocolBuffers.Serialization">
+      <HintPath>..\Reference\protobuf-csharp-port\2.4.1\Google.ProtocolBuffers.Serialization.dll</HintPath>
+    </Reference>
     <Reference Include="SuperSocket.SocketBase">
       <HintPath>..\Reference\SuperSocket\1.4\SuperSocket.SocketBase.dll</HintPath>
     </Reference>
@@ -49,7 +55,7 @@
     <Compile Include="Command\BaseCommand.cs" />
     <Compile Include="Command\CommandFactory.cs" />
     <Compile Include="Command\ICommand.cs" />
-    <Compile Include="ECHO.cs" />
+    <Compile Include="GameCommand.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="GameSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -41,6 +41,8 @@ namespace StartUp
 
             Console.WriteLine();
             Console.WriteLine("The server has been stopped!");
+            Console.WriteLine("Press any key to close!");
+            Console.ReadKey();
         }
     }
 }

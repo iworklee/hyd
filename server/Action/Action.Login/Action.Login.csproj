@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SuperSocket.Common, Version=1.4.5.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\SuperSocket\1.4\SuperSocket.Common.dll</HintPath>
+    </Reference>
     <Reference Include="SuperSocket.SocketBase, Version=1.4.5.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Reference\SuperSocket\1.4\SuperSocket.SocketBase.dll</HintPath>

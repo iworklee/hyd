@@ -5,6 +5,7 @@ using System.Text;
 using Action.Engine;
 using System.ComponentModel.Composition;
 using Action.Core;
+using SuperSocket.Common;
 
 namespace Action.Login
 {
@@ -13,12 +14,14 @@ namespace Action.Login
     {
         public override void Load(GameServer server)
         {
-            TestHelper.WriteLine("LoginModule loaded.");
+            LogUtil.LogInfo("LoginModule loaded.");
+            //TestHelper.WriteLine("LoginModule loaded.");
         }
 
         public override void Unload(GameServer server)
         {
-            TestHelper.WriteLine("LoginModule unloaded.");
+            LogUtil.LogInfo("LoginModule unloaded.");
+            //TestHelper.WriteLine("LoginModule unloaded.");
         }
     }
 }

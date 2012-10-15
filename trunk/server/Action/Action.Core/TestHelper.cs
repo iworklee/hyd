@@ -7,14 +7,14 @@ namespace Action.Core
 {
     public static class TestHelper
     {
-        public static void WriteLine(object text)
-        {
-            Console.WriteLine(text);
-        }
+        //public static void WriteLine(object text)
+        //{
+        //    Console.WriteLine(text);
+        //}
 
-        public static void WriteLine(string format, params object[] args)
-        {
-            Console.WriteLine(format, args);
-        }
+        //public static void WriteLine(string format, params object[] args)
+        //{
+        //    Console.WriteLine(format, args);
+        //}
     }
 }

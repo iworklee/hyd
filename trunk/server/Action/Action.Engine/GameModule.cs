@@ -13,7 +13,7 @@ namespace Action.Engine
 
     public abstract class GameModule : IGameModule
     {
-        public abstract void Load(GameServer server);
-        public abstract void Unload(GameServer server);
+        public virtual void Load(GameServer server) { }
+        public virtual void Unload(GameServer server) { }
     }
 }

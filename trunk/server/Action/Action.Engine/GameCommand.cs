@@ -9,6 +9,14 @@ namespace Action.Engine
 {
     public class GameCommand : CommandBase<GameSession,BinaryCommandInfo>
     {
+        public override string Name
+        {
+            get
+            {
+                return base.Name;
+            }
+        }
+
         public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
         {
             throw new NotImplementedException();

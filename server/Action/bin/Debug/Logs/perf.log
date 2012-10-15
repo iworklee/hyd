@@ -1,0 +1,14 @@
+2012-10-15 14:08:26,250 SuperSocket - ---------------------------------------------------
+CPU Usage: 0.00%, Physical Memory Usage: 29,016,064.00, Total Thread Count: 23
+AvailableWorkingThreads: 1022, AvailableCompletionPortThreads: 1000
+MaxWorkingThreads: 1023, MaxCompletionPortThreads: 1000
+FlashPolicyServer - Started Time: 2012-10-15 14:08:15, Total Connections: 0, Total Handled Commands: 0, Command Handling Speed: 0/s
+hydGameServer - Started Time: 2012-10-15 14:08:25, Total Connections: 0, Total Handled Commands: 0, Command Handling Speed: 0/s
+
+2012-10-15 14:08:51,031 SuperSocket - ---------------------------------------------------
+CPU Usage: 0.00%, Physical Memory Usage: 20,725,760.00, Total Thread Count: 15
+AvailableWorkingThreads: 1022, AvailableCompletionPortThreads: 1000
+MaxWorkingThreads: 1023, MaxCompletionPortThreads: 1000
+FlashPolicyServer - Started Time: 2012-10-15 14:08:49, Total Connections: 0, Total Handled Commands: 0, Command Handling Speed: 0/s
+hydGameServer - Started Time: 2012-10-15 14:08:49, Total Connections: 0, Total Handled Commands: 0, Command Handling Speed: 0/s
+

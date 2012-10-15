@@ -18,8 +18,15 @@ namespace Action.Engine
         protected override void OnStartup()
         {
             base.OnStartup();
-            // TODO 模块加载逻辑 
+            foreach (var module in GameModuleFactory.Current.Modules)
+                module.Load(this);
         }
 
+        protected override void OnStopped()
+        {
+            base.OnStopped();
+            foreach (var module in GameModuleFactory.Current.Modules)
+                module.Unload(this);
+        }
     }
 }

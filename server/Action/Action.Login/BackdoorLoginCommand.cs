@@ -6,6 +6,7 @@ using Action.Engine;
 
 namespace Action.Login
 {
+    [GameCommand(1000)]
     public class BackdoorLoginCommand : GameCommand
     {
         

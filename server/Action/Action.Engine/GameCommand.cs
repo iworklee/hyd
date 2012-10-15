@@ -15,13 +15,13 @@ namespace Action.Engine
         } 
     }
 
-    public class GameCommand<TProtobuf> : CommandBase<GameSession, BinaryCommandInfo>
-    {
-        public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
-        {
-            throw new NotImplementedException();
-            //commandInfo.
-            //GeneratedBuilder<TProtobuf, Builder> 
-        }
-    }
+    //public class GameCommand<TProtobuf> : CommandBase<GameSession, BinaryCommandInfo>
+    //{
+    //    public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
+    //    {
+    //        throw new NotImplementedException();
+    //        //commandInfo.
+    //        //GeneratedBuilder<TProtobuf, Builder> 
+    //    }
+    //}
 }

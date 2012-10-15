@@ -56,6 +56,8 @@
     <Compile Include="Command\CommandFactory.cs" />
     <Compile Include="Command\ICommand.cs" />
     <Compile Include="GameCommand.cs" />
+    <Compile Include="GameCommandReader.cs" />
+    <Compile Include="GameProtocol.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="GameSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

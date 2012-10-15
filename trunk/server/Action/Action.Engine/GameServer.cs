@@ -10,6 +10,11 @@ namespace Action.Engine
     public class GameServer : AppServer<GameSession, BinaryCommandInfo>
     {
 
+        public GameServer()
+            : base(new GameProtocol())
+        {
+        }
+
         protected override void OnStartup()
         {
             base.OnStartup();

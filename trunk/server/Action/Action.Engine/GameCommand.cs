@@ -7,29 +7,50 @@ using Google.ProtocolBuffers;
 
 namespace Action.Engine
 {
-    public class GameCommand : CommandBase<GameSession,BinaryCommandInfo>
+    public abstract class GameCommand : CommandBase<GameSession, BinaryCommandInfo>
     {
-        public override string Name
+        protected GameCommand()
+            : base()
         {
-            get
-            {
-                return base.Name;
-            }
+            var type = this.GetType();
+            var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
+            if (attr == null)
+                name = null;
+            else
+                name = ((GameCommandAttribute)attr).CommandId.ToString();
         }
+
+        private string name;
+        public override string Name { get { return name; } }
 
         public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
         {
             throw new NotImplementedException();
-        } 
+        }
     }
 
-    //public class GameCommand<TProtobuf> : CommandBase<GameSession, BinaryCommandInfo>
-    //{
-    //    public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
-    //    {
-    //        throw new NotImplementedException();
-    //        //commandInfo.
-    //        //GeneratedBuilder<TProtobuf, Builder> 
-    //    }
-    //}
+    public abstract class GameCommand<TProtobuf> : CommandBase<GameSession, BinaryCommandInfo>
+    {
+        protected GameCommand()
+            : base()
+        {
+            var type = this.GetType();
+            var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
+            if (attr == null)
+                name = null;
+            else
+                name = ((GameCommandAttribute)attr).CommandId.ToString();
+        }
+
+        private string name;
+        public override string Name { get { return name; } }
+
+        public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public abstract void ExecuteCommand(GameSession session, TProtobuf data);
+
+    }
 }

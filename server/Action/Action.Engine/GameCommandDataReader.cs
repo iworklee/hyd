@@ -8,7 +8,7 @@ using SuperSocket.SocketBase;
 
 namespace Action.Engine
 {
-    public class GameCommandReader : CommandReaderBase<BinaryCommandInfo>
+    public class GameCommandDataReader : CommandReaderBase<BinaryCommandInfo>
     {
         public override BinaryCommandInfo FindCommandInfo(IAppSession session, byte[] readBuffer, int offset, int length, bool isReusableBuffer, out int left)
         {

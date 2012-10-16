@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ProtoBuf;
+using System.IO;
 
 namespace Action.Engine
 {
     static class GameCommandDataDeserializer
     {
         private static Dictionary<Type, IGameCommandDataDeserializer> _hash;
-        private static IGameCommandDataDeserializer _default;
 
         static GameCommandDataDeserializer()
         {
@@ -20,21 +21,34 @@ namespace Action.Engine
             _hash.Add(typeof(float), new SingleDeserializer());
             _hash.Add(typeof(double), new DoubleDeserializer());
             _hash.Add(typeof(string), new StringDeserializer());
-            _default = new ProtobufDeserializer();
         }
 
-        public static object Deserialize(Type type, byte[] data)
-        {
-            IGameCommandDataDeserializer des = null;
-            if (_hash.TryGetValue(type, out des))
-                return des.Deserialize(data);
-            else
-                return _default;
-        }
+        //public static object Deserialize(Type type, byte[] data)
+        //{
+        //    IGameCommandDataDeserializer des = null;
+        //    if (_hash.TryGetValue(type, out des))
+        //        return des.Deserialize(data);
+        //    else
+        //        return _default.Deserialize(data);
+        //}
 
         public static T Deserialize<T>(byte[] data)
         {
-            return (T)Deserialize(typeof(T), data);
+            Type type = typeof(T);
+            IGameCommandDataDeserializer des = null;
+            if (_hash.TryGetValue(type, out des))
+                return (T)des.Deserialize(data);
+            else
+            {
+
+                using (var ms = new MemoryStream(data))
+                {
+                    var o =  (T)Serializer.Deserialize<T>(ms);
+                }
+
+                return default(T);
+            }
+
         }
     }
 
@@ -99,11 +113,4 @@ namespace Action.Engine
         }
     }
 
-    class ProtobufDeserializer : IGameCommandDataDeserializer
-    {
-        public object Deserialize(byte[] data)
-        {
-            return null;
-        }
-    }
 }

@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.ProtocolBuffers">
-      <HintPath>..\Reference\protobuf-csharp-port\2.4.1\Google.ProtocolBuffers.dll</HintPath>
+    <Reference Include="protobuf-net, Version=2.0.0.594, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\protobuf-net\r594\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="SuperSocket.Common, Version=1.4.5.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

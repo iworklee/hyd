@@ -1,0 +1,4 @@
+package Action.Model.Protobuf;
+message BackgroundLoginArgs {
+  optional string Account = 1;
+}

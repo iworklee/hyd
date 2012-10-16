@@ -12,9 +12,19 @@ namespace Action.Login
     [GameCommand(1000)]
     public class BackdoorLoginCommand : GameCommand<BackdoorLoginArgs>
     {
+        protected override bool Ready(GameSession session, BackdoorLoginArgs args)
+        {
+            return true;
+        }
+
         protected override void Run(GameSession session, BackdoorLoginArgs args)
         {
-            throw new NotImplementedException();
+            if (args.Account != null && args.Account.Trim().ToLower().StartsWith("test"))
+            {
+                session.Bind(args.Account);
+            }
+            else
+                session.Close();
         }
     }
 }

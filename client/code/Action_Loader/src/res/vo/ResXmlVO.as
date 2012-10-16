@@ -15,10 +15,10 @@ package res.vo
 			super();
 		}
 		
-		public function initXmlVO(xmlData:XML, urlName:String, isSave:Boolean, byteTotal:Number):void
+		public function initXmlVO(xmlData:XML, urlName:String, isSave:Boolean, byteTotal:Number, passData:Object):void
 		{
 			this._xmlData = xmlData;
-			super.initVO(urlName, isSave, byteTotal);
+			super.initVO(urlName, isSave, byteTotal, passData);
 		}
 	}
 }

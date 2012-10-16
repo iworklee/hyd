@@ -20,15 +20,22 @@ package res.vo
 			return this._callbackFunc;
 		}
 		
+		private var _passData:Object;
+		public function get passData():Object
+		{
+			return this._passData;
+		}
+		
 		public function PreloadData()
 		{
 		}
 		
-		public function initPreload(url:String, isSave:Boolean, callbackFunc:Function):void
+		public function initPreload(url:String, isSave:Boolean, callbackFunc:Function, passData:Object):void
 		{
 			this._url = url;
 			this._isSave = isSave;
 			this._callbackFunc = callbackFunc;
+			this._passData = passData;
 		}
 	}
 }

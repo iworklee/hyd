@@ -32,7 +32,10 @@ package res.data
 
 		public function initByXML(xmlData:XML):void
 		{
-			
+			this._configName = xmlData.@configName;
+			this._type = xmlData.@type;
+			this._description = xmlData.@description;
+			this._url = xmlData.@url;
 		}
 	}
 }

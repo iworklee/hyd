@@ -10,16 +10,7 @@ package
 	{
 		public function Action_Temp_Main()
 		{
-			ResLoaderManager.getInstance().loadXmlByURL(ConfigDataManager.CONFIG_URL, false, loadXmlFunc);
-			ResLoaderManager.getInstance().loadXmlByURL(ConfigDataManager.CONFIG_URL);
-			
-			ResLoaderManager.getInstance().loadXmlByURL("assets/xml/animation/animationConfig.xml");
-			ResLoaderManager.getInstance().loadXmlByURL("assets/xml/animation/actionConfig.xml");
-		}
-		
-		private function loadXmlFunc(xmlData:ResXmlVO):void
-		{
-			
+			ConfigDataManager.getInstance().initConfigData();
 		}
 	}
 }

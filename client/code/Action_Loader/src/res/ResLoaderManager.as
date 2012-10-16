@@ -1,14 +1,16 @@
 package res
 {
 	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	
+	import res.event.ResXmlLoadEvent;
 	import res.loader.ResXmlLoader;
 	import res.vo.PreloadXmlData;
 	import res.vo.ResXmlVO;
 
-	public class ResLoaderManager
+	public class ResLoaderManager extends EventDispatcher
 	{
 		private static var _instance:ResLoaderManager;
 		public static function getInstance():ResLoaderManager
@@ -74,11 +76,18 @@ package res
 			}
 		}
 		
-		public function loadXmlByURL(url:String, isSave:Boolean = false, callbackFunc:Function = null):ResXmlVO
+		public function loadXmlByURL(url:String, isSave:Boolean = false, callbackFunc:Function = null, passData:Object = null):ResXmlVO
 		{
 			var resXmlVO:ResXmlVO = ResDataPool.getInstance().getXmlVOByURL(url);
 			if(resXmlVO)
 			{
+				if(callbackFunc != null)
+				{
+					callbackFunc(resXmlVO);
+				}
+				
+				this.dispatchEvent(new ResXmlLoadEvent(resXmlVO));
+				
 				return resXmlVO;
 			}
 			
@@ -88,7 +97,7 @@ package res
 			}
 			
 			var preloadXmlData:PreloadXmlData = new PreloadXmlData();
-			preloadXmlData.initPreload(url, isSave, callbackFunc);
+			preloadXmlData.initPreload(url, isSave, callbackFunc, passData);
 			
 			if(this._currentXmlLoadingNum < this._xmlLoadLimit)
 			{
@@ -119,13 +128,15 @@ package res
 			if(this._currentXmlLoadingQueue[completeXmlLoader.resUrl])
 			{
 				var preloadXmlData:PreloadXmlData = this._currentXmlLoadingQueue[completeXmlLoader.resUrl];
-				ResDataPool.getInstance().addResXmlVO(xmlData, completeXmlLoader.resUrl, preloadXmlData.isSave, completeXmlLoader.bytesTotal);
+				ResDataPool.getInstance().addResXmlVO(xmlData, preloadXmlData.url, preloadXmlData.isSave, completeXmlLoader.bytesTotal, preloadXmlData.passData);
 				completeXmlLoader.removeEventListener(Event.COMPLETE, xmlLoadComplete);
 				
 				if(preloadXmlData.callbackFunc != null)
 				{
 					preloadXmlData.callbackFunc(ResDataPool.getInstance().getXmlVOByURL(completeXmlLoader.resUrl));
 				}
+
+				this.dispatchEvent(new ResXmlLoadEvent(ResDataPool.getInstance().getXmlVOByURL(completeXmlLoader.resUrl)));
 
 				this._currentXmlLoadingQueue[completeXmlLoader.resUrl] = null;
 				delete this._currentXmlLoadingQueue[completeXmlLoader.resUrl];
@@ -136,7 +147,7 @@ package res
 			if(this._currentXmlLoadingNum < this._xmlLoadLimit && this._xmlPreloadQueue.length > 0)
 			{
 				var shiftLoadData:PreloadXmlData = this._xmlPreloadQueue.shift();
-				this.loadXmlByURL(shiftLoadData.url, shiftLoadData.isSave, shiftLoadData.callbackFunc);
+				this.loadXmlByURL(shiftLoadData.url, shiftLoadData.isSave, shiftLoadData.callbackFunc, shiftLoadData.passData);
 			}
 		}
 	}

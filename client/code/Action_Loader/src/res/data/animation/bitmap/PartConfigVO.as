@@ -1,4 +1,4 @@
-package res.data.animation
+package res.data.animation.bitmap
 {
 	public class PartConfigVO
 	{
@@ -44,7 +44,12 @@ package res.data.animation
 				
 		public function initByXML(xmlData:XML):void
 		{
-			
+			this._type = xmlData.@type;
+			this._partWidth = xmlData.@partWidth;
+			this._partHeight = xmlData.@partHeight;
+			this._centerX = xmlData.@centerX;
+			this._centerY = xmlData.@centerY;
+			this._isVertical = xmlData.@isVertical;
 		}
 	}
 }

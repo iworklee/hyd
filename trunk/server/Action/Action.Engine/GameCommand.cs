@@ -9,23 +9,6 @@ namespace Action.Engine
 {
     public abstract class GameCommandBase : CommandBase<GameSession, BinaryCommandInfo>
     {
-        //protected GameCommandBase()
-        //    : base()
-        //{
-        //    var type = this.GetType();
-        //    var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
-        //    if (attr == null)
-        //        _name = null;
-        //    else
-        //        _name = ((GameCommandAttribute)attr).CommandId.ToString();
-        //}
-
-        //private string _name;
-        //public override string Name
-        //{
-        //    get { return _name; }
-        //}
-
         protected virtual int CD
         {
             get { return 0; }

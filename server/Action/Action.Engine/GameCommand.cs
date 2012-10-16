@@ -56,16 +56,16 @@ namespace Action.Engine
     {
         protected override void Execute(GameSession session, BinaryCommandInfo commandInfo)
         {
-            var data = GameCommandDataDeserializer.Deserialize<T>(commandInfo.Data);
-            if (Ready(session, data))
-                Run(session, data);
+            var args = GameCommandDataDeserializer.Deserialize<T>(commandInfo.Data);
+            if (Ready(session, args))
+                Run(session, args);
         }
 
-        protected virtual bool Ready(GameSession session, T data)
+        protected virtual bool Ready(GameSession session, T args)
         {
             return true;
         }
 
-        protected abstract void Run(GameSession session, T data);
+        protected abstract void Run(GameSession session, T args);
     }
 }

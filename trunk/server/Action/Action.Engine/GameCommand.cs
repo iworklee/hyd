@@ -42,6 +42,16 @@ namespace Action.Engine
         }
 
         protected abstract void Execute(GameSession session, BinaryCommandInfo commandInfo);
+
+        public override string ToString()
+        {
+            var type = this.GetType();
+            var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
+            if (attr == null)
+                return Name;
+            else
+                return string.Format("{0}({1})", Name, ((GameCommandAttribute)attr).CommandId);
+        }
     }
 
     public abstract class GameCommand : GameCommandBase

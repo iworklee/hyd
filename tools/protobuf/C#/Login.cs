@@ -10,10 +10,10 @@
 // Generated from: protos/Login.proto
 namespace Action.Model.Protobuf
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BackgroundLoginArgs")]
-  public partial class BackgroundLoginArgs : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BackdoorLoginArgs")]
+  public partial class BackdoorLoginArgs : global::ProtoBuf.IExtensible
   {
-    public BackgroundLoginArgs() {}
+    public BackdoorLoginArgs() {}
     
 
     private string _Account = "";

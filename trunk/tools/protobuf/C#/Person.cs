@@ -9,7 +9,7 @@
 
 // Generated from: protos/Person.proto
 // Note: requires additional types generated from: protobuf-net.proto
-namespace AS3.Model.Protobuf
+namespace Action.Model.Protobuf
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Person")]
   public partial class Person : global::ProtoBuf.IExtensible

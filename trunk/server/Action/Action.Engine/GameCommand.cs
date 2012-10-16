@@ -74,16 +74,9 @@ namespace Action.Engine
     {
         protected override void Execute(GameSession session, BinaryCommandInfo commandInfo)
         {
-            var data = (T)Deserialize(commandInfo.Data);
+            var data = GameCommandDataDeserializer.Deserialize<T>(commandInfo.Data);
             if (Ready(session, data))
                 Run(session, data);
-        }
-
-        private object Deserialize(byte[] data)
-        {
-            if (typeof(T) == typeof(int))
-                return BitConverter.ToInt32(data, 0);
-            return null;
         }
 
         protected virtual bool Ready(GameSession session, T data)

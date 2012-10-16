@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Action.Engine;
 using SuperSocket.SocketBase.Command;
+using SuperSocket.Common;
 
 namespace Action.Login
 {
@@ -12,7 +13,7 @@ namespace Action.Login
     {
         protected override void Run(GameSession session, int data)
         {
-            throw new NotImplementedException();
+            LogUtil.LogDebug("BackdoorLoginCommand is running.");
         }
     }
 }

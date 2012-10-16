@@ -1,4 +1,9 @@
-package Action.Model.Protobuf;
+
+import "protobuf-net.proto";
+
+package AS3.Model.Protobuf;
+option (protobuf_net.namespace) = "Action.Model.Protobuf";
+
 message BackdoorLoginArgs {
   optional string Account = 1;
 }

@@ -60,6 +60,7 @@
     <Compile Include="GameCommandAttribute.cs" />
     <Compile Include="GameCommandDataDeserializer.cs" />
     <Compile Include="GameCommandDataReader.cs" />
+    <Compile Include="GameCommandFilterAttribute.cs" />
     <Compile Include="GameModule.cs" />
     <Compile Include="GameModuleFactory.cs" />
     <Compile Include="GameProtocol.cs" />

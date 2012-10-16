@@ -46,8 +46,15 @@ namespace Action.Engine
             get
             {
                 var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
-                var server = MongoServer.Create(connectionString);
-                return server;
+                return MongoServer.Create(connectionString);
+            }
+        }
+
+        public MongoDatabase DefaultDatabase
+        {
+            get
+            {
+                return MongoDBServer.GetDatabase("Game");
             }
         }
 

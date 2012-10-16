@@ -6,6 +6,7 @@ using SuperSocket.SocketBase.Command;
 using SuperSocket.Common;
 using Action.Engine;
 using Action.Model.Protobuf;
+using MongoDB.Driver;
 
 namespace Action.Login
 {
@@ -19,6 +20,10 @@ namespace Action.Login
 
         protected override void Run(GameSession session, BackdoorLoginArgs args)
         {
+            var db = session.DefaultDatabase;
+            var otherDB = session.MongoDBServer.GetDatabase("Ranking");
+            
+
             if (args.Account != null && args.Account.Trim().ToLower().StartsWith("test"))
             {
                 session.Bind(args.Account);

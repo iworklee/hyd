@@ -19,12 +19,16 @@ namespace StartUp
             if (!SocketServerManager.Initialize(serverConfig))
             {
                 Console.WriteLine("Failed to initialize SuperSocket server! Please check error log for more information!");
+                Console.WriteLine("Press any key to close!");
+                Console.ReadKey();
                 return;
             }
 
             if (!SocketServerManager.Start())
             {
                 Console.WriteLine("Failed to start SuperSocket server! Please check error log for more information!");
+                Console.WriteLine("Press any key to close!");
+                Console.ReadKey();
                 SocketServerManager.Stop();
                 return;
             }
@@ -41,6 +45,7 @@ namespace StartUp
 
             Console.WriteLine();
             Console.WriteLine("The server has been stopped!");
+
             Console.WriteLine("Press any key to close!");
             Console.ReadKey();
         }

@@ -31,8 +31,8 @@ namespace Action.Engine
         }
 
         [ImportMany]
-        private IEnumerable<Lazy<GameCommand, ICommandMetaData>> _commands = null;
-
+        private IEnumerable<Lazy<GameCommandBase, ICommandMetaData>> _commands = null;
+        
         protected override bool SetupCommands(Dictionary<string, ICommand<GameSession, BinaryCommandInfo>> commandDict)
         {
             if (!Composition.ComposeParts(this))
@@ -43,13 +43,13 @@ namespace Action.Engine
 
             foreach (var cmd in _commands)
             {
-                Logger.LogDebug(string.Format("Command found: {0} - {1}", cmd.Metadata.CommandId, cmd.GetType().AssemblyQualifiedName));
+                Logger.LogDebug(string.Format("Command found: {0}({1}) - {2}", cmd.Value.Name,cmd.Metadata.CommandId, cmd.Value.GetType().AssemblyQualifiedName));
 
                 try
                 {
                     if (commandDict.ContainsKey(cmd.Metadata.CommandId.ToString()))
                     {
-                        Logger.LogError("Duplicated name command has been found! Command name: " + cmd.Value.Name);
+                        Logger.LogError(string.Format("Duplicated name command has been found! Command : {0}({1})", cmd.Value.Name, cmd.Metadata.CommandId));
                         return false;
                     }
 

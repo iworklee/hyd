@@ -41,6 +41,8 @@ namespace Action.Engine
             _enabled = true;
         }
 
+        public GamePlayer Player { get; set; }
+
         public MongoServer MongoDBServer
         {
             get

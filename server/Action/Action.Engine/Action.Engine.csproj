@@ -67,6 +67,7 @@
     <Compile Include="GameCommandFilterAttribute.cs" />
     <Compile Include="GameModule.cs" />
     <Compile Include="GameModuleFactory.cs" />
+    <Compile Include="GamePlayer.cs" />
     <Compile Include="GameProtocol.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="GameSession.cs" />

@@ -20,9 +20,7 @@ namespace Action.Login
 
         protected override void Run(GameSession session, BackdoorLoginArgs args)
         {
-            var db = session.DefaultDatabase;
-            var otherDB = session.MongoDBServer.GetDatabase("Ranking");
-            
+            var db = session.DefaultDatabase;            
 
             if (args.Account != null && args.Account.Trim().ToLower().StartsWith("test"))
             {

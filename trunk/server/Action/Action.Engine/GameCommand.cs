@@ -7,32 +7,80 @@ using Google.ProtocolBuffers;
 
 namespace Action.Engine
 {
-    public abstract class GameCommand : CommandBase<GameSession, BinaryCommandInfo>
+    public abstract class GameCommandBase : CommandBase<GameSession, BinaryCommandInfo>
     {
-        protected GameCommand()
+        protected GameCommandBase()
             : base()
         {
             var type = this.GetType();
             var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
             if (attr == null)
-                name = null;
+                _name = null;
             else
-                name = ((GameCommandAttribute)attr).CommandId.ToString();
+                _name = ((GameCommandAttribute)attr).CommandId.ToString();
         }
 
-        private string name;
-        public override string Name { get { return name; } }
-    }
+        private string _name;
+        public override string Name
+        {
+            get { return _name; }
+        }
 
-    public abstract class GameCommand<TProtobuf> : GameCommand
-    {
+        protected virtual int CD
+        {
+            get { return 0; }
+        }
+
         public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
         {
-            CodedInputStream.CreateInstance(commandInfo.Data);
-            ExecuteCommand(session, default(TProtobuf));
+            //TODO:CD验证
+
+            //TODO:执行命令
+            Execute(session, commandInfo);
+
+            //TODO:记录命令
         }
 
-        public abstract void ExecuteCommand(GameSession session, TProtobuf data);
+        protected abstract void Execute(GameSession session, BinaryCommandInfo commandInfo);
+    }
 
+    public abstract class GameCommand : GameCommandBase
+    {
+        protected override void Execute(GameSession session, BinaryCommandInfo commandInfo)
+        {
+            if (Ready(session))
+                Run(session);
+        }
+
+        protected virtual bool Ready(GameSession session)
+        {
+            return true;
+        }
+
+        protected abstract void Run(GameSession session);
+    }
+
+    public abstract class GameCommand<T> : GameCommandBase
+    {
+        protected override void Execute(GameSession session, BinaryCommandInfo commandInfo)
+        {
+            var data = (T)Deserialize(commandInfo.Data);
+            if (Ready(session, data))
+                Run(session, data);
+        }
+
+        private object Deserialize(byte[] data)
+        {
+            if (typeof(T) == typeof(int))
+                return BitConverter.ToInt32(data, 0);
+            return null;
+        }
+
+        protected virtual bool Ready(GameSession session, T data)
+        {
+            return true;
+        }
+
+        protected abstract void Run(GameSession session, T data);
     }
 }

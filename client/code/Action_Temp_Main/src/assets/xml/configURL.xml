@@ -1,0 +1,4 @@
+<root>
+	<ConfigUrlVO configName="animationConfig" type="xml" description="动画资源配置" url="assets/xml/animation/animationConfig.xml"/>
+	<ConfigUrlVO configName="actionConfig" type="xml" description="动画帧动作配置" url="assets/xml/animation/actionConfig.xml"/>
+</root>

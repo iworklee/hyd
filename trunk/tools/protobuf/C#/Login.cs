@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 // Generated from: protos/Login.proto
-namespace protos.Login
+namespace Action.Model.Protobuf
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BackgroundLoginArgs")]
   public partial class BackgroundLoginArgs : global::ProtoBuf.IExtensible

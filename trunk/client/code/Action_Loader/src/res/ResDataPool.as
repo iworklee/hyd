@@ -26,12 +26,12 @@ package res
 			this._resXmlVOList = new Array();
 		}
 		
-		public function addResXmlVO(xmlData:XML, urlName:String, isSave:Boolean, byteTotal:Number):void
+		public function addResXmlVO(xmlData:XML, urlName:String, isSave:Boolean, byteTotal:Number, passData:Object):void
 		{
 			if(getXmlVOByURL(urlName) == null)
 			{
 				var resXmlVO:ResXmlVO = new ResXmlVO();
-				resXmlVO.initXmlVO(xmlData, urlName, isSave, byteTotal);
+				resXmlVO.initXmlVO(xmlData, urlName, isSave, byteTotal, passData);
 				
 				this._resXmlVOList[urlName] = resXmlVO;
 			}

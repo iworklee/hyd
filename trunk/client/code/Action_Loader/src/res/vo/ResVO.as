@@ -22,15 +22,22 @@ package res.vo
 			return this._byteTotal;
 		}
 		
+		private var _passData:Object;
+		public function get passData():Object
+		{
+			return this._passData;
+		}
+		
 		public function ResVO()
 		{
 		}
 		
-		protected function initVO(urlName:String, isSave:Boolean, byteTotal:Number):void
+		protected function initVO(urlName:String, isSave:Boolean, byteTotal:Number, passData:Object):void
 		{
 			this._urlName = urlName;
 			this._isSave = isSave;
 			this._byteTotal = byteTotal;
+			this._passData = passData;
 		}
 	}
 }

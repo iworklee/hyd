@@ -1,4 +1,4 @@
-package res.data.animation
+package res.data.animation.bitmap
 {
 	public class AnimationConfigVO
 	{
@@ -28,11 +28,23 @@ package res.data.animation
 		
 		public function AnimationConfigVO()
 		{
+			this._partConfigVOList = new Array();
 		}
 		
 		public function initByXML(xmlData:XML):void
 		{
+			this._type = xmlData.@type;
+			this._maxWidth = xmlData.@maxWidth;
+			this._maxHeight = xmlData.@maxHeight;
 			
+			this._partConfigVOList = new Array();
+			for each(var partXml:XML in xmlData.PartConfigVO)
+			{
+				var partConfigVO:PartConfigVO = new PartConfigVO();
+				partConfigVO.initByXML(partXml);
+				
+				this._partConfigVOList[partXml.@type] = partConfigVO;
+			}
 		}
 	}
 }

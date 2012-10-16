@@ -1,4 +1,4 @@
 package Action.Model.Protobuf;
-message BackgroundLoginArgs {
+message BackdoorLoginArgs {
   optional string Account = 1;
 }

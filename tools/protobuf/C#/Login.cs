@@ -9,7 +9,7 @@
 
 // Generated from: protos/Login.proto
 // Note: requires additional types generated from: protobuf-net.proto
-namespace AS3.Model.Protobuf
+namespace Action.Model.Protobuf
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BackdoorLoginArgs")]
   public partial class BackdoorLoginArgs : global::ProtoBuf.IExtensible
@@ -54,10 +54,10 @@ namespace AS3.Model.Protobuf
       set { _Job = value; }
     }
 
-    private AS3.Model.Protobuf.SexType _Sex = AS3.Model.Protobuf.SexType.Male;
+    private Action.Model.Protobuf.SexType _Sex = Action.Model.Protobuf.SexType.Male;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"Sex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(AS3.Model.Protobuf.SexType.Male)]
-    public AS3.Model.Protobuf.SexType Sex
+    [global::System.ComponentModel.DefaultValue(Action.Model.Protobuf.SexType.Male)]
+    public Action.Model.Protobuf.SexType Sex
     {
       get { return _Sex; }
       set { _Sex = value; }

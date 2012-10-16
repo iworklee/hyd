@@ -63,6 +63,7 @@
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BackdoorLoginCommand.cs" />
+    <Compile Include="CreateRoleCommand.cs" />
     <Compile Include="LoginModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

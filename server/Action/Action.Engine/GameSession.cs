@@ -53,19 +53,47 @@ namespace Action.Engine
         /// <summary>
         /// Send cmdId and protobuf data
         /// </summary>
-        /// <typeparam name="TProtobuf"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="commandId"></param>
         /// <param name="data"></param>
-        public void SendResponse<TProtobuf>(int commandId, TProtobuf data)
+        public void SendResponse<T>(int commandId, T data)
         {
             SendResponse(BitConverter.GetBytes(commandId));
             using (var ms = new MemoryStream())
             {
-                Serializer.Serialize<TProtobuf>(ms, data);
+                Serializer.Serialize<T>(ms, data);
                 SendResponse(BitConverter.GetBytes(ms.Length));
                 SendResponse(ms.ToArray());
             }
         }
 
+        public void SendResponse(int commandId, bool data)
+        {
+            SendResponse(BitConverter.GetBytes(commandId));
+            SendResponse(BitConverter.GetBytes(1));
+            SendResponse(BitConverter.GetBytes(data));
+        }
+
+        public void SendResponse(int commandId, int data)
+        {
+            SendResponse(BitConverter.GetBytes(commandId));
+            SendResponse(BitConverter.GetBytes(4));
+            SendResponse(BitConverter.GetBytes(data));
+        }
+
+        public void SendResponse(int commandId, float data)
+        {
+            SendResponse(BitConverter.GetBytes(commandId));
+            SendResponse(BitConverter.GetBytes(4));
+            SendResponse(BitConverter.GetBytes(data));
+        }
+
+        public void SendResponse(int commandId, string data)
+        {
+            SendResponse(BitConverter.GetBytes(commandId));
+            byte[] bytes = Encoding.UTF8.GetBytes(data);
+            SendResponse(BitConverter.GetBytes(bytes.Length));
+            SendResponse(bytes);
+        }
     }
 }

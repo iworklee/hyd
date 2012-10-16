@@ -34,9 +34,6 @@
     <Reference Include="Google.ProtocolBuffers">
       <HintPath>..\Reference\protobuf-csharp-port\2.4.1\Google.ProtocolBuffers.dll</HintPath>
     </Reference>
-    <Reference Include="Google.ProtocolBuffers.Serialization">
-      <HintPath>..\Reference\protobuf-csharp-port\2.4.1\Google.ProtocolBuffers.Serialization.dll</HintPath>
-    </Reference>
     <Reference Include="SuperSocket.Common, Version=1.4.5.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Reference\SuperSocket\1.4\SuperSocket.Common.dll</HintPath>

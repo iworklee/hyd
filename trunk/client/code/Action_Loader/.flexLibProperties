@@ -7,6 +7,15 @@
     <classEntry path="res.vo.ResSwfVO"/>
     <classEntry path="res.vo.ResVO"/>
     <classEntry path="res.vo.ResXmlVO"/>
+    <classEntry path="res.data.animation.AnimationConfigVO"/>
+    <classEntry path="res.data.animation.PartConfigVO"/>
+    <classEntry path="res.data.animation.enum.AnimationTypeEnum"/>
+    <classEntry path="res.data.ConfigDataManager"/>
+    <classEntry path="res.data.ConfigUrlVO"/>
+    <classEntry path="res.loader.ResXmlLoader"/>
+    <classEntry path="res.ResDataPool"/>
+    <classEntry path="res.vo.PreloadXmlData"/>
+    <classEntry path="res.vo.PreloadData"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

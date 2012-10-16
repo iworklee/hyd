@@ -18,18 +18,19 @@ namespace Action.Engine
 
         private static object _syncRoot = new object();
 
-        public static void ComposeParts(params object[] attributedParts)
+        public static bool ComposeParts(params object[] attributedParts)
         {
             lock (_syncRoot)
             {
                 try
                 {
                     _container.ComposeParts(attributedParts);
+                    return true;
                 }
                 catch (CompositionException compositionException)
                 {
                     LogUtil.LogError(compositionException);
-                    throw;
+                    return false;
                 }
             }
         }

@@ -14,12 +14,9 @@ namespace Action.Engine
         static GameCommandDataDeserializer()
         {
             _hash = new Dictionary<Type, IGameCommandDataDeserializer>();
-            _hash.Add(typeof(bool), new BooleanDeserializer());
-            _hash.Add(typeof(short), new Int16Deserializer());
-            _hash.Add(typeof(int), new Int32Deserializer());
-            _hash.Add(typeof(long), new Int64Deserializer());
-            _hash.Add(typeof(float), new SingleDeserializer());
-            _hash.Add(typeof(double), new DoubleDeserializer());
+            _hash.Add(typeof(bool), new BoolDeserializer());
+            _hash.Add(typeof(int), new IntDeserializer());
+            _hash.Add(typeof(float), new FloatDeserializer());
             _hash.Add(typeof(string), new StringDeserializer());
         }
 
@@ -45,7 +42,7 @@ namespace Action.Engine
         object Deserialize(byte[] data);
     }
     
-    class BooleanDeserializer : IGameCommandDataDeserializer
+    class BoolDeserializer : IGameCommandDataDeserializer
     {
         public object Deserialize(byte[] data)
         {
@@ -53,15 +50,7 @@ namespace Action.Engine
         }
     }
 
-    class Int16Deserializer : IGameCommandDataDeserializer
-    {
-        public object Deserialize(byte[] data)
-        {
-            return BitConverter.ToInt16(data, 0);
-        }
-    }
-
-    class Int32Deserializer : IGameCommandDataDeserializer
+    class IntDeserializer : IGameCommandDataDeserializer
     {
         public object Deserialize(byte[] data)
         {
@@ -69,30 +58,14 @@ namespace Action.Engine
         }
     }
 
-    class Int64Deserializer : IGameCommandDataDeserializer
-    {
-        public object Deserialize(byte[] data)
-        {
-            return BitConverter.ToInt64(data, 0);
-        }
-    }
-
-    class SingleDeserializer : IGameCommandDataDeserializer
+    class FloatDeserializer : IGameCommandDataDeserializer
     {
         public object Deserialize(byte[] data)
         {
             return BitConverter.ToSingle(data, 0);
         }
     }
-
-    class DoubleDeserializer : IGameCommandDataDeserializer
-    {
-        public object Deserialize(byte[] data)
-        {
-            return BitConverter.ToDouble(data, 0);
-        }
-    }
-
+    
     class StringDeserializer : IGameCommandDataDeserializer
     {
         public object Deserialize(byte[] data)

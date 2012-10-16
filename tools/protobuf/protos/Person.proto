@@ -1,3 +1,9 @@
+
+import "protobuf-net.proto";
+
+package AS3.Model.Protobuf;
+option (protobuf_net.namespace) = "Action.Model.Protobuf";
+
 message Person {
   required int32 id = 1;
   required string name = 2;

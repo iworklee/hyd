@@ -87,6 +87,7 @@
   </xsl:template>
   
   <xsl:template name="PickNamespace"><xsl:param name="defaultNamespace"/><xsl:choose>
+    <xsl:when test="options/namespace"><xsl:value-of select="options/namespace"/></xsl:when>
     <xsl:when test="package"><xsl:call-template name="pascal">
       <xsl:with-param name="value" select="package"/>
     </xsl:call-template></xsl:when>

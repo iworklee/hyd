@@ -1,4 +1,4 @@
-package  {
+package AS3.Model.Protobuf {
 	import com.netease.protobuf.*;
 	use namespace com.netease.protobuf.used_by_generated_code;
 	import com.netease.protobuf.fieldDescriptors.*;
@@ -14,21 +14,21 @@ package  {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("Person.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("AS3.Model.Protobuf.Person.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		public var id:int;
 
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("Person.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("AS3.Model.Protobuf.Person.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		public var name:String;
 
 		/**
 		 *  @private
 		 */
-		public static const EMAIL:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("Person.email", "email", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const EMAIL:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("AS3.Model.Protobuf.Person.email", "email", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var email$field:String;
 

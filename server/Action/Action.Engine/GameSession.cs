@@ -6,6 +6,8 @@ using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Command;
 using System.IO;
 using ProtoBuf;
+using MongoDB.Driver;
+using System.Configuration;
 
 namespace Action.Engine
 {
@@ -37,6 +39,16 @@ namespace Action.Engine
         {
             _account = account;
             _enabled = true;
+        }
+
+        public MongoServer MongoDBServer
+        {
+            get
+            {
+                var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
+                var server = MongoServer.Create(connectionString);
+                return server;
+            }
         }
 
 

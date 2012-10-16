@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
+using SuperSocket.Common;
 
 namespace Action.Engine
 {
@@ -27,8 +28,8 @@ namespace Action.Engine
                 }
                 catch (CompositionException compositionException)
                 {
-                    Debug.WriteLine(compositionException.ToString());
-                    throw;                    
+                    LogUtil.LogError(compositionException);
+                    throw;
                 }
             }
         }

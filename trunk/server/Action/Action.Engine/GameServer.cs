@@ -28,5 +28,10 @@ namespace Action.Engine
             foreach (var module in GameModuleFactory.Current.Modules)
                 module.Unload(this);
         }
+
+        protected override bool SetupCommands(Dictionary<string, ICommand<GameSession, BinaryCommandInfo>> commandDict)
+        {
+            return base.SetupCommands(commandDict);
+        }
     }
 }

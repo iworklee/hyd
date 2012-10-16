@@ -19,7 +19,7 @@ namespace Action.Engine
 
             //TODO:执行命令
             Execute(session, commandInfo);
-
+            
             //TODO:记录命令
         }
 
@@ -46,7 +46,7 @@ namespace Action.Engine
 
         protected virtual bool Ready(GameSession session)
         {
-            return true;
+            return session.Enabled;
         }
 
         protected abstract void Run(GameSession session);
@@ -63,7 +63,7 @@ namespace Action.Engine
 
         protected virtual bool Ready(GameSession session, T args)
         {
-            return true;
+            return session.Enabled;
         }
 
         protected abstract void Run(GameSession session, T args);

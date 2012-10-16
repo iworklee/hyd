@@ -23,15 +23,6 @@ namespace Action.Engine
             _hash.Add(typeof(string), new StringDeserializer());
         }
 
-        //public static object Deserialize(Type type, byte[] data)
-        //{
-        //    IGameCommandDataDeserializer des = null;
-        //    if (_hash.TryGetValue(type, out des))
-        //        return des.Deserialize(data);
-        //    else
-        //        return _default.Deserialize(data);
-        //}
-
         public static T Deserialize<T>(byte[] data)
         {
             Type type = typeof(T);
@@ -40,15 +31,12 @@ namespace Action.Engine
                 return (T)des.Deserialize(data);
             else
             {
-
                 using (var ms = new MemoryStream(data))
                 {
                     var o =  (T)Serializer.Deserialize<T>(ms);
                 }
-
                 return default(T);
             }
-
         }
     }
 

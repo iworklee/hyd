@@ -12,9 +12,6 @@ namespace Action.Login
         public static void EnterGame(GameSession session, Player player)
         {
             session.Player.IsOnline = true;
-            session.Player.Name = player.Name;
-            session.Player.Job = player.Job;
-            session.Player.Sex = (int)player.Sex;
             session.SendResponse((int)CommandEnum.EnterGame);
         }
     }

@@ -7,9 +7,11 @@ namespace Action.Model
 {
     public class Player
     {
+        public Player()
+        {
+        }
+
         public string Account { get; set; }
-        public string Name { get; set; }
-        public int Job { get; set; }
-        public SexEnum Sex { get; set; }
+        public Role Role { get; set; }
     }
 }

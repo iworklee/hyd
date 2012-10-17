@@ -38,7 +38,16 @@
             this.txtCmdId1 = new System.Windows.Forms.TextBox();
             this.btnSend1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSend2 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtCmdId2 = new System.Windows.Forms.TextBox();
+            this.ddlParamType2 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtParam2 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -134,11 +143,92 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Only CommandID";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.ddlParamType2);
+            this.groupBox2.Controls.Add(this.btnSend2);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.txtParam2);
+            this.groupBox2.Controls.Add(this.txtCmdId2);
+            this.groupBox2.Location = new System.Drawing.Point(12, 117);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(584, 104);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "CommandID with one value";
+            // 
+            // btnSend2
+            // 
+            this.btnSend2.Location = new System.Drawing.Point(207, 73);
+            this.btnSend2.Name = "btnSend2";
+            this.btnSend2.Size = new System.Drawing.Size(75, 23);
+            this.btnSend2.TabIndex = 8;
+            this.btnSend2.Text = "Send";
+            this.btnSend2.UseVisualStyleBackColor = true;
+            this.btnSend2.Click += new System.EventHandler(this.btnSend2_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 12);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "CommandId";
+            // 
+            // txtCmdId2
+            // 
+            this.txtCmdId2.Location = new System.Drawing.Point(79, 20);
+            this.txtCmdId2.Name = "txtCmdId2";
+            this.txtCmdId2.Size = new System.Drawing.Size(110, 21);
+            this.txtCmdId2.TabIndex = 7;
+            // 
+            // ddlParamType2
+            // 
+            this.ddlParamType2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlParamType2.FormattingEnabled = true;
+            this.ddlParamType2.Items.AddRange(new object[] {
+            "int",
+            "bool",
+            "float"});
+            this.ddlParamType2.Location = new System.Drawing.Point(79, 47);
+            this.ddlParamType2.Name = "ddlParamType2";
+            this.ddlParamType2.Size = new System.Drawing.Size(121, 20);
+            this.ddlParamType2.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(14, 50);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 12);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "ParamType";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(14, 76);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "ParamValue";
+            // 
+            // txtParam2
+            // 
+            this.txtParam2.Location = new System.Drawing.Point(79, 73);
+            this.txtParam2.Name = "txtParam2";
+            this.txtParam2.Size = new System.Drawing.Size(110, 21);
+            this.txtParam2.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(608, 439);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.txtPort);
@@ -150,6 +240,8 @@
             this.Text = "Client";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,6 +259,14 @@
         private System.Windows.Forms.TextBox txtCmdId1;
         private System.Windows.Forms.Button btnSend1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox ddlParamType2;
+        private System.Windows.Forms.Button btnSend2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtParam2;
+        private System.Windows.Forms.TextBox txtCmdId2;
     }
 }
 

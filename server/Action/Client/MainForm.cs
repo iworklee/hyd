@@ -89,8 +89,19 @@ namespace Client
 
         private void btnSend3_Click(object sender, EventArgs e)
         {
+            int cmdId = int.Parse(txtCmdId3.Text);
+            writer.Write(cmdId);    // cmdId
+
             var classType = (Type)ddlParamType3.SelectedValue;
             var o = Activator.CreateInstance(classType);
+
+
+            using (var ms = new MemoryStream())
+            {
+                Serializer.NonGeneric.Serialize(ms, o);
+                writer.Write((int)ms.Length);        // package length
+                ms.WriteTo(stream);
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)

@@ -4,6 +4,8 @@
     <classEntry path="animation.template.AnimationTemplate"/>
     <classEntry path="animation.template.UnitAnimationTemplate"/>
     <classEntry path="animation.AnimationTemplateManager"/>
+    <classEntry path="animation.vo.AnimationVO"/>
+    <classEntry path="animation.vo.UnitAnimationVO"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

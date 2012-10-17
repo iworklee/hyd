@@ -23,25 +23,15 @@ package
 			ConfigDataManager.getInstance().initConfigData();
 			ConfigDataManager.getInstance().addEventListener(ConfigDataCompleteEvent.NAME, configDataComplete);
 		}
-		
-		private var animationTemplate:UnitAnimationTemplate;
+
 		private function configDataComplete(event:ConfigDataCompleteEvent):void
 		{
-			animationTemplate = new UnitAnimationTemplate();
-			animationTemplate.initUnitAnimationTemplate(100001, "foot");
 			
-			this.addEventListener(Event.ENTER_FRAME, enterFrameProcess);
 		}
 		
 		private function enterFrameProcess(event:Event):void
 		{
-			if(animationTemplate.partBitmapDataList["atk"])
-			{
-				var bitmap:Bitmap = new Bitmap(animationTemplate.partBitmapDataList["spd"], "auto", true);
-				this.addChild(bitmap);
-				
-				this.removeEventListener(Event.ENTER_FRAME, enterFrameProcess);
-			}
+			
 		}
 	}
 }

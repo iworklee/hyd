@@ -33,11 +33,14 @@ namespace Action.Engine
         public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
         {
             //TODO:CD验证
+            if (CD > 0 && session.CommandLogger.IsCommandInCD(CommandId, CD))
+                return;
 
             //TODO:执行命令
             Execute(session, commandInfo);
 
             //TODO:记录命令
+            session.CommandLogger.LogCommand(CommandId, commandInfo);
         }
 
         protected abstract void Execute(GameSession session, BinaryCommandInfo commandInfo);

@@ -41,7 +41,18 @@ namespace Action.Engine
             _enabled = true;
         }
 
-        public GamePlayer Player { get; set; }
+        private GamePlayer _player;
+        public GamePlayer Player
+        {
+            get { return _player; }
+            set { _player = value; }
+        }
+
+        private GameCommandLogger _cmdLogger= new GameCommandLogger();
+        public GameCommandLogger CommandLogger
+        {
+            get { return _cmdLogger; }
+        }
 
         public MongoServer MongoDBServer
         {

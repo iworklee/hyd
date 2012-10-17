@@ -23,17 +23,17 @@ namespace Action.Engine
             // TODO 用户会话
         }
 
-        private bool _enabled;
-        public bool Enabled
+        private bool _opened;
+        public bool Opened
         {
-            get { return _enabled; }
+            get { return _opened; }
         }
 
-        public void Login(string account)
+        public void Open(string account)
         {
             _player = new GamePlayer();
             _player.Account = account;
-            _enabled = true;
+            _opened = true;
         }
 
         private GamePlayer _player;

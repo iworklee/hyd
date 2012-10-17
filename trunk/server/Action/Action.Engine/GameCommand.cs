@@ -61,7 +61,7 @@ namespace Action.Engine
 
         protected virtual bool Ready(GameSession session)
         {
-            return session.Enabled;
+            return session.Opened;
         }
 
         protected abstract void Run(GameSession session);
@@ -78,7 +78,7 @@ namespace Action.Engine
 
         protected virtual bool Ready(GameSession session, T args)
         {
-            return session.Enabled && session.Player.IsOnline;
+            return session.Opened && session.Player.IsOnline;
         }
 
         protected abstract void Run(GameSession session, T args);

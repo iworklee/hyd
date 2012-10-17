@@ -8,15 +8,22 @@ namespace Action.Engine
 {
     public abstract class GameCommandBase : CommandBase<GameSession, BinaryCommandInfo>
     {
-        public int Id
+        protected GameCommandBase()
         {
-            get
-            {
-                var type = this.GetType();
-                var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
-                return attr != null ? ((GameCommandAttribute)attr).CommandId : -1;
-            }
+            var type = this.GetType();
+            name = type.Name;
+
+            var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
+            if (attr == null)
+                cmdId = 0;
+            else
+                cmdId = ((GameCommandAttribute)attr).CommandId;
         }
+
+        private string name;
+        public override string Name { get { return name; } }
+        private int cmdId;
+        public int CommandId { get { return cmdId; } }
 
         protected virtual int CD
         {
@@ -37,12 +44,7 @@ namespace Action.Engine
 
         public override string ToString()
         {
-            var type = this.GetType();
-            var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
-            if (attr == null)
-                return Name;
-            else
-                return string.Format("{0}({1})", Name, ((GameCommandAttribute)attr).CommandId);
+            return string.Format("{0}({1})", Name, CommandId);
         }
     }
 

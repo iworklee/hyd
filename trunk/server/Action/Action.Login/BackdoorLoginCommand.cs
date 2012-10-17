@@ -7,10 +7,11 @@ using SuperSocket.Common;
 using Action.Engine;
 using Action.Model.Protobuf;
 using MongoDB.Driver;
+using Action.Model;
 
 namespace Action.Login
 {
-    [GameCommand(1000)]
+    [GameCommand((int)CommandEnum.BackdoorLogin)]
     public class BackdoorLoginCommand : GameCommand<BackdoorLoginArgs>
     {
         protected override bool Ready(GameSession session, BackdoorLoginArgs args)

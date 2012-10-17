@@ -1,0 +1,11 @@
+
+import "protobuf-net.proto";
+
+package Action.Model;
+option (protobuf_net.namespace) = "xxxxxx";
+
+message Role {
+  optional string Name = 1;
+  optional int32 Job = 2;
+  optional int32 Sex = 3;
+}

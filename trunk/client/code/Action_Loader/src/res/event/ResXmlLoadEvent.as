@@ -12,7 +12,7 @@ package res.event
 			return this._resXmlVO;
 		}
 		
-		public static const NAME:String = "ResLoadEvent";
+		public static const NAME:String = "ResXmlLoadEvent";
 		public function ResXmlLoadEvent(resXmlVO:ResXmlVO)
 		{
 			super(NAME, true, false);

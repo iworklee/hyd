@@ -11,6 +11,7 @@ package
 		public function Action_Temp_Main()
 		{
 			ConfigDataManager.getInstance().initConfigData();
+			ResLoaderManager.getInstance().loadSwfByURL("assets/swf/100001.swf");
 		}
 	}
 }

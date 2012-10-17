@@ -22,6 +22,12 @@
     <classEntry path="res.data.XmlDataModule"/>
     <classEntry path="res.data.animation.XmlAnimationDataModule"/>
     <classEntry path="res.data.animation.XmlActionDataModule"/>
+    <classEntry path="res.data.animation.enum.ActionTypeEnum"/>
+    <classEntry path="res.data.unit.UnitConfigVO"/>
+    <classEntry path="res.data.unit.XmlUnitDataModule"/>
+    <classEntry path="res.loader.ResSwfLoader"/>
+    <classEntry path="res.vo.PreloadSwfData"/>
+    <classEntry path="res.event.ResSwfLoadEvent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

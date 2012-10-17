@@ -8,6 +8,16 @@ namespace Action.Engine
 {
     public abstract class GameCommandBase : CommandBase<GameSession, BinaryCommandInfo>
     {
+        public int Id
+        {
+            get
+            {
+                var type = this.GetType();
+                var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
+                return attr != null ? ((GameCommandAttribute)attr).CommandId : -1;
+            }
+        }
+
         protected virtual int CD
         {
             get { return 0; }

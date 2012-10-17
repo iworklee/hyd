@@ -24,6 +24,8 @@ package animation.template
 		
 		protected function initActionUnitConfig(actionUnitConfig:ActionUnitConfig):void
 		{
+			this._actionUnitConfig = actionUnitConfig;
+			
 			var initAnimationConfigVO:AnimationConfigVO = ConfigDataManager.getInstance().getAnimationConfigVOByType(actionUnitConfig.animationType);
 			if(initAnimationConfigVO)
 			{

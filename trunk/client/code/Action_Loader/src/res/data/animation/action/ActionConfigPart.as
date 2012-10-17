@@ -36,7 +36,7 @@ package res.data.animation.action
 				var partFace:PartFace = new PartFace();
 				partFace.initByXML(faceXml);
 				
-				this._partFaceList.push(partFace);
+				this._partFaceList[faceXml.@face] = partFace;
 			}
 		}
 	}

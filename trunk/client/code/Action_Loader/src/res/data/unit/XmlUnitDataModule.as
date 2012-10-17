@@ -40,5 +40,15 @@ package res.data.unit
 				this._unitConfigList[unitXml.@unitId] = unitConfigVO;
 			}
 		}
+		
+		public function getUnitConfigVOByUnitId(unitId:int):UnitConfigVO
+		{
+			if(this._unitConfigList && this._unitConfigList[unitId])
+			{
+				return  this._unitConfigList[unitId];
+			}
+			
+			return null;
+		}
 	}
 }

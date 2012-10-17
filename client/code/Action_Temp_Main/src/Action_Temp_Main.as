@@ -6,6 +6,7 @@ package
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.GradientType;
 	import flash.display.Sprite;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
@@ -22,11 +23,7 @@ package
 		public function Action_Temp_Main()
 		{
 			this.stage.scaleMode = StageScaleMode.NO_SCALE;
-			
-			this.graphics.beginFill(0xffffff, 1);
-			this.graphics.drawRect(400 - 32, 300 - 64, 64, 64);
-			this.graphics.endFill();
-			
+
 			ConfigDataManager.getInstance().initConfigData();
 			ConfigDataManager.getInstance().addEventListener(ConfigDataCompleteEvent.NAME, configDataComplete);
 		}
@@ -54,7 +51,7 @@ package
 				unitAnimationVO.enterFrameProcess();
 			}
 			
-			if(_randomTickdown < 30 * 2)
+			if(_randomTickdown < 30)
 			{
 				_randomTickdown ++;
 			}
@@ -63,6 +60,40 @@ package
 				_randomTickdown = 0;
 				var randomFace:int = Math.floor(Math.random() * 4) * 2;
 				unitAnimationVO.changeFace(randomFace);
+				
+//				public static const ACTION_TYPE_WAIT:String = "wait";
+//				public static const ACTION_TYPE_MOVE:String = "move";
+//				public static const ACTION_TYPE_ATTACK:String = "attack";
+//				public static const ACTION_TYPE_DEFEAT:String = "defeat";
+//				public static const ACTION_TYPE_PARRY:String = "parry";
+//				public static const ACTION_TYPE_HIT:String = "hit";
+//				public static const ACTION_TYPE_BUFF:String = "buff";
+				
+				var randomAction:int = Math.floor(Math.random() * 7);
+				switch(randomAction)
+				{
+					case 0:
+						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_ATTACK);
+						break;
+					case 1:
+						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_BUFF);
+						break;
+					case 2:
+						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_DEFEAT);
+						break;
+					case 3:
+						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_HIT);
+						break;
+					case 4:
+						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_MOVE);
+						break;
+					case 5:
+						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_PARRY);
+						break;
+					case 6:
+						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_WAIT);
+						break;
+				}
 			}
 		}
 	}

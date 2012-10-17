@@ -31,6 +31,11 @@ namespace Action.Engine
                 module.Unload(this);
         }
 
+        protected override void OnPerformanceDataCollected(GlobalPerformanceData globalPerfData, PerformanceData performanceData)
+        {
+            // TODO 周期性记录在线玩家数量等信息
+        }
+
         protected override void OnAppSessionClosed(object sender, AppSessionClosedEventArgs<GameSession> e)
         {
             // TODO 玩家下线

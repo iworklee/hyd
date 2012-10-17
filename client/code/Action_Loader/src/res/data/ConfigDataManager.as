@@ -9,6 +9,7 @@ package res.data
 	import res.data.animation.bitmap.AnimationConfigVO;
 	import res.data.res.ResUrlVO;
 	import res.data.res.XmlResDataModule;
+	import res.data.unit.UnitConfigVO;
 	import res.data.unit.XmlUnitDataModule;
 	import res.enum.ResTypeEnum;
 	import res.event.ConfigDataCompleteEvent;
@@ -155,6 +156,11 @@ package res.data
 		public function getActionUnitConfigByClass(actionClass:String):ActionUnitConfig
 		{
 			return XmlActionDataModule.getInstance().getActionUnitConfigByClass(actionClass);
+		}
+		
+		public function getUnitConfigVOByUnitId(unitId:int):UnitConfigVO
+		{
+			return XmlUnitDataModule.getInstance().getUnitConfigVOByUnitId(unitId);
 		}
 	}
 }

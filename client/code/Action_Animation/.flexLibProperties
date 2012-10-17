@@ -6,6 +6,7 @@
     <classEntry path="animation.AnimationTemplateManager"/>
     <classEntry path="animation.vo.AnimationVO"/>
     <classEntry path="animation.vo.UnitAnimationVO"/>
+    <classEntry path="animation.enum.AnimationFaceEnum"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

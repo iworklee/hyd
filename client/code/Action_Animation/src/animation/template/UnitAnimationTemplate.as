@@ -32,10 +32,17 @@ package animation.template
 			return this._partBitmapDataList;
 		}
 		
+		private var _isInitComplete:Boolean;
+		public function get isInitComplete():Boolean
+		{
+			return this._isInitComplete;
+		}
+		
 		public function UnitAnimationTemplate()
 		{
 			super();
 			this._partBitmapDataList = new Array();
+			this._isInitComplete = false;
 		}
 		
 		public function initUnitAnimationTemplate(resId:int, unitAction:String):void
@@ -79,6 +86,8 @@ package animation.template
 					this._partBitmapDataList[partConfigVO.type] = partBitmapData;
 				}
 			}
+			
+			this._isInitComplete = true;
 		}
 	}
 }

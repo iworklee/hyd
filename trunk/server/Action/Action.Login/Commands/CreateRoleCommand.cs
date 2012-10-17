@@ -40,9 +40,10 @@ namespace Action.Login.Commands
             //创建玩家角色
             var player = new Player();
             player.Account = session.Player.Account;
-            player.Name = args.Name;
-            player.Job = args.Job;
-            player.Sex = (SexEnum)args.Sex;
+            player.Role = new Role();
+            player.Role.Name = args.Name;
+            player.Role.Job = args.Job;
+            player.Role.Sex = args.Sex;
             var tblPlayer = session.AppServer.DefaultDatabase
                 .GetCollection(DbCollectionDef.Player.Name);
             tblPlayer.Insert<Player>(player);

@@ -31,6 +31,11 @@ namespace Action.Engine
                 module.Unload(this);
         }
 
+        protected override void OnAppSessionClosed(object sender, AppSessionClosedEventArgs<GameSession> e)
+        {
+            // TODO 玩家下线
+        }  
+
         [ImportMany]
         private IEnumerable<Lazy<GameCommandBase, ICommandMetaData>> _commands = null;
 

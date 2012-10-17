@@ -3,6 +3,7 @@ package
 	import animation.template.UnitAnimationTemplate;
 	
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
@@ -12,7 +13,7 @@ package
 	import res.event.ConfigDataCompleteEvent;
 	import res.vo.ResXmlVO;
 	
-	[SWF(frameRate="30", width="800", height="600", pageTitle="ActionTemp")]
+	[SWF(backgroundColor="#000000", frameRate="30", width="800", height="600", pageTitle="ActionTemp")]
 	public class Action_Temp_Main extends Sprite
 	{
 		public function Action_Temp_Main()
@@ -36,7 +37,7 @@ package
 		{
 			if(animationTemplate.partBitmapDataList["atk"])
 			{
-				var bitmap:Bitmap = new Bitmap(animationTemplate.partBitmapDataList["move"], "auto", true);
+				var bitmap:Bitmap = new Bitmap(animationTemplate.partBitmapDataList["spd"], "auto", true);
 				this.addChild(bitmap);
 				
 				this.removeEventListener(Event.ENTER_FRAME, enterFrameProcess);

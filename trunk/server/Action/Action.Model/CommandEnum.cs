@@ -9,6 +9,7 @@ namespace Action.Model
     {
         BackdoorLogin = 1000,
         TencentOpenLogin,
-        CreateRole = 1010
+        CreateRole = 1010,
+        EnterGame = 1011,
     }
 }

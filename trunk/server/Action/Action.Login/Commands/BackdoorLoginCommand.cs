@@ -36,13 +36,7 @@ namespace Action.Login.Commands
                     .GetCollection(DbCollectionDef.Player.Name).AsQueryable<Player>();
                 var player = allPlayers.Where(p => p.Account == args.Account).FirstOrDefault();
                 if (player != null)
-                {
-                    session.Player.IsOnline = true;
-                    session.Player.Name = player.Name;
-                    session.Player.Job = player.Job;
-                    session.Player.Sex = (int)player.Sex;
-                    session.SendResponse(ID, (int)S2C.OK);
-                }
+                    LoginHelper.EnterGame(session, player);
                 else
                     session.SendResponse(ID, (int)S2C.RoleMissing);
             }

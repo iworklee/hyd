@@ -54,7 +54,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtCmdId3 = new System.Windows.Forms.TextBox();
-            this.txtJson = new System.Windows.Forms.TextBox();
+            this.txtBson = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iListBindingSource)).BeginInit();
@@ -237,7 +237,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.txtJson);
+            this.groupBox3.Controls.Add(this.txtBson);
             this.groupBox3.Controls.Add(this.ddlParamType3);
             this.groupBox3.Controls.Add(this.btnSend3);
             this.groupBox3.Controls.Add(this.label8);
@@ -299,13 +299,13 @@
             this.txtCmdId3.Size = new System.Drawing.Size(110, 21);
             this.txtCmdId3.TabIndex = 7;
             // 
-            // txtJson
+            // txtBson
             // 
-            this.txtJson.Location = new System.Drawing.Point(16, 47);
-            this.txtJson.Multiline = true;
-            this.txtJson.Name = "txtJson";
-            this.txtJson.Size = new System.Drawing.Size(481, 170);
-            this.txtJson.TabIndex = 11;
+            this.txtBson.Location = new System.Drawing.Point(16, 47);
+            this.txtBson.Multiline = true;
+            this.txtBson.Name = "txtBson";
+            this.txtBson.Size = new System.Drawing.Size(481, 170);
+            this.txtBson.TabIndex = 11;
             // 
             // MainForm
             // 
@@ -366,7 +366,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtCmdId3;
         private System.Windows.Forms.BindingSource iListBindingSource;
-        private System.Windows.Forms.TextBox txtJson;
+        private System.Windows.Forms.TextBox txtBson;
     }
 }
 

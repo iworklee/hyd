@@ -30,9 +30,8 @@ namespace Action.Engine
             {
                 using (var ms = new MemoryStream(data))
                 {
-                    var o =  (T)Serializer.Deserialize<T>(ms);
+                    return (T)Serializer.Deserialize<T>(ms);
                 }
-                return default(T);
             }
         }
     }
@@ -41,7 +40,7 @@ namespace Action.Engine
     {
         object Deserialize(byte[] data);
     }
-    
+
     class BoolDeserializer : IGameCommandDataDeserializer
     {
         public object Deserialize(byte[] data)
@@ -65,7 +64,7 @@ namespace Action.Engine
             return BitConverter.ToSingle(data, 0);
         }
     }
-    
+
     class StringDeserializer : IGameCommandDataDeserializer
     {
         public object Deserialize(byte[] data)

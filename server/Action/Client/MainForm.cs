@@ -10,6 +10,8 @@ using System.Net.Sockets;
 using System.IO;
 using System.Reflection;
 using ProtoBuf;
+using MongoDB.Bson;
+using Action.Model;
 
 namespace Client
 {
@@ -18,6 +20,20 @@ namespace Client
         public MainForm()
         {
             InitializeComponent();
+
+            Application.ThreadException += (sender, e) =>
+            {
+                var ex = e.Exception;
+                MessageBox.Show(ex.ToString());
+            };
+
+            AppDomain.CurrentDomain.UnhandledException +=
+                (sender, e) =>
+                {
+                    var ex = e.ExceptionObject;
+                    MessageBox.Show(ex.ToString());
+                };
+
         }
 
         private TcpClient tcpClient;
@@ -89,12 +105,36 @@ namespace Client
 
         private void btnSend3_Click(object sender, EventArgs e)
         {
-            int cmdId = int.Parse(txtCmdId3.Text);
-            writer.Write(cmdId);    // cmdId
-
             var classType = (Type)ddlParamType3.SelectedValue;
             var o = Activator.CreateInstance(classType);
 
+            int cmdId = int.Parse(txtCmdId3.Text);
+            writer.Write(cmdId);    // cmdId
+
+            var newdoc = BsonDocument.Parse(txtBson.Text);
+            foreach (var element in newdoc.Elements)
+            {
+                var prop = classType.GetProperty(element.Name);
+                if (prop == null)
+                    continue;
+                if (element.Value.IsInt32)
+                    prop.SetValue(o, element.Value.AsInt32, null);
+                else if (element.Value.IsBoolean)
+                    prop.SetValue(o, element.Value.AsBoolean, null);
+                else if (element.Value.IsDouble)
+                    prop.SetValue(o, element.Value.AsDouble, null);
+                else if (element.Value.IsString)
+                    prop.SetValue(o, element.Value.AsString, null);
+            }
+
+            //using (var ms = new MemoryStream())
+            //{
+            //    Serializer.Serialize<BackdoorLoginArgs>(ms, (BackdoorLoginArgs)o);
+
+            //    var arg = Serializer.Deserialize<BackdoorLoginArgs>(ms);
+            //    writer.Write((int)ms.Length);        // package length
+            //    ms.WriteTo(stream);
+            //}
 
             using (var ms = new MemoryStream())
             {

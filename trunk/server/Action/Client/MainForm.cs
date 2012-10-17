@@ -70,7 +70,7 @@ namespace Client
                 else
                     writer.Write(false);
             }
-            else if (ddlParamType2.Text == "bool")
+            else if (ddlParamType2.Text == "float")
             {
                 writer.Write(4);
                 float param;

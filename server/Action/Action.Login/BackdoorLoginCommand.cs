@@ -18,6 +18,7 @@ namespace Action.Login
     {
         enum S2C
         {
+            OK,
             RoleMissing = 1
         }
 
@@ -30,7 +31,7 @@ namespace Action.Login
         {
             if (args.Account != null && args.Account.Trim().ToLower().StartsWith("test"))
             {
-                session.Login(args.Account);
+                session.Open(args.Account);
                 var allPlayers = session.AppServer.DefaultDatabase
                     .GetCollection(DbCollectionDef.Player.Name).AsQueryable<Player>();
                 var player = allPlayers.Where(p => p.Account == args.Account).FirstOrDefault();
@@ -40,6 +41,7 @@ namespace Action.Login
                     session.Player.Name = player.Name;
                     session.Player.Job = player.Job;
                     session.Player.Sex = (int)player.Sex;
+                    session.SendResponse(CommandId, (int)S2C.OK);
                 }
                 else
                     session.SendResponse(CommandId, (int)S2C.RoleMissing);

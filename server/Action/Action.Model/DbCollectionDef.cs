@@ -10,7 +10,13 @@ namespace Action.Model
         public class Player
         {
             public const string Name = "Player";
-            public const string Key = "Id";
+            public const string Key = "Account";
+        }
+
+        public class PlayerIndex
+        {
+            public const string Name = "PlayerIndex";
+            public const string Key = "Name";
         }
     }
 }

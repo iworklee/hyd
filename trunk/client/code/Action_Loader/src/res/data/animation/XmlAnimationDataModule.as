@@ -41,5 +41,15 @@ package res.data.animation
 				this._animationConfigList[animationXml.@type] = animationConfigVO;
 			}
 		}
+		
+		public function getAnimationConfigVOByType(animationType:String):AnimationConfigVO
+		{
+			if(this._animationConfigList && this._animationConfigList[animationType])
+			{
+				return  this._animationConfigList[animationType];
+			}
+			
+			return null;
+		}
 	}
 }

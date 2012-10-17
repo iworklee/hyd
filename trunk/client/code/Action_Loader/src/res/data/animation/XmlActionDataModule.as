@@ -41,5 +41,15 @@ package res.data.animation
 				this._actionConfigList[actionXml.@actionClass] = actionUnitConfig;
 			}
 		}
+		
+		public function getActionUnitConfigByClass(actionClass:String):ActionUnitConfig
+		{
+			if(this._actionConfigList && this._actionConfigList[actionClass])
+			{
+				return  this._actionConfigList[actionClass];
+			}
+			
+			return null;
+		}
 	}
 }

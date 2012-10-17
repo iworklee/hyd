@@ -33,6 +33,9 @@
     <classEntry path="res.data.animation.action.ActionConfigPart"/>
     <classEntry path="res.data.animation.action.PartFace"/>
     <classEntry path="res.data.animation.enum.ActionClassEnum"/>
+    <classEntry path="res.data.res.ResUrlVO"/>
+    <classEntry path="res.data.res.XmlResDataModule"/>
+    <classEntry path="res.event.ConfigDataCompleteEvent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

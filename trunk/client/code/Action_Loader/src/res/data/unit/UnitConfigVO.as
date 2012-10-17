@@ -20,6 +20,12 @@ package res.data.unit
 			return this._unitAction;
 		}
 		
+		private var _unitResId:int;
+		public function get unitResId():int
+		{
+			return this._unitResId;
+		}
+		
 		public function UnitConfigVO()
 		{
 		}
@@ -29,6 +35,7 @@ package res.data.unit
 			this._unitName = xmlData.@unitName;
 			this._unitId = xmlData.@unitId;
 			this._unitAction = xmlData.@unitAction;
+			this._unitResId = xmlData.@unitResId;
 		}
 	}
 }

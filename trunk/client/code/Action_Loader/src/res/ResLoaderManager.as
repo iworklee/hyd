@@ -183,7 +183,7 @@ package res
 			var swfLoaderInfo:LoaderInfo = event.currentTarget as LoaderInfo;
 			var swfMovieClip:MovieClip = swfLoaderInfo.content as MovieClip;
 			
-			if(this._currentXmlLoadingQueue[ResSwfLoader(swfLoaderInfo.loader).resUrl])
+			if(this._currentSwfLoadingQueue[ResSwfLoader(swfLoaderInfo.loader).resUrl])
 			{
 				var preloadSwfData:PreloadSwfData = this._currentSwfLoadingQueue[ResSwfLoader(swfLoaderInfo.loader).resUrl];
 				ResDataPool.getInstance().addResSwfVO(swfMovieClip, preloadSwfData.url, preloadSwfData.isSave, swfLoaderInfo.bytesTotal, preloadSwfData.passData);

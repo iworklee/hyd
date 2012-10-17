@@ -45,5 +45,44 @@ namespace Client
             writer.Write(cmdId);    // cmdId
             writer.Write(0);        // package length
         }
+
+        private void btnSend2_Click(object sender, EventArgs e)
+        {
+            int cmdId = int.Parse(txtCmdId2.Text);
+            writer.Write(cmdId);    // cmdId
+
+            // param
+            if (ddlParamType2.Text == "int")
+            {
+                writer.Write(4);
+                int param;
+                if (int.TryParse(txtParam2.Text, out param))
+                    writer.Write(param);
+                else
+                    writer.Write(0);
+            }
+            else if (ddlParamType2.Text == "bool")
+            {
+                writer.Write(1);
+                bool param;
+                if (bool.TryParse(txtParam2.Text, out param))
+                    writer.Write(param);
+                else
+                    writer.Write(false);
+            }
+            else if (ddlParamType2.Text == "bool")
+            {
+                writer.Write(4);
+                float param;
+                if (float.TryParse(txtParam2.Text, out param))
+                    writer.Write(param);
+                else
+                    writer.Write(0f);
+            }
+            else
+            {
+                writer.Write(0);
+            }
+        }
     }
 }

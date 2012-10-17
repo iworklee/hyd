@@ -41,6 +41,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ddlParamType2 = new System.Windows.Forms.ComboBox();
+            this.iListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnSend2 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -53,11 +54,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtCmdId3 = new System.Windows.Forms.TextBox();
-            this.iListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.txtJson = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iListBindingSource)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -133,7 +134,7 @@
             // 
             // btnSend1
             // 
-            this.btnSend1.Location = new System.Drawing.Point(207, 20);
+            this.btnSend1.Location = new System.Drawing.Point(503, 18);
             this.btnSend1.Name = "btnSend1";
             this.btnSend1.Size = new System.Drawing.Size(75, 23);
             this.btnSend1.TabIndex = 8;
@@ -164,7 +165,7 @@
             this.groupBox2.Controls.Add(this.txtCmdId2);
             this.groupBox2.Location = new System.Drawing.Point(12, 117);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(584, 104);
+            this.groupBox2.Size = new System.Drawing.Size(584, 81);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CommandID with one value";
@@ -174,14 +175,18 @@
             this.ddlParamType2.DataSource = this.iListBindingSource;
             this.ddlParamType2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlParamType2.FormattingEnabled = true;
-            this.ddlParamType2.Location = new System.Drawing.Point(79, 47);
+            this.ddlParamType2.Location = new System.Drawing.Point(271, 20);
             this.ddlParamType2.Name = "ddlParamType2";
             this.ddlParamType2.Size = new System.Drawing.Size(121, 20);
             this.ddlParamType2.TabIndex = 10;
             // 
+            // iListBindingSource
+            // 
+            this.iListBindingSource.DataSource = typeof(System.Collections.IList);
+            // 
             // btnSend2
             // 
-            this.btnSend2.Location = new System.Drawing.Point(207, 73);
+            this.btnSend2.Location = new System.Drawing.Point(503, 47);
             this.btnSend2.Name = "btnSend2";
             this.btnSend2.Size = new System.Drawing.Size(75, 23);
             this.btnSend2.TabIndex = 8;
@@ -192,7 +197,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 76);
+            this.label6.Location = new System.Drawing.Point(403, 23);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 6;
@@ -201,7 +206,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 50);
+            this.label5.Location = new System.Drawing.Point(206, 23);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 12);
             this.label5.TabIndex = 6;
@@ -218,7 +223,7 @@
             // 
             // txtParam2
             // 
-            this.txtParam2.Location = new System.Drawing.Point(79, 73);
+            this.txtParam2.Location = new System.Drawing.Point(468, 20);
             this.txtParam2.Name = "txtParam2";
             this.txtParam2.Size = new System.Drawing.Size(110, 21);
             this.txtParam2.TabIndex = 7;
@@ -232,14 +237,15 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.txtJson);
             this.groupBox3.Controls.Add(this.ddlParamType3);
             this.groupBox3.Controls.Add(this.btnSend3);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.txtCmdId3);
-            this.groupBox3.Location = new System.Drawing.Point(12, 227);
+            this.groupBox3.Location = new System.Drawing.Point(12, 204);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(584, 200);
+            this.groupBox3.Size = new System.Drawing.Size(584, 223);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "CommandID with Protocol Buffers";
@@ -253,13 +259,14 @@
             ""});
             this.ddlParamType3.Location = new System.Drawing.Point(263, 20);
             this.ddlParamType3.Name = "ddlParamType3";
-            this.ddlParamType3.Size = new System.Drawing.Size(304, 20);
+            this.ddlParamType3.Size = new System.Drawing.Size(234, 20);
             this.ddlParamType3.TabIndex = 10;
             this.ddlParamType3.ValueMember = "Value";
+            this.ddlParamType3.SelectedIndexChanged += new System.EventHandler(this.ddlParamType3_SelectedIndexChanged);
             // 
             // btnSend3
             // 
-            this.btnSend3.Location = new System.Drawing.Point(492, 159);
+            this.btnSend3.Location = new System.Drawing.Point(503, 194);
             this.btnSend3.Name = "btnSend3";
             this.btnSend3.Size = new System.Drawing.Size(75, 23);
             this.btnSend3.TabIndex = 8;
@@ -292,9 +299,13 @@
             this.txtCmdId3.Size = new System.Drawing.Size(110, 21);
             this.txtCmdId3.TabIndex = 7;
             // 
-            // iListBindingSource
+            // txtJson
             // 
-            this.iListBindingSource.DataSource = typeof(System.Collections.IList);
+            this.txtJson.Location = new System.Drawing.Point(16, 47);
+            this.txtJson.Multiline = true;
+            this.txtJson.Name = "txtJson";
+            this.txtJson.Size = new System.Drawing.Size(481, 170);
+            this.txtJson.TabIndex = 11;
             // 
             // MainForm
             // 
@@ -310,16 +321,19 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnConnect);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Client";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iListBindingSource)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iListBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,6 +366,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtCmdId3;
         private System.Windows.Forms.BindingSource iListBindingSource;
+        private System.Windows.Forms.TextBox txtJson;
     }
 }
 

@@ -8,13 +8,8 @@ message BackdoorLoginArgs {
   optional string Account = 1;
 }
 
-enum SexType {
-    Male = 1;
-    Female = 0;
-}
-
 message CreateRoleArgs {
   optional string Name = 1;
   optional int32 Job = 2;
-  optional SexType Sex = 3;
+  optional int32 Sex = 3;
 }

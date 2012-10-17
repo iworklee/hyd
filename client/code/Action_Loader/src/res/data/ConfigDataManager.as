@@ -5,8 +5,13 @@ package res.data
 	import res.ResLoaderManager;
 	import res.data.animation.XmlActionDataModule;
 	import res.data.animation.XmlAnimationDataModule;
+	import res.data.animation.action.ActionUnitConfig;
+	import res.data.animation.bitmap.AnimationConfigVO;
+	import res.data.res.ResUrlVO;
+	import res.data.res.XmlResDataModule;
 	import res.data.unit.XmlUnitDataModule;
 	import res.enum.ResTypeEnum;
+	import res.event.ConfigDataCompleteEvent;
 	import res.event.ResXmlLoadEvent;
 	import res.vo.ResXmlVO;
 
@@ -27,6 +32,7 @@ package res.data
 		
 		private var _preloadConfigXmlList:Array = 
 			[
+				ConfigUrlEnum.RES_URL,
 				ConfigUrlEnum.ANIMATION_CONFIG,
 				ConfigUrlEnum.ACTION_CONFIG,
 				ConfigUrlEnum.UNIT_CONFIG
@@ -93,6 +99,10 @@ package res.data
 			{
 				switch(ConfigUrlVO(loadedResXmlVO.passData).configName)
 				{
+					case ConfigUrlEnum.RES_URL:
+						XmlResDataModule.getInstance().initModule(loadedResXmlVO.xmlData);
+						break;
+					
 					case ConfigUrlEnum.ANIMATION_CONFIG:
 						XmlAnimationDataModule.getInstance().initModule(loadedResXmlVO.xmlData);
 						break;
@@ -106,7 +116,10 @@ package res.data
 						break;
 				}
 				
-				checkXmlLoadComplete(ConfigUrlVO(loadedResXmlVO.passData).configName);
+				if(checkXmlLoadComplete(ConfigUrlVO(loadedResXmlVO.passData).configName))
+				{
+					this.dispatchEvent(new ConfigDataCompleteEvent());
+				}
 			}
 		}
 		
@@ -127,6 +140,21 @@ package res.data
 			}
 			
 			return false;
+		}
+		
+		public function getResUrlVOByResClass(resClass:String):ResUrlVO
+		{
+			return XmlResDataModule.getInstance().getResUrlVOByResClass(resClass);
+		}
+		
+		public function getAnimationConfigVOByType(animationType:String):AnimationConfigVO
+		{
+			return XmlAnimationDataModule.getInstance().getAnimationConfigVOByType(animationType);
+		}
+		
+		public function getActionUnitConfigByClass(actionClass:String):ActionUnitConfig
+		{
+			return XmlActionDataModule.getInstance().getActionUnitConfigByClass(actionClass);
 		}
 	}
 }

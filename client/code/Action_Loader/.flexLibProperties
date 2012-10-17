@@ -28,6 +28,11 @@
     <classEntry path="res.loader.ResSwfLoader"/>
     <classEntry path="res.vo.PreloadSwfData"/>
     <classEntry path="res.event.ResSwfLoadEvent"/>
+    <classEntry path="res.data.animation.action.ActionUnitConfig"/>
+    <classEntry path="res.data.animation.action.ActionConfigVO"/>
+    <classEntry path="res.data.animation.action.ActionConfigPart"/>
+    <classEntry path="res.data.animation.action.PartFace"/>
+    <classEntry path="res.data.animation.enum.ActionClassEnum"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

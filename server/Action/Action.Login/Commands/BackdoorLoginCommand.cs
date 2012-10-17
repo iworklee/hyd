@@ -8,8 +8,6 @@ using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Action.Engine;
 using Action.Model;
-using Action.Model.Protobuf;
-using Action.Model.Mongodb;
 
 namespace Action.Login.Commands
 {

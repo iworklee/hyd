@@ -11,19 +11,20 @@ namespace Action.Engine
         protected GameCommandBase()
         {
             var type = this.GetType();
-            name = type.Name;
+            _name = type.Name;
 
             var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
             if (attr == null)
-                cmdId = 0;
+                _id = 0;
             else
-                cmdId = ((GameCommandAttribute)attr).CommandId;
+                _id = ((GameCommandAttribute)attr).CommandId;
         }
 
-        private string name;
-        public override string Name { get { return name; } }
-        private int cmdId;
-        public int CommandId { get { return cmdId; } }
+        private string _name;
+        public override string Name { get { return _name; } }
+
+        private int _id;
+        public int ID { get { return _id; } }
 
         protected virtual int CD
         {
@@ -33,21 +34,21 @@ namespace Action.Engine
         public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
         {
             //TODO:CD验证
-            if (CD > 0 && session.CommandLogger.IsCommandInCD(CommandId, CD))
+            if (CD > 0 && session.CommandLogger.IsCommandInCD(ID, CD))
                 return;
 
             //TODO:执行命令
             Execute(session, commandInfo);
 
             //TODO:记录命令
-            session.CommandLogger.LogCommand(CommandId, commandInfo);
+            session.CommandLogger.LogCommand(ID, commandInfo);
         }
 
         protected abstract void Execute(GameSession session, BinaryCommandInfo commandInfo);
 
         public override string ToString()
         {
-            return string.Format("{0}({1})", Name, CommandId);
+            return string.Format("{0}({1})", Name, ID);
         }
     }
 

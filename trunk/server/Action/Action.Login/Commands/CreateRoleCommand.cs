@@ -9,7 +9,7 @@ using Action.Model.Protobuf;
 using Action.Model;
 using Action.Model.Mongodb;
 
-namespace Action.Login
+namespace Action.Login.Commands
 {
     [GameCommand((int)CommandEnum.CreateRole)]
     public class CreateRoleCommand : GameCommand<CreateRoleArgs>
@@ -35,9 +35,27 @@ namespace Action.Login
                 .GetCollection(DbCollectionDef.PlayerIndex.Name).AsQueryable<PlayerIndex>();
             if (playerIndexes.Where(p => p.Name == args.Name).Count() > 0)
             {
-                session.SendResponse(CommandId, S2C.NameExisted);
+                session.SendResponse(ID, S2C.NameExisted);
                 return;
             }
+
+            //创建玩家角色
+            var player = new Player();
+            player.Account = session.Player.Account;
+            player.Name = args.Name;
+            player.Job = args.Job;
+            player.Sex = (SexEnum)args.Sex;
+            var tblPlayer = session.AppServer.DefaultDatabase
+                .GetCollection(DbCollectionDef.Player.Name);
+            tblPlayer.Insert<Player>(player);
+
+            //创建玩家索引
+            var playerIndex = new PlayerIndex();
+            playerIndex.Name = args.Name;
+            playerIndex.Account = session.Player.Account;
+            var tblPlayerIndex = session.AppServer.DefaultDatabase
+                .GetCollection(DbCollectionDef.PlayerIndex.Name);
+            tblPlayerIndex.Insert<PlayerIndex>(playerIndex);
         }
     }
 }

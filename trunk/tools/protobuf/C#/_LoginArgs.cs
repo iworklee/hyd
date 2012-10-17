@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: protos/_Login.proto
+// Generated from: protos/_LoginArgs.proto
 // Note: requires additional types generated from: protobuf-net.proto
 namespace Action.Model
 {

@@ -11,7 +11,7 @@ using Action.Model;
 using Action.Model.Protobuf;
 using Action.Model.Mongodb;
 
-namespace Action.Login
+namespace Action.Login.Commands
 {
     [GameCommand((int)CommandEnum.BackdoorLogin)]
     public class BackdoorLoginCommand : GameCommand<BackdoorLoginArgs>
@@ -41,10 +41,10 @@ namespace Action.Login
                     session.Player.Name = player.Name;
                     session.Player.Job = player.Job;
                     session.Player.Sex = (int)player.Sex;
-                    session.SendResponse(CommandId, (int)S2C.OK);
+                    session.SendResponse(ID, (int)S2C.OK);
                 }
                 else
-                    session.SendResponse(CommandId, (int)S2C.RoleMissing);
+                    session.SendResponse(ID, (int)S2C.RoleMissing);
             }
             else
                 session.Close();

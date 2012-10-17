@@ -54,10 +54,10 @@ namespace Action.Model.Protobuf
       set { _Job = value; }
     }
 
-    private Action.Model.Protobuf.SexType _Sex = Action.Model.Protobuf.SexType.Male;
+    private int _Sex = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"Sex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(Action.Model.Protobuf.SexType.Male)]
-    public Action.Model.Protobuf.SexType Sex
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Sex
     {
       get { return _Sex; }
       set { _Sex = value; }
@@ -66,16 +66,5 @@ namespace Action.Model.Protobuf
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"SexType")]
-    public enum SexType
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Male", Value=1)]
-      Male = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Female", Value=0)]
-      Female = 0
-    }
   
 }

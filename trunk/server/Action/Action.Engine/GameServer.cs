@@ -16,6 +16,22 @@ namespace Action.Engine
             : base(new GameProtocol())
         {
         }
+        public override bool Setup(SuperSocket.SocketBase.Config.IRootConfig rootConfig, SuperSocket.SocketBase.Config.IServerConfig config, ISocketServerFactory socketServerFactory, SuperSocket.SocketBase.Protocol.ICustomProtocol<BinaryCommandInfo> protocol)
+        {
+            if (!base.Setup(rootConfig, config, socketServerFactory, protocol))
+                return false;
+
+            try
+            {
+                MongoServer.Ping();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError("The MongoDB Server is not alive!", ex);
+                return false;
+            }
+            return true;
+        }
 
         protected override void OnStartup()
         {
@@ -39,7 +55,7 @@ namespace Action.Engine
         protected override void OnAppSessionClosed(object sender, AppSessionClosedEventArgs<GameSession> e)
         {
             // TODO 玩家下线
-        }  
+        }
 
         [ImportMany]
         private IEnumerable<Lazy<GameCommandBase, ICommandMetaData>> _commands = null;

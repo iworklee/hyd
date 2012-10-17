@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net.Sockets;
 using System.IO;
+using System.Reflection;
+using ProtoBuf;
 
 namespace Client
 {
@@ -83,6 +85,22 @@ namespace Client
             {
                 writer.Write(0);
             }
+        }
+
+        private void btnSend3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            iListBindingSource.DataSource = new List<string> { "int", "bool", "float" };
+
+            var assembly = Assembly.Load("Action.Model");
+            var types = assembly.GetExportedTypes()
+                .Where(t => !t.IsAbstract && t.GetInterface("IExtensible") != null)
+                .ToDictionary(t => t.FullName, t => t);
+            ddlParamType3.DataSource = new BindingSource(types, null);
         }
     }
 }

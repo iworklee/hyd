@@ -56,6 +56,9 @@ namespace Action.Login.Commands
             var tblPlayerIndex = session.AppServer.DefaultDatabase
                 .GetCollection(DbCollectionDef.PlayerIndex.Name);
             tblPlayerIndex.Insert<PlayerIndex>(playerIndex);
+
+            //玩家进入游戏
+            LoginHelper.EnterGame(session, player);
         }
     }
 }

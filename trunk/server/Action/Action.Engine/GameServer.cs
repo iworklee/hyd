@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
+using System.ComponentModel.Composition;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Command;
-using System.ComponentModel.Composition;
+using MongoDB.Driver;
 
 namespace Action.Engine
 {
     public class GameServer : AppServer<GameSession, BinaryCommandInfo>
     {
-
         public GameServer()
             : base(new GameProtocol())
         {
@@ -63,6 +64,23 @@ namespace Action.Engine
             CommandFilterFactory.GenerateCommandFilterLibrary(this.GetType(), commandDict.Values.Cast<ICommand>());
 
             return true;
+        }
+
+        public MongoServer MongoServer
+        {
+            get
+            {
+                var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
+                return MongoServer.Create(connectionString);
+            }
+        }
+
+        public MongoDatabase DefaultDatabase
+        {
+            get
+            {
+                return MongoServer.GetDatabase("Game");
+            }
         }
     }
 }

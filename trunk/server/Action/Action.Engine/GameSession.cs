@@ -23,21 +23,16 @@ namespace Action.Engine
             // TODO 用户会话
         }
 
-        private string _account;
-        public string Account
-        {
-            get { return _account; }
-        }
-
         private bool _enabled;
         public bool Enabled
         {
             get { return _enabled; }
         }
 
-        public void Bind(string account)
+        public void Login(string account)
         {
-            _account = account;
+            _player = new GamePlayer();
+            _player.Account = account;
             _enabled = true;
         }
 
@@ -45,7 +40,6 @@ namespace Action.Engine
         public GamePlayer Player
         {
             get { return _player; }
-            set { _player = value; }
         }
 
         private GameCommandLogger _cmdLogger= new GameCommandLogger();
@@ -53,24 +47,6 @@ namespace Action.Engine
         {
             get { return _cmdLogger; }
         }
-
-        public MongoServer MongoDBServer
-        {
-            get
-            {
-                var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
-                return MongoServer.Create(connectionString);
-            }
-        }
-
-        public MongoDatabase DefaultDatabase
-        {
-            get
-            {
-                return MongoDBServer.GetDatabase("Game");
-            }
-        }
-
 
         /// <summary>
         /// Only send cmdId, no data, package size is 0

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Action.Engine;
 using System.ComponentModel.Composition;
-using Action.Core;
 using SuperSocket.Common;
+using MongoDB.Driver;
+using Action.Engine;
+using Action.Core;
+using Action.Model;
 
 namespace Action.Login
 {
@@ -15,7 +17,9 @@ namespace Action.Login
         public override void Load(GameServer server)
         {
             LogUtil.LogInfo("LoginModule loaded.");
-            //TestHelper.WriteLine("LoginModule loaded.");
+
+            var playerCollection = server.DefaultDatabase.GetCollection(DbCollectionDef.Player.Name);
+            playerCollection.CreateIndex(DbCollectionDef.Player.Key);
         }
 
         public override void Unload(GameServer server)

@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Action.Engine
+namespace Action.Model.Mongodb
 {
-    public class GamePlayer
+    public class Player : SmartObj
     {
         public string Account { get; set; }
-        public bool IsOnline { get; set; }
-        public string Name { get; set; }
         public int Job { get; set; }
-        public int Sex { get; set; }
+        public SexEnum Sex { get; set; }
     }
 }

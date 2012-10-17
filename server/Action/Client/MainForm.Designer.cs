@@ -39,13 +39,13 @@
             this.btnSend1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnSend2 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtCmdId2 = new System.Windows.Forms.TextBox();
             this.ddlParamType2 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.btnSend2 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtParam2 = new System.Windows.Forms.TextBox();
+            this.txtCmdId2 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -159,6 +159,20 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CommandID with one value";
             // 
+            // ddlParamType2
+            // 
+            this.ddlParamType2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlParamType2.FormattingEnabled = true;
+            this.ddlParamType2.Items.AddRange(new object[] {
+            "",
+            "int",
+            "bool",
+            "float"});
+            this.ddlParamType2.Location = new System.Drawing.Point(79, 47);
+            this.ddlParamType2.Name = "ddlParamType2";
+            this.ddlParamType2.Size = new System.Drawing.Size(121, 20);
+            this.ddlParamType2.TabIndex = 10;
+            // 
             // btnSend2
             // 
             this.btnSend2.Location = new System.Drawing.Point(207, 73);
@@ -169,34 +183,14 @@
             this.btnSend2.UseVisualStyleBackColor = true;
             this.btnSend2.Click += new System.EventHandler(this.btnSend2_Click);
             // 
-            // label4
+            // label6
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 12);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "CommandId";
-            // 
-            // txtCmdId2
-            // 
-            this.txtCmdId2.Location = new System.Drawing.Point(79, 20);
-            this.txtCmdId2.Name = "txtCmdId2";
-            this.txtCmdId2.Size = new System.Drawing.Size(110, 21);
-            this.txtCmdId2.TabIndex = 7;
-            // 
-            // ddlParamType2
-            // 
-            this.ddlParamType2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlParamType2.FormattingEnabled = true;
-            this.ddlParamType2.Items.AddRange(new object[] {
-            "int",
-            "bool",
-            "float"});
-            this.ddlParamType2.Location = new System.Drawing.Point(79, 47);
-            this.ddlParamType2.Name = "ddlParamType2";
-            this.ddlParamType2.Size = new System.Drawing.Size(121, 20);
-            this.ddlParamType2.TabIndex = 10;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(14, 76);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "ParamValue";
             // 
             // label5
             // 
@@ -207,14 +201,14 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "ParamType";
             // 
-            // label6
+            // label4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 76);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "ParamValue";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 12);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "CommandId";
             // 
             // txtParam2
             // 
@@ -222,6 +216,13 @@
             this.txtParam2.Name = "txtParam2";
             this.txtParam2.Size = new System.Drawing.Size(110, 21);
             this.txtParam2.TabIndex = 7;
+            // 
+            // txtCmdId2
+            // 
+            this.txtCmdId2.Location = new System.Drawing.Point(79, 20);
+            this.txtCmdId2.Name = "txtCmdId2";
+            this.txtCmdId2.Size = new System.Drawing.Size(110, 21);
+            this.txtCmdId2.TabIndex = 7;
             // 
             // MainForm
             // 

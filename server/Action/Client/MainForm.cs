@@ -89,7 +89,8 @@ namespace Client
 
         private void btnSend3_Click(object sender, EventArgs e)
         {
-
+            var classType = (Type)ddlParamType3.SelectedValue;
+            var o = Activator.CreateInstance(classType);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -101,6 +102,12 @@ namespace Client
                 .Where(t => !t.IsAbstract && t.GetInterface("IExtensible") != null)
                 .ToDictionary(t => t.FullName, t => t);
             ddlParamType3.DataSource = new BindingSource(types, null);
+        }
+
+        private void ddlParamType3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var className = ddlParamType3.Text;
+            var classType = (Type)ddlParamType3.SelectedValue;
         }
     }
 }

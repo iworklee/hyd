@@ -9,7 +9,7 @@
 
 // Generated from: protos/Login.proto
 // Note: requires additional types generated from: protobuf-net.proto
-namespace Action.Model.Protobuf
+namespace Action.Model
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BackdoorLoginArgs")]
   public partial class BackdoorLoginArgs : global::ProtoBuf.IExtensible

@@ -72,7 +72,15 @@ namespace Action.Engine
     {
         protected override void Execute(GameSession session, BinaryCommandInfo commandInfo)
         {
-            var args = GameCommandDataDeserializer.Deserialize<T>(commandInfo.Data);
+            T args;
+            try
+            {
+                args = GameCommandDataDeserializer.Deserialize<T>(commandInfo.Data);
+            }
+            catch
+            {
+                args = default(T);
+            }
             if (Ready(session, args))
                 Run(session, args);
         }

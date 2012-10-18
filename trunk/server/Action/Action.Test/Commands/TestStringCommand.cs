@@ -16,7 +16,7 @@ namespace Action.Test.Commands
 
         protected override void Run(GameSession session, string args)
         {
-            Console.WriteLine(this.ToString());
+            Console.WriteLine("{0} - {1}", this.ToString(), args);
         }
     }
 }

@@ -104,6 +104,12 @@ namespace Client
                 else
                     writer.Write(0f);
             }
+            else if (ddlParamType2.Text == "string")
+            {
+                var param = Encoding.UTF8.GetBytes(txtParam2.Text);
+                writer.Write(param.Length);
+                writer.Write(param);
+            }
             else
             {
                 writer.Write(0);
@@ -155,7 +161,7 @@ namespace Client
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            iListBindingSource.DataSource = new List<string> { "int", "bool", "float" };
+            iListBindingSource.DataSource = new List<string> { "string", "int", "bool", "float" };
 
             var assembly = Assembly.Load("Action.Model");
             var types = assembly.GetExportedTypes()

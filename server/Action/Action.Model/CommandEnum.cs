@@ -15,5 +15,9 @@ namespace Action.Model
 
         //Role
         ViewRoleInfo = 1100,
+        ViewBasicPropCommand = 1101,
+
+        //Chat
+        TalkToWorld = 1200,
     }
 }

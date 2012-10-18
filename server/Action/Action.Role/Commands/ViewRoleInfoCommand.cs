@@ -7,7 +7,7 @@ using MongoDB.Driver.Linq;
 using Action.Model;
 using Action.Engine;
 
-namespace Action.Role
+namespace Action.Role.Commands
 {
     [GameCommand((int)CommandEnum.ViewRoleInfo)]
     public class ViewRoleInfoCommand : GameCommand<string>

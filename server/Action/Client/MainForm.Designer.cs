@@ -38,8 +38,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtCmdId1 = new System.Windows.Forms.TextBox();
             this.btnSend1 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpCmd1 = new System.Windows.Forms.GroupBox();
+            this.grpCmd2 = new System.Windows.Forms.GroupBox();
             this.ddlParamType2 = new System.Windows.Forms.ComboBox();
             this.iListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnSend2 = new System.Windows.Forms.Button();
@@ -48,17 +48,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtParam2 = new System.Windows.Forms.TextBox();
             this.txtCmdId2 = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.grpCmd3 = new System.Windows.Forms.GroupBox();
+            this.txtBson = new System.Windows.Forms.TextBox();
             this.ddlParamType3 = new System.Windows.Forms.ComboBox();
             this.btnSend3 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtCmdId3 = new System.Windows.Forms.TextBox();
-            this.txtBson = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.grpCmd1.SuspendLayout();
+            this.grpCmd2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iListBindingSource)).BeginInit();
-            this.groupBox3.SuspendLayout();
+            this.grpCmd3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -142,33 +142,35 @@
             this.btnSend1.UseVisualStyleBackColor = true;
             this.btnSend1.Click += new System.EventHandler(this.btnSend1_Click);
             // 
-            // groupBox1
+            // grpCmd1
             // 
-            this.groupBox1.Controls.Add(this.btnSend1);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtCmdId1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 59);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(584, 52);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Only CommandID";
+            this.grpCmd1.Controls.Add(this.btnSend1);
+            this.grpCmd1.Controls.Add(this.label3);
+            this.grpCmd1.Controls.Add(this.txtCmdId1);
+            this.grpCmd1.Enabled = false;
+            this.grpCmd1.Location = new System.Drawing.Point(12, 59);
+            this.grpCmd1.Name = "grpCmd1";
+            this.grpCmd1.Size = new System.Drawing.Size(584, 52);
+            this.grpCmd1.TabIndex = 9;
+            this.grpCmd1.TabStop = false;
+            this.grpCmd1.Text = "Only CommandID";
             // 
-            // groupBox2
+            // grpCmd2
             // 
-            this.groupBox2.Controls.Add(this.ddlParamType2);
-            this.groupBox2.Controls.Add(this.btnSend2);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.txtParam2);
-            this.groupBox2.Controls.Add(this.txtCmdId2);
-            this.groupBox2.Location = new System.Drawing.Point(12, 117);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(584, 81);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "CommandID with one value";
+            this.grpCmd2.Controls.Add(this.ddlParamType2);
+            this.grpCmd2.Controls.Add(this.btnSend2);
+            this.grpCmd2.Controls.Add(this.label6);
+            this.grpCmd2.Controls.Add(this.label5);
+            this.grpCmd2.Controls.Add(this.label4);
+            this.grpCmd2.Controls.Add(this.txtParam2);
+            this.grpCmd2.Controls.Add(this.txtCmdId2);
+            this.grpCmd2.Enabled = false;
+            this.grpCmd2.Location = new System.Drawing.Point(12, 117);
+            this.grpCmd2.Name = "grpCmd2";
+            this.grpCmd2.Size = new System.Drawing.Size(584, 81);
+            this.grpCmd2.TabIndex = 9;
+            this.grpCmd2.TabStop = false;
+            this.grpCmd2.Text = "CommandID with one value";
             // 
             // ddlParamType2
             // 
@@ -235,20 +237,29 @@
             this.txtCmdId2.Size = new System.Drawing.Size(110, 21);
             this.txtCmdId2.TabIndex = 7;
             // 
-            // groupBox3
+            // grpCmd3
             // 
-            this.groupBox3.Controls.Add(this.txtBson);
-            this.groupBox3.Controls.Add(this.ddlParamType3);
-            this.groupBox3.Controls.Add(this.btnSend3);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.txtCmdId3);
-            this.groupBox3.Location = new System.Drawing.Point(12, 204);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(584, 223);
-            this.groupBox3.TabIndex = 9;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "CommandID with Protocol Buffers";
+            this.grpCmd3.Controls.Add(this.txtBson);
+            this.grpCmd3.Controls.Add(this.ddlParamType3);
+            this.grpCmd3.Controls.Add(this.btnSend3);
+            this.grpCmd3.Controls.Add(this.label8);
+            this.grpCmd3.Controls.Add(this.label9);
+            this.grpCmd3.Controls.Add(this.txtCmdId3);
+            this.grpCmd3.Enabled = false;
+            this.grpCmd3.Location = new System.Drawing.Point(12, 204);
+            this.grpCmd3.Name = "grpCmd3";
+            this.grpCmd3.Size = new System.Drawing.Size(584, 223);
+            this.grpCmd3.TabIndex = 9;
+            this.grpCmd3.TabStop = false;
+            this.grpCmd3.Text = "CommandID with Protocol Buffers";
+            // 
+            // txtBson
+            // 
+            this.txtBson.Location = new System.Drawing.Point(16, 47);
+            this.txtBson.Multiline = true;
+            this.txtBson.Name = "txtBson";
+            this.txtBson.Size = new System.Drawing.Size(481, 170);
+            this.txtBson.TabIndex = 11;
             // 
             // ddlParamType3
             // 
@@ -299,22 +310,14 @@
             this.txtCmdId3.Size = new System.Drawing.Size(110, 21);
             this.txtCmdId3.TabIndex = 7;
             // 
-            // txtBson
-            // 
-            this.txtBson.Location = new System.Drawing.Point(16, 47);
-            this.txtBson.Multiline = true;
-            this.txtBson.Name = "txtBson";
-            this.txtBson.Size = new System.Drawing.Size(481, 170);
-            this.txtBson.TabIndex = 11;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(608, 439);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grpCmd3);
+            this.Controls.Add(this.grpCmd2);
+            this.Controls.Add(this.grpCmd1);
             this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.txtIP);
@@ -327,13 +330,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Client";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.grpCmd1.ResumeLayout(false);
+            this.grpCmd1.PerformLayout();
+            this.grpCmd2.ResumeLayout(false);
+            this.grpCmd2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iListBindingSource)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.grpCmd3.ResumeLayout(false);
+            this.grpCmd3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,8 +353,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtCmdId1;
         private System.Windows.Forms.Button btnSend1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpCmd1;
+        private System.Windows.Forms.GroupBox grpCmd2;
         private System.Windows.Forms.ComboBox ddlParamType2;
         private System.Windows.Forms.Button btnSend2;
         private System.Windows.Forms.Label label6;
@@ -359,7 +362,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtParam2;
         private System.Windows.Forms.TextBox txtCmdId2;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox grpCmd3;
         private System.Windows.Forms.ComboBox ddlParamType3;
         private System.Windows.Forms.Button btnSend3;
         private System.Windows.Forms.Label label8;

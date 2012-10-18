@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
-  <includeClasses/>
+  <includeClasses>
+    <classEntry path="battle.BattlePlayManager"/>
+    <classEntry path="battle.unit.BattleUnit"/>
+    <classEntry path="battle.unit.FootBattleUnit"/>
+    <classEntry path="battle.unit.GeneralBattleUnit"/>
+    <classEntry path="battle.army.BattleArmy"/>
+    <classEntry path="battle.view.BattleUnitViewVO"/>
+    <classEntry path="battle.view.BattleArmyViewVO"/>
+  </includeClasses>
   <includeResources/>
   <namespaceManifests/>
 </flexLibProperties>

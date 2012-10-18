@@ -27,5 +27,18 @@ namespace Action.Engine
         {
             _players.TryRemove(player.Name, out player);
         }
+
+        public IEnumerable<GamePlayer> GetPlayers()
+        {
+            return _players.Values;
+        }
+
+        public GamePlayer GetPlayer(string name)
+        {
+            GamePlayer player = null;
+            if (_players.TryGetValue(name, out player))
+                return player;
+            return null;
+        }
     }
 }

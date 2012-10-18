@@ -11,8 +11,7 @@ namespace Action.Login
     {
         public static void EnterGame(GameSession session, Player player)
         {
-            session.Player.Name = player.Name;
-            session.Player.IsOnline = true;
+            session.EnterGame(player.Name);
             session.SendResponse((int)CommandEnum.EnterGame);
         }
     }

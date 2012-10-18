@@ -29,7 +29,7 @@ namespace Action.Login.Commands
         {
             if (args.Account != null && args.Account.Trim().ToLower().StartsWith("test"))
             {
-                session.Open(args.Account);
+                session.EnterLogin(args.Account);
                 var allPlayers = session.AppServer.DefaultDatabase
                     .GetCollection(DbCollectionDef.Player.Name).AsQueryable<Player>();
                 var player = allPlayers.Where(p => p.Account == args.Account).FirstOrDefault();

@@ -19,12 +19,10 @@ namespace Action.Login
             LogUtil.LogInfo("LoginModule loaded.");
 
             var tblPlayer = server.DefaultDatabase.GetCollection(DbCollectionDef.Player.Name);
-            if (!tblPlayer.IndexExistsByName(DbCollectionDef.Player.Key))
-                tblPlayer.CreateIndex(DbCollectionDef.Player.Key);
+            tblPlayer.CreateIndex(DbCollectionDef.Player.Key);
 
             var tblPlayerIndex = server.DefaultDatabase.GetCollection(DbCollectionDef.PlayerIndex.Name);
-            if (!tblPlayerIndex.IndexExistsByName(DbCollectionDef.PlayerIndex.Key))
-                tblPlayerIndex.CreateIndex(DbCollectionDef.PlayerIndex.Key);
+            tblPlayerIndex.CreateIndex(DbCollectionDef.PlayerIndex.Key);
         }
 
         public override void Unload(GameServer server)

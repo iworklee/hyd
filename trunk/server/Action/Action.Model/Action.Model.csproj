@@ -51,7 +51,7 @@
     <Compile Include="DbCollectionDef.cs" />
     <Compile Include="Mongodb\Entity.cs" />
     <Compile Include="Mongodb\Player.cs" />
-    <Compile Include="Mongodb\PlayerIndex.cs" />
+    <Compile Include="Mongodb\Account.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protobuf\PlayerInfo.cs" />
     <Compile Include="Protobuf\_LoginArgs.cs" />

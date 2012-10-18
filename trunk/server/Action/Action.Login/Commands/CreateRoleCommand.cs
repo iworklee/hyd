@@ -29,9 +29,9 @@ namespace Action.Login.Commands
             //输入合法性验证
 
             //重名验证
-            var playerIndexes = session.AppServer.DefaultDatabase
-                .GetCollection(DbCollectionDef.PlayerIndex.Name).AsQueryable<PlayerIndex>();
-            if (playerIndexes.Where(p => p.Name == args.Name).Count() > 0)
+            var players = session.AppServer.DefaultDatabase
+                .GetCollection(DbCollectionDef.Player.Name).AsQueryable<Player>();
+            if (players.Where(p => p.Name == args.Name).Count() > 0)
             {
                 session.SendResponse(ID, S2C.NameExisted);
                 return;
@@ -40,6 +40,7 @@ namespace Action.Login.Commands
             //创建玩家角色
             var player = new Player();
             player.Account = session.Player.Account;
+            player.Name = args.Name;
             player.Role = new Role();
             player.Role.Name = args.Name;
             player.Role.Job = args.Job;
@@ -48,13 +49,13 @@ namespace Action.Login.Commands
                 .GetCollection(DbCollectionDef.Player.Name);
             tblPlayer.Insert<Player>(player);
 
-            //创建玩家索引
-            var playerIndex = new PlayerIndex();
-            playerIndex.Name = args.Name;
-            playerIndex.Account = session.Player.Account;
-            var tblPlayerIndex = session.AppServer.DefaultDatabase
-                .GetCollection(DbCollectionDef.PlayerIndex.Name);
-            tblPlayerIndex.Insert<PlayerIndex>(playerIndex);
+            //绑定玩家账户和角色
+            var account = new Account();
+            account.AccKey = session.Player.Account;
+            account.PlayerName = args.Name;
+            var tblAccount = session.AppServer.DefaultDatabase
+                .GetCollection(DbCollectionDef.Account.Name);
+            tblAccount.Insert<Account>(account);
 
             //玩家进入游戏
             LoginHelper.EnterGame(session, player);

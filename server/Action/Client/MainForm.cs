@@ -122,9 +122,6 @@ namespace Client
             var classType = (Type)ddlParamType3.SelectedValue;
             var o = Activator.CreateInstance(classType);
 
-            int cmdId = int.Parse(txtCmdId3.Text);
-            writer.Write(cmdId);    // cmdId
-
             var newdoc = BsonDocument.Parse(txtBson.Text);
             foreach (var element in newdoc.Elements)
             {
@@ -153,6 +150,10 @@ namespace Client
             using (var ms = new MemoryStream())
             {
                 Serializer.NonGeneric.Serialize(ms, o);
+
+                int cmdId = int.Parse(txtCmdId3.Text);
+                writer.Write(cmdId);    // cmdId
+
                 writer.Write((int)ms.Length);        // package length
                 ms.WriteTo(stream);
             }

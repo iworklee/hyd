@@ -37,15 +37,16 @@ namespace Action.Engine
 
         public void EnterLogin(string account)
         {
-            _player = new GamePlayer();
+            _player = new GamePlayer(this);
             _player.Account = account;
             _opened = true;
         }
 
         public void EnterGame(string name)
         {
+            _player.Name = name;
             _player.IsOnline = true;
-            AppServer.EnterGame(_player.Name = name, this);
+            AppServer.World.AddPlayer(_player);
         }
 
         private GameCommandLogger _cmdLogger= new GameCommandLogger();

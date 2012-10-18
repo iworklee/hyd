@@ -22,34 +22,7 @@ namespace Action.Engine
         public GameWorld World
         {
             get { return _world; }
-        }
-
-        private ConcurrentDictionary<string, GameSession> _onlinePlayers
-            = new ConcurrentDictionary<string, GameSession>();
-
-        public void EnterGame(string player, GameSession session)
-        {
-            _onlinePlayers[player] = session;
-        }
-
-        public void LeaveGame(string player)
-        {
-            GameSession session = null;
-            _onlinePlayers.TryRemove(player, out session);
-        }
-
-        public IEnumerable<GameSession> GetOnlineSessions()
-        {
-            return _onlinePlayers.Values;
-        }
-
-        public GameSession GetPlayerSession(string player)
-        {
-            GameSession session = null;
-            if (_onlinePlayers.TryGetValue(player, out session))
-                return session;
-            return null;
-        }
+        }        
 
         public override bool Setup(SuperSocket.SocketBase.Config.IRootConfig rootConfig, SuperSocket.SocketBase.Config.IServerConfig config, ISocketServerFactory socketServerFactory, SuperSocket.SocketBase.Protocol.ICustomProtocol<BinaryCommandInfo> protocol)
         {
@@ -90,7 +63,7 @@ namespace Action.Engine
         protected override void OnAppSessionClosed(object sender, AppSessionClosedEventArgs<GameSession> e)
         {
             // TODO 玩家下线
-            e.Session.AppServer.LeaveGame(e.Session.Player.Name);
+            e.Session.AppServer.World.RemovePlayer(e.Session.Player);
         }
 
         [ImportMany]

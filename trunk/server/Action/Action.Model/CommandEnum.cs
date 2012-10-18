@@ -7,9 +7,13 @@ namespace Action.Model
 {
     public enum CommandEnum
     {
+        //Login
         BackdoorLogin = 1000,
         TencentOpenLogin,
         CreateRole = 1010,
         EnterGame = 1011,
+
+        //Role
+        ViewRoleInfo = 1100,
     }
 }

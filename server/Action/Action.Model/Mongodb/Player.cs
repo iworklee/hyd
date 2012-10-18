@@ -12,6 +12,7 @@ namespace Action.Model
         }
 
         public string Account { get; set; }
+        public string Name { get; set; }
         public Role Role { get; set; }
     }
 }

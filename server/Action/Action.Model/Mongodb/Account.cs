@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Action.Model
 {
-    public class PlayerIndex
+    public class Account
     {
-        public string Name { get; set; }
-        public string Account { get; set; }
+        public string AccKey { get; set; }
+        public string PlayerName { get; set; }
     }
 }

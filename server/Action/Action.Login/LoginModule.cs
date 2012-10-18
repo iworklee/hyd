@@ -21,8 +21,8 @@ namespace Action.Login
             var tblPlayer = server.DefaultDatabase.GetCollection(DbCollectionDef.Player.Name);
             tblPlayer.CreateIndex(DbCollectionDef.Player.Key);
 
-            var tblPlayerIndex = server.DefaultDatabase.GetCollection(DbCollectionDef.PlayerIndex.Name);
-            tblPlayerIndex.CreateIndex(DbCollectionDef.PlayerIndex.Key);
+            var tblAccount = server.DefaultDatabase.GetCollection(DbCollectionDef.Account.Name);
+            tblAccount.CreateIndex(DbCollectionDef.Account.Key);
         }
 
         public override void Unload(GameServer server)

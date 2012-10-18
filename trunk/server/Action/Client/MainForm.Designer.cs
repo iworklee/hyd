@@ -131,6 +131,7 @@
             this.txtCmdId1.Name = "txtCmdId1";
             this.txtCmdId1.Size = new System.Drawing.Size(110, 21);
             this.txtCmdId1.TabIndex = 7;
+            this.txtCmdId1.Text = "979";
             // 
             // btnSend1
             // 
@@ -236,6 +237,7 @@
             this.txtCmdId2.Name = "txtCmdId2";
             this.txtCmdId2.Size = new System.Drawing.Size(110, 21);
             this.txtCmdId2.TabIndex = 7;
+            this.txtCmdId2.Text = "982";
             // 
             // grpCmd3
             // 
@@ -309,6 +311,7 @@
             this.txtCmdId3.Name = "txtCmdId3";
             this.txtCmdId3.Size = new System.Drawing.Size(110, 21);
             this.txtCmdId3.TabIndex = 7;
+            this.txtCmdId3.Text = "1000";
             // 
             // MainForm
             // 

@@ -8,7 +8,7 @@ using SuperSocket.SocketBase;
 
 namespace Action.Engine
 {
-    public class GameCommandHeaderReader : ICommandReader<BinaryCommandInfo>
+    public class GameCommandReader : CommandReaderBase<BinaryCommandInfo>
     {
         private byte[] buffer = new byte[8];
         private int currentReceived = 0;
@@ -18,21 +18,14 @@ namespace Action.Engine
         private int cmdId = 0;
         private int dataLen = 0;
 
-        public IAppServer AppServer { get; private set; }
-
-        public int LeftBufferSize { get { return currentReceived; } }
-
-        public GameCommandDataReader DataReader { get; private set; }
-
-        public ICommandReader<BinaryCommandInfo> NextCommandReader { get; private set; }
-
-        public GameCommandHeaderReader(IAppServer appServer)
+        public GameCommandReader(IAppServer server)
+            : base(server)
         {
-            AppServer = appServer;
-            DataReader = new GameCommandDataReader(this);
         }
 
-        public BinaryCommandInfo FindCommandInfo(IAppSession session, byte[] readBuffer, int offset, int length, bool isReusableBuffer, out int left)
+
+
+        public override BinaryCommandInfo FindCommandInfo(IAppSession session, byte[] readBuffer, int offset, int length, bool isReusableBuffer, out int left)
         {
             NextCommandReader = this;
 
@@ -55,22 +48,17 @@ namespace Action.Engine
             currentReceived = 0;
 
             cmdId = BitConverter.ToInt32(buffer, 0);
+
             dataLen = BitConverter.ToInt32(buffer, 4);
 
-            BinaryCommandInfo cmdInfo;
             if (dataLen > 0)
             {
-                DataReader.CommandId = cmdId;
-                DataReader.DataLength = dataLen;
-
-                cmdInfo = DataReader.FindCommandInfo(session, readBuffer, offset + (length - left), left, isReusableBuffer, out left);
-                NextCommandReader = DataReader.NextCommandReader;
+                return null;
             }
             else
             {
-                cmdInfo = new BinaryCommandInfo(cmdId.ToString(), null);
+                return new BinaryCommandInfo(cmdId.ToString(), null);
             }
-            return cmdInfo;
 
             #region UNDONE ProtocolBuffer
             /*   
@@ -127,4 +115,3 @@ namespace Action.Engine
 
     }
 }
-

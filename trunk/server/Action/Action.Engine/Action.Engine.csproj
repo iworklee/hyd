@@ -75,6 +75,7 @@
     <Compile Include="ICommandMetaData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameCommandHeaderReader.cs" />
+    <Compile Include="GameCommandReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Action.Core\Action.Core.csproj">

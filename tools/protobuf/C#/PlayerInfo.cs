@@ -43,6 +43,24 @@ namespace Action.Model
       get { return _Sex; }
       set { _Sex = value; }
     }
+
+    private int _Level = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"Level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Level
+    {
+      get { return _Level; }
+      set { _Level = value; }
+    }
+
+    private int _Skin = default(int);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"Skin", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Skin
+    {
+      get { return _Skin; }
+      set { _Skin = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

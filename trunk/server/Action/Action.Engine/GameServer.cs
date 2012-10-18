@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using System.Collections.Concurrent;
 using System.ComponentModel.Composition;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Command;
@@ -16,6 +17,40 @@ namespace Action.Engine
             : base(new GameProtocol())
         {
         }
+
+        private GameWorld _world = new GameWorld();
+        public GameWorld World
+        {
+            get { return _world; }
+        }
+
+        private ConcurrentDictionary<string, GameSession> _onlinePlayers
+            = new ConcurrentDictionary<string, GameSession>();
+
+        public void EnterGame(string player, GameSession session)
+        {
+            _onlinePlayers[player] = session;
+        }
+
+        public void LeaveGame(string player)
+        {
+            GameSession session = null;
+            _onlinePlayers.TryRemove(player, out session);
+        }
+
+        public IEnumerable<GameSession> GetOnlineSessions()
+        {
+            return _onlinePlayers.Values;
+        }
+
+        public GameSession GetPlayerSession(string player)
+        {
+            GameSession session = null;
+            if (_onlinePlayers.TryGetValue(player, out session))
+                return session;
+            return null;
+        }
+
         public override bool Setup(SuperSocket.SocketBase.Config.IRootConfig rootConfig, SuperSocket.SocketBase.Config.IServerConfig config, ISocketServerFactory socketServerFactory, SuperSocket.SocketBase.Protocol.ICustomProtocol<BinaryCommandInfo> protocol)
         {
             if (!base.Setup(rootConfig, config, socketServerFactory, protocol))
@@ -55,6 +90,7 @@ namespace Action.Engine
         protected override void OnAppSessionClosed(object sender, AppSessionClosedEventArgs<GameSession> e)
         {
             // TODO 玩家下线
+            e.Session.AppServer.LeaveGame(e.Session.Player.Name);
         }
 
         [ImportMany]

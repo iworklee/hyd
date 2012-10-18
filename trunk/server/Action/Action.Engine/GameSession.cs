@@ -29,17 +29,23 @@ namespace Action.Engine
             get { return _opened; }
         }
 
-        public void Open(string account)
+        private GamePlayer _player;
+        public GamePlayer Player
+        {
+            get { return _player; }
+        }
+
+        public void EnterLogin(string account)
         {
             _player = new GamePlayer();
             _player.Account = account;
             _opened = true;
         }
 
-        private GamePlayer _player;
-        public GamePlayer Player
+        public void EnterGame(string name)
         {
-            get { return _player; }
+            _player.IsOnline = true;
+            AppServer.EnterGame(_player.Name = name, this);
         }
 
         private GameCommandLogger _cmdLogger= new GameCommandLogger();

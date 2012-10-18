@@ -45,6 +45,7 @@ namespace Action.Login.Commands
             player.Role.Name = args.Name;
             player.Role.Job = args.Job;
             player.Role.Sex = args.Sex;
+            player.Role.Level = player.Role.Skin = 1;
             var tblPlayer = session.AppServer.DefaultDatabase
                 .GetCollection(DbCollectionDef.Player.Name);
             tblPlayer.Insert<Player>(player);

@@ -47,6 +47,7 @@ namespace Action.Engine
             _player.Name = name;
             _player.IsOnline = true;
             AppServer.World.AddPlayer(_player);
+            AppServer.World.GetScene(_player.SceneId).AddPlayer(_player);
         }
 
         private GameCommandLogger _cmdLogger= new GameCommandLogger();

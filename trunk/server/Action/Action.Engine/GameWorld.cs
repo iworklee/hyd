@@ -8,11 +8,18 @@ namespace Action.Engine
 {
     public class GameWorld
     {
+        private GameScene _defaultScene = new GameScene();
+
         private ConcurrentDictionary<int, GameScene> _scenes
             = new ConcurrentDictionary<int, GameScene>();
 
         private ConcurrentDictionary<string, GamePlayer> _onlinePlayers
             = new ConcurrentDictionary<string, GamePlayer>();
+
+        public GameWorld()
+        {
+            _scenes[0] = _defaultScene;
+        }
 
         public void AddScene(GameScene scene)
         {
@@ -24,17 +31,20 @@ namespace Action.Engine
             GameScene scene = null;
             if (_scenes.TryGetValue(sceneId, out scene))
                 return scene;
-            return null;
+            return _defaultScene;
         }
 
         public void SwitchScene(GamePlayer player, int targetSceneId)
         {
-            var sourceScene = GetScene(player.SceneId);
-            var targetScene = GetScene(targetSceneId);
-            if (sourceScene != null && targetScene != null)
+            if (player.SceneId != targetSceneId)
             {
-                sourceScene.RemovePlayer(player);
-                targetScene.AddPlayer(player);
+                var sourceScene = GetScene(player.SceneId);
+                var targetScene = GetScene(targetSceneId);
+                if (sourceScene != null && targetScene != null)
+                {
+                    sourceScene.RemovePlayer(player);
+                    targetScene.AddPlayer(player);
+                }
             }
         }
 

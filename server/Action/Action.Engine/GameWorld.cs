@@ -34,7 +34,7 @@ namespace Action.Engine
             return _defaultScene;
         }
 
-        public void SwitchScene(GamePlayer player, int targetSceneId)
+        public bool SwitchScene(GamePlayer player, int targetSceneId)
         {
             if (player.SceneId != targetSceneId)
             {
@@ -44,8 +44,10 @@ namespace Action.Engine
                 {
                     sourceScene.RemovePlayer(player);
                     targetScene.AddPlayer(player);
+                    return true;
                 }
             }
+            return false;
         }
 
         public void AddPlayer(GamePlayer player)

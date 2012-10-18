@@ -48,6 +48,9 @@ namespace Client
             writer = new BinaryWriter(stream);
             btnConnect.Enabled = false;
             btnDisconnect.Enabled = true;
+            grpCmd1.Enabled = true;
+            grpCmd2.Enabled = true;
+            grpCmd3.Enabled = true;
         }
 
         private void btnDisconnect_Click(object sender, EventArgs e)
@@ -55,6 +58,9 @@ namespace Client
             tcpClient.Close();
             btnConnect.Enabled = true;
             btnDisconnect.Enabled = false;
+            grpCmd1.Enabled = false;
+            grpCmd2.Enabled = false;
+            grpCmd3.Enabled = false;
         }
 
         private void btnSend1_Click(object sender, EventArgs e)
@@ -62,6 +68,7 @@ namespace Client
             int cmdId = int.Parse(txtCmdId1.Text);
             writer.Write(cmdId);    // cmdId
             writer.Write(0);        // package length
+            writer.Flush();
         }
 
         private void btnSend2_Click(object sender, EventArgs e)
@@ -101,6 +108,7 @@ namespace Client
             {
                 writer.Write(0);
             }
+            writer.Flush();
         }
 
         private void btnSend3_Click(object sender, EventArgs e)
@@ -142,6 +150,7 @@ namespace Client
                 writer.Write((int)ms.Length);        // package length
                 ms.WriteTo(stream);
             }
+            writer.Flush();
         }
 
         private void MainForm_Load(object sender, EventArgs e)

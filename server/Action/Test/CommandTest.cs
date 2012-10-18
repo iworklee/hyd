@@ -91,19 +91,15 @@ namespace Test
         [TestMethod()]
         public void TestStringCommandTest()
         {
-            var bytes = Encoding.UTF8.GetBytes("摘要：今天试探性的打开了66.178.223.73的VS2005，添加了个Form和几个控件");
+            var text = "摘要：今天试探性的打开了66.178.223.73的VS2005，添加了个Form和几个控件";
+            var bytes = Encoding.UTF8.GetBytes(text);
             writer.Write(982);    // cmdId
             writer.Write(bytes.Length);        // package length
             writer.Write(bytes);
 
             Assert.AreEqual(982, reader.ReadInt32());
             Assert.AreEqual(bytes.Length, reader.ReadInt32());
-
-            int i = 0;
-            foreach (var b in reader.ReadBytes(bytes.Length))
-            {
-                Assert.AreEqual(bytes[i++], b);
-            }
+            Assert.AreEqual(text, Encoding.UTF8.GetString(reader.ReadBytes(bytes.Length)));
         }
     }
 }

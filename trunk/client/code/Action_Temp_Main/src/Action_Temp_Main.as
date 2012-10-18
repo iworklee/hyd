@@ -31,7 +31,7 @@ package
 		private var unitAnimationVO:UnitAnimationVO;
 		private function configDataComplete(event:ConfigDataCompleteEvent):void
 		{
-			unitAnimationVO = new UnitAnimationVO(ConfigDataManager.getInstance().getUnitConfigVOByUnitId(100001));
+			unitAnimationVO = new UnitAnimationVO(ConfigDataManager.getInstance().getUnitConfigVOByUnitId(200001));
 			unitAnimationVO.x = 400;
 			unitAnimationVO.y = 300;
 			this.addChild(unitAnimationVO);
@@ -69,31 +69,31 @@ package
 //				public static const ACTION_TYPE_HIT:String = "hit";
 //				public static const ACTION_TYPE_BUFF:String = "buff";
 				
-				var randomAction:int = Math.floor(Math.random() * 7);
-				switch(randomAction)
-				{
-					case 0:
-						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_ATTACK);
-						break;
-					case 1:
-						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_BUFF);
-						break;
-					case 2:
-						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_DEFEAT);
-						break;
-					case 3:
-						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_HIT);
-						break;
-					case 4:
-						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_MOVE);
-						break;
-					case 5:
-						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_PARRY);
-						break;
-					case 6:
-						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_WAIT);
-						break;
-				}
+//				var randomAction:int = Math.floor(Math.random() * 7);
+//				switch(randomAction)
+//				{
+//					case 0:
+//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_ATTACK);
+//						break;
+//					case 1:
+//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_BUFF);
+//						break;
+//					case 2:
+//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_DEFEAT);
+//						break;
+//					case 3:
+//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_HIT);
+//						break;
+//					case 4:
+//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_MOVE);
+//						break;
+//					case 5:
+//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_PARRY);
+//						break;
+//					case 6:
+//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_WAIT);
+//						break;
+//				}
 			}
 		}
 	}

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
 	<UnitConfigVO unitName="红色步兵" unitId="100001" unitAction="foot" unitResId="100001"/>
+	<UnitConfigVO unitName="红色骑兵" unitId="100101" unitAction="foot" unitResId="100101"/>
+	<UnitConfigVO unitName="红色骑兵" unitId="200001" unitAction="general" unitResId="200001"/>
 </root>

@@ -88,4 +88,92 @@
 			</ActionConfigPart>
 		</ActionConfigVO>
 	</ActionUnitConfig>
+	<ActionUnitConfig actionClass="general" animationType="unit">
+		<ActionConfigVO actionName="wait" totalFrame="20">
+			<ActionConfigPart type="move" frame="20">
+				<PartFace face="0" xOffset="0" yOffset="7" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="8" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="6" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="8" reverse="0"/>
+			</ActionConfigPart>
+		</ActionConfigVO>
+		<ActionConfigVO actionName="move" totalFrame="20">
+			<ActionConfigPart type="move" frame="10">
+				<PartFace face="0" xOffset="0" yOffset="2" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="4" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="0" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="4" reverse="0"/>
+			</ActionConfigPart>
+			<ActionConfigPart type="move" frame="10">
+				<PartFace face="0" xOffset="0" yOffset="3" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="5" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="1" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="5" reverse="0"/>
+			</ActionConfigPart>
+		</ActionConfigVO>
+		<ActionConfigVO actionName="attack" totalFrame="20">
+			<ActionConfigPart type="atk" frame="5">
+				<PartFace face="0" xOffset="0" yOffset="4" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="8" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="0" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="8" reverse="0"/>
+			</ActionConfigPart>
+			<ActionConfigPart type="atk" frame="5">
+				<PartFace face="0" xOffset="0" yOffset="5" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="9" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="1" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="9" reverse="0"/>
+			</ActionConfigPart>
+			<ActionConfigPart type="atk" frame="5">
+				<PartFace face="0" xOffset="0" yOffset="6" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="10" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="2" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="10" reverse="0"/>
+			</ActionConfigPart>
+			<ActionConfigPart type="atk" frame="5">
+				<PartFace face="0" xOffset="0" yOffset="7" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="11" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="3" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="11" reverse="0"/>
+			</ActionConfigPart>
+		</ActionConfigVO>
+		<ActionConfigVO actionName="defeat" totalFrame="20">
+			<ActionConfigPart type="move" frame="10">
+				<PartFace face="0" xOffset="0" yOffset="9" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="9" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="9" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="9" reverse="0"/>
+			</ActionConfigPart>
+			<ActionConfigPart type="move" frame="10">
+				<PartFace face="0" xOffset="0" yOffset="10" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="10" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="10" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="10" reverse="0"/>
+			</ActionConfigPart>
+		</ActionConfigVO>
+		<ActionConfigVO actionName="parry" totalFrame="20">
+			<ActionConfigPart type="spd" frame="20">
+				<PartFace face="0" xOffset="0" yOffset="1" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="2" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="0" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="2" reverse="0"/>
+			</ActionConfigPart>
+		</ActionConfigVO>
+		<ActionConfigVO actionName="hit" totalFrame="20">
+			<ActionConfigPart type="spd" frame="20">
+				<PartFace face="0" xOffset="0" yOffset="3" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="3" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="3" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="3" reverse="0"/>
+			</ActionConfigPart>
+		</ActionConfigVO>
+		<ActionConfigVO actionName="buff" totalFrame="20">
+			<ActionConfigPart type="spd" frame="20">
+				<PartFace face="0" xOffset="0" yOffset="4" reverse="0"/>
+				<PartFace face="2" xOffset="0" yOffset="4" reverse="1"/>
+				<PartFace face="4" xOffset="0" yOffset="4" reverse="0"/>
+				<PartFace face="6" xOffset="0" yOffset="4" reverse="0"/>
+			</ActionConfigPart>
+		</ActionConfigVO>
+	</ActionUnitConfig>
 </root>

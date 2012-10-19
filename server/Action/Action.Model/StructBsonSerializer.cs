@@ -71,7 +71,6 @@ namespace Action.Model
         {
             throw new NotImplementedException();
         }
-        
         public IBsonSerializationOptions GetDefaultSerializationOptions()
         {
             throw new NotImplementedException();

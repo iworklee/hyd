@@ -38,5 +38,15 @@ namespace Action.Engine
         public bool IsOnline { get; set; }
         public int SceneId { get; set; }
         public Vector2 Position { get; set; }
+
+        public GameScene GetScene()
+        {
+            return _session.AppServer.World.GetScene(SceneId);
+        }
+
+        public void MoveTo(int x, int y)
+        {
+            Position = new Vector2(x, y);
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace Action.Login
         public static void EnterGame(GameSession session, Player player)
         {
             session.Player.SceneId = player.SceneId;
+            session.Player.Position = player.Position;
             session.EnterGame(player.Name);
             session.SendResponse((int)CommandEnum.EnterGame);
         }

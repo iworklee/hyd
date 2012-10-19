@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Action.Model
 {
-    public struct Point
-    {
-        public int X{get;set;}
-        public int Y{get;set;}
-    }
-
     public class Player
     {
         public Player()
@@ -20,7 +15,7 @@ namespace Action.Model
         public string Account { get; set; }
         public string Name { get; set; }
         public int SceneId { get; set; }
-        public Point Position { get; set; }
+        public Vector2 Position { get; set; }
         public Role Role { get; set; }
     }
 }

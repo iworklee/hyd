@@ -92,4 +92,32 @@ namespace Action.Model
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MoveArgs")]
+  public partial class MoveArgs : global::ProtoBuf.IExtensible
+  {
+    public MoveArgs() {}
+    
+
+    private int _X = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"X", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int X
+    {
+      get { return _X; }
+      set { _X = value; }
+    }
+
+    private int _Y = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Y
+    {
+      get { return _Y; }
+      set { _Y = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }

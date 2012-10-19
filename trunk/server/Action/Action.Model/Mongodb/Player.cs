@@ -13,9 +13,9 @@ namespace Action.Model
         {
         }
 
-        public string Account { get; set; }
         [BsonId]
         public string Name { get; set; }
+        public string Account { get; set; }
         public int SceneId { get; set; }
 
         [BsonSerializer(typeof(StructBsonSerializer))]

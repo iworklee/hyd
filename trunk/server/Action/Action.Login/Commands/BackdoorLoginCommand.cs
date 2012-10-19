@@ -31,7 +31,7 @@ namespace Action.Login.Commands
             {
                 session.EnterLogin(args.Account);
                 var allPlayers = session.AppServer.DefaultDatabase
-                    .GetCollection(DbCollectionDef.Player.Name).AsQueryable<Player>();
+                    .GetCollection<Player>(DbCollectionDef.Player.Name).AsQueryable();
                 var player = allPlayers.Where(p => p.Account == args.Account).FirstOrDefault();
                 if (player != null)
                     LoginHelper.EnterGame(session, player);

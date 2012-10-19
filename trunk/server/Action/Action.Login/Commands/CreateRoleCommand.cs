@@ -30,7 +30,7 @@ namespace Action.Login.Commands
 
             //重名验证
             var players = session.AppServer.DefaultDatabase
-                .GetCollection(DbCollectionDef.Player.Name).AsQueryable<Player>();
+                .GetCollection<Player>(DbCollectionDef.Player.Name).AsQueryable();
             if (players.Where(p => p.Name == args.Name).Count() > 0)
             {
                 session.SendResponse(ID, S2C.NameExisted);

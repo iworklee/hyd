@@ -35,14 +35,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Reference\MongoDB\CSharpDriver-1.6.0.4624\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Framework.Windows">
-      <HintPath>..\Reference\MonoGame\2.5.1\MonoGame.Framework.Windows.dll</HintPath>
+    <Reference Include="MonoGame.Framework.Linux, Version=2.5.1.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\MonoGame\2.5.1\MonoGame.Framework.Linux.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
       <HintPath>..\Reference\protobuf-net\r594\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +55,7 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="StructBsonSerializer.cs" />
     <Compile Include="CommandEnum.cs" />
     <Compile Include="CommonEnum.cs" />
     <Compile Include="DbCollectionDef.cs" />

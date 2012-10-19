@@ -4,11 +4,11 @@ import "protobuf-net.proto";
 package Action.Model;
 option (protobuf_net.namespace) = "xxxxxx";
 
-message SnapPlayersArgsCollection {
+message SnapPlayerArgsCollection {
   repeated SnapPlayersArgs Items = 1;
 }
 
-message SnapPlayersArgs {
+message SnapPlayerArgs {
   optional string Name = 1;
   optional int32 Job = 2;
   optional int32 Sex = 3;

@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Action.Engine;
 using Action.Model;
+using Microsoft.Xna.Framework;
 
 namespace Action.Login.Commands
 {
@@ -42,7 +43,7 @@ namespace Action.Login.Commands
             player.Account = session.Player.Account;
             player.Name = args.Name;
             player.SceneId = 1;
-            player.Position = default(Point);
+            player.Position = default(Vector2);
             player.Role = new Role();
             player.Role.Name = args.Name;
             player.Role.Job = args.Job;

@@ -41,6 +41,8 @@ namespace Action.Login.Commands
             var player = new Player();
             player.Account = session.Player.Account;
             player.Name = args.Name;
+            player.SceneId = 1;
+            player.Position = default(Point);
             player.Role = new Role();
             player.Role.Name = args.Name;
             player.Role.Job = args.Job;

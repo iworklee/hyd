@@ -1,12 +1,13 @@
 
 import "protobuf-net.proto";
-import "protos/PlayerInfo.proto";
 
 package Action.Model;
 option (protobuf_net.namespace) = "xxxxxx";
 
 message SnapPlayersArgs {
-  optional Role Role = 1;
-  optional int32 X = 2;
-  optional int32 Y = 3;
+  optional string Name = 1;
+  optional int32 Job = 2;
+  optional int32 Sex = 3;
+  optional int32 X = 4;
+  optional int32 Y = 5;
 }

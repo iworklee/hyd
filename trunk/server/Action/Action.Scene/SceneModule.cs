@@ -27,8 +27,10 @@ namespace Action.Scene
         public void OnAppSessionClosed(GameSession session)
         {
             //从场景中移除玩家
-            session.AppServer.World.GetScene(session.Player.SceneId)
-                .RemovePlayer(session.Player);
+            if (session.Player != null)
+                session.AppServer.World
+                    .GetScene(session.Player.SceneId)
+                    .RemovePlayer(session.Player);
 
             //保存玩家所在的场景和位置
             var tblPlayer = session.AppServer.DefaultDatabase

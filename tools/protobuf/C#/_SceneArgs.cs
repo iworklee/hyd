@@ -11,16 +11,16 @@
 // Note: requires additional types generated from: protobuf-net.proto
 namespace Action.Model
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"List")]
-  public partial class List : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SnapPlayersArgsCollection")]
+  public partial class SnapPlayersArgsCollection : global::ProtoBuf.IExtensible
   {
-    public List() {}
+    public SnapPlayersArgsCollection() {}
     
-    private readonly global::System.Collections.Generic.List<Action.Model.SnapPlayersArgs> _Item = new global::System.Collections.Generic.List<Action.Model.SnapPlayersArgs>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"Item", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Action.Model.SnapPlayersArgs> Item
+    private readonly global::System.Collections.Generic.List<Action.Model.SnapPlayersArgs> _Items = new global::System.Collections.Generic.List<Action.Model.SnapPlayersArgs>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"Items", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Action.Model.SnapPlayersArgs> Items
     {
-      get { return _Item; }
+      get { return _Items; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;

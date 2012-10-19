@@ -36,11 +36,16 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.LoadTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MongoDB.Driver, Version=1.6.0.4624, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\MongoDB\CSharpDriver-1.6.0.4624\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="SuperSocket.SocketBase">
       <HintPath>..\Reference\SuperSocket\1.4\SuperSocket.SocketBase.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -60,11 +65,17 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommandTest.cs" />
+    <Compile Include="TestBase.cs" />
+    <Compile Include="LoginModuleTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Action.Engine\Action.Engine.csproj">
       <Project>{0348CA5E-C60B-424D-999C-55A153A637E1}</Project>
       <Name>Action.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Action.Model\Action.Model.csproj">
+      <Project>{FCB49407-1470-44C8-8D9B-AABA921FF088}</Project>
+      <Name>Action.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Action.Test\Action.Test.csproj">
       <Project>{68BE7386-9C0B-48B8-A048-7A1CAED5BBCB}</Project>
@@ -72,6 +83,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="CommandTestLoad.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

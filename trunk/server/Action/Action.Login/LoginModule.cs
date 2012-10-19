@@ -12,9 +12,9 @@ using Action.Model;
 namespace Action.Login
 {
     [Export(typeof(IGameModule))]
-    public class LoginModule : GameModule
+    public class LoginModule : IGameModule
     {
-        public override void Load(GameServer server)
+        public void OnStartup(GameServer server)
         {
             LogUtil.LogInfo("LoginModule loaded.");
 
@@ -25,10 +25,14 @@ namespace Action.Login
             tblAccount.CreateIndex(DbCollectionDef.Account.Key);
         }
 
-        public override void Unload(GameServer server)
+        public void OnStopped(GameServer server)
         {
             LogUtil.LogInfo("LoginModule unloaded.");
-            //TestHelper.WriteLine("LoginModule unloaded.");
+        }
+
+        public void OnAppSessionClosed(GameSession session)
+        {
+            
         }
     }
 }

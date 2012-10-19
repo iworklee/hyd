@@ -45,14 +45,14 @@ namespace Action.Engine
         {
             base.OnStartup();
             foreach (var module in GameModuleFactory.Current.Modules)
-                module.Load(this);
+                module.OnStartup(this);
         }
 
         protected override void OnStopped()
         {
             base.OnStopped();
             foreach (var module in GameModuleFactory.Current.Modules)
-                module.Unload(this);
+                module.OnStopped(this);
         }
 
         protected override void OnPerformanceDataCollected(GlobalPerformanceData globalPerfData, PerformanceData performanceData)
@@ -63,6 +63,8 @@ namespace Action.Engine
         protected override void OnAppSessionClosed(object sender, AppSessionClosedEventArgs<GameSession> e)
         {
             // TODO 玩家下线
+            foreach (var module in GameModuleFactory.Current.Modules)
+                module.OnAppSessionClosed(e.Session);
             e.Session.AppServer.World.RemovePlayer(e.Session.Player);
         }
 

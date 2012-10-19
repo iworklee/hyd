@@ -61,8 +61,17 @@ namespace Action.Model
       set { _Sex = value; }
     }
 
+    private int _Skin = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"Skin", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Skin
+    {
+      get { return _Skin; }
+      set { _Skin = value; }
+    }
+
     private int _X = default(int);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"X", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"X", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int X
     {
@@ -71,7 +80,7 @@ namespace Action.Model
     }
 
     private int _Y = default(int);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"Y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"Y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int Y
     {

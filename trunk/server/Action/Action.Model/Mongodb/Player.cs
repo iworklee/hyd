@@ -7,13 +7,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Action.Model
 {
-    public class Player
+    public class Player : BsonClass
     {
-        public Player()
-        {
-        }
-
-        [BsonId]
         public string Name { get; set; }
 
         public string Account { get; set; }

@@ -46,6 +46,7 @@ namespace Action.Engine
         {
             _player.Name = name;
             _player.IsOnline = true;
+            // TODO 踢掉另一个
             AppServer.World.AddPlayer(_player);
             AppServer.World.GetScene(_player.SceneId).AddPlayer(_player);
         }

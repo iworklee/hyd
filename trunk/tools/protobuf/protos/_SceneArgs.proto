@@ -12,6 +12,7 @@ message SnapPlayersArgs {
   optional string Name = 1;
   optional int32 Job = 2;
   optional int32 Sex = 3;
-  optional int32 X = 4;
-  optional int32 Y = 5;
+  optional int32 Skin = 4;
+  optional int32 X = 5;
+  optional int32 Y = 6;
 }

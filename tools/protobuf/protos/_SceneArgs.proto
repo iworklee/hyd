@@ -16,3 +16,8 @@ message SnapPlayerArgs {
   optional int32 X = 5;
   optional int32 Y = 6;
 }
+
+message MoveArgs { 
+  optional int32 X = 1;
+  optional int32 Y = 2;
+}

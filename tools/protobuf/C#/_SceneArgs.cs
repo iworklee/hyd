@@ -9,7 +9,6 @@
 
 // Generated from: protos/_SceneArgs.proto
 // Note: requires additional types generated from: protobuf-net.proto
-// Note: requires additional types generated from: protos/PlayerInfo.proto
 namespace Action.Model
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SnapPlayersArgs")]
@@ -18,17 +17,35 @@ namespace Action.Model
     public SnapPlayersArgs() {}
     
 
-    private Action.Model.Role _Role = null;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"Role", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public Action.Model.Role Role
+    private string _Name = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"Name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string Name
     {
-      get { return _Role; }
-      set { _Role = value; }
+      get { return _Name; }
+      set { _Name = value; }
+    }
+
+    private int _Job = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Job", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Job
+    {
+      get { return _Job; }
+      set { _Job = value; }
+    }
+
+    private int _Sex = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"Sex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Sex
+    {
+      get { return _Sex; }
+      set { _Sex = value; }
     }
 
     private int _X = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"X", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"X", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int X
     {
@@ -37,7 +54,7 @@ namespace Action.Model
     }
 
     private int _Y = default(int);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"Y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"Y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int Y
     {

@@ -15,6 +15,7 @@ namespace Action.Model
 
         [BsonId]
         public string Name { get; set; }
+
         public string Account { get; set; }
         public int SceneId { get; set; }
 

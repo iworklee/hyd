@@ -22,7 +22,7 @@ namespace Action.Engine
         public GameWorld World
         {
             get { return _world; }
-        }        
+        }
 
         public override bool Setup(SuperSocket.SocketBase.Config.IRootConfig rootConfig, SuperSocket.SocketBase.Config.IServerConfig config, ISocketServerFactory socketServerFactory, SuperSocket.SocketBase.Protocol.ICustomProtocol<BinaryCommandInfo> protocol)
         {
@@ -65,7 +65,9 @@ namespace Action.Engine
             // TODO 玩家下线
             foreach (var module in GameModuleFactory.Current.Modules)
                 module.OnAppSessionClosed(e.Session);
-            e.Session.AppServer.World.RemovePlayer(e.Session.Player);
+
+            if (e.Session.Player != null)
+                e.Session.AppServer.World.RemovePlayer(e.Session.Player);
         }
 
         [ImportMany]

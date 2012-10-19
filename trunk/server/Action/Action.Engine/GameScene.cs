@@ -25,7 +25,8 @@ namespace Action.Engine
 
         public void RemovePlayer(GamePlayer player)
         {
-            _players.TryRemove(player.Name, out player);
+            if (player.Name != null)
+                _players.TryRemove(player.Name, out player);
         }
 
         public IEnumerable<GamePlayer> GetPlayers()

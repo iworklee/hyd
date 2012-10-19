@@ -24,21 +24,21 @@ namespace Test
             for (int i = 0; i < 1000; i++)
                 playerNames.Add("test" + i);
 
-            var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
-            var mongoDB = MongoServer.Create(connectionString).GetDatabase("Game");
-            var table = mongoDB.GetCollection<Player>("Player");
-            table.InsertBatch(playerNames.Select(p => new Player { Account = p, Name = p }));
+            //var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
+            //var mongoDB = MongoServer.Create(connectionString).GetDatabase("Game");
+            //var table = mongoDB.GetCollection<Player>("Player");
+            //table.InsertBatch(playerNames.Select(p => new Player { Account = p, Name = p }));
         }
         //[ClassCleanup()]
         [AssemblyCleanup]
         public static void ClassCleanup()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
-            var mongoDB = MongoServer.Create(connectionString).GetDatabase("Game");
-            var table = mongoDB.GetCollection<Player>("Player");
+            //var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
+            //var mongoDB = MongoServer.Create(connectionString).GetDatabase("Game");
+            //var table = mongoDB.GetCollection<Player>("Player");
 
-            var query = Query<Player>.Where(p => p.Name.StartsWith("test"));
-            table.Remove(query);
+            //var query = Query<Player>.Where(p => p.Name.StartsWith("test"));
+            //table.Remove(query);
         }
         private static List<string> playerNames = new List<string>();
 
@@ -55,6 +55,10 @@ namespace Test
                 writer.Write((int)ms.Length);        // package length
                 ms.WriteTo(stream);
             }
+            var cmdId = reader.ReadInt32();
+            var length = reader.ReadInt32();
+            if (length != 0)
+                reader.ReadBytes(length);
         }
 
     }

@@ -20,6 +20,7 @@ namespace Action.Model
         //Scene
         SnapPlayers = 1200,
         Move = 1201,
+        SwitchScene = 1202,
 
         //Chat
         TalkToWorld = 1300,

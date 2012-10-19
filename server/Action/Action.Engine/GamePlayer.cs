@@ -39,9 +39,14 @@ namespace Action.Engine
         public int SceneId { get; set; }
         public Vector2 Position { get; set; }
 
-        public GameScene GetScene()
+        public GameWorld World
         {
-            return _session.AppServer.World.GetScene(SceneId);
+            get { return _session.AppServer.World; }
+        }
+
+        public GameScene Scene
+        {
+            get { return World.GetScene(SceneId); }
         }
 
         public void MoveTo(int x, int y)

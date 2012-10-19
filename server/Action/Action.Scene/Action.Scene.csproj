@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="Commands\MoveCommand.cs" />
     <Compile Include="Commands\SnapPlayersCommand.cs" />
+    <Compile Include="Commands\SwitchSceneCommand.cs" />
     <Compile Include="SceneModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

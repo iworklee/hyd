@@ -10,14 +10,20 @@ namespace Action.Scene
     [Export(typeof(IGameModule))]
     public class SceneModule : IGameModule
     {
-        public void Load(GameServer server)
+        public void OnStartup(GameServer server)
         {
             
         }
 
-        public void Unload(GameServer server)
+        public void OnStopped(GameServer server)
         {
             
+        }
+
+        public void OnAppSessionClosed(GameSession session)
+        {
+            session.AppServer.World.GetScene(session.Player.SceneId)
+                .RemovePlayer(session.Player);
         }
     }
 }

@@ -5,7 +5,7 @@ package Action.Model;
 option (protobuf_net.namespace) = "xxxxxx";
 
 message SnapPlayerArgsCollection {
-  repeated SnapPlayersArgs Items = 1;
+  repeated SnapPlayerArgs Items = 1;
 }
 
 message SnapPlayerArgs {

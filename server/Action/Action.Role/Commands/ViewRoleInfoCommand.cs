@@ -16,7 +16,7 @@ namespace Action.Role.Commands
         {
             var name = string.IsNullOrEmpty(args) ? session.Player.Name : args;
             var players = session.AppServer.DefaultDatabase
-                .GetCollection(DbCollectionDef.Player.Name).AsQueryable<Player>();
+                .GetCollection<Player>(DbCollectionDef.Player.Name).AsQueryable();
             var role = players.Where(p => p.Name == name).Select(p => p.Role).FirstOrDefault();
             if (role != null)
                 session.SendResponse<Model.Role>(ID, role);

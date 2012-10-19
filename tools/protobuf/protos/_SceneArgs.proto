@@ -4,6 +4,10 @@ import "protobuf-net.proto";
 package Action.Model;
 option (protobuf_net.namespace) = "xxxxxx";
 
+message SnapPlayersArgsCollection {
+  repeated SnapPlayersArgs Items = 1;
+}
+
 message SnapPlayersArgs {
   optional string Name = 1;
   optional int32 Job = 2;

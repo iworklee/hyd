@@ -42,6 +42,7 @@ namespace Action.Engine
                 var targetScene = GetScene(targetSceneId);
                 if (sourceScene != null && targetScene != null)
                 {
+                    player.SceneId = targetSceneId;
                     sourceScene.RemovePlayer(player);
                     targetScene.AddPlayer(player);
                     return true;

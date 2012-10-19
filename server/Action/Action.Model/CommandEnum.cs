@@ -17,7 +17,10 @@ namespace Action.Model
         ViewRoleInfo = 1100,
         ViewBasicPropCommand = 1101,
 
+        //Scene
+        SnapPlayers = 1200,
+
         //Chat
-        TalkToWorld = 1200,
+        TalkToWorld = 1300,
     }
 }

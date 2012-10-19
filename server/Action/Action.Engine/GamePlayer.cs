@@ -6,12 +6,26 @@ using Microsoft.Xna.Framework;
 
 namespace Action.Engine
 {
+    public class GamePlayerDisplay
+    {
+        public int Job { get; set; }
+        public int Sex { get; set; }
+        public int Skin { get; set; }
+    }
+
     public class GamePlayer
     {
         private GameSession _session;
         public GameSession Session
         {
             get { return _session; }
+        }
+
+        private GamePlayerDisplay _display;
+        public GamePlayerDisplay Display
+        {
+            get { return _display; }
+            set { _display = value; }
         }
 
         public GamePlayer(GameSession session)

@@ -13,6 +13,9 @@ namespace Action.Login
         {
             session.Player.SceneId = player.SceneId;
             session.Player.Position = player.Position;
+            session.Player.Display.Job = player.Role.Job;
+            session.Player.Display.Sex = player.Role.Sex;
+            session.Player.Display.Skin = player.Role.Skin;
             session.EnterGame(player.Name);
             session.SendResponse((int)CommandEnum.EnterGame);
         }

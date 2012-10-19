@@ -67,6 +67,7 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Commands\MoveCommand.cs" />
     <Compile Include="Commands\SnapPlayersCommand.cs" />
     <Compile Include="SceneModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

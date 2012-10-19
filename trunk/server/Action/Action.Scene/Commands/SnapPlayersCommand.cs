@@ -14,9 +14,8 @@ namespace Action.Scene.Commands
     {
         protected override void Run(GameSession session)
         {
-            var scene = session.AppServer.World.GetScene(session.Player.SceneId);
             var argsColl = new SnapPlayerArgsCollection();
-            foreach (var player in scene.GetPlayers())
+            foreach (var player in session.Player.GetScene().GetPlayers())
             {
                 var args = new SnapPlayerArgs();
                 args.Name = player.Name;

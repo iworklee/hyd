@@ -21,3 +21,9 @@ message MoveArgs {
   optional int32 X = 1;
   optional int32 Y = 2;
 }
+
+message PlayerMoveArgs { 
+  optional string Name = 1;
+  optional int32 X = 2;
+  optional int32 Y = 3;
+}

@@ -120,4 +120,41 @@ namespace Action.Model
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerMoveArgs")]
+  public partial class PlayerMoveArgs : global::ProtoBuf.IExtensible
+  {
+    public PlayerMoveArgs() {}
+    
+
+    private string _Name = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"Name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string Name
+    {
+      get { return _Name; }
+      set { _Name = value; }
+    }
+
+    private int _X = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"X", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int X
+    {
+      get { return _X; }
+      set { _X = value; }
+    }
+
+    private int _Y = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"Y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Y
+    {
+      get { return _Y; }
+      set { _Y = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }

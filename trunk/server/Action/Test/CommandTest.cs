@@ -8,37 +8,8 @@ using System.Text;
 namespace Test
 {
     [TestClass()]
-    public class CommandTest
+    public class CommandTest : TestBase
     {
-        public TestContext TestContext { get; set; }
-        [ClassInitialize()]
-        public static void Initialize(TestContext testContext)
-        {
-            rng = new Random(DateTime.Now.Second);
-        }
-        [ClassCleanup()]
-        public static void ClassCleanup()
-        {
-        }
-        [TestInitialize()]
-        public void TestInitialize()
-        {
-            client = new TcpClient("127.0.0.1", 1808);
-            stream = client.GetStream();
-            writer = new BinaryWriter(stream);
-            reader = new BinaryReader(stream);
-        }
-        [TestCleanup()]
-        public void TestCleanup()
-        {
-            client.Close();
-        }
-        private static Random rng;
-        private TcpClient client;
-        private NetworkStream stream;
-        private BinaryWriter writer;
-        private BinaryReader reader;
-
         [TestMethod()]
         public void TestCommandTest()
         {

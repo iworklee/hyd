@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protobuf\PlayerInfo.cs" />
     <Compile Include="Protobuf\_LoginArgs.cs" />
+    <Compile Include="Protobuf\_SceneArgs.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

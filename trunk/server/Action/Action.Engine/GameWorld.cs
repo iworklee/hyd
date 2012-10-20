@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace Action.Engine
 {
@@ -16,8 +18,15 @@ namespace Action.Engine
         private ConcurrentDictionary<string, GamePlayer> _onlinePlayers
             = new ConcurrentDictionary<string, GamePlayer>();
 
-        public GameWorld()
+        private GameServer _server;
+        public GameServer Server
         {
+            get { return _server; }
+        }
+
+        public GameWorld(GameServer server)
+        {
+            _server = server;
             _scenes[0] = _defaultScene;
         }
 
@@ -72,6 +81,11 @@ namespace Action.Engine
             if (_onlinePlayers.TryGetValue(name, out player))
                 return player;
             return null;
+        }
+
+        public MongoCollection<T> GetDbCollection<T>(string name)
+        {
+            return _server.DefaultDatabase.GetCollection<T>(name);
         }
     }
 }

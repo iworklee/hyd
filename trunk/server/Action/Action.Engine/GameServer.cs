@@ -16,9 +16,10 @@ namespace Action.Engine
         public GameServer()
             : base(new GameProtocol())
         {
+            _world = new GameWorld(this);
         }
 
-        private GameWorld _world = new GameWorld();
+        private GameWorld _world;
         public GameWorld World
         {
             get { return _world; }
@@ -45,14 +46,14 @@ namespace Action.Engine
         {
             base.OnStartup();
             foreach (var module in GameModuleFactory.Current.Modules)
-                module.OnStartup(this);
+                module.Load(_world);
         }
 
         protected override void OnStopped()
         {
             base.OnStopped();
             foreach (var module in GameModuleFactory.Current.Modules)
-                module.OnStopped(this);
+                module.Unload(_world);
         }
 
         protected override void OnPerformanceDataCollected(GlobalPerformanceData globalPerfData, PerformanceData performanceData)
@@ -62,12 +63,15 @@ namespace Action.Engine
 
         protected override void OnAppSessionClosed(object sender, AppSessionClosedEventArgs<GameSession> e)
         {
-            // TODO 玩家下线
-            foreach (var module in GameModuleFactory.Current.Modules)
-                module.OnAppSessionClosed(e.Session);
+            if (e.Session.Opened)
+            {
+                //各模块处理玩家离开游戏
+                foreach (var module in GameModuleFactory.Current.Modules)
+                    module.LeaveGame(e.Session.Player);
 
-            if (e.Session.Player != null)
+                //从世界删除玩家
                 e.Session.AppServer.World.RemovePlayer(e.Session.Player);
+            }
         }
 
         [ImportMany]

@@ -14,45 +14,32 @@ namespace Action.Scene
     [Export(typeof(IGameModule))]
     public class SceneModule : IGameModule
     {
-        public void OnStartup(GameServer server)
+        public void Load(GameWorld world)
         {
 
         }
 
-        public void OnStopped(GameServer server)
+        public void Unload(GameWorld world)
         {
 
         }
 
-        public void OnAppSessionClosed(GameSession session)
+        public void EnterGame(GamePlayer player)
         {
-            //从场景中移除玩家
-            if (session.Player == null)
-                return;
+            player.Scene.AddPlayer(player);
+        }
 
-            session.AppServer.World
-                .GetScene(session.Player.SceneId)
-                .RemovePlayer(session.Player);
+        public void LeaveGame(GamePlayer player)
+        {
+            player.Scene.RemovePlayer(player);
 
             //保存玩家所在的场景和位置
-            var tblPlayer = session.AppServer.DefaultDatabase
+            var tblPlayer = player.World.Server.DefaultDatabase
                 .GetCollection<Player>(DbCollectionDef.Player.Name);
-
-            //保存方案1：可能性能不行
-            //var player = tblPlayer.AsQueryable().Where(p => p.Name == session.Player.Name)
-            //    .FirstOrDefault();
-            //if (player != null)
-            //{
-            //    player.SceneId = session.Player.SceneId;
-            //    player.Position = session.Player.Position;
-            //    tblPlayer.Save(player);
-            //}
-
-            //保存方案2
-            var query = Query<Player>.Where(p => p.Name == session.Player.Name);
+            var query = Query<Player>.Where(p => p.Name == player.Name);
             var update = Update<Player>
-                .Set(p => p.SceneId, session.Player.SceneId)
-                .Set(p => p.Position, session.Player.Position);
+                .Set(p => p.SceneId, player.SceneId)
+                .Set(p => p.Position, player.Position);
             tblPlayer.Update(query, update);
         }
     }

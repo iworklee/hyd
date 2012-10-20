@@ -31,8 +31,17 @@ namespace Action.Engine
             get { return 0; }
         }
 
+        protected virtual bool CheckRight
+        {
+            get { return false; }
+        }
+
         public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
         {
+            //TODO:权限认证
+            if (CheckRight && !session.Player.Right.Contains(ID))
+                return;
+
             //TODO:CD验证
             if (CD > 0 && session.CommandLogger.IsCommandInCD(ID, CD))
                 return;

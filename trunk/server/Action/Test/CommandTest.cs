@@ -91,7 +91,6 @@ namespace Test
                 Assert.AreNotEqual(0, length);
                 if (length != 0)
                 {
-                    reader.ReadBytes(length);
                     var text = Encoding.UTF8.GetString(reader.ReadBytes(bytes.Length));
                 }
             }

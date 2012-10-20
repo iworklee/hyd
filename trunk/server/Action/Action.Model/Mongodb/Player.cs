@@ -18,5 +18,6 @@ namespace Action.Model
         public Vector2 Position { get; set; }
 
         public Role Role { get; set; }
+        public Right Right { get; set; }
     }
 }

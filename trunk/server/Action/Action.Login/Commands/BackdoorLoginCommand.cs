@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Action.Engine;
 using Action.Model;
+using Action.Core;
 
 namespace Action.Login.Commands
 {
@@ -31,7 +32,7 @@ namespace Action.Login.Commands
             {
                 session.EnterLogin(args.Account);
                 var allPlayers = session.AppServer.DefaultDatabase
-                    .GetCollection<Player>(DbCollectionDef.Player.Name).AsQueryable();
+                    .GetCollection<Player>().AsQueryable();
                 var player = allPlayers.Where(p => p.Account == args.Account).FirstOrDefault();
                 if (player != null)
                     LoginHelper.EnterGame(session, player);

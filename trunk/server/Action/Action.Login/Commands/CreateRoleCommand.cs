@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Action.Engine;
 using Action.Model;
+using Action.Core;
 using Microsoft.Xna.Framework;
 
 namespace Action.Login.Commands
@@ -31,7 +32,7 @@ namespace Action.Login.Commands
 
             //重名验证
             var players = session.AppServer.DefaultDatabase
-                .GetCollection<Player>(DbCollectionDef.Player.Name).AsQueryable();
+                .GetCollection<Player>().AsQueryable();
             if (players.Where(p => p.Name == args.Name).Count() > 0)
             {
                 session.SendResponse(ID, S2C.NameExisted);
@@ -49,16 +50,16 @@ namespace Action.Login.Commands
             player.Role.Sex = args.Sex;
             player.Role.Level = player.Role.Skin = 1;
             var tblPlayer = session.AppServer.DefaultDatabase
-                .GetCollection(DbCollectionDef.Player.Name);
-            tblPlayer.Insert<Player>(player);
+                .GetCollection<Player>();
+            tblPlayer.Insert(player);
 
             //绑定玩家账户和角色
             var account = new Account();
             account.AccKey = session.Player.Account;
             account.PlayerName = args.Name;
             var tblAccount = session.AppServer.DefaultDatabase
-                .GetCollection(DbCollectionDef.Account.Name);
-            tblAccount.Insert<Account>(account);
+                .GetCollection<Account>();
+            tblAccount.Insert(account);
 
             //玩家进入游戏
             LoginHelper.EnterGame(session, player);

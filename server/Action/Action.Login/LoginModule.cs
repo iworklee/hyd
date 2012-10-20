@@ -16,18 +16,18 @@ namespace Action.Login
     {
         public void Load(GameWorld world)
         {
-            LogUtil.LogInfo("LoginModule loaded.");
+            var db = world.AppServer.DefaultDatabase;
 
-            var tblPlayer = world.GetDbCollection<Player>(DbCollectionDef.Player.Name);
+            var tblPlayer = db.GetCollection<Player>(DbCollectionDef.Player.Name);
             tblPlayer.CreateIndex(DbCollectionDef.Player.Key);
 
-            var tblAccount = world.GetDbCollection<Account>(DbCollectionDef.Account.Name);
+            var tblAccount = db.GetCollection<Account>(DbCollectionDef.Account.Name);
             tblAccount.CreateIndex(DbCollectionDef.Account.Key);
         }
 
         public void Unload(GameWorld world)
         {
-            LogUtil.LogInfo("LoginModule unloaded.");
+            
         }
 
         public void EnterGame(GamePlayer player)

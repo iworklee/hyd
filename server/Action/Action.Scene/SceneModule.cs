@@ -34,7 +34,7 @@ namespace Action.Scene
             player.Scene.RemovePlayer(player);
 
             //保存玩家所在的场景和位置
-            var tblPlayer = player.World.Server.DefaultDatabase
+            var tblPlayer = player.World.AppServer.DefaultDatabase
                 .GetCollection<Player>(DbCollectionDef.Player.Name);
             var query = Query<Player>.Where(p => p.Name == player.Name);
             var update = Update<Player>

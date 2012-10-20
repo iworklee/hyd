@@ -26,18 +26,15 @@ namespace Action.Role
 
         public void EnterGame(GamePlayer player)
         {
-            var players = player.Session.AppServer.DefaultDatabase
+            var dbPlayers = player.Session.AppServer.DefaultDatabase
                 .GetCollection<Player>(DbCollectionDef.Player.Name).AsQueryable();
-            var ply = players.Where(p => p.Name == player.Name).FirstOrDefault();
-            if (ply != null)
-            {
-                
-            }
+            var dbPlayer = dbPlayers.Where(p => p.Name == player.Name).FirstOrDefault();
+            if (dbPlayer != null)
+                player.Right.Reset(dbPlayer.Right.Items);
         }
 
         public void LeaveGame(GamePlayer player)
         {
-            
         }
     }
 }

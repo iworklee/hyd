@@ -44,7 +44,6 @@ namespace Action.Login.Commands
             player.Name = args.Name;
             player.SceneId = 1;
             player.Position = default(Vector2);
-            player.Role = new Role();
             player.Role.Name = args.Name;
             player.Role.Job = args.Job;
             player.Role.Sex = args.Sex;

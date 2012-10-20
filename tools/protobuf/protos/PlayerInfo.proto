@@ -11,3 +11,7 @@ message Role {
   optional int32 Level = 4;
   optional int32 Skin = 5;
 }
+
+message Right {
+  repeated int32 Items = 1;
+}

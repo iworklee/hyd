@@ -8,6 +8,7 @@ using MongoDB.Driver.Linq;
 using MongoDB.Driver.Builders;
 using Action.Engine;
 using Action.Model;
+using Action.Core;
 
 namespace Action.Scene
 {
@@ -35,7 +36,7 @@ namespace Action.Scene
 
             //保存玩家所在的场景和位置
             var tblPlayer = player.World.AppServer.DefaultDatabase
-                .GetCollection<Player>(DbCollectionDef.Player.Name);
+                .GetCollection<Player>();
             var query = Query<Player>.Where(p => p.Name == player.Name);
             var update = Update<Player>
                 .Set(p => p.SceneId, player.SceneId)

@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Action.Model;
 using Action.Engine;
+using Action.Core;
 
 namespace Action.Role.Commands
 {
@@ -16,7 +17,7 @@ namespace Action.Role.Commands
         {
             var name = string.IsNullOrEmpty(args) ? session.Player.Name : args;
             var players = session.AppServer.DefaultDatabase
-                .GetCollection<Player>(DbCollectionDef.Player.Name).AsQueryable();
+                .GetCollection<Player>().AsQueryable();
             var role = players.Where(p => p.Name == name).Select(p => p.Role).FirstOrDefault();
             if (role != null)
                 session.SendResponse<Model.Role>(ID, role);

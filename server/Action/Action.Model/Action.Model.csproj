@@ -58,7 +58,6 @@
     <Compile Include="StructBsonSerializer.cs" />
     <Compile Include="CommandEnum.cs" />
     <Compile Include="CommonEnum.cs" />
-    <Compile Include="DbCollectionDef.cs" />
     <Compile Include="Mongodb\Entity.cs" />
     <Compile Include="Mongodb\Player.cs" />
     <Compile Include="Mongodb\Account.cs" />

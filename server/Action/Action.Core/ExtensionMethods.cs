@@ -8,7 +8,7 @@ namespace Action.Core
 {
     public static class ExtensionMethods
     {
-        public static MongoCollection GetCollection<T>(this MongoDatabase db)
+        public static MongoCollection<T> GetCollection<T>(this MongoDatabase db)
         {
             return db.GetCollection<T>(typeof(T).Name);
         }

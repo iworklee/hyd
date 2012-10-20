@@ -17,20 +17,20 @@ namespace Test
     [TestClass()]
     public class LoginModuleTest : TestBase
     {
-        //[ClassInitialize()]
-        [AssemblyInitialize]
+        [ClassInitialize()]
+        //[AssemblyInitialize]
         public static void Initialize(TestContext testContext)
         {
             for (int i = 0; i < 1000; i++)
                 playerNames.Add("test" + i);
 
-            var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
-            var mongoDB = MongoServer.Create(connectionString).GetDatabase("Game");
-            var table = mongoDB.GetCollection<Player>("Player");
-            table.InsertBatch(playerNames.Select(p => new Player { Account = p, Name = p }));
+            //var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
+            //var mongoDB = MongoServer.Create(connectionString).GetDatabase("Game");
+            //var table = mongoDB.GetCollection<Player>("Player");
+            //table.InsertBatch(playerNames.Select(p => new Player { Account = p, Name = p }));
         }
-        //[ClassCleanup()]
-        [AssemblyCleanup]
+        [ClassCleanup()]
+        //[AssemblyCleanup]
         public static void ClassCleanup()
         {
             //var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
@@ -43,7 +43,6 @@ namespace Test
         private static List<string> playerNames = new List<string>();
 
         [TestMethod()]
-        [Timeout(60000)]
         public void BackdoorLoginCommandTest()
         {
             var name = playerNames[rng.Next(1, 1000)];
@@ -56,10 +55,15 @@ namespace Test
                 writer.Write((int)ms.Length);        // package length
                 ms.WriteTo(stream);
             }
-            var cmdId = reader.ReadInt32();
-            var length = reader.ReadInt32();
-            if (length != 0)
-                reader.ReadBytes(length);
+            if (client.Connected)
+            {
+                var cmdId = reader.ReadInt32();
+                Assert.AreEqual(1011, cmdId);
+                var length = reader.ReadInt32();
+                Assert.AreEqual(0, length);
+                if (length != 0)
+                    reader.ReadBytes(length);
+            }
         }
 
     }

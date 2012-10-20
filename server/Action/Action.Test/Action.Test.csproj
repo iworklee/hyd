@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MongoDB.Driver, Version=1.6.0.4624, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\MongoDB\CSharpDriver-1.6.0.4624\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="SuperSocket.SocketBase">
       <HintPath>..\Reference\SuperSocket\1.4\SuperSocket.SocketBase.dll</HintPath>
     </Reference>
@@ -48,6 +52,7 @@
     <Compile Include="Commands\TestBoolCommand.cs" />
     <Compile Include="Commands\TestFloatCommand.cs" />
     <Compile Include="Commands\TestStringCommand.cs" />
+    <Compile Include="Commands\TestQueryMongoDBCommand.cs" />
     <Compile Include="TestModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -55,6 +60,10 @@
     <ProjectReference Include="..\Action.Engine\Action.Engine.csproj">
       <Project>{0348CA5E-C60B-424D-999C-55A153A637E1}</Project>
       <Name>Action.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Action.Model\Action.Model.csproj">
+      <Project>{FCB49407-1470-44C8-8D9B-AABA921FF088}</Project>
+      <Name>Action.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

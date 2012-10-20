@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SuperSocket.SocketBase.Command;
+using SuperSocket.Common;
 
 namespace Action.Engine
 {
@@ -86,9 +87,12 @@ namespace Action.Engine
             {
                 args = GameCommandDataDeserializer.Deserialize<T>(commandInfo.Data);
             }
-            catch
+            catch (Exception ex)
             {
-                args = default(T);
+                //args = default(T);
+                LogUtil.LogError(string.Format("{0} cannot deserialize data to {1}", this.ToString(), typeof(T).FullName), ex);
+                session.Close();
+                return;
             }
             if (Ready(session, args))
                 Run(session, args);

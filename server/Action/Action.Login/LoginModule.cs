@@ -19,18 +19,18 @@ namespace Action.Login
         {
             var db = world.AppServer.DefaultDatabase;
 
-            var tblPlayer = db.GetCollection<Player>(DbCollectionDef.Player.Name);
-            tblPlayer.EnsureIndex(IndexKeys.Ascending(DbCollectionDef.Player.Key),
+            var tblPlayer = db.GetCollection<Player>();
+            tblPlayer.EnsureIndex(IndexKeys<Player>.Ascending(p => p.Name),
                 IndexOptions.SetUnique(true));
 
-            var tblAccount = db.GetCollection<Account>(DbCollectionDef.Account.Name);
-            tblAccount.EnsureIndex(IndexKeys.Ascending(DbCollectionDef.Account.Key),
+            var tblAccount = db.GetCollection<Account>();
+            tblAccount.EnsureIndex(IndexKeys<Account>.Ascending(acc => acc.AccKey),
                 IndexOptions.SetUnique(true));
         }
 
         public void Unload(GameWorld world)
         {
-            
+
         }
 
         public void EnterGame(GamePlayer player)
@@ -38,7 +38,7 @@ namespace Action.Login
         }
 
         public void LeaveGame(GamePlayer player)
-        {            
+        {
         }
     }
 }

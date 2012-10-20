@@ -72,5 +72,29 @@ namespace Test
             Assert.AreEqual(bytes.Length, reader.ReadInt32());
             Assert.AreEqual(text, Encoding.UTF8.GetString(reader.ReadBytes(bytes.Length)));
         }
+
+        [TestMethod()]
+        public void TestQueryMongoDBCommandTest()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                var name = "test" + rng.Next(1, 1000);
+
+                var bytes = Encoding.UTF8.GetBytes(name);
+                writer.Write(983);    // cmdId
+                writer.Write(bytes.Length);        // package length
+                writer.Write(bytes);
+
+                var cmdId = reader.ReadInt32();
+                Assert.AreEqual(983, cmdId);
+                var length = reader.ReadInt32();
+                Assert.AreNotEqual(0, length);
+                if (length != 0)
+                {
+                    reader.ReadBytes(length);
+                    var text = Encoding.UTF8.GetString(reader.ReadBytes(bytes.Length));
+                }
+            }
+        }
     }
 }

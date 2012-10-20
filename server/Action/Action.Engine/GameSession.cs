@@ -51,9 +51,12 @@ namespace Action.Engine
             if (player != null)
                 player.Session.Close();
 
-            //加入到世界和场景
+            //玩家加入到世界
             AppServer.World.AddPlayer(_player);
-            AppServer.World.GetScene(_player.SceneId).AddPlayer(_player);
+
+            //各模块处理玩家进入游戏
+            foreach (var module in GameModuleFactory.Current.Modules)
+                module.EnterGame(_player);
         }
 
         private GameCommandLogger _cmdLogger= new GameCommandLogger();

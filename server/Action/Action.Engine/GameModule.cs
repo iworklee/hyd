@@ -7,8 +7,9 @@ namespace Action.Engine
 {
     public interface IGameModule
     {
-        void OnStartup(GameServer server);
-        void OnStopped(GameServer server);
-        void OnAppSessionClosed(GameSession session);
+        void Load(GameWorld world);
+        void Unload(GameWorld world);
+        void EnterGame(GamePlayer player);
+        void LeaveGame(GamePlayer player);
     }
 }

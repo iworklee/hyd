@@ -14,25 +14,28 @@ namespace Action.Login
     [Export(typeof(IGameModule))]
     public class LoginModule : IGameModule
     {
-        public void OnStartup(GameServer server)
+        public void Load(GameWorld world)
         {
             LogUtil.LogInfo("LoginModule loaded.");
 
-            var tblPlayer = server.DefaultDatabase.GetCollection(DbCollectionDef.Player.Name);
+            var tblPlayer = world.GetDbCollection<Player>(DbCollectionDef.Player.Name);
             tblPlayer.CreateIndex(DbCollectionDef.Player.Key);
 
-            var tblAccount = server.DefaultDatabase.GetCollection(DbCollectionDef.Account.Name);
+            var tblAccount = world.GetDbCollection<Account>(DbCollectionDef.Account.Name);
             tblAccount.CreateIndex(DbCollectionDef.Account.Key);
         }
 
-        public void OnStopped(GameServer server)
+        public void Unload(GameWorld world)
         {
             LogUtil.LogInfo("LoginModule unloaded.");
         }
 
-        public void OnAppSessionClosed(GameSession session)
+        public void EnterGame(GamePlayer player)
         {
-            
+        }
+
+        public void LeaveGame(GamePlayer player)
+        {            
         }
     }
 }

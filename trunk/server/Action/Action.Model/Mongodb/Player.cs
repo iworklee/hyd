@@ -9,6 +9,12 @@ namespace Action.Model
 {
     public class Player : BsonClass
     {
+        public Player()
+        {
+            Role = new Role();
+            Right = new Right();
+        }
+
         public string Name { get; set; }
 
         public string Account { get; set; }

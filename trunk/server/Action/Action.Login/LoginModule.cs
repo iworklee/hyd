@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using Action.Engine;
 using Action.Core;
 using Action.Model;
+using MongoDB.Driver.Builders;
 
 namespace Action.Login
 {
@@ -19,10 +20,12 @@ namespace Action.Login
             var db = world.AppServer.DefaultDatabase;
 
             var tblPlayer = db.GetCollection<Player>(DbCollectionDef.Player.Name);
-            tblPlayer.CreateIndex(DbCollectionDef.Player.Key);
+            tblPlayer.EnsureIndex(IndexKeys.Ascending(DbCollectionDef.Player.Key),
+                IndexOptions.SetUnique(true));
 
             var tblAccount = db.GetCollection<Account>(DbCollectionDef.Account.Name);
-            tblAccount.CreateIndex(DbCollectionDef.Account.Key);
+            tblAccount.EnsureIndex(IndexKeys.Ascending(DbCollectionDef.Account.Key),
+                IndexOptions.SetUnique(true));
         }
 
         public void Unload(GameWorld world)

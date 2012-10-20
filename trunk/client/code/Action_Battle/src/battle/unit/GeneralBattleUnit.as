@@ -1,6 +1,8 @@
 package battle.unit
 {
-	public class GeneralBattleUnit extends BattleUnit
+	import battle.interfaces.IBattleUnit;
+
+	public class GeneralBattleUnit extends BattleUnit implements IBattleUnit
 	{
 		public function GeneralBattleUnit()
 		{

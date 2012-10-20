@@ -8,6 +8,8 @@
     <classEntry path="battle.army.BattleArmy"/>
     <classEntry path="battle.view.BattleUnitViewVO"/>
     <classEntry path="battle.view.BattleArmyViewVO"/>
+    <classEntry path="battle.enum.BattleUnitTypeEnum"/>
+    <classEntry path="battle.interfaces.IBattleUnit"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

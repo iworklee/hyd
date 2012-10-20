@@ -36,7 +36,19 @@ package battle.view
 		
 		public function placeUnitViewVO(placeStage:Sprite):void
 		{
-			
+			this._placeStage = placeStage;
+			if(this._placeStage && this._unitAnimationVO)
+			{
+				this._placeStage.addChild(this._unitAnimationVO);
+			}
+		}
+		
+		public function enterFrameProcess(passTime:Number = 0):void
+		{
+			if(this._unitAnimationVO)
+			{
+				this._unitAnimationVO.enterFrameProcess(passTime);
+			}
 		}
 	}
 }

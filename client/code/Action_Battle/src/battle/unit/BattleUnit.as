@@ -1,12 +1,13 @@
 package battle.unit
 {
+	import battle.interfaces.IBattleUnit;
 	import battle.view.BattleUnitViewVO;
 	
 	import flash.display.Sprite;
 	
 	import res.data.unit.UnitConfigVO;
 
-	public class BattleUnit
+	public class BattleUnit implements IBattleUnit
 	{
 		protected var _unitConfigVO:UnitConfigVO;
 		public function get unitConfigVO():UnitConfigVO
@@ -34,7 +35,18 @@ package battle.unit
 		
 		public function placeUnitViewVO(placeStage:Sprite):void
 		{
-			
+			if(this._unitViewVO)
+			{
+				this._unitViewVO.placeUnitViewVO(placeStage);
+			}
+		}
+		
+		public function enterFrameProcess(passTime:Number = 0):void
+		{
+			if(this._unitViewVO)
+			{
+				this._unitViewVO.enterFrameProcess(passTime);
+			}
 		}
 	}
 }

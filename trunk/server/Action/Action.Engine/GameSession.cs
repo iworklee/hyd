@@ -6,7 +6,6 @@ using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Command;
 using System.IO;
 using ProtoBuf;
-using MongoDB.Driver;
 using System.Configuration;
 
 namespace Action.Engine

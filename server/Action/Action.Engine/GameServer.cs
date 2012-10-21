@@ -122,7 +122,8 @@ namespace Action.Engine
         {
             get
             {
-                return MongoServer.GetDatabase("Game");
+                var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
+                return MongoDatabase.Create(connectionString);
             }
         }
     }

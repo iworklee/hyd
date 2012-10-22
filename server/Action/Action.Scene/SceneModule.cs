@@ -15,6 +15,9 @@ namespace Action.Scene
     [Export(typeof(IGameModule))]
     public class SceneModule : IGameModule
     {
+        [Import]
+        private MongoDataAccess mongoDB = null;
+
         public void Load(GameWorld world)
         {
 
@@ -35,7 +38,7 @@ namespace Action.Scene
             player.Scene.RemovePlayer(player);
 
             //保存玩家所在的场景和位置
-            var tblPlayer = player.World.AppServer.DefaultDatabase
+            var tblPlayer = mongoDB.DefaultDatabase
                 .GetCollection<Player>();
             var query = Query<Player>.Where(p => p.Name == player.Name);
             var update = Update<Player>

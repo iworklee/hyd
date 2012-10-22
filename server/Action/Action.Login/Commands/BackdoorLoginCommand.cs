@@ -9,12 +9,16 @@ using MongoDB.Driver.Linq;
 using Action.Engine;
 using Action.Model;
 using Action.DataAccess;
+using System.ComponentModel.Composition;
 
 namespace Action.Login.Commands
 {
     [GameCommand((int)CommandEnum.BackdoorLogin)]
     public class BackdoorLoginCommand : GameCommand<BackdoorLoginArgs>
     {
+        [Import]
+        private MongoDataAccess mongoDB = null;
+
         enum S2C
         {
             OK,
@@ -31,7 +35,7 @@ namespace Action.Login.Commands
             if (args.Account != null && args.Account.Trim().ToLower().StartsWith("test"))
             {
                 session.EnterLogin(args.Account);
-                var allPlayers = session.AppServer.DefaultDatabase
+                var allPlayers = mongoDB.DefaultDatabase
                     .GetCollection<Player>().AsQueryable();
                 var player = allPlayers.Where(p => p.Account == args.Account).FirstOrDefault();
                 if (player != null)

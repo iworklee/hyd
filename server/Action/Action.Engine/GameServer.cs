@@ -7,7 +7,6 @@ using System.Collections.Concurrent;
 using System.ComponentModel.Composition;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Command;
-using MongoDB.Driver;
 
 namespace Action.Engine
 {
@@ -25,22 +24,22 @@ namespace Action.Engine
             get { return _world; }
         }
 
-        public override bool Setup(SuperSocket.SocketBase.Config.IRootConfig rootConfig, SuperSocket.SocketBase.Config.IServerConfig config, ISocketServerFactory socketServerFactory, SuperSocket.SocketBase.Protocol.ICustomProtocol<BinaryCommandInfo> protocol)
-        {
-            if (!base.Setup(rootConfig, config, socketServerFactory, protocol))
-                return false;
+        //public override bool Setup(SuperSocket.SocketBase.Config.IRootConfig rootConfig, SuperSocket.SocketBase.Config.IServerConfig config, ISocketServerFactory socketServerFactory, SuperSocket.SocketBase.Protocol.ICustomProtocol<BinaryCommandInfo> protocol)
+        //{
+        //    if (!base.Setup(rootConfig, config, socketServerFactory, protocol))
+        //        return false;
 
-            try
-            {
-                MongoServer.Ping();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("The MongoDB Server is not alive!", ex);
-                return false;
-            }
-            return true;
-        }
+        //    try
+        //    {
+        //        MongoServer.Ping();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.LogError("The MongoDB Server is not alive!", ex);
+        //        return false;
+        //    }
+        //    return true;
+        //}
 
         protected override void OnStartup()
         {
@@ -109,22 +108,5 @@ namespace Action.Engine
             return true;
         }
 
-        public MongoServer MongoServer
-        {
-            get
-            {
-                var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
-                return MongoServer.Create(connectionString);
-            }
-        }
-
-        public MongoDatabase DefaultDatabase
-        {
-            get
-            {
-                var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
-                return MongoDatabase.Create(connectionString);
-            }
-        }
     }
 }

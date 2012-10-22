@@ -9,6 +9,8 @@ package Action.Core.Module
 		private static var _current:GameModuleFactory = null;
 		public static function get current():GameModuleFactory
 		{
+			if(_current == null)
+				_current = new GameModuleFactory();
 			return _current;
 		}
 		
@@ -16,12 +18,8 @@ package Action.Core.Module
 		
 		public function GameModuleFactory()
 		{
-			for each(var name:String in GamePlugins.modules)
-			{
-				var module:IGameModule = getDefinitionByName(name) as IGameModule;
-				if(module != null)
-					_modules[module.name] = module;
-			}
+			for each(var module:IGameModule in GamePlugins.modules)			
+				_modules[module.name] = module;			
 		}
 		
 		public function getAllModules():Array

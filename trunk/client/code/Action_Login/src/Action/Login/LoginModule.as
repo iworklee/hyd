@@ -4,6 +4,7 @@ package Action.Login
 	import Action.Core.Net.GameClient;
 	
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	
 	public class LoginModule implements IGameModule
 	{
@@ -37,6 +38,11 @@ package Action.Login
 		public function onClose(client:GameClient, e:Event):void
 		{
 			trace("LoginModule.onClose");
+		}
+		
+		public function onIOError(client:GameClient, e:IOErrorEvent):void
+		{
+			trace("LoginModule.onIOError");
 		}
 	}
 }

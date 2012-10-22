@@ -80,12 +80,6 @@
     <Compile Include="GameCommandHeaderReader.cs" />
     <Compile Include="GameCommandReader.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Action.Core\Action.Core.csproj">
-      <Project>{4528F2B2-5546-4F67-9B13-D75E1058876E}</Project>
-      <Name>Action.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

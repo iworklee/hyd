@@ -73,9 +73,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Action.Core\Action.Core.csproj">
-      <Project>{4528F2B2-5546-4F67-9B13-D75E1058876E}</Project>
-      <Name>Action.Core</Name>
+    <ProjectReference Include="..\Action.DataAccess\Action.DataAccess.csproj">
+      <Project>{F622118C-38C5-4D06-929E-46A5DADEF618}</Project>
+      <Name>Action.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Action.Engine\Action.Engine.csproj">
       <Project>{0348CA5E-C60B-424D-999C-55A153A637E1}</Project>

@@ -1,0 +1,3 @@
+<Map Width="500" height="300">
+  <Landform>00001000010000010000111002030405</Landform>
+</Map>

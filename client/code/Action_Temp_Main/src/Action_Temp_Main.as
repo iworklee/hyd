@@ -43,10 +43,6 @@ package
 			unitAnimationVO.changeFace(AnimationFaceEnum.ANIMATION_FACE_EAST);
 			
 			this.addEventListener(Event.ENTER_FRAME, enterFrameProcess);
-			
-			//load all modules
-			for each(var module:IGameModule in GameModuleFactory.current.getAllModules())
-				module.onLoad();
 		}
 		
 		private var _randomTickdown:int = 0;

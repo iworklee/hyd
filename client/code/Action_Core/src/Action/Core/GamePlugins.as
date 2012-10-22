@@ -6,7 +6,7 @@ package Action.Core
 		{
 		}
 		
-		public static var modules:String = "LoginModule";
-		public static var commands:String = "EnterGameCommand";
+		public static var modules:Array;
+		public static var commands:Array;
 	}
 }

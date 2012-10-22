@@ -76,7 +76,8 @@ package Action.Core.Net
 		
 		private function onIOError(e:IOErrorEvent):void 
 		{
-			trace("GameClient.onIOError");
+			for each(var module:IGameModule in GameModuleFactory.current.getAllModules())
+				module.onIOError(this, e);
 		}
 		
 		private function onSecurityError(e:SecurityErrorEvent):void

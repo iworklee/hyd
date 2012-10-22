@@ -9,6 +9,8 @@ package Action.Core.Command
 		private static var _current:GameCommandFactory = null;
 		public static function get current():GameCommandFactory
 		{
+			if(_current == null)
+				_current = new GameCommandFactory();
 			return _current;
 		}
 		
@@ -16,12 +18,8 @@ package Action.Core.Command
 		
 		public function GameCommandFactory()
 		{
-			for each(var name:String in GamePlugins.commands)
-			{
-				var command:IGameCommand = getDefinitionByName(name) as IGameCommand;
-				if(command != null)
-					_commands[command.id] = command;
-			}
+			for each(var command:IGameCommand in GamePlugins.commands)
+				_commands[command.id] = command;
 		}
 		
 		public function getCommands():Array

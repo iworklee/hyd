@@ -4,8 +4,12 @@
     <classEntry path="Action.Core.Command.IGameCommand"/>
     <classEntry path="Action.Core.Net.GameClient"/>
     <classEntry path="Action.Core.GamePlayer"/>
-    <classEntry path="Action.Core.Net.GameDataSerializer"/>
-    <classEntry path="Action.Core.Command.GameCommandArgs"/>
+    <classEntry path="Action.Core.Net.GameDataManager"/>
+    <classEntry path="Action.Core.Module.IGameModule"/>
+    <classEntry path="Action.Core.Module.GameModuleFactory"/>
+    <classEntry path="Action.Core.Command.GameCommandFactory"/>
+    <classEntry path="Action.Core.Net.GameReceiveData"/>
+    <classEntry path="Action.Core.GamePlugins"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

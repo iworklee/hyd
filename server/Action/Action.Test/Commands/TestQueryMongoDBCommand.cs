@@ -7,6 +7,7 @@ using Action.Model;
 using Action.DataAccess;
 using MongoDB.Driver.Linq;
 using System.ComponentModel.Composition;
+using MongoDB.Driver.Builders;
 
 namespace Action.Test.Commands
 {
@@ -26,6 +27,8 @@ namespace Action.Test.Commands
             var db = mongoDB.DefaultDatabase;
             var player = db.GetCollection<Player>().AsQueryable().Single(p => p.Name == args);
             session.SendResponse(983, player.Account);
+
+            //db.GetCollection<Player>().GeoHaystackSearch(10.0d, 10.0d, GeoHaystackSearchOptions<Player>.Null);
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Test
     [TestClass()]
     public class CommandTest : TestBase
     {
+        private const int COUNT = 1000000;
+
         [TestMethod()]
         public void TestCommandTest()
         {
@@ -18,6 +20,19 @@ namespace Test
 
             Assert.AreEqual(979, reader.ReadInt32());
             Assert.AreEqual(0, reader.ReadInt32());
+        }
+
+        [TestMethod()]
+        public void TestCommandLongTest()
+        {
+            for (int i = 0; i < COUNT; i++)
+            {
+                writer.Write(979);    // cmdId
+                writer.Write(0);        // package length
+
+                Assert.AreEqual(979, reader.ReadInt32());
+                Assert.AreEqual(0, reader.ReadInt32());
+            }
         }
 
         [TestMethod()]
@@ -76,7 +91,7 @@ namespace Test
         [TestMethod()]
         public void TestQueryMongoDBCommandTest()
         {
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < COUNT; i++)
             {
                 var name = "test" + rng.Next(1, 1000);
 

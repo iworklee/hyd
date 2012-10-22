@@ -10,6 +10,10 @@
     <classEntry path="battle.view.BattleArmyViewVO"/>
     <classEntry path="battle.enum.BattleUnitTypeEnum"/>
     <classEntry path="battle.interfaces.IBattleUnit"/>
+    <classEntry path="battle.map.BattleMap"/>
+    <classEntry path="battle.view.BattleMapViewVO"/>
+    <classEntry path="battle.map.BattleFormation"/>
+    <classEntry path="battle.view.BattleFormationViewVO"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

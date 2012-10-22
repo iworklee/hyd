@@ -2,7 +2,7 @@
 import "protobuf-net.proto";
 
 package Action.Model;
-option (protobuf_net.namespace) = "xxxxxx";
+option (protobuf_net.namespace) = "Action.Model";
 
 message BackdoorLoginArgs {
   optional string Account = 1;

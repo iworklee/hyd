@@ -8,12 +8,16 @@ using Action.Engine;
 using Action.Model;
 using Action.DataAccess;
 using Microsoft.Xna.Framework;
+using System.ComponentModel.Composition;
 
 namespace Action.Login.Commands
 {
     [GameCommand((int)CommandEnum.CreateRole)]
     public class CreateRoleCommand : GameCommand<CreateRoleArgs>
     {
+        [Import]
+        private MongoDataAccess mongoDB = null;
+
         public enum S2C
         {
             OK,
@@ -31,7 +35,7 @@ namespace Action.Login.Commands
             //输入合法性验证
 
             //重名验证
-            var players = session.AppServer.DefaultDatabase
+            var players = mongoDB.DefaultDatabase
                 .GetCollection<Player>().AsQueryable();
             if (players.Where(p => p.Name == args.Name).Count() > 0)
             {
@@ -49,7 +53,7 @@ namespace Action.Login.Commands
             player.Role.Job = args.Job;
             player.Role.Sex = args.Sex;
             player.Role.Level = player.Role.Skin = 1;
-            var tblPlayer = session.AppServer.DefaultDatabase
+            var tblPlayer = mongoDB.DefaultDatabase
                 .GetCollection<Player>();
             tblPlayer.Insert(player);
 
@@ -57,7 +61,7 @@ namespace Action.Login.Commands
             var account = new Account();
             account.AccKey = session.Player.Account;
             account.PlayerName = args.Name;
-            var tblAccount = session.AppServer.DefaultDatabase
+            var tblAccount = mongoDB.DefaultDatabase
                 .GetCollection<Account>();
             tblAccount.Insert(account);
 

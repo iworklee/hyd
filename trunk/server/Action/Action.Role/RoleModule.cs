@@ -15,6 +15,9 @@ namespace Action.Role
     [Export(typeof(IGameModule))]
     public class RoleModule : IGameModule
     {
+        [Import]
+        private MongoDataAccess mongoDB = null;
+
         public void Load(GameWorld world)
         {
             
@@ -27,7 +30,7 @@ namespace Action.Role
 
         public void EnterGame(GamePlayer player)
         {
-            var dbPlayers = player.Session.AppServer.DefaultDatabase
+            var dbPlayers = mongoDB.DefaultDatabase
                 .GetCollection<Player>().AsQueryable();
             var dbPlayer = dbPlayers.Where(p => p.Name == player.Name).FirstOrDefault();
             if (dbPlayer != null)

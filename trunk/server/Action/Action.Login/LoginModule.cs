@@ -15,9 +15,12 @@ namespace Action.Login
     [Export(typeof(IGameModule))]
     public class LoginModule : IGameModule
     {
+        [Import]
+        private MongoDataAccess mongoDB = null;
+
         public void Load(GameWorld world)
         {
-            var db = world.AppServer.DefaultDatabase;
+            var db = mongoDB.DefaultDatabase;
 
             var tblPlayer = db.GetCollection<Player>();
             tblPlayer.EnsureIndex(IndexKeys<Player>.Ascending(p => p.Name),

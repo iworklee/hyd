@@ -18,7 +18,10 @@ package Action.Login
 		
 		public function onLoad():void
 		{
-		
+			trace("LoginModule.onLoad");
+			var host:String = "127.0.0.1";
+			var port:int = 1808;
+			GameClient.create().connect(host, port);
 		}
 		
 		public function onUnload():void
@@ -28,10 +31,12 @@ package Action.Login
 		
 		public function onConnect(client:GameClient, e:Event):void
 		{
+			trace("LoginModule.onConnect");
 		}
 		
 		public function onClose(client:GameClient, e:Event):void
 		{
+			trace("LoginModule.onClose");
 		}
 	}
 }

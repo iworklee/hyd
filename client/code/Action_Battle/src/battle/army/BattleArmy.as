@@ -21,10 +21,14 @@ package battle.army
 			return this._currentArmySize;
 		}
 		
+		private var _footUnitList:Array;
+		private var _generalUnit:GeneralBattleUnit;
+		
 		public function BattleArmy()
 		{
 			this._armyMaxSize = 0;
 			this._currentArmySize = 0;
+			this._footUnitList = new Array();
 		}
 		
 		public function createBattleArmy(armySize:int):void
@@ -44,11 +48,15 @@ package battle.army
 					case BattleUnitTypeEnum.BATTLE_UNIT_TYPE_FOOT:
 						var footUnit:FootBattleUnit = new FootBattleUnit();
 						footUnit.initBattleUnit(unitConfigVO);
+						
+						this._footUnitList.push(footUnit);
 						break;
 					
 					case BattleUnitTypeEnum.BATTLE_UNIT_TYPE_GENERAL:
 						var generalUnit:GeneralBattleUnit = new GeneralBattleUnit();
 						generalUnit.initBattleUnit(unitConfigVO);
+						
+						this._generalUnit = generalUnit;
 						break;
 				}
 			}

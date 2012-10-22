@@ -1,10 +1,9 @@
 #summary yuuhhe's working log
 
 *todo list*
- # protobuf代码自动生成时自定义命名空间
  # 网络层的cmdId和长度使用protobuf编码
  # mongodb事务的实现
 
 ===working log===
 || *日期* || *内容* ||
-|| 2012-10-22 || mongodb封装为独立dataaccess工程||
+|| 2012-10-22 || mongodb封装为独立dataaccess工程,protobuf代码自动生成时自定义命名空间||

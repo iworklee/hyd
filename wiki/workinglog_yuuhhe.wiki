@@ -1,5 +1,5 @@
 #summary yuuhhe's working log
 
 
-|| 日期|| 内容||
-|| 2012-10-22|| mongodb封装||
+|| 日期|| 内容
+|| 2012-10-22|| mongodb封装为独立dataaccess工程

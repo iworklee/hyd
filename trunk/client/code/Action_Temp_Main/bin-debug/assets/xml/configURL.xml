@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ConfigUrlVO configName="resURL" type="xml" description="资源路径配置" url="assets/xml/resURL.xml"/>
+	<ConfigUrlVO configName="animationConfig" type="xml" description="动画资源配置" url="assets/xml/animation/animationConfig.xml"/>
+	<ConfigUrlVO configName="actionConfig" type="xml" description="动画帧动作配置" url="assets/xml/animation/actionConfig.xml"/>
+	<ConfigUrlVO configName="unitConfig" type="xml" description="角色单位配置" url="assets/xml/unit/unitConfigXml.xml"/>
+</root>

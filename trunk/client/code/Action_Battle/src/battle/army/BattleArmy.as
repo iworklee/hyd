@@ -1,6 +1,9 @@
 package battle.army
 {
+	import battle.enum.BattleUnitTypeEnum;
 	import battle.interfaces.IBattleUnit;
+	import battle.unit.FootBattleUnit;
+	import battle.unit.GeneralBattleUnit;
 	
 	import res.data.unit.UnitConfigVO;
 
@@ -20,6 +23,8 @@ package battle.army
 		
 		public function BattleArmy()
 		{
+			this._armyMaxSize = 0;
+			this._currentArmySize = 0;
 		}
 		
 		public function createBattleArmy(armySize:int):void
@@ -30,9 +35,25 @@ package battle.army
 			}
 		}
 		
-		public function createNewUnit(unitConfigVO:UnitConfigVO, unitType:String):void
+		public function createNewUnit(unitConfigVO:UnitConfigVO, unitType:String):Boolean
 		{
+			if(this._currentArmySize < this._armyMaxSize)
+			{
+				switch(unitType)
+				{
+					case BattleUnitTypeEnum.BATTLE_UNIT_TYPE_FOOT:
+						var footUnit:FootBattleUnit = new FootBattleUnit();
+						footUnit.initBattleUnit(unitConfigVO);
+						break;
+					
+					case BattleUnitTypeEnum.BATTLE_UNIT_TYPE_GENERAL:
+						var generalUnit:GeneralBattleUnit = new GeneralBattleUnit();
+						generalUnit.initBattleUnit(unitConfigVO);
+						break;
+				}
+			}
 			
+			return false;
 		}
 	}
 }

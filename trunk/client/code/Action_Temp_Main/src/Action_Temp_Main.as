@@ -28,16 +28,52 @@ package
 			ConfigDataManager.getInstance().addEventListener(ConfigDataCompleteEvent.NAME, configDataComplete);
 		}
 
-		private var unitAnimationVO:UnitAnimationVO;
+//		private var unitAnimationVO:UnitAnimationVO;
+		private var _unitVOList:Array;
 		private function configDataComplete(event:ConfigDataCompleteEvent):void
 		{
-			unitAnimationVO = new UnitAnimationVO(ConfigDataManager.getInstance().getUnitConfigVOByUnitId(200001));
-			unitAnimationVO.x = 400;
-			unitAnimationVO.y = 300;
-			this.addChild(unitAnimationVO);
-			
-			unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_MOVE);
-			unitAnimationVO.changeFace(AnimationFaceEnum.ANIMATION_FACE_EAST);
+//			unitAnimationVO = new UnitAnimationVO(ConfigDataManager.getInstance().getUnitConfigVOByUnitId(200001));
+//			unitAnimationVO.x = 400;
+//			unitAnimationVO.y = 300;
+//			this.addChild(unitAnimationVO);
+//			
+//			unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_MOVE);
+//			unitAnimationVO.changeFace(AnimationFaceEnum.ANIMATION_FACE_EAST);
+//			
+
+			this._unitVOList = new Array();
+			for(var i:int = 0; i < 31; i++)
+			{
+				for(var j:int = 0; j < 21; j++)
+				{
+					if(i == 15 && j == 10)
+					{
+						var unitAnimationVO:UnitAnimationVO = new UnitAnimationVO(ConfigDataManager.getInstance().getUnitConfigVOByUnitId(200001));
+					}
+					else
+					{
+						if(i > 10 && i < 20 && j > 5 && j < 15)
+						{
+							unitAnimationVO = new UnitAnimationVO(ConfigDataManager.getInstance().getUnitConfigVOByUnitId(100101));
+						}
+						else
+						{
+							unitAnimationVO = new UnitAnimationVO(ConfigDataManager.getInstance().getUnitConfigVOByUnitId(100001));
+						}
+						
+					}
+					
+					unitAnimationVO.x = i * 24 + 32;
+					unitAnimationVO.y = j * 24 + 64;
+					
+					this.addChild(unitAnimationVO);
+					
+					unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_MOVE);
+					unitAnimationVO.changeFace(AnimationFaceEnum.ANIMATION_FACE_EAST);
+					
+					this._unitVOList.push(unitAnimationVO);
+				}
+			}
 			
 			this.addEventListener(Event.ENTER_FRAME, enterFrameProcess);
 		}
@@ -46,55 +82,19 @@ package
 		
 		private function enterFrameProcess(event:Event):void
 		{
-			if(unitAnimationVO)
+			if(this._unitVOList)
 			{
-				unitAnimationVO.enterFrameProcess();
+				for(var i:int = 0; i < this._unitVOList.length; i++)
+				{
+					var unitAnimationVO:UnitAnimationVO = this._unitVOList[i] as UnitAnimationVO;
+					unitAnimationVO.enterFrameProcess();
+				}
 			}
 			
-			if(_randomTickdown < 30)
-			{
-				_randomTickdown ++;
-			}
-			else
-			{
-				_randomTickdown = 0;
-				var randomFace:int = Math.floor(Math.random() * 4) * 2;
-				unitAnimationVO.changeFace(randomFace);
-				
-//				public static const ACTION_TYPE_WAIT:String = "wait";
-//				public static const ACTION_TYPE_MOVE:String = "move";
-//				public static const ACTION_TYPE_ATTACK:String = "attack";
-//				public static const ACTION_TYPE_DEFEAT:String = "defeat";
-//				public static const ACTION_TYPE_PARRY:String = "parry";
-//				public static const ACTION_TYPE_HIT:String = "hit";
-//				public static const ACTION_TYPE_BUFF:String = "buff";
-				
-//				var randomAction:int = Math.floor(Math.random() * 7);
-//				switch(randomAction)
-//				{
-//					case 0:
-//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_ATTACK);
-//						break;
-//					case 1:
-//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_BUFF);
-//						break;
-//					case 2:
-//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_DEFEAT);
-//						break;
-//					case 3:
-//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_HIT);
-//						break;
-//					case 4:
-//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_MOVE);
-//						break;
-//					case 5:
-//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_PARRY);
-//						break;
-//					case 6:
-//						unitAnimationVO.changeAction(ActionTypeEnum.ACTION_TYPE_WAIT);
-//						break;
-//				}
-			}
+//			if(unitAnimationVO)
+//			{
+//				unitAnimationVO.enterFrameProcess();
+//			}
 		}
 	}
 }

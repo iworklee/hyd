@@ -14,6 +14,7 @@
     <classEntry path="battle.view.BattleMapViewVO"/>
     <classEntry path="battle.map.BattleFormation"/>
     <classEntry path="battle.view.BattleFormationViewVO"/>
+    <classEntry path="battle.vo.BattleReportVO"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

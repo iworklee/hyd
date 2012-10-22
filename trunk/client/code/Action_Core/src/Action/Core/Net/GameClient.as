@@ -76,12 +76,12 @@ package Action.Core.Net
 		
 		private function onIOError(e:IOErrorEvent):void 
 		{
-			
+			trace("GameClient.onIOError");
 		}
 		
 		private function onSecurityError(e:SecurityErrorEvent):void
 		{
-			
+			trace("GameClient.onSecurityError");
 		}	
 		
 		private var _player:GamePlayer = null;

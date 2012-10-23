@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="760" height="600"
+			   creationComplete="application1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import Action.Core.GamePlugins;
+			import Action.Core.Net.GameClient;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			private var _testModule:TestModule = new TestModule();
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				loadPlugins();
+				resetUI();
+			}
+			
+			private function loadPlugins():void
+			{
+				GamePlugins.modules = [_testModule];
+				_testModule.addEventListener("onConnect", _testModule_onConnect);
+				_testModule.addEventListener("onClose", _testModule_onClose);
+				_testModule.addEventListener("onIOError", _testModule_onIOError);
+			}
+			
+			private function _testModule_onConnect(e:Event):void
+			{
+			 	resetUI(true);
+			}
+			
+			private function _testModule_onClose(e:Event):void
+			{
+				resetUI(false);
+			}
+			
+			private function _testModule_onIOError(e:Event):void
+			{
+				Alert.show("远程服务器积极的拒绝");
+			}
+			
+			private function resetUI(connected:Boolean=false):void
+			{
+				btnSend.enabled = txtCmdId.enabled = txtSendType.enabled = txtSendContent.enabled
+					= txtRecvType.enabled = txtRecvContent.enabled = connected;
+				btnConnect.label = connected ? "断开" : "连接";
+			}
+			
+			private function parseInt(text:String):int
+			{
+				try{return int(text);}
+				catch(e:Error){}
+				return 0;
+			}
+			
+			protected function btnConnect_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				if(GameClient.current == null)
+					GameClient.create();
+				if(GameClient.current.connected)
+					GameClient.current.close();
+				else
+					GameClient.current.connect(txtHost.text, parseInt(txtPort.text));
+			}
+			
+			protected function btnSend_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Panel width="760" height="600" title="Action命令测试工具" backgroundColor="#eeeeee">
+		<s:Label x="50" y="30" text="主机："/>
+		<s:TextInput id="txtHost" x="90" y="22" width="100" text="127.0.0.1"/>
+		<s:Label x="200" y="30" text="端口："/>
+		<s:TextInput id="txtPort" x="240" y="22" width="50" text="1808"/>
+		<s:Button id="btnConnect" x="300" y="22" label="连接" click="btnConnect_clickHandler(event)"/>
+		<s:Button id="btnSend" x="380" y="22" label="发送" click="btnSend_clickHandler(event)"/>
+		<s:Label x="25" y="60" text="命令编号："/>
+		<s:TextInput id="txtCmdId" x="90" y="52" width="600" text="1000"/>
+		<s:Label x="25" y="90" text="发送类型："/>
+		<s:TextInput id="txtSendType" x="90" y="82" width="600" text="null"/>
+		<s:Label x="25" y="120" text="发送内容："/>
+		<s:TextArea id="txtSendContent" x="90" y="112" width="600" height="200" text=""/>
+		<s:Label x="25" y="330" text="返回类型："/>
+		<s:TextInput id="txtRecvType" x="90" y="322" width="600" text="null"/>
+		<s:Label x="25" y="360" text="返回内容："/>
+		<s:TextArea id="txtRecvContent" x="90" y="352" width="600" height="200" text=""/>
+	</s:Panel>
+</s:Application>

@@ -35,7 +35,7 @@ package Action.Core.Net
 			return _current = new GameClient();
 		}
 		
-		public function connected():Boolean
+		public function get connected():Boolean
 		{
 			return _socket.connected;
 		}
@@ -48,6 +48,12 @@ package Action.Core.Net
 			_socket.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			_socket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 			_socket.connect(host, port);
+		}
+		
+		public function close():void
+		{
+			_socket.close();
+			onClose(null);
 		}
 		
 		private function onConnect(e:Event):void

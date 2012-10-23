@@ -8,6 +8,14 @@
 		<![CDATA[
 			import Action.Core.GamePlugins;
 			import Action.Core.Net.GameClient;
+			import Action.Core.ReceiveEvent;
+			import Action.Login.Commands.BackdoorLoginCommand;
+			import Action.Model.BackdoorLoginArgs;
+			
+			import com.adobe.serialization.json.*;
+			import com.netease.protobuf.Message;
+			
+			import flash.utils.getDefinitionByName;
 			
 			import mx.controls.Alert;
 			import mx.events.FlexEvent;
@@ -24,9 +32,11 @@
 			private function loadPlugins():void
 			{
 				GamePlugins.modules = [_testModule];
+				GamePlugins.commands = [new BackdoorLoginCommand()];
 				_testModule.addEventListener("onConnect", _testModule_onConnect);
 				_testModule.addEventListener("onClose", _testModule_onClose);
 				_testModule.addEventListener("onIOError", _testModule_onIOError);
+				_testModule.addEventListener("onReceive", _testModule_onReceive);
 			}
 			
 			private function _testModule_onConnect(e:Event):void
@@ -39,6 +49,11 @@
 				resetUI(false);
 			}
 			
+			private function _testModule_onReceive(e:ReceiveEvent):void
+			{
+				txtRecvResult.text = e.cmdId + "(" + e.cmdName + ")\n{" + e.cmdArgs + "\n}";
+			}
+			
 			private function _testModule_onIOError(e:Event):void
 			{
 				Alert.show("远程服务器积极的拒绝");
@@ -46,16 +61,9 @@
 			
 			private function resetUI(connected:Boolean=false):void
 			{
-				btnSend.enabled = txtCmdId.enabled = txtSendType.enabled = txtSendContent.enabled
-					= txtRecvType.enabled = txtRecvContent.enabled = connected;
+				btnSend.enabled = txtCmdId.enabled = txtSendType.enabled 
+					= txtSendArgs.enabled = txtRecvResult.enabled = connected;
 				btnConnect.label = connected ? "断开" : "连接";
-			}
-			
-			private function parseInt(text:String):int
-			{
-				try{return int(text);}
-				catch(e:Error){}
-				return 0;
 			}
 			
 			protected function btnConnect_clickHandler(event:MouseEvent):void
@@ -66,13 +74,46 @@
 				if(GameClient.current.connected)
 					GameClient.current.close();
 				else
-					GameClient.current.connect(txtHost.text, parseInt(txtPort.text));
+					GameClient.current.connect(txtHost.text, MyConvert.toInt(txtPort.text));
 			}
 			
 			protected function btnSend_clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				
+				var cmdId:int = MyConvert.toInt(txtCmdId.text);
+				switch(txtSendType.text.toLowerCase())
+				{
+					case "bool":
+						GameClient.current.sendBoolean(cmdId, MyConvert.toBool(txtSendArgs.text));
+						break;
+					case "int":
+						GameClient.current.sendInt(cmdId, MyConvert.toInt(txtSendArgs.text));
+						break;
+					case "float":
+						GameClient.current.sendFloat(cmdId, MyConvert.toFloat(txtSendArgs.text));
+						break;
+					case "string":
+						GameClient.current.sendString(cmdId, txtSendArgs.text);
+						break;
+					case "null":
+						GameClient.current.sendNull(cmdId);
+						break;
+					default:
+						var model:Object = ModelCollection.current.getModel(txtSendType.text);
+						updateModel(model, txtSendArgs.text);
+						GameClient.current.sendMessage(cmdId, model as Message);
+						break;
+				}
+			}
+			
+			private function updateModel(model:Object, args:String):void
+			{
+				for each(var item:String in args.split("\n"))
+				{
+					var p:int = item.indexOf("=");
+					if(p > -1)
+						model[item.substring(0, p)] = item.substring(p + 1);
+				}
 			}
 			
 		]]>
@@ -90,12 +131,10 @@
 		<s:Label x="25" y="60" text="命令编号："/>
 		<s:TextInput id="txtCmdId" x="90" y="52" width="600" text="1000"/>
 		<s:Label x="25" y="90" text="发送类型："/>
-		<s:TextInput id="txtSendType" x="90" y="82" width="600" text="null"/>
-		<s:Label x="25" y="120" text="发送内容："/>
-		<s:TextArea id="txtSendContent" x="90" y="112" width="600" height="200" text=""/>
-		<s:Label x="25" y="330" text="返回类型："/>
-		<s:TextInput id="txtRecvType" x="90" y="322" width="600" text="null"/>
-		<s:Label x="25" y="360" text="返回内容："/>
-		<s:TextArea id="txtRecvContent" x="90" y="352" width="600" height="200" text=""/>
+		<s:TextInput id="txtSendType" x="90" y="82" width="600" text="BackdoorLoginArgs"/>
+		<s:Label x="25" y="120" text="发送参数："/>
+		<s:TextArea id="txtSendArgs" x="90" y="112" width="600" height="200" text="account=test001"/>
+		<s:Label x="25" y="330" text="返回结果："/>
+		<s:TextArea id="txtRecvResult" x="90" y="322" width="600" height="200" text=""/>
 	</s:Panel>
 </s:Application>

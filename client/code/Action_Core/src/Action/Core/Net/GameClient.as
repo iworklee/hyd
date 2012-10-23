@@ -5,6 +5,10 @@ package Action.Core.Net
 	import Action.Core.GamePlayer;
 	import Action.Core.Module.GameModuleFactory;
 	import Action.Core.Module.IGameModule;
+	import Action.Core.ReceiveEvent;
+	import Action.Core.Serial.IGameDataSerializer;
+	
+	import avmplus.getQualifiedClassName;
 	
 	import com.netease.protobuf.Message;
 	
@@ -69,15 +73,26 @@ package Action.Core.Net
 		}	
 		
 		private function onReceive(e:ProgressEvent):void 
-		{
+		{			
 			var data:GameReceiveData = _dataManager.fromSocket(_socket);
 			var command:IGameCommand = GameCommandFactory.current.getCommand(data.key);
+			
+			var evt:ReceiveEvent = new ReceiveEvent("onReceive", e.bubbles, e.cancelable);
+			evt.cmdId = data.key;
+			
 			if(command != null)
 			{
-				var message:Message = command.createMessage();
-				message.mergeFrom(data.buffer);
-				command.execute(this, message);
+				var args:Object = command.serializer != null 
+					? command.serializer.deserialize(data.buffer) : null;
+				command.execute(this, args);
+				
+				evt.cmdId = data.key;
+				evt.cmdName = getQualifiedClassName(command);
+				evt.cmdArgs = args;
 			}
+			
+			for each(var module:IGameModule in GameModuleFactory.current.getAllModules())
+				module.onReceive(this, evt);
 		}
 		
 		private function onIOError(e:IOErrorEvent):void 
@@ -102,13 +117,57 @@ package Action.Core.Net
 			_player = player;
 		}
 		
-		public function send(cmdId:int, msg:Message):void
+		public function sendNull(cmdId:int):void
 		{
-			var buffer:ByteArray = _dataManager.toByteArray(msg);
+			_socket.writeInt(cmdId);
+			_socket.writeInt(0);
+			_socket.flush();
+		}		
+		
+		public function sendBoolean(cmdId:int, data:Boolean):void
+		{
+			_socket.writeInt(cmdId);
+			_socket.writeInt(1);
+			_socket.writeBoolean(data);
+			_socket.flush();
+		}
+		
+		public function sendInt(cmdId:int, data:int):void
+		{
+			_socket.writeInt(cmdId);
+			_socket.writeInt(4);
+			_socket.writeInt(data);
+			_socket.flush();
+		}
+		
+		public function sendFloat(cmdId:int, data:Number):void
+		{
+			_socket.writeInt(cmdId);
+			_socket.writeInt(4);
+			_socket.writeFloat(data);
+			_socket.flush();
+		}
+		
+		public function sendString(cmdId:int, data:String):void
+		{
+			var buffer:ByteArray = new ByteArray();
+			buffer.writeUTFBytes(data);
+			_socket.writeInt(cmdId);			
+			_socket.writeInt(buffer.length);
+			_socket.writeBytes(buffer);
+			_socket.flush();
+		}
+		
+		public function sendMessage(cmdId:int, data:Message):void
+		{
+			if(data == null)
+				return;
+			var buffer:ByteArray = _dataManager.toByteArray(data);
 			_socket.writeInt(cmdId);
 			_socket.writeInt(buffer.length);
 			if(buffer.length > 0)
 				_socket.writeBytes(buffer);
+			_socket.flush();
 		}
 	}
 }

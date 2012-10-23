@@ -2,6 +2,7 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="Action.Login.LoginModule"/>
+    <classEntry path="Action.Login.Commands.BackdoorLoginCommand"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

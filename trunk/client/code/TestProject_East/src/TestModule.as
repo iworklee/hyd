@@ -2,6 +2,7 @@ package
 {
 	import Action.Core.Module.IGameModule;
 	import Action.Core.Net.GameClient;
+	import Action.Core.ReceiveEvent;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -34,6 +35,11 @@ package
 		public function onClose(client:GameClient, e:Event):void
 		{
 			dispatchEvent(new Event("onClose"));
+		}
+		
+		public function onReceive(client:GameClient, e:ReceiveEvent):void
+		{
+			dispatchEvent(e);
 		}
 		
 		public function onIOError(client:GameClient, e:IOErrorEvent):void

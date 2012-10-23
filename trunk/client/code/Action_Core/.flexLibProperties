@@ -10,6 +10,10 @@
     <classEntry path="Action.Core.Command.GameCommandFactory"/>
     <classEntry path="Action.Core.Net.GameReceiveData"/>
     <classEntry path="Action.Core.GamePlugins"/>
+    <classEntry path="Action.Core.Serial.IGameDataSerializer"/>
+    <classEntry path="Action.Core.Serial.FloatSerializer"/>
+    <classEntry path="Action.Core.Serial.BoolSerializer"/>
+    <classEntry path="Action.Core.ReceiveEvent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

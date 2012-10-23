@@ -2,6 +2,7 @@ package Action.Login
 {
 	import Action.Core.Module.IGameModule;
 	import Action.Core.Net.GameClient;
+	import Action.Core.ReceiveEvent;
 	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -38,6 +39,11 @@ package Action.Login
 		public function onClose(client:GameClient, e:Event):void
 		{
 			trace("LoginModule.onClose");
+		}
+		
+		public function onReceive(client:GameClient, e:ReceiveEvent):void
+		{
+			trace("LoginModule.onReceive");
 		}
 		
 		public function onIOError(client:GameClient, e:IOErrorEvent):void

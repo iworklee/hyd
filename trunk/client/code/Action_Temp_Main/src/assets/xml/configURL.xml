@@ -4,4 +4,5 @@
 	<ConfigUrlVO configName="animationConfig" type="xml" description="动画资源配置" url="assets/xml/animation/animationConfig.xml"/>
 	<ConfigUrlVO configName="actionConfig" type="xml" description="动画帧动作配置" url="assets/xml/animation/actionConfig.xml"/>
 	<ConfigUrlVO configName="unitConfig" type="xml" description="角色单位配置" url="assets/xml/unit/unitConfigXml.xml"/>
+	<ConfigUrlVO configName="battleMapConfig" type="xml" description="战斗用地图配置" url="assets/xml/map/battleMapConfigXml.xml"/>
 </root>

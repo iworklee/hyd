@@ -24,11 +24,12 @@ package battle
 		
 		public function BattlePlayManager()
 		{
+			this._battleMap = new BattleMap();
 		}
 		
 		public function playOneBattle(battleReport:BattleReportVO):void
 		{
-			
+			this._battleMap.initBattleMap(battleReport);
 		}
 	}
 }

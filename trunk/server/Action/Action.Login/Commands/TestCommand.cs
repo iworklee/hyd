@@ -21,7 +21,7 @@ namespace Action.Login.Commands
 
         protected override void Run(GameSession session)
         {
-            
+            session.SendResponse(ID);
         }
     }
 }

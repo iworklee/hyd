@@ -22,6 +22,11 @@ namespace Action.Engine
             // TODO 用户会话
         }
 
+        public override void HandleUnknownCommand(BinaryCommandInfo cmdInfo)
+        {
+            Close();
+        }
+
         private bool _opened;
         public bool Opened
         {

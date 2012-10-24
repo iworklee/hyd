@@ -22,7 +22,8 @@ namespace Action.Login.Commands
         enum S2C
         {
             OK,
-            RoleMissing = 1
+            ErrorAccount,
+            RoleMissing
         }
 
         protected override bool Ready(GameSession session, BackdoorLoginArgs args)
@@ -44,7 +45,7 @@ namespace Action.Login.Commands
                     session.SendResponse(ID, (int)S2C.RoleMissing);
             }
             else
-                session.Close();
+                session.SendResponse(ID, (int)S2C.ErrorAccount);
         }
     }
 }

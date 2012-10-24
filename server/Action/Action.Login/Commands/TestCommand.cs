@@ -11,7 +11,7 @@ using Action.DataAccess;
 
 namespace Action.Login.Commands
 {
-    [GameCommand(0)]
+    [GameCommand(1)]
     public class TestCommand : GameCommand
     {
         protected override bool Ready(GameSession session)

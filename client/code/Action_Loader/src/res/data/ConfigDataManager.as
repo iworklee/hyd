@@ -7,6 +7,8 @@ package res.data
 	import res.data.animation.XmlAnimationDataModule;
 	import res.data.animation.action.ActionUnitConfig;
 	import res.data.animation.bitmap.AnimationConfigVO;
+	import res.data.map.BattleMapConfig;
+	import res.data.map.XmlBattleMapDataModule;
 	import res.data.res.ResUrlVO;
 	import res.data.res.XmlResDataModule;
 	import res.data.unit.UnitConfigVO;
@@ -36,7 +38,8 @@ package res.data
 				ConfigUrlEnum.RES_URL,
 				ConfigUrlEnum.ANIMATION_CONFIG,
 				ConfigUrlEnum.ACTION_CONFIG,
-				ConfigUrlEnum.UNIT_CONFIG
+				ConfigUrlEnum.UNIT_CONFIG,
+				ConfigUrlEnum.BATTLE_MAP_CONFIG
 			];
 		
 		private var _configUrlList:Array;
@@ -115,6 +118,10 @@ package res.data
 					case ConfigUrlEnum.UNIT_CONFIG:
 						XmlUnitDataModule.getInstance().initModule(loadedResXmlVO.xmlData);
 						break;
+					
+					case ConfigUrlEnum.BATTLE_MAP_CONFIG:
+						XmlBattleMapDataModule.getInstance().initModule(loadedResXmlVO.xmlData);
+						break;
 				}
 				
 				if(checkXmlLoadComplete(ConfigUrlVO(loadedResXmlVO.passData).configName))
@@ -161,6 +168,11 @@ package res.data
 		public function getUnitConfigVOByUnitId(unitId:int):UnitConfigVO
 		{
 			return XmlUnitDataModule.getInstance().getUnitConfigVOByUnitId(unitId);
+		}
+		
+		public function getBattleMapConfigById(mapId:int):BattleMapConfig
+		{
+			return XmlBattleMapDataModule.getInstance().getBattleMapConfigById(mapId);
 		}
 	}
 }

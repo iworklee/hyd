@@ -36,6 +36,8 @@
     <classEntry path="res.data.res.ResUrlVO"/>
     <classEntry path="res.data.res.XmlResDataModule"/>
     <classEntry path="res.event.ConfigDataCompleteEvent"/>
+    <classEntry path="res.data.map.BattleMapConfig"/>
+    <classEntry path="res.data.map.XmlBattleMapDataModule"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

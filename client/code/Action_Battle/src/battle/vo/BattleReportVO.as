@@ -11,5 +11,10 @@ package battle.vo
 		public function BattleReportVO()
 		{
 		}
+		
+		public function initBattleReport(mapId:int):void
+		{
+			this._battleMapID = mapId;
+		}
 	}
 }

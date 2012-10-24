@@ -18,16 +18,10 @@ package Action.Core.Net
 	import flash.events.SecurityErrorEvent;
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
+	import flash.utils.Endian;
 
 	public class GameClient
-	{
-		private var _socket:Socket = new Socket();
-		private var _dataManager:GameDataManager = new GameDataManager();
-		
-		public function GameClient()
-		{
-		}
-		
+	{		
 		private static var _current:GameClient = null;
 		public static function get current():GameClient
 		{
@@ -37,6 +31,20 @@ package Action.Core.Net
 		public static function create():GameClient
 		{
 			return _current = new GameClient();
+		}
+		
+		private var _socket:Socket;
+		private var _dataManager:GameDataManager = new GameDataManager();
+		
+		public function GameClient()
+		{
+			resetSocket();
+		}
+		
+		private function resetSocket():void
+		{
+			_socket = new Socket();
+			_socket.endian = Endian.LITTLE_ENDIAN;
 		}
 		
 		public function get connected():Boolean
@@ -68,6 +76,7 @@ package Action.Core.Net
 		
 		private function onClose(e:Event):void 
 		{
+			resetSocket();
 			for each(var module:IGameModule in GameModuleFactory.current.getAllModules())
 				module.onClose(this, e);
 		}	
@@ -75,8 +84,10 @@ package Action.Core.Net
 		private function onReceive(e:ProgressEvent):void 
 		{			
 			var data:GameReceiveData = _dataManager.fromSocket(_socket);
-			var command:IGameCommand = GameCommandFactory.current.getCommand(data.key);
+			if(data == null)
+				return;
 			
+			var command:IGameCommand = GameCommandFactory.current.getCommand(data.key);			
 			var evt:ReceiveEvent = new ReceiveEvent("onReceive", e.bubbles, e.cancelable);
 			evt.cmdId = data.key;
 			

@@ -14,6 +14,7 @@
     <classEntry path="Action.Core.Serial.FloatSerializer"/>
     <classEntry path="Action.Core.Serial.BoolSerializer"/>
     <classEntry path="Action.Core.ReceiveEvent"/>
+    <classEntry path="Action.Core.IConsole"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

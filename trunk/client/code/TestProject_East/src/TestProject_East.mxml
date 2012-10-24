@@ -3,22 +3,46 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   width="760" height="600"
-			   creationComplete="application1_creationCompleteHandler(event)">
+			   creationComplete="application1_creationCompleteHandler(event)"
+			   implements="Action.Core.IConsole">
 	<fx:Script>
 		<![CDATA[
+			import Action.Core.Command.GameCommandFactory;
+			import Action.Core.Command.IGameCommand;
 			import Action.Core.GamePlugins;
 			import Action.Core.Net.GameClient;
 			import Action.Core.ReceiveEvent;
 			import Action.Login.Commands.BackdoorLoginCommand;
 			import Action.Model.BackdoorLoginArgs;
 			
+			import avmplus.getQualifiedClassName;
+			
 			import com.adobe.serialization.json.*;
 			import com.netease.protobuf.Message;
 			
+			import flash.utils.describeType;
 			import flash.utils.getDefinitionByName;
 			
+			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			public function write(text:String):void
+			{
+				txtTestOutput.text += text;
+			}
+			
+			public function writeLine(text:String):void
+			{
+				write(text + "\n");
+			}
+			
+			public function clear():void
+			{
+				txtTestOutput.text = "";
+			}
 			
 			private var _testModule:TestModule = new TestModule();
 			
@@ -26,6 +50,8 @@
 			{
 				// TODO Auto-generated method stub
 				loadPlugins();
+				loadDropDownList();
+				initEvents();
 				resetUI();
 			}
 			
@@ -33,6 +59,25 @@
 			{
 				GamePlugins.modules = [_testModule];
 				GamePlugins.commands = [new BackdoorLoginCommand()];
+				GamePlugins.console = this;
+			}
+			
+			private function loadDropDownList():void
+			{
+				ddlSendType.dataProvider = ModelCollection.current.toArrayCollection();
+				ddlSendType.selectedIndex = 0;
+				
+				var arc:ArrayCollection = new ArrayCollection([{"id":0, "name":"<Custom>"}]);
+				for each(var cmd:IGameCommand in GameCommandFactory.current.getCommands())
+				{
+					arc.addItem({"id" : cmd.id, "name" : getQualifiedClassName(cmd)});
+				}
+				ddlInnerCmd.dataProvider = arc;
+				ddlInnerCmd.selectedIndex = 0;
+			}
+			
+			private function initEvents():void
+			{				
 				_testModule.addEventListener("onConnect", _testModule_onConnect);
 				_testModule.addEventListener("onClose", _testModule_onClose);
 				_testModule.addEventListener("onIOError", _testModule_onIOError);
@@ -51,7 +96,8 @@
 			
 			private function _testModule_onReceive(e:ReceiveEvent):void
 			{
-				txtRecvResult.text = e.cmdId + "(" + e.cmdName + ")\n{" + e.cmdArgs + "\n}";
+				lblRecvCount.text = (MyConvert.toInt(lblRecvCount.text) + 1).toString();
+				txtRecvResult.text = "[Cmd]\n" + e.cmdId + "\n" + e.cmdName + "\n\n[Args]\n" + e.cmdArgs + "\n";
 			}
 			
 			private function _testModule_onIOError(e:Event):void
@@ -61,8 +107,8 @@
 			
 			private function resetUI(connected:Boolean=false):void
 			{
-				btnSend.enabled = txtCmdId.enabled = txtSendType.enabled 
-					= txtSendArgs.enabled = txtRecvResult.enabled = connected;
+				btnSend.enabled = txtCmdId.enabled = ddlSendType.enabled = ddlSendType.enabled
+					= ddlInnerCmd.enabled = txtSendArgs.enabled = connected;
 				btnConnect.label = connected ? "断开" : "连接";
 			}
 			
@@ -75,13 +121,34 @@
 					GameClient.current.close();
 				else
 					GameClient.current.connect(txtHost.text, MyConvert.toInt(txtPort.text));
+			}		
+			
+			
+			protected function ddlInnerCmd_changeHandler(event:IndexChangeEvent):void
+			{
+				// TODO Auto-generated method stub
+				txtCmdId.text = ddlInnerCmd.selectedItem.id;			
+			}
+			
+			protected function ddlSendType_changeHandler(event:IndexChangeEvent):void
+			{
+				var model:Message = ModelCollection.current.getModel(ddlSendType.selectedItem.toString()) as Message;
+				if(model != null)
+				{
+					var text:String = "";
+					for each(var prop:String in getModelProps(model))
+						text += prop + "=" + model[prop] + "\n";
+					txtSendArgs.text = text;
+				}
 			}
 			
 			protected function btnSend_clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
+				lblSendCount.text = (MyConvert.toInt(lblSendCount.text) + 1).toString();
 				var cmdId:int = MyConvert.toInt(txtCmdId.text);
-				switch(txtSendType.text.toLowerCase())
+				var sendType:String = ddlSendType.selectedItem.toString();
+				switch(sendType.toLowerCase())
 				{
 					case "bool":
 						GameClient.current.sendBoolean(cmdId, MyConvert.toBool(txtSendArgs.text));
@@ -99,20 +166,44 @@
 						GameClient.current.sendNull(cmdId);
 						break;
 					default:
-						var model:Object = ModelCollection.current.getModel(txtSendType.text);
+						var model:Message = ModelCollection.current.getModel(sendType) as Message;
 						updateModel(model, txtSendArgs.text);
-						GameClient.current.sendMessage(cmdId, model as Message);
+						GameClient.current.sendMessage(cmdId, model);
 						break;
 				}
 			}
 			
-			private function updateModel(model:Object, args:String):void
+			protected function btnClear_clickHandler(event:MouseEvent):void
 			{
+				GamePlugins.console.clear();
+				lblSendCount.text = lblRecvCount.text = "0";
+			}
+			
+			private function getModelProps(model:Message):Array
+			{
+				var props:Array = new Array();
+				var xml:XML = describeType(model);
+				for each(var xs:XML in xml.accessor)
+				{
+					if(xs.@access == "readwrite")
+						props.push(xs.@name.toString());
+				}
+				return props;
+			}
+			
+			private function updateModel(model:Message, args:String):void
+			{
+				var props:Array = getModelProps(model);
 				for each(var item:String in args.split("\n"))
 				{
 					var p:int = item.indexOf("=");
 					if(p > -1)
-						model[item.substring(0, p)] = item.substring(p + 1);
+					{
+						var prop:String = item.substring(0, p);
+						var value:Object = item.substring(p + 1);
+						if(props.indexOf(prop) > -1)
+							model[prop] = value;
+					}
 				}
 			}
 			
@@ -121,7 +212,7 @@
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
-	<s:Panel width="760" height="600" title="Action命令测试工具" backgroundColor="#eeeeee">
+	<s:Panel width="760" height="600" backgroundColor="#eeeeee" title="Action命令测试工具">
 		<s:Label x="50" y="30" text="主机："/>
 		<s:TextInput id="txtHost" x="90" y="22" width="100" text="127.0.0.1"/>
 		<s:Label x="200" y="30" text="端口："/>
@@ -129,12 +220,25 @@
 		<s:Button id="btnConnect" x="300" y="22" label="连接" click="btnConnect_clickHandler(event)"/>
 		<s:Button id="btnSend" x="380" y="22" label="发送" click="btnSend_clickHandler(event)"/>
 		<s:Label x="25" y="60" text="命令编号："/>
-		<s:TextInput id="txtCmdId" x="90" y="52" width="600" text="1000"/>
+		<s:TextInput id="txtCmdId" x="90" y="52" width="100" text="0"/>
+		<s:Label x="200" y="60" text="内置命令："/>
+		<s:DropDownList id="ddlInnerCmd" x="270" y="52" width="420" labelField="name"
+						change="ddlInnerCmd_changeHandler(event)"/>
 		<s:Label x="25" y="90" text="发送类型："/>
-		<s:TextInput id="txtSendType" x="90" y="82" width="600" text="BackdoorLoginArgs"/>
+		<s:DropDownList id="ddlSendType" x="90" y="82" width="600"
+						change="ddlSendType_changeHandler(event)"/>
 		<s:Label x="25" y="120" text="发送参数："/>
-		<s:TextArea id="txtSendArgs" x="90" y="112" width="600" height="200" text="account=test001"/>
-		<s:Label x="25" y="330" text="返回结果："/>
-		<s:TextArea id="txtRecvResult" x="90" y="322" width="600" height="200" text=""/>
+		<s:TextArea id="txtSendArgs" x="90" y="112" width="600" height="100" text=""/>
+		<s:Label x="25" y="230" text="返回结果："/>
+		<s:TextArea id="txtRecvResult" x="90" y="222" width="600" height="100" editable="false"
+					text=""/>
+		<s:Label x="25" y="340" text="测试输出："/>
+		<s:TextArea id="txtTestOutput" x="90" y="332" width="600" height="180" editable="false"
+					text=""/>
+		<s:Button id="btnClear" x="90" y="522" label="清空" click="btnClear_clickHandler(event)"/>
+		<s:Label x="200" y="530" text="已发送："/>
+		<s:Label id="lblSendCount" x="250" y="530" text="0"/>
+		<s:Label x="300" y="530" text="已接收："/>
+		<s:Label id="lblRecvCount" x="350" y="530" text="0"/>
 	</s:Panel>
 </s:Application>

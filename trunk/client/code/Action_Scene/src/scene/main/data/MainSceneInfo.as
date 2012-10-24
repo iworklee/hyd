@@ -8,5 +8,10 @@ package scene.main.data
 		{
 			super();
 		}
+		
+		public function initMainSceneInfo(sceneId:int):void
+		{
+			super.initSceneInfo(sceneId);
+		}
 	}
 }

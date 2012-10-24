@@ -11,13 +11,15 @@ package
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	
+	import game.GameCoreManager;
+	
 	import res.ResLoaderManager;
 	import res.data.ConfigDataManager;
 	import res.data.animation.enum.ActionTypeEnum;
 	import res.event.ConfigDataCompleteEvent;
 	import res.vo.ResXmlVO;
 	
-	[SWF(backgroundColor="#000000", frameRate="30", width="800", height="600", pageTitle="ActionTemp")]
+	[SWF(backgroundColor="#000000", frameRate="30", width="960", height="720", pageTitle="ActionTemp")]
 	public class Action_Temp_Main extends Sprite
 	{
 		public function Action_Temp_Main()
@@ -30,14 +32,9 @@ package
 
 		private function configDataComplete(event:ConfigDataCompleteEvent):void
 		{
-			this.addEventListener(Event.ENTER_FRAME, enterFrameProcess);
-			
-			
-		}
-
-		private function enterFrameProcess(event:Event):void
-		{
-			
+			GameCoreManager.getInstance().initGameStage(this);
+			//test code
+			GameCoreManager.getInstance().initGameScene();
 		}
 	}
 }

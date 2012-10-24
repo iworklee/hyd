@@ -6,6 +6,8 @@ package animation.vo
 	{
 		public function AnimationVO()
 		{
+			this.mouseEnabled = false;
+			this.mouseChildren = false;
 		}
 	}
 }

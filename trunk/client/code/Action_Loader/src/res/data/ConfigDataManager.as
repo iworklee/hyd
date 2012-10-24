@@ -8,12 +8,14 @@ package res.data
 	import res.data.animation.action.ActionUnitConfig;
 	import res.data.animation.bitmap.AnimationConfigVO;
 	import res.data.map.BattleMapConfig;
+	import res.data.map.SceneMapConfig;
 	import res.data.map.XmlBattleMapDataModule;
+	import res.data.map.XmlSceneMapDataModule;
 	import res.data.res.ResUrlVO;
 	import res.data.res.XmlResDataModule;
 	import res.data.unit.UnitConfigVO;
 	import res.data.unit.XmlUnitDataModule;
-	import res.enum.ResTypeEnum;
+	import res.enum.LoaderTypeEnum;
 	import res.event.ConfigDataCompleteEvent;
 	import res.event.ResXmlLoadEvent;
 	import res.vo.ResXmlVO;
@@ -39,6 +41,7 @@ package res.data
 				ConfigUrlEnum.ANIMATION_CONFIG,
 				ConfigUrlEnum.ACTION_CONFIG,
 				ConfigUrlEnum.UNIT_CONFIG,
+				ConfigUrlEnum.SCENE_MAP_CONFIG,
 				ConfigUrlEnum.BATTLE_MAP_CONFIG
 			];
 		
@@ -85,7 +88,7 @@ package res.data
 					var configUrlVO:ConfigUrlVO = this._configUrlList[i] as ConfigUrlVO;
 					switch(configUrlVO.type)
 					{
-						case ResTypeEnum.RES_TYPE_XML:
+						case LoaderTypeEnum.LOADER_TYPE_XML:
 							ResLoaderManager.getInstance().loadXmlByURL(configUrlVO.url, false, null, configUrlVO);
 							break;
 						
@@ -117,6 +120,10 @@ package res.data
 					
 					case ConfigUrlEnum.UNIT_CONFIG:
 						XmlUnitDataModule.getInstance().initModule(loadedResXmlVO.xmlData);
+						break;
+					
+					case ConfigUrlEnum.SCENE_MAP_CONFIG:
+						XmlSceneMapDataModule.getInstance().initModule(loadedResXmlVO.xmlData);
 						break;
 					
 					case ConfigUrlEnum.BATTLE_MAP_CONFIG:
@@ -168,6 +175,11 @@ package res.data
 		public function getUnitConfigVOByUnitId(unitId:int):UnitConfigVO
 		{
 			return XmlUnitDataModule.getInstance().getUnitConfigVOByUnitId(unitId);
+		}
+		
+		public function getSceneMapConfigById(mapId:int):SceneMapConfig
+		{
+			return XmlSceneMapDataModule.getInstance().getSceneMapConfigById(mapId);
 		}
 		
 		public function getBattleMapConfigById(mapId:int):BattleMapConfig

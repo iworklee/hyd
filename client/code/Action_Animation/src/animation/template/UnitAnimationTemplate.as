@@ -8,7 +8,7 @@ package animation.template
 	import res.data.ConfigDataManager;
 	import res.data.animation.action.ActionUnitConfig;
 	import res.data.animation.bitmap.PartConfigVO;
-	import res.data.animation.enum.AnimationTypeEnum;
+	import res.enum.ResTypeEnum;
 	import res.data.res.ResUrlVO;
 	import res.vo.ResSwfVO;
 
@@ -63,7 +63,7 @@ package animation.template
 		{
 			if(this._unitResId > 0)
 			{
-				var resUrlVO:ResUrlVO = ConfigDataManager.getInstance().getResUrlVOByResClass(AnimationTypeEnum.ANIMATION_TYPE_UNIT);
+				var resUrlVO:ResUrlVO = ConfigDataManager.getInstance().getResUrlVOByResClass(ResTypeEnum.RES_TYPE_UNIT);
 				if(resUrlVO)
 				{
 					var unitBitmapResURL:String = resUrlVO.url + this._unitResId.toString() + "." + resUrlVO.type;

@@ -2,8 +2,9 @@ package res.enum
 {
 	public class ResTypeEnum
 	{
-		public static const RES_TYPE_BITMAP:String = "bitmap";
-		public static const RES_TYPE_SWF:String = "swf";
-		public static const RES_TYPE_XML:String = "xml";
+		public static const RES_TYPE_UNIT:String = "unit";
+		public static const RES_TYPE_EFFECT:String = "effect";
+		public static const RES_TYPE_SCENEMAP:String = "sceneMap";
+		public static const RES_TYPE_BATTLEMAP:String = "battleMap";
 	}
 }

@@ -65,7 +65,8 @@ namespace Action.Engine
 
         public void RemovePlayer(GamePlayer player)
         {
-            _onlinePlayers.TryRemove(player.Name, out player);
+            if (player.Name != null)
+                _onlinePlayers.TryRemove(player.Name, out player);
         }
 
         public IEnumerable<GamePlayer> GetOnlinePlayers()

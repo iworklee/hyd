@@ -7,6 +7,7 @@ package Action.Model {
 	import flash.utils.IDataOutput;
 	import flash.utils.IExternalizable;
 	import flash.errors.IOError;
+	import Action.Model.BattleActionType;
 	import Action.Model.BattleEffect;
 	// @@protoc_insertion_point(imports)
 
@@ -42,51 +43,51 @@ package Action.Model {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("Action.Model.BattleAction.Id", "id", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("Action.Model.BattleAction.Type", "type", (2 << 3) | com.netease.protobuf.WireType.VARINT, Action.Model.BattleActionType);
 
-		private var Id$field:int;
+		private var Type$field:int;
 
-		public function clearId():void {
+		public function clearType():void {
 			hasField$0 &= 0xfffffffd;
-			Id$field = new int();
+			Type$field = new int();
 		}
 
-		public function get hasId():Boolean {
+		public function get hasType():Boolean {
 			return (hasField$0 & 0x2) != 0;
 		}
 
-		public function set id(value:int):void {
+		public function set type(value:int):void {
 			hasField$0 |= 0x2;
-			Id$field = value;
+			Type$field = value;
 		}
 
-		public function get id():int {
-			return Id$field;
+		public function get type():int {
+			return Type$field;
 		}
 
 		/**
 		 *  @private
 		 */
-		public static const SKILLID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("Action.Model.BattleAction.SkillId", "skillId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ARGS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("Action.Model.BattleAction.Args", "args", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
-		private var SkillId$field:int;
+		private var Args$field:int;
 
-		public function clearSkillId():void {
+		public function clearArgs():void {
 			hasField$0 &= 0xfffffffb;
-			SkillId$field = new int();
+			Args$field = new int();
 		}
 
-		public function get hasSkillId():Boolean {
+		public function get hasArgs():Boolean {
 			return (hasField$0 & 0x4) != 0;
 		}
 
-		public function set skillId(value:int):void {
+		public function set args(value:int):void {
 			hasField$0 |= 0x4;
-			SkillId$field = value;
+			Args$field = value;
 		}
 
-		public function get skillId():int {
-			return SkillId$field;
+		public function get args():int {
+			return Args$field;
 		}
 
 		/**
@@ -105,13 +106,13 @@ package Action.Model {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
 				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, UnitSID$field);
 			}
-			if (hasId) {
+			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, Id$field);
+				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, Type$field);
 			}
-			if (hasSkillId) {
+			if (hasArgs) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, SkillId$field);
+				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, Args$field);
 			}
 			for (var effects$index:uint = 0; effects$index < this.effects.length; ++effects$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
@@ -127,8 +128,8 @@ package Action.Model {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var UnitSID$count:uint = 0;
-			var Id$count:uint = 0;
-			var SkillId$count:uint = 0;
+			var Type$count:uint = 0;
+			var Args$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
 				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 				switch (tag >> 3) {
@@ -140,18 +141,18 @@ package Action.Model {
 					this.unitSID = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
 					break;
 				case 2:
-					if (Id$count != 0) {
-						throw new flash.errors.IOError('Bad data format: BattleAction.id cannot be set twice.');
+					if (Type$count != 0) {
+						throw new flash.errors.IOError('Bad data format: BattleAction.type cannot be set twice.');
 					}
-					++Id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					++Type$count;
+					this.type = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
 					break;
 				case 3:
-					if (SkillId$count != 0) {
-						throw new flash.errors.IOError('Bad data format: BattleAction.skillId cannot be set twice.');
+					if (Args$count != 0) {
+						throw new flash.errors.IOError('Bad data format: BattleAction.args cannot be set twice.');
 					}
-					++SkillId$count;
-					this.skillId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					++Args$count;
+					this.args = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
 					break;
 				case 4:
 					this.effects.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new Action.Model.BattleEffect()));

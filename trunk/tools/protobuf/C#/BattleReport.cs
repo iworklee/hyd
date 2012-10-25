@@ -140,22 +140,22 @@ namespace Action.Model
       set { _UnitSID = value; }
     }
 
-    private int _Id = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int Id
+    private Action.Model.BattleActionType _Type = Action.Model.BattleActionType.Cast;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(Action.Model.BattleActionType.Cast)]
+    public Action.Model.BattleActionType Type
     {
-      get { return _Id; }
-      set { _Id = value; }
+      get { return _Type; }
+      set { _Type = value; }
     }
 
-    private int _SkillId = default(int);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"SkillId", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private int _Args = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"Args", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
-    public int SkillId
+    public int Args
     {
-      get { return _SkillId; }
-      set { _SkillId = value; }
+      get { return _Args; }
+      set { _Args = value; }
     }
     private readonly global::System.Collections.Generic.List<Action.Model.BattleEffect> _Effects = new global::System.Collections.Generic.List<Action.Model.BattleEffect>();
     [global::ProtoBuf.ProtoMember(4, Name=@"Effects", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -184,8 +184,17 @@ namespace Action.Model
       set { _UnitSID = value; }
     }
 
+    private Action.Model.BattleEffectType _Type = Action.Model.BattleEffectType.Normal;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(Action.Model.BattleEffectType.Normal)]
+    public Action.Model.BattleEffectType Type
+    {
+      get { return _Type; }
+      set { _Type = value; }
+    }
+
     private int _PlusHP = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"PlusHP", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"PlusHP", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int PlusHP
     {
@@ -194,7 +203,7 @@ namespace Action.Model
     }
 
     private int _PlusMP = default(int);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"PlusMP", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"PlusMP", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int PlusMP
     {
@@ -203,25 +212,44 @@ namespace Action.Model
     }
 
     private int _BuffId = default(int);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"BuffId", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"BuffId", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int BuffId
     {
       get { return _BuffId; }
       set { _BuffId = value; }
     }
-
-    private int _Result = default(int);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"Result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int Result
-    {
-      get { return _Result; }
-      set { _Result = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"BattleActionType")]
+    public enum BattleActionType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Cast", Value=1)]
+      Cast = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Move", Value=2)]
+      Move = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"BattleEffectType")]
+    public enum BattleEffectType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Miss", Value=0)]
+      Miss = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Block", Value=1)]
+      Block = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Normal", Value=2)]
+      Normal = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Heavy", Value=3)]
+      Heavy = 3
+    }
   
 }

@@ -23,3 +23,5 @@ for %%a in (protos\*.proto) do protoc --plugin=protoc-gen-as3=protoc-gen-as3\pro
 FOR /f "tokens=1 delims=." %%F IN ('dir /b protos\*.proto') DO (
 "protobuf-net\protogen" "-i:protos\%%F.proto" "-o:C#\%%F.cs"
 )
+
+pause

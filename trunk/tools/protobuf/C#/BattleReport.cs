@@ -25,24 +25,20 @@ namespace Action.Model
       get { return _UID; }
       set { _UID = value; }
     }
-
-    private Action.Model.BattleUnitCollection _Units = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Units", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public Action.Model.BattleUnitCollection Units
+    private readonly global::System.Collections.Generic.List<Action.Model.BattleUnit> _Units = new global::System.Collections.Generic.List<Action.Model.BattleUnit>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"Units", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Action.Model.BattleUnit> Units
     {
       get { return _Units; }
-      set { _Units = value; }
     }
-
-    private Action.Model.BattleBoutCollection _Items = null;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"Items", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public Action.Model.BattleBoutCollection Items
+  
+    private readonly global::System.Collections.Generic.List<Action.Model.BattleBout> _Bouts = new global::System.Collections.Generic.List<Action.Model.BattleBout>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"Bouts", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Action.Model.BattleBout> Bouts
     {
-      get { return _Items; }
-      set { _Items = value; }
+      get { return _Bouts; }
     }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -103,23 +99,6 @@ namespace Action.Model
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BattleUnitCollection")]
-  public partial class BattleUnitCollection : global::ProtoBuf.IExtensible
-  {
-    public BattleUnitCollection() {}
-    
-    private readonly global::System.Collections.Generic.List<Action.Model.BattleUnit> _Items = new global::System.Collections.Generic.List<Action.Model.BattleUnit>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"Items", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Action.Model.BattleUnit> Items
-    {
-      get { return _Items; }
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BattleBout")]
   public partial class BattleBout : global::ProtoBuf.IExtensible
   {
@@ -134,30 +113,11 @@ namespace Action.Model
       get { return _SID; }
       set { _SID = value; }
     }
-
-    private Action.Model.BattleActionCollection _Actions = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Actions", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public Action.Model.BattleActionCollection Actions
+    private readonly global::System.Collections.Generic.List<Action.Model.BattleAction> _Actions = new global::System.Collections.Generic.List<Action.Model.BattleAction>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"Actions", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Action.Model.BattleAction> Actions
     {
       get { return _Actions; }
-      set { _Actions = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BattleBoutCollection")]
-  public partial class BattleBoutCollection : global::ProtoBuf.IExtensible
-  {
-    public BattleBoutCollection() {}
-    
-    private readonly global::System.Collections.Generic.List<Action.Model.BattleBout> _Items = new global::System.Collections.Generic.List<Action.Model.BattleBout>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"Items", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Action.Model.BattleBout> Items
-    {
-      get { return _Items; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -197,21 +157,11 @@ namespace Action.Model
       get { return _SkillId; }
       set { _SkillId = value; }
     }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BattleActionCollection")]
-  public partial class BattleActionCollection : global::ProtoBuf.IExtensible
-  {
-    public BattleActionCollection() {}
-    
-    private readonly global::System.Collections.Generic.List<Action.Model.BattleAction> _Items = new global::System.Collections.Generic.List<Action.Model.BattleAction>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"Items", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Action.Model.BattleAction> Items
+    private readonly global::System.Collections.Generic.List<Action.Model.BattleEffect> _Effects = new global::System.Collections.Generic.List<Action.Model.BattleEffect>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"Effects", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Action.Model.BattleEffect> Effects
     {
-      get { return _Items; }
+      get { return _Effects; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -235,7 +185,7 @@ namespace Action.Model
     }
 
     private int _PlusHP = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"PlusHP", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"PlusHP", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int PlusHP
     {
@@ -244,7 +194,7 @@ namespace Action.Model
     }
 
     private int _PlusMP = default(int);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"PlusMP", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"PlusMP", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
     [global::System.ComponentModel.DefaultValue(default(int))]
     public int PlusMP
     {
@@ -260,23 +210,15 @@ namespace Action.Model
       get { return _BuffId; }
       set { _BuffId = value; }
     }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BattleEffectCollection")]
-  public partial class BattleEffectCollection : global::ProtoBuf.IExtensible
-  {
-    public BattleEffectCollection() {}
-    
-    private readonly global::System.Collections.Generic.List<Action.Model.BattleEffect> _Items = new global::System.Collections.Generic.List<Action.Model.BattleEffect>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"Items", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Action.Model.BattleEffect> Items
+
+    private int _Result = default(int);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"Result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Result
     {
-      get { return _Items; }
+      get { return _Result; }
+      set { _Result = value; }
     }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

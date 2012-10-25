@@ -6,8 +6,8 @@ option (protobuf_net.namespace) = "Action.Model";
 
 message BattleReport {
   optional string UID = 1;				//战报唯一号
-  optional BattleUnitCollection Units = 2;		//战斗开始前所有作战单位的数据
-  optional BattleBoutCollection Items = 3;		//战斗开始后每一回合的数据
+  repeated BattleUnit Units = 2;			//战斗开始前所有作战单位的数据
+  repeated BattleBout Bouts = 3;			//战斗开始后每一回合的数据
 }
 
 message BattleUnit {
@@ -18,37 +18,22 @@ message BattleUnit {
   optional int32 MP = 5;				//作战单位的士气
 }
 
-message BattleUnitCollection {
-  repeated BattleUnit Items = 1;
-}
-
 message BattleBout {
   optional int32 SID = 1;				//回合序号，1－50
-  optional BattleActionCollection Actions = 2;		//本回合内每个作战单位的行为	
-}
-
-message BattleBoutCollection {				
-  repeated BattleBout Items = 1;
+  repeated BattleAction Actions = 2;			//本回合内每个作战单位的行为	
 }
 
 message BattleAction {
   optional int32 UnitSID = 1;				//作战单位唯一号
   optional int32 Id = 2;				//行为编号
   optional int32 SkillId = 3;				//技能编号，普攻为0
-}
-
-message BattleActionCollection {
-  repeated BattleAction Items = 1;
+  repeated BattleEffect Effects = 4;			//行为产生的效果
 }
 
 message BattleEffect {
-  optional int32 UnitSID = 1;				//效果作用的作战单位唯一号
-  optional int32 PlusHP = 2;				//HP增加值
-  optional int32 PlusMP = 3;				//MP增加值
+  optional int32 UnitSID = 1;		 		//效果作用的作战单位唯一号
+  optional sint32 PlusHP = 2;				//HP增加值
+  optional sint32 PlusMP = 3;				//MP增加值
   optional int32 BuffId = 4;				//Buff编号
-}
-
-message BattleEffectCollection
-{
-  repeated BattleEffect Items = 1;
+  optional int32 Result = 5;				//效果结果（闪避、格挡、暴击、正常）
 }

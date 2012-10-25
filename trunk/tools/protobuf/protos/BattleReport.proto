@@ -11,11 +11,11 @@ message BattleReport {
 }
 
 message BattleUnit {
-  optional int32 SID = 1;					//作战单位唯一号
-  optional int32 Id = 2;					//作战单位编号，例如：赵云的编号为395
-  optional int32 Pos = 3;					//作战单位所处的位置，战场1－50，营地101－102
-  optional int32 HP = 4;					//作战单位的生命或耐久
-  optional int32 MP = 5;					//作战单位的士气
+  optional int32 SID = 1;				//作战单位唯一号
+  optional int32 Id = 2;				//作战单位编号，例如：赵云的编号为395
+  optional int32 Pos = 3;				//作战单位所处的位置，战场1－50，营地101－102
+  optional int32 HP = 4;				//作战单位的生命或耐久
+  optional int32 MP = 5;				//作战单位的士气
 }
 
 message BattleUnitCollection {
@@ -23,7 +23,7 @@ message BattleUnitCollection {
 }
 
 message BattleBout {
-  optional int32 SID = 1;					//回合序号，1－50
+  optional int32 SID = 1;				//回合序号，1－50
   optional BattleActionCollection Actions = 2;		//本回合内每个作战单位的行为	
 }
 
@@ -33,7 +33,7 @@ message BattleBoutCollection {
 
 message BattleAction {
   optional int32 UnitSID = 1;				//作战单位唯一号
-  optional int32 Id = 2;					//行为编号
+  optional int32 Id = 2;				//行为编号
   optional int32 SkillId = 3;				//技能编号，普攻为0
 }
 

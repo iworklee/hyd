@@ -91,10 +91,6 @@
       <Project>{FCB49407-1470-44C8-8D9B-AABA921FF088}</Project>
       <Name>Action.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Action.Test\Action.Test.csproj">
-      <Project>{68BE7386-9C0B-48B8-A048-7A1CAED5BBCB}</Project>
-      <Name>Action.Test</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

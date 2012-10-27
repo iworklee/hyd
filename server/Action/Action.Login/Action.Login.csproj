@@ -37,8 +37,9 @@
     <Reference Include="MongoDB.Driver">
       <HintPath>..\Reference\MongoDB\CSharpDriver-1.6.0.4624\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>..\Reference\MonoGame\2.5.1\MonoGame.Framework.dll</HintPath>
+    <Reference Include="MonoGame.Framework.Windows, Version=2.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\MonoGame\2.5.1\MonoGame.Framework.Windows.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net, Version=2.0.0.594, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

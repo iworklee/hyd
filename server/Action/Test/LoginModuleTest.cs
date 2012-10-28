@@ -24,10 +24,16 @@ namespace Test
             for (int i = 0; i < 1000; i++)
                 playerNames.Add("test" + i);
 
-            //var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
-            //var mongoDB = MongoServer.Create(connectionString).GetDatabase("Game");
-            //var table = mongoDB.GetCollection<Player>("Player");
-            //table.InsertBatch(playerNames.Select(p => new Player { Account = p, Name = p }));
+            try
+            {
+                var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
+                var mongoDB = MongoServer.Create(connectionString).GetDatabase("Game");
+                var table = mongoDB.GetCollection<Player>("Player");
+                table.InsertBatch(playerNames.Select(p => new Player { Account = p, Name = p }));
+            }
+            catch (Exception)
+            {
+            }
         }
         [ClassCleanup()]
         //[AssemblyCleanup]

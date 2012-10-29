@@ -55,7 +55,10 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Mongodb\Army.cs" />
     <Compile Include="Mongodb\BsonClass.cs" />
+    <Compile Include="Mongodb\Hero.cs" />
+    <Compile Include="Protobuf\BattleReport.cs" />
     <Compile Include="StructBsonSerializer.cs" />
     <Compile Include="CommandEnum.cs" />
     <Compile Include="CommonEnum.cs" />

@@ -24,5 +24,8 @@ namespace Action.Model
 
         //Chat
         TalkToWorld = 1300,
+
+        //War
+        Embattle = 1300,
     }
 }

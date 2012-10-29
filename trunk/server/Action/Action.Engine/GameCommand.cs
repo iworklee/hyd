@@ -85,6 +85,7 @@ namespace Action.Engine
             T args;
             try
             {
+                // UNDONE 对象池取args实例
                 args = GameCommandDataDeserializer.Deserialize<T>(commandInfo.Data);
             }
             catch (Exception ex)
@@ -96,6 +97,8 @@ namespace Action.Engine
             }
             if (Ready(session, args))
                 Run(session, args);
+
+            // UNDONE 对象池回收args实例
         }
 
         protected virtual bool Ready(GameSession session, T args)

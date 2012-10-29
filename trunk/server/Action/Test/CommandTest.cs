@@ -4,13 +4,14 @@ using System;
 using System.Net.Sockets;
 using System.IO;
 using System.Text;
+using System.Diagnostics;
 
 namespace Test
 {
     [TestClass()]
     public class CommandTest : TestBase
     {
-        private const int COUNT = 1000000;
+        private const int COUNT = 100000;
 
         [TestMethod()]
         public void TestCommandTest()
@@ -25,13 +26,27 @@ namespace Test
         [TestMethod()]
         public void TestCommandLongTest()
         {
+            byte[] send = new byte[8];
+            Buffer.BlockCopy(BitConverter.GetBytes(979), 0, send, 0, 4);// cmdId
+            Buffer.BlockCopy(BitConverter.GetBytes(0), 0, send, 4, 4);// package length
+
+            byte[] receive = new byte[8];
+
             for (int i = 0; i < COUNT; i++)
             {
-                writer.Write(979);    // cmdId
-                writer.Write(0);        // package length
+                //writer.Write(979);    // cmdId
+                //writer.Write(0);        // package length
+                //stream.BeginWrite(send, 0, 8, null, null);
+                stream.Write(send, 0, 8);
 
-                Assert.AreEqual(979, reader.ReadInt32());
-                Assert.AreEqual(0, reader.ReadInt32());
+                //Assert.AreEqual(979, reader.ReadInt32());
+                //Assert.AreEqual(0, reader.ReadInt32());
+                stream.Read(receive, 0, 8);
+                //Assert.AreEqual(979, BitConverter.ToInt32(receive, 0));
+                //Assert.AreEqual(0, BitConverter.ToInt32(receive, 4));
+
+                //Debug.WriteLine("Round : {0}", i);
+                //Console.WriteLine("Round : ", i);
             }
         }
 
@@ -91,14 +106,22 @@ namespace Test
         [TestMethod()]
         public void TestQueryMongoDBCommandTest()
         {
+            byte[] send = new byte[1024];
+            Buffer.BlockCopy(BitConverter.GetBytes(983), 0, send, 0, 4);// cmdId
+
+            byte[] receive = new byte[1024];
+
             for (int i = 0; i < COUNT; i++)
             {
                 var name = "test" + rng.Next(1, 1000);
 
                 var bytes = Encoding.UTF8.GetBytes(name);
-                writer.Write(983);    // cmdId
-                writer.Write(bytes.Length);        // package length
-                writer.Write(bytes);
+                //writer.Write(983);    // cmdId
+                //writer.Write(bytes.Length);        // package length
+                //writer.Write(bytes);
+                Buffer.BlockCopy(BitConverter.GetBytes(bytes.Length), 0, send, 4, 4);// package length
+                Buffer.BlockCopy(bytes, 0, send, 8, bytes.Length);
+                stream.BeginWrite(send, 0, 8 + bytes.Length, null, null);
 
                 var cmdId = reader.ReadInt32();
                 Assert.AreEqual(983, cmdId);
@@ -107,6 +130,23 @@ namespace Test
                 if (length != 0)
                 {
                     var text = Encoding.UTF8.GetString(reader.ReadBytes(bytes.Length));
+                }
+                continue;
+
+                stream.Read(receive, 0, 8);
+                //var cmdId = BitConverter.ToInt32(receive, 0);
+                //Assert.AreEqual(983, cmdId);
+                length = BitConverter.ToInt32(receive, 4);
+                if (length != 0)
+                {
+                    try
+                    {
+                        stream.Read(receive, 8, length);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
                 }
             }
         }

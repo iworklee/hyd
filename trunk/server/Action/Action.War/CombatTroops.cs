@@ -7,5 +7,6 @@ namespace Action.War
 {
     public class CombatTroops
     {
+        public List<CombatUnit> Units { get; set; }
     }
 }

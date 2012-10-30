@@ -121,33 +121,34 @@ namespace Test
                 //writer.Write(bytes);
                 Buffer.BlockCopy(BitConverter.GetBytes(bytes.Length), 0, send, 4, 4);// package length
                 Buffer.BlockCopy(bytes, 0, send, 8, bytes.Length);
-                stream.BeginWrite(send, 0, 8 + bytes.Length, null, null);
+                //stream.BeginWrite(send, 0, 8 + bytes.Length, null, null);
+                stream.Write(send, 0, 8 + bytes.Length);
 
                 var cmdId = reader.ReadInt32();
-                Assert.AreEqual(983, cmdId);
+                //Assert.AreEqual(983, cmdId);
                 var length = reader.ReadInt32();
-                Assert.AreNotEqual(0, length);
+                //Assert.AreNotEqual(0, length);
                 if (length != 0)
                 {
-                    var text = Encoding.UTF8.GetString(reader.ReadBytes(bytes.Length));
+                    reader.ReadBytes(bytes.Length);
+                    //var text = Encoding.UTF8.GetString(reader.ReadBytes(bytes.Length));
                 }
-                continue;
 
-                stream.Read(receive, 0, 8);
+                //stream.Read(receive, 0, 8);
                 //var cmdId = BitConverter.ToInt32(receive, 0);
                 //Assert.AreEqual(983, cmdId);
-                length = BitConverter.ToInt32(receive, 4);
-                if (length != 0)
-                {
-                    try
-                    {
-                        stream.Read(receive, 8, length);
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-                }
+                //length = BitConverter.ToInt32(receive, 4);
+                //if (length != 0)
+                //{
+                //    try
+                //    {
+                //        stream.Read(receive, 8, length);
+                //    }
+                //    catch (Exception)
+                //    {
+                //        throw;
+                //    }
+                //}
             }
         }
     }

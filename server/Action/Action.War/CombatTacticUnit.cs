@@ -10,6 +10,18 @@ namespace Action.War
     /// </summary>
     public class CombatTacticUnit : CombatUnit
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Charge { get; set; }
 
+        /// <summary>
+        /// 可以释放技能
+        /// </summary>
+        /// <returns></returns>
+        public override bool SkillReady()
+        {
+            return true;
+        }
     }
 }

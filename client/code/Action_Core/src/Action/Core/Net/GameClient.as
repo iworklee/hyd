@@ -5,6 +5,8 @@ package Action.Core.Net
 	import Action.Core.GamePlayer;
 	import Action.Core.Module.GameModuleFactory;
 	import Action.Core.Module.IGameModule;
+	import Action.Core.Page.IGameFrame;
+	import Action.Core.Page.IGamePage;
 	import Action.Core.ReceiveEvent;
 	import Action.Core.Serial.IGameDataSerializer;
 	
@@ -126,6 +128,17 @@ package Action.Core.Net
 		public function bind(player:GamePlayer):void
 		{
 			_player = player;
+		}
+		
+		private var _frame:IGameFrame = null;
+		public function get frame():IGameFrame
+		{
+			return _frame;
+		}
+		
+		public function set frame(frame:IGameFrame):void
+		{
+			_frame = frame;
 		}
 		
 		public function sendNull(cmdId:int):void

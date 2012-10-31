@@ -15,6 +15,9 @@
     <classEntry path="Action.Core.Serial.BoolSerializer"/>
     <classEntry path="Action.Core.ReceiveEvent"/>
     <classEntry path="Action.Core.IConsole"/>
+    <classEntry path="Action.Core.Page.IGamePage"/>
+    <classEntry path="Action.Core.Page.IGameFrame"/>
+    <classEntry path="Action.Core.Page.IGameDialog"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

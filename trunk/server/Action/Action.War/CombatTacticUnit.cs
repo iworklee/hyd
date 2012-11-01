@@ -10,8 +10,10 @@ namespace Action.War
     /// </summary>
     public class CombatTacticUnit : CombatUnit
     {
+        const int MAX_CHARGE = 100;
+
         /// <summary>
-        /// 
+        /// 气势
         /// </summary>
         public int Charge { get; set; }
 
@@ -21,7 +23,7 @@ namespace Action.War
         /// <returns></returns>
         public override bool SkillReady()
         {
-            return true;
+            return Charge > 100;
         }
     }
 }

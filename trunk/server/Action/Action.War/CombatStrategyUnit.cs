@@ -22,7 +22,7 @@ namespace Action.War
         public override bool SkillReady()
         {
             var rng = new Random();
-            return true;
+            return rng.NextDouble() < SkillChance;
         }
     }
 }

@@ -18,6 +18,9 @@
     <classEntry path="Action.Core.Page.IGamePage"/>
     <classEntry path="Action.Core.Page.IGameFrame"/>
     <classEntry path="Action.Core.Page.IGameDialog"/>
+    <classEntry path="Action.Core.Flow.Workflow"/>
+    <classEntry path="Action.Core.Flow.IActivity"/>
+    <classEntry path="Action.Core.Flow.ActivityBase"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

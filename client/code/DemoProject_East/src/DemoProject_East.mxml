@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" implements="Action.Core.Page.IGameFrame" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="760" height="600"
+			   backgroundColor="#00aabb" creationComplete="application1_creationCompleteHandler(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import Action.Core.Page.IGameDialog;
+			import Action.Core.Page.IGamePage;
+			import Action.Demo.UI.pgBattle;
+			
+			import mx.controls.Alert;
+			import mx.core.IVisualElement;
+			import mx.events.FlexEvent;
+			
+			private var _currentPage:IGamePage;
+			
+			public function get currentPage():IGamePage
+			{
+				return _currentPage;
+			}
+			
+			public function changePage(page:IGamePage):void
+			{
+				if(_currentPage != null)
+				{
+					_currentPage.onUnload();
+					this.removeElement(_currentPage as IVisualElement);
+				}
+				_currentPage = page;
+				if(_currentPage != null)
+				{
+					this.addElement(_currentPage as IVisualElement);
+					_currentPage.onLoad();
+				}
+			}
+			
+			public function showDialog(page:IGameDialog):void
+			{
+				
+			}
+			
+			public function alert(text:String):void
+			{
+				Alert.show(text);
+			}
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				changePage(new pgBattle());
+			}
+			
+		]]>
+	</fx:Script>
+</s:Application>

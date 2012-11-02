@@ -12,6 +12,8 @@
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
       <libraryPathEntry kind="3" linkType="1" path="/Action_Core/bin/Action_Core.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/Action_Resource/bin/Action_Resource.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Action_Display/bin/Action_Display.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Action_War/bin/Action_War.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

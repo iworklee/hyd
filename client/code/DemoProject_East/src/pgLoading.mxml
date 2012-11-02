@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" implements="Action.Core.Page.IGamePage"
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="760" height="600"
+				   backgroundImage="@Embed(source='assets/loading.jpg')">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			public function onLoad():void
+			{
+				
+			}
+			
+			public function onUnload():void
+			{
+				
+			}
+		]]>
+	</fx:Script>
+	<s:Label x="150" y="450" color="#ffff00" fontFamily="微软雅黑" fontSize="48" fontWeight="bold"
+			 text="正在加载，请稍侯……">
+		
+	</s:Label>
+</s:BorderContainer>

@@ -4,6 +4,7 @@
     <classEntry path="Action.Display.Decorator.IDisplayDecorator"/>
     <classEntry path="Action.Display.Decorator.DisplayDecoratorBuilder"/>
     <classEntry path="Action.Display.Decorator.CommonDisplayDecorator"/>
+    <classEntry path="Action.Display.Drawing.BitmapHelper"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

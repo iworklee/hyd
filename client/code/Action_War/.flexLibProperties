@@ -2,10 +2,17 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="Action.War.WarModule"/>
-    <classEntry path="Action.War.BattleReportFactory"/>
+    <classEntry path="Action.War.BattleReportProvider"/>
     <classEntry path="Action.War.Commands.PlayBattleReportCommand"/>
-    <classEntry path="Action.War.BattleUnitManager"/>
+    <classEntry path="Action.War.Manager.BattleUnitManager"/>
     <classEntry path="Action.War.Flow.LoadBattleUnitActivity"/>
+    <classEntry path="Action.War.Manager.BattleReportManager"/>
+    <classEntry path="Action.War.BattleResourceEnum"/>
+    <classEntry path="Action.War.Manager.BattleResourceManager"/>
+    <classEntry path="Action.War.Strategy.IBattleResourceStrategy"/>
+    <classEntry path="Action.War.Strategy.BattleResourceStrategyFactory"/>
+    <classEntry path="Action.War.Strategy.AttackResourceStrategy"/>
+    <classEntry path="Action.War.Strategy.DefendResourceStrategy"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

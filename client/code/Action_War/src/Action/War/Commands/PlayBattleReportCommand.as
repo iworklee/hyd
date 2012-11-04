@@ -1,6 +1,7 @@
 package Action.War.Commands
 {
 	import Action.Core.Command.IGameCommand;
+	import Action.Core.Flow.IActivity;
 	import Action.Core.Flow.Workflow;
 	import Action.Core.Net.GameClient;
 	import Action.Core.Page.IGameFrame;
@@ -10,7 +11,8 @@ package Action.War.Commands
 	import Action.Model.BattleUnit;
 	import Action.Resource.Flow.LoadImageActivity;
 	import Action.Resource.ResourceManager;
-	import Action.War.BattleUnitManager;
+	import Action.War.Manager.BattleReportManager;
+	import Action.War.Manager.BattleUnitManager;
 	import Action.War.UI.pgBattle;
 	import Action.War.WarModule;
 	
@@ -45,16 +47,10 @@ package Action.War.Commands
 			frame.changePage(frame.loadingPage);
 			
 			//准备要加载的资源
+			var reportManager:BattleReportManager = BattleReportManager.getInstance(report.uID, report);
 			var loadings:Array = [new LoadImageActivity(WarModule.BgUrl)];
-			for each(var bu:BattleUnit in report.units)
-			{
-				if(ResourceManager.BUMSection.get(bu.id.toString()) == null)
-				{
-					var bum:BattleUnitManager = new BattleUnitManager(bu);
-					ResourceManager.BUMSection.set(bu.id.toString(), bum);
-					loadings.push(bum.createLoadingActivitiy());
-				}
-			}
+			for each(var act:IActivity in reportManager.createLoadingActivities())
+				loadings.push(act);
 			
 			//加载资源
 			var workflow:Workflow = Workflow.create(loadings);

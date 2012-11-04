@@ -19,6 +19,7 @@ package Action.Core.Serial
 		
 		public function MessageSerializer()
 		{
+			
 		}
 		
 		public function deserialize(buffer:ByteArray):Object

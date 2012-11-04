@@ -9,6 +9,5 @@ package Action.Core
 		public static var console:IConsole;
 		public static var modules:Array;
 		public static var commands:Array;
-		public static var pages:Array;
 	}
 }

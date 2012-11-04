@@ -33,8 +33,8 @@ package Action.Core.Flow
 			var act:IActivity = getCurrentActivity();
 			if(act != null)
 			{
-				act.run();
 				_index++;
+				act.run();
 			}
 			else if(_index >= _activities.length)
 			{

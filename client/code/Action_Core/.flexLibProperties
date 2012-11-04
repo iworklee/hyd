@@ -21,6 +21,7 @@
     <classEntry path="Action.Core.Flow.Workflow"/>
     <classEntry path="Action.Core.Flow.IActivity"/>
     <classEntry path="Action.Core.Flow.ActivityBase"/>
+    <classEntry path="Util.NumberWrapper"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

@@ -15,7 +15,7 @@ package Action.Login
 		
 		public function get name():String
 		{
-			return null;
+			return "LoginModule";
 		}
 		
 		public function onLoad():void

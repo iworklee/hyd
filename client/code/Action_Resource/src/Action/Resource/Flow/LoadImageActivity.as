@@ -23,18 +23,23 @@ package Action.Resource.Flow
 		
 		public function run():void
 		{
-			var request:URLRequest = new URLRequest();  
-			request.url = ResourceManager.parseUrl(_url);
-			request.method = URLRequestMethod.GET;
-			
-			var loader:Loader = new Loader();
-			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoaded);
-			loader.load(request);
+			if(ResourceManager.imageSection.get(_url) == null)
+			{
+				var request:URLRequest = new URLRequest();  
+				request.url = ResourceManager.parseUrl(_url);
+				request.method = URLRequestMethod.GET;
+				
+				var loader:Loader = new Loader();
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoaded);
+				loader.load(request);
+			}
+			else
+				this.workflow.goon();
 		}
 		
 		private function onImageLoaded(e:Event):void
 		{
-			ResourceManager.set(_url, e.currentTarget.content);
+			ResourceManager.imageSection.set(_url, e.currentTarget.content);
 			this.workflow.goon();
 		}
 	}

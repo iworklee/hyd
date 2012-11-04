@@ -2,11 +2,6 @@ package Action.Resource
 {
 	public class ResourceManager
 	{
-		public function ResourceManager()
-		{
-		}
-		
-		private static var _items:Array = new Array();
 		private static const _root:String = "http://hyd.googlecode.com/svn/trunk/client/raw/Action/";
 		
 		public static function parseUrl(url:String):String
@@ -16,12 +11,30 @@ package Action.Resource
 			return _root + url;
 		}
 		
-		public static function get(key:String):Object
+		private static var _imageSection:ResourceManager = new ResourceManager();
+		public static function get imageSection():ResourceManager
+		{
+			return _imageSection;
+		}
+		
+		private static var _bumSection:ResourceManager = new ResourceManager();
+		public static function get BUMSection():ResourceManager
+		{
+			return _bumSection;
+		}
+		
+		public function ResourceManager()
+		{
+		}
+		
+		private var _items:Array = new Array();
+		
+		public function get(key:String):Object
 		{
 			return _items[key.toLowerCase()];
 		}
 		
-		public static function set(key:String,value:Object):void
+		public function set(key:String,value:Object):void
 		{
 			_items[key.toLowerCase()] = value;
 		}

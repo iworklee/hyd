@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="Action.War.WarModule"/>
+    <classEntry path="Action.War.BattleReportFactory"/>
+    <classEntry path="Action.War.Commands.PlayBattleReportCommand"/>
+    <classEntry path="Action.War.BattleUnitManager"/>
+    <classEntry path="Action.War.Flow.LoadBattleUnitActivity"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="Action.Display.Decorator.IDisplayDecorator"/>
+    <classEntry path="Action.Display.Decorator.DisplayDecoratorBuilder"/>
+    <classEntry path="Action.Display.Decorator.CommonDisplayDecorator"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

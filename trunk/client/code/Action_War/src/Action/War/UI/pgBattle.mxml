@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:s="library://ns.adobe.com/flex/spark" implements="Action.Core.Page.IGamePage"
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="760" height="600" backgroundColor="#000000">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import Action.Core.Flow.Workflow;
+			import Action.Core.GamePlugins;
+			import Action.Display.Decorator.CommonDisplayDecorator;
+			import Action.Display.Decorator.DisplayDecoratorBuilder;
+			import Action.Display.Decorator.IDisplayDecorator;
+			import Action.Model.BattleUnit;
+			import Action.Resource.Flow.LoadImageActivity;
+			import Action.Resource.ResourceManager;
+			import Action.War.BattleUnitManager;
+			import Action.War.WarModule;
+			
+			import Util.NumberWrapper;
+			
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.core.IVisualElement;			
+						
+			public function onLoad():void
+			{
+				//加载背景
+				_bcMain.setStyle("backgroundImage", ResourceManager.imageSection.get(WarModule.BgUrl));
+				
+				//生成网格
+				for(var i:int = 0; i<5; i++)
+				{
+					for(var j:int = 0; j<14; j++)
+					{
+						var cell:BorderContainer = new BorderContainer();
+						cell.setStyle("borderWeight", 1);
+						cell.setStyle("backgroundAlpha", 0.3);
+						cell.setStyle("backgroundColor", "#000044");
+						cell.setStyle("borderColor", "#00ffff");
+						cell.width = cell.height = 50;
+						cell.x = j * 50;
+						cell.y = i * 50;						
+						_bcGrid.addElement(cell);
+						
+						var lbl:Label = new Label();
+						lbl.x = 20;
+						lbl.y = 20;
+						lbl.setStyle("color", "#ffff00");
+						lbl.text = (j * 5 + i).toString();
+						cell.addElement(lbl);
+					}
+				}
+				
+				//装饰控件
+				var decorator1:CommonDisplayDecorator = new CommonDisplayDecorator();
+				decorator1.color = "#ffff00";
+				var decorator2:CommonDisplayDecorator = new CommonDisplayDecorator();
+				decorator2.color = "#ff8800";
+				DisplayDecoratorBuilder.create([_lblGrid, _lblPlay])
+					.appendDecorator(MouseEvent.MOUSE_OVER, decorator1)
+					.appendDecorator(MouseEvent.MOUSE_OUT, decorator2)
+					.build();
+				
+				//test
+				var bum:BattleUnitManager = ResourceManager.BUMSection.get("1") as BattleUnitManager;
+				var img:Image = new Image();
+				img.x = 100;
+				img.source = bum.image;
+				_bcCanvas.addElement(img);
+			}
+			
+			public function onUnload():void
+			{
+				
+			}	
+			
+			protected function _lblGrid_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				_lblGrid.text = (_bcGrid.visible = !_bcGrid.visible) ? "隐藏网格" : "显示网格";
+			}
+			
+			protected function _lblPlay_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				for(var i:int=0; i<10; i++)
+					GamePlugins.console.writeLine(NumberWrapper.wrap(1).toText(i));
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Label id="_lblPlayer1" x="50" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28"
+			 fontWeight="bold" text=" 神仙一枝花"  buttonMode="true"/>
+	<s:Label id="_lblVS" x="350" y="40" color="#00ff00" fontFamily="微软雅黑" fontSize="28"
+			 fontWeight="bold" text=" VS " />
+	<s:Label id="_lblPlayer2" x="550" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28"
+			 fontWeight="bold" text="万寿落雪"  buttonMode="true"/>
+	<s:BorderContainer id="_bcMain" y="100" width="100%" height="400" useHandCursor="false">		
+		<s:BorderContainer id="_bcGrid" width="700" height="250" borderColor="#0000ff" borderWeight="0"
+						   backgroundAlpha="0" x="30" y="75" visible="false">			
+		</s:BorderContainer>
+		<s:BorderContainer id="_bcCanvas" width="700" height="250" x="30" y="75" borderVisible="false"
+						   backgroundAlpha="0">			
+		</s:BorderContainer>
+	</s:BorderContainer>
+	<s:Label id="_lblGrid" x="490" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28"
+			 fontWeight="bold" text="显示网格" buttonMode="true" click="_lblGrid_clickHandler(event)"/>
+	<s:Label id="_lblPlay" x="620" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28"
+			 fontWeight="bold" text="加速播放" buttonMode="true" click="_lblPlay_clickHandler(event)" />
+</s:BorderContainer>

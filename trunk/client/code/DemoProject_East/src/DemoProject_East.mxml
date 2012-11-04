@@ -14,7 +14,7 @@
 			import Action.Core.Net.GameClient;
 			import Action.Core.Page.IGameDialog;
 			import Action.Core.Page.IGamePage;
-			import Action.War.BattleReportFactory;
+			import Action.War.BattleReportProvider;
 			import Action.War.Commands.PlayBattleReportCommand;
 			import Action.War.WarModule;
 			
@@ -80,12 +80,36 @@
 			
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
+				parent.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
 				GameClient.create().frame = this;
 				GamePlugins.console = this;
 				GamePlugins.modules = [];
 				GamePlugins.commands = [new PlayBattleReportCommand()];
 				GameCommandFactory.current.getCommand(9527).execute(GameClient.current,
-					BattleReportFactory.current.createTestReport());
+					BattleReportProvider.current.createTestReport());
+			}
+			
+			private function onUncaughtError(event:UncaughtErrorEvent):void
+			{
+				var errorStr:String = "";
+				//synchronous Error
+				if(event.error is Error)
+				{
+					
+					var error:Error = event.error as Error;
+					errorStr += "Error ID:"+ error.errorID + "\n";
+					errorStr += "Error Name:"+ error.name + "\n";
+					errorStr += "Error Msg:"+ error.message + "\n";
+					if(error.getStackTrace())
+						errorStr += "Error StackTrace:"+ error.getStackTrace() + "\n";
+				}
+				else{
+					//asynchronous Error
+					var errorEvent:ErrorEvent = event.error as ErrorEvent;
+					errorStr +=  "Error ID:"+ errorEvent.errorID + "\n";
+					errorStr += "Error Msg:"+ errorEvent.toString() + "\n";
+				}
+				Alert.show(errorStr, "Error");
 			}
 			
 		]]>

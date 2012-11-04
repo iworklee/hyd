@@ -17,11 +17,11 @@ package Action.Resource
 			return _imageSection;
 		}
 		
-		private static var _bumSection:ResourceManager = new ResourceManager();
+		/*private static var _bumSection:ResourceManager = new ResourceManager();
 		public static function get BUMSection():ResourceManager
 		{
 			return _bumSection;
-		}
+		}*/
 		
 		public function ResourceManager()
 		{

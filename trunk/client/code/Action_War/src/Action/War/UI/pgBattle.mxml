@@ -12,10 +12,11 @@
 			import Action.Display.Decorator.CommonDisplayDecorator;
 			import Action.Display.Decorator.DisplayDecoratorBuilder;
 			import Action.Display.Decorator.IDisplayDecorator;
+			import Action.Display.Drawing.BitmapHelper;
 			import Action.Model.BattleUnit;
 			import Action.Resource.Flow.LoadImageActivity;
 			import Action.Resource.ResourceManager;
-			import Action.War.BattleUnitManager;
+			import Action.War.Manager.BattleResourceManager;
 			import Action.War.WarModule;
 			
 			import Util.NumberWrapper;
@@ -63,12 +64,61 @@
 					.appendDecorator(MouseEvent.MOUSE_OUT, decorator2)
 					.build();
 				
-				//test
-				var bum:BattleUnitManager = ResourceManager.BUMSection.get("1") as BattleUnitManager;
-				var img:Image = new Image();
-				img.x = 100;
-				img.source = bum.image;
-				_bcCanvas.addElement(img);
+				//test				
+				test();
+			}
+			
+			private function test():void
+			{
+				var resMgr:BattleResourceManager = BattleResourceManager.getInstance(1);
+				for(var i:int=0; i<12; i++)
+				{
+					var img:Image = new Image();
+					img.x = 42 + i * 50;
+					img.y = -8;
+					img.source = resMgr.attackBitmaps[i];
+					_bcCanvas.addElement(img);
+				}
+				for(i=0; i<4; i++)
+				{
+					img = new Image();
+					img.x = 42 + i * 50;
+					img.y = 42;
+					img.source = resMgr.attackBitmaps[i+12];
+					_bcCanvas.addElement(img);
+				}
+				for(i=0; i<4; i++)
+				{
+					img = new Image();
+					img.x = 50 + i * 50;
+					img.y = 100;
+					img.source = resMgr.defendBitmaps[i];
+					_bcCanvas.addElement(img);
+				}
+				for(i=0; i<8; i++)
+				{
+					img = new Image();
+					img.x = 50 + i * 50;
+					img.y = 150;
+					img.source = resMgr.moveBitmaps[i];
+					_bcCanvas.addElement(img);
+				}
+				for(i=0; i<4; i++)
+				{
+					img = new Image();
+					img.x = 50 + i * 50;
+					img.y = 200;
+					img.source = resMgr.waitBitmaps[i];
+					_bcCanvas.addElement(img);
+				}
+				for(i=0; i<4; i++)
+				{
+					img = new Image();
+					img.x = 450 + i * 50;
+					img.y = 200;
+					img.source = resMgr.hurtBitmaps[i];
+					_bcCanvas.addElement(img);
+				}
 			}
 			
 			public function onUnload():void

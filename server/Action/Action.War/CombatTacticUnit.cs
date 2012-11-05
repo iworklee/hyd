@@ -12,6 +12,8 @@ namespace Action.War
     {
         const int MAX_CHARGE = 100;
 
+        public CombatTacticUnit(CombatMilitary military) : base(military) { }
+
         /// <summary>
         /// 可以释放技能
         /// </summary>

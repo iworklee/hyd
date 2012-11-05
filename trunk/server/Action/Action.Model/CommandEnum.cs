@@ -26,6 +26,6 @@ namespace Action.Model
         TalkToWorld = 1300,
 
         //War
-        Embattle = 1300,
+        Embattle = 1400,
     }
 }

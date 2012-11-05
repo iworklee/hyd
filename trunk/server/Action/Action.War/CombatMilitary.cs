@@ -27,7 +27,7 @@ namespace Action.War
         public IEnumerable<CombatUnit> AliveUnits { get { return _aliveUnits.AsReadOnly(); } }
 
         /// <summary>
-        /// 
+        /// 营寨被攻陷
         /// </summary>
         public bool Defeated { get; set; }
 

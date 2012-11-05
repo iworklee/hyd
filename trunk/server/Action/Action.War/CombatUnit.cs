@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Action.Model;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,21 @@ namespace Action.War
         /// 所属军队
         /// </summary>
         public CombatTroops Troops { get; set; }
+
+        /// <summary>
+        /// 战斗单位类型标识
+        /// </summary>
+        public int ID { get; set; }
+
+        /// <summary>
+        /// 战斗单位战场标识
+        /// </summary>
+        public int SID { get; set; }
+
+        /// <summary>
+        /// 位置坐标
+        /// </summary>
+        public Vector2 Position { get; set; }
 
         /// <summary>
         /// 普通攻击
@@ -63,6 +80,11 @@ namespace Action.War
         public int Health { get; set; }
 
         /// <summary>
+        /// 气势
+        /// </summary>
+        public int Charge { get; set; }
+
+        /// <summary>
         /// 战斗力
         /// </summary>
         public int CombatPower { get; set; }
@@ -84,6 +106,37 @@ namespace Action.War
         public virtual bool SkillReady()
         {
             return false;
+        }
+
+        /// <summary>
+        /// 普通攻击
+        /// </summary>
+        /// <param name="targetUnits"></param>
+        /// <returns></returns>
+        public BattleAction Strike(IEnumerable<CombatUnit> targetUnits)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 技能攻击
+        /// </summary>
+        /// <param name="targetUnits"></param>
+        /// <returns></returns>
+        public BattleAction SkillStrike(IEnumerable<CombatUnit> targetUnits)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static explicit operator BattleUnit(CombatUnit unit)
+        {
+            var bu = new BattleUnit();
+            bu.Id = unit.ID;
+            bu.SID = unit.SID;
+            bu.HP = unit.Health;
+            bu.MP = unit.Charge;
+            bu.Pos = unit.Position.Pos2Int();
+            return bu;
         }
 
 

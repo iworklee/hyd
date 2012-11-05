@@ -13,11 +13,6 @@ namespace Action.War
         const int MAX_CHARGE = 100;
 
         /// <summary>
-        /// 气势
-        /// </summary>
-        public int Charge { get; set; }
-
-        /// <summary>
         /// 可以释放技能
         /// </summary>
         /// <returns></returns>

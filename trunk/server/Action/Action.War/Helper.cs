@@ -17,5 +17,19 @@ namespace Action.War
         {
             return new Vector2(pos / 5, pos % 5);
         }
+
+        public static DamageType Test(float criticalChance, float blockChance, float dodgeChance)
+        {
+            var rng = new Random();
+            var n = rng.NextDouble();
+            if (n < dodgeChance)
+                return DamageType.Dodge;
+            else if (n < dodgeChance + blockChance)
+                return DamageType.Block;
+            else if (n < dodgeChance + blockChance + criticalChance)
+                return DamageType.Critical;
+            else
+                return DamageType.Normal;
+        }
     }
 }

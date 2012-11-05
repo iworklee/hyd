@@ -69,6 +69,7 @@
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Combat.cs" />
+    <Compile Include="CombatEnum.cs" />
     <Compile Include="CombatTroops.cs" />
     <Compile Include="Commands\EmbattleCommand.cs" />
     <Compile Include="Helper.cs" />

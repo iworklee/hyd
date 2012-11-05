@@ -33,13 +33,23 @@ namespace Action.War
         public Vector2 Position { get; set; }
 
         /// <summary>
+        /// 攻击
+        /// </summary>
+        private Dictionary<AttackType, int> _attack = new Dictionary<AttackType, int>();
+
+        /// <summary>
+        /// 防御
+        /// </summary>
+        private Dictionary<AttackType, int> _defence = new Dictionary<AttackType, int>();
+
+        /// <summary>
         /// 普通攻击
         /// </summary>
         public int NormalAttack { get; set; }
         /// <summary>
         /// 普通防御
         /// </summary>
-        public int NormalDefender { get; set; }
+        public int NormalDefence { get; set; }
 
         /// <summary>
         /// 战法攻击
@@ -48,7 +58,7 @@ namespace Action.War
         /// <summary>
         /// 战法防御
         /// </summary>
-        public int TacticDefender { get; set; }
+        public int TacticDefence { get; set; }
 
         /// <summary>
         /// 策略攻击
@@ -57,7 +67,7 @@ namespace Action.War
         /// <summary>
         /// 策略防御
         /// </summary>
-        public int StrategyDefender { get; set; }
+        public int StrategyDefence { get; set; }
 
         /// <summary>
         /// 暴击
@@ -111,21 +121,58 @@ namespace Action.War
         /// <summary>
         /// 普通攻击
         /// </summary>
-        /// <param name="targetUnits"></param>
         /// <returns></returns>
-        public BattleAction Strike(IEnumerable<CombatUnit> targetUnits)
+        public BattleAction Strike()
         {
-            throw new NotImplementedException();
+            if (StrikeRange == 0)
+                return null;
+
+            // 根据攻击范围，找攻击目标
+            var targets = Troops.Enemy.AliveUnits.Where(unit => Vector2.Distance(this.Position, unit.Position) <= StrikeRange);
+            var target = targets.FirstOrDefault();
+            if (target == null)
+                return null;
+
+            // 计算格挡，暴击
+            var damageType = Helper.Test(this.CriticalChance, target.BlockChance, 0);
+            var defence = target.NormalDefence;
+            if (damageType == DamageType.Block)
+                defence = defence * 2;
+            var attack = this.NormalAttack;
+            if (damageType == DamageType.Critical)
+                attack = (int)(attack * 1.5);
+
+            var damage = attack - defence;
+            if (damage < 1)
+                damage = 1;
+            if (damage > target.Health)
+                damage = target.Health;
+            target.Health -= damage;
+
+            var ba = new BattleAction();
+            ba.UnitSID = this.SID;
+            ba.Type = BattleActionType.Cast; // 攻击
+            ba.Args = 0; // 普通攻击
+            ba.Effects.Add(new BattleEffect() { UnitSID = target.SID, Type = BattleEffectType.Normal, PlusHP = -damage, PlusMP = 0 });
+            return ba;
+        }
+
+        protected virtual BattleEffect Attacking(CombatUnit unit)
+        {
+            return null;
+        }
+
+        protected virtual void Attacked()
+        {
         }
 
         /// <summary>
         /// 技能攻击
         /// </summary>
-        /// <param name="targetUnits"></param>
         /// <returns></returns>
-        public BattleAction SkillStrike(IEnumerable<CombatUnit> targetUnits)
+        public BattleAction SkillStrike()
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public static explicit operator BattleUnit(CombatUnit unit)

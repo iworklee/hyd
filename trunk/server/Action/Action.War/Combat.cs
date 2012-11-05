@@ -108,13 +108,9 @@ namespace Action.War
                 // skill round
                 foreach (var attacker in attackOrder.Values)
                 {
-                    BattleAction action;
-                    IEnumerable<CombatUnit> targetUnits = FindSkillTarget(attacker);
-                    if (targetUnits.Any())
-                    {
-                        action = SkillStrike(attacker, targetUnits);
+                    var action = attacker.SkillStrike();
+                    if (action != null)
                         bout.Actions.Add(action);
-                    }
                 }
             }
             else
@@ -122,14 +118,16 @@ namespace Action.War
                 // normal round
                 foreach (var attacker in attackOrder.Values)
                 {
-                    BattleAction action;
-                    IEnumerable<CombatUnit> targetUnits = FindTarget(attacker);
-                    if (targetUnits.Any())
-                        action = Strike(attacker, targetUnits);
-                    else
-                        action = Move(attacker);
+                    var action = attacker.Strike();
+                    if (action != null)
+                    {
+                        bout.Actions.Add(action);
+                        continue;
+                    }
 
-                    bout.Actions.Add(action);
+                    action = Move(attacker);
+                    if (action != null)
+                        bout.Actions.Add(action);
                 }
             }
 
@@ -137,41 +135,18 @@ namespace Action.War
             {
                 if (unit.Health == 0)
                     attackOrder.Remove(unit.CombatPower);
-
             }
 
             Report.Bouts.Add(bout);
         }
-
-        private IEnumerable<CombatUnit> FindTarget(CombatUnit attacker)
-        {
-            var range = attacker.StrikeRange;
-            return attacker.Troops.Enemy.Units.Where(unit => Vector2.Distance(attacker.Position, unit.Position) <= range);
-        }
-
-        private IEnumerable<CombatUnit> FindSkillTarget(CombatUnit attacker)
-        {
-            var range = attacker.SkillStrikeRange;
-            return attacker.Troops.Enemy.Units.Where(unit => Vector2.Distance(attacker.Position, unit.Position) <= range);
-        }
-
-        private BattleAction Strike(CombatUnit attacker, IEnumerable<CombatUnit> targetUnits)
-        {
-            return attacker.Strike(targetUnits);
-        }
-
-        private BattleAction SkillStrike(CombatUnit attacker, IEnumerable<CombatUnit> targetUnits)
-        {
-            return attacker.SkillStrike(targetUnits);
-        }
-
+        
         private BattleAction Move(CombatUnit attacker)
         {
             attacker.Position = attacker.Position + attacker.Troops.Forward;
             var ba = new BattleAction();
-            ba.Type = BattleActionType.Move;
             ba.UnitSID = attacker.SID;
-            ba.Args = attacker.Position.Pos2Int();
+            ba.Type = BattleActionType.Move;    // 移动
+            ba.Args = attacker.Position.Pos2Int();// 位置
             return ba;
         }
 

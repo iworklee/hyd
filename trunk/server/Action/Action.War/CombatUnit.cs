@@ -15,17 +15,17 @@ namespace Action.War
         /// <summary>
         /// 所属军队
         /// </summary>
-        public CombatTroops Troops { get; set; }
+        public CombatMilitary Military { get; set; }
 
         /// <summary>
         /// 战斗单位类型标识
         /// </summary>
-        public int ID { get; set; }
+        public int UnitTypeID { get; set; }
 
         /// <summary>
         /// 战斗单位战场标识
         /// </summary>
-        public int SID { get; set; }
+        public int BattleID { get; set; }
 
         /// <summary>
         /// 位置坐标
@@ -41,6 +41,8 @@ namespace Action.War
         /// 防御
         /// </summary>
         private Dictionary<AttackType, int> _defence = new Dictionary<AttackType, int>();
+
+        #region 攻防属性
 
         /// <summary>
         /// 普通攻击
@@ -68,6 +70,8 @@ namespace Action.War
         /// 策略防御
         /// </summary>
         public int StrategyDefence { get; set; }
+
+        #endregion
 
         /// <summary>
         /// 暴击
@@ -118,6 +122,11 @@ namespace Action.War
             return false;
         }
 
+        public CombatUnit(CombatMilitary military)
+        {
+            Military = military;
+        }
+
         /// <summary>
         /// 普通攻击
         /// </summary>
@@ -128,7 +137,7 @@ namespace Action.War
                 return null;
 
             // 根据攻击范围，找攻击目标
-            var targets = Troops.Enemy.AliveUnits.Where(unit => Vector2.Distance(this.Position, unit.Position) <= StrikeRange);
+            var targets = Military.Enemy.AliveUnits.Where(unit => Vector2.Distance(this.Position, unit.Position) <= StrikeRange);
             var target = targets.FirstOrDefault();
             if (target == null)
                 return null;
@@ -150,10 +159,10 @@ namespace Action.War
             target.Health -= damage;
 
             var ba = new BattleAction();
-            ba.UnitSID = this.SID;
+            ba.UnitSID = this.BattleID;
             ba.Type = BattleActionType.Cast; // 攻击
             ba.Args = 0; // 普通攻击
-            ba.Effects.Add(new BattleEffect() { UnitSID = target.SID, Type = BattleEffectType.Normal, PlusHP = -damage, PlusMP = 0 });
+            ba.Effects.Add(new BattleEffect() { UnitSID = target.BattleID, Type = BattleEffectType.Normal, PlusHP = -damage, PlusMP = 0 });
             return ba;
         }
 
@@ -178,8 +187,8 @@ namespace Action.War
         public static explicit operator BattleUnit(CombatUnit unit)
         {
             var bu = new BattleUnit();
-            bu.Id = unit.ID;
-            bu.SID = unit.SID;
+            bu.Id = unit.UnitTypeID;
+            bu.SID = unit.BattleID;
             bu.HP = unit.Health;
             bu.MP = unit.Charge;
             bu.Pos = unit.Position.Pos2Int();

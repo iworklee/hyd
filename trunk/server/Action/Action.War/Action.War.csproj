@@ -70,7 +70,7 @@
     </Compile>
     <Compile Include="Combat.cs" />
     <Compile Include="CombatEnum.cs" />
-    <Compile Include="CombatTroops.cs" />
+    <Compile Include="CombatMilitary.cs" />
     <Compile Include="Commands\EmbattleCommand.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="WarModule.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="CombatUnit.cs" />
     <Compile Include="CombatTacticUnit.cs" />
     <Compile Include="CombatStrategyUnit.cs" />
+    <Compile Include="CombatCampUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Action.Core\Action.Core.csproj">

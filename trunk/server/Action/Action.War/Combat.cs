@@ -11,8 +11,8 @@ namespace Action.War
     {
         const int MAX_ROUND = 50;
 
-        private CombatTroops _attacker = new CombatTroops();
-        private CombatTroops _defender = new CombatTroops();
+        private CombatMilitary _attacker = new CombatMilitary();
+        private CombatMilitary _defender = new CombatMilitary();
 
         public BattleReport Report = new BattleReport();
 
@@ -22,23 +22,23 @@ namespace Action.War
             // 初始化攻方单位
             for (int i = 0; i < 25; i++)
             {
-                var unit = new CombatUnit();
-                unit.ID = 1;
+                var unit = new CombatUnit(_attacker);
+                unit.UnitTypeID = 1;
                 unit.Position = (i + 10).Int2Pos();
-                _attacker.Units.Add(unit);
+                _attacker.AddUnit(unit);
             }
             // 攻方城墙
             for (int i = 0; i < 5; i++)
             {
-                var unit = new CombatUnit();
-                unit.ID = 0;
+                var unit = new CombatCampUnit(_attacker);
+                unit.UnitTypeID = 0;
                 unit.Position = i.Int2Pos();
-                _attacker.Units.Add(unit);
+                _attacker.AddUnit(unit);
             }
 
             foreach (var unit in _attacker.Units)
             {
-                unit.SID = unit.Position.Pos2Int();
+                unit.BattleID = unit.Position.Pos2Int();
                 Report.Units.Add((BattleUnit)unit);
                 attackOrder.Add(unit.CombatPower, unit);
             }
@@ -56,23 +56,23 @@ namespace Action.War
             {
                 var j = i + 55 - i / 5 * 10;
 
-                var unit = new CombatUnit();
+                var unit = new CombatUnit(_defender);
                 unit.Position = j.Int2Pos();
 
-                _defender.Units.Add(unit);
+                _defender.AddUnit(unit);
             }
 
             // 守方城墙
             for (int i = 65; i < 70; i++)
             {
-                var unit = new CombatUnit();
+                var unit = new CombatCampUnit(_defender);
                 unit.Position = i.Int2Pos();
-                _attacker.Units.Add(unit);
+                _attacker.AddUnit(unit);
             }
 
             foreach (var unit in _defender.Units)
             {
-                unit.SID = unit.Position.Pos2Int();
+                unit.BattleID = unit.Position.Pos2Int();
                 attackOrder.Add(unit.CombatPower, unit);
             }
 
@@ -142,9 +142,9 @@ namespace Action.War
         
         private BattleAction Move(CombatUnit attacker)
         {
-            attacker.Position = attacker.Position + attacker.Troops.Forward;
+            attacker.Position = attacker.Position + attacker.Military.Forward;
             var ba = new BattleAction();
-            ba.UnitSID = attacker.SID;
+            ba.UnitSID = attacker.BattleID;
             ba.Type = BattleActionType.Move;    // 移动
             ba.Args = attacker.Position.Pos2Int();// 位置
             return ba;

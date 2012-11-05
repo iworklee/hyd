@@ -15,6 +15,8 @@ namespace Action.War
         /// </summary>
         public float SkillChance { get; set; }
 
+        public CombatStrategyUnit(CombatMilitary military) : base(military) { }
+
         /// <summary>
         /// 可以释放技能
         /// </summary>

@@ -13,30 +13,44 @@ namespace Action.War
 
         private CombatMilitary _attacker = new CombatMilitary();
         private CombatMilitary _defender = new CombatMilitary();
-
-        public BattleReport Report = new BattleReport();
-
+        private BattleReport _report = new BattleReport();
+        private SortedDictionary<int, CombatUnit> attackOrder = new SortedDictionary<int, CombatUnit>();
         private bool _attackerLoaded;
+        private bool _defenderLoaded;
+
+        /// <summary>
+        /// 攻方
+        /// </summary>
+        public CombatMilitary Attacker { get { return _attacker; } }
+        /// <summary>
+        /// 守方
+        /// </summary>
+        public CombatMilitary Defender { get { return _defender; } }
+        /// <summary>
+        /// 战报
+        /// </summary>
+        public BattleReport Report { get { return _report; } }
+
         public void LoadAttacker(Army attacker)
         {
             // 初始化攻方单位
             for (int i = 0; i < 25; i++)
             {
-                var unit = new CombatUnit(_attacker);
+                var unit = new CombatUnit(Attacker);
                 unit.UnitTypeID = 1;
                 unit.Position = (i + 10).Int2Pos();
-                _attacker.AddUnit(unit);
+                Attacker.AddUnit(unit);
             }
             // 攻方城墙
             for (int i = 0; i < 5; i++)
             {
-                var unit = new CombatCampUnit(_attacker);
+                var unit = new CombatCampUnit(Attacker);
                 unit.UnitTypeID = 0;
                 unit.Position = i.Int2Pos();
-                _attacker.AddUnit(unit);
+                Attacker.AddUnit(unit);
             }
 
-            foreach (var unit in _attacker.Units)
+            foreach (var unit in Attacker.Units)
             {
                 unit.BattleID = unit.Position.Pos2Int();
                 Report.Units.Add((BattleUnit)unit);
@@ -44,11 +58,10 @@ namespace Action.War
             }
 
             _attackerLoaded = true;
-            _attacker.Forward = new Vector2(1, 0);
-            _defender.Enemy = _attacker;
+            Attacker.Forward = new Vector2(1, 0);
+            Defender.Enemy = Attacker;
         }
 
-        private bool _defenderLoaded;
         public void LoadDefender(Army defender)
         {
             // 初始化守方单位
@@ -56,32 +69,30 @@ namespace Action.War
             {
                 var j = i + 55 - i / 5 * 10;
 
-                var unit = new CombatUnit(_defender);
+                var unit = new CombatUnit(Defender);
                 unit.Position = j.Int2Pos();
 
-                _defender.AddUnit(unit);
+                Defender.AddUnit(unit);
             }
 
             // 守方城墙
             for (int i = 65; i < 70; i++)
             {
-                var unit = new CombatCampUnit(_defender);
+                var unit = new CombatCampUnit(Defender);
                 unit.Position = i.Int2Pos();
-                _attacker.AddUnit(unit);
+                Attacker.AddUnit(unit);
             }
 
-            foreach (var unit in _defender.Units)
+            foreach (var unit in Defender.Units)
             {
                 unit.BattleID = unit.Position.Pos2Int();
                 attackOrder.Add(unit.CombatPower, unit);
             }
 
             _defenderLoaded = true;
-            _attacker.Forward = new Vector2(-1, 0);
-            _attacker.Enemy = _defender;
+            Attacker.Forward = new Vector2(-1, 0);
+            Attacker.Enemy = Defender;
         }
-
-        private SortedDictionary<int, CombatUnit> attackOrder = new SortedDictionary<int, CombatUnit>();
 
         public bool Perform()
         {
@@ -93,6 +104,18 @@ namespace Action.War
             for (int round = 0; round < MAX_ROUND; round++)
             {
                 PerformRound(round);
+
+                if (Attacker.Defeated || Attacker.AliveUnits.Count() == 5)
+                {
+                    // 攻方胜
+                    break;
+                }
+
+                if (Defender.Defeated || Defender.AliveUnits.Count() == 5)
+                {
+                    // 守方胜
+                    break;
+                }
             }
 
             return true;
@@ -139,7 +162,7 @@ namespace Action.War
 
             Report.Bouts.Add(bout);
         }
-        
+
         private BattleAction Move(CombatUnit attacker)
         {
             attacker.Position = attacker.Position + attacker.Military.Forward;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Action.War
         private List<CombatUnit> _units = new List<CombatUnit>();
         public List<CombatUnit> Units { get { return _units; } }
 
+        public Vector2 Forward { get; set; }
     }
 }

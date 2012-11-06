@@ -68,26 +68,26 @@ package Action.Model {
 		/**
 		 *  @private
 		 */
-		public static const ARGS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("Action.Model.BattleAction.Args", "args", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PARAM:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("Action.Model.BattleAction.Param", "param", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
-		private var Args$field:int;
+		private var Param$field:int;
 
-		public function clearArgs():void {
+		public function clearParam():void {
 			hasField$0 &= 0xfffffffb;
-			Args$field = new int();
+			Param$field = new int();
 		}
 
-		public function get hasArgs():Boolean {
+		public function get hasParam():Boolean {
 			return (hasField$0 & 0x4) != 0;
 		}
 
-		public function set args(value:int):void {
+		public function set param(value:int):void {
 			hasField$0 |= 0x4;
-			Args$field = value;
+			Param$field = value;
 		}
 
-		public function get args():int {
-			return Args$field;
+		public function get param():int {
+			return Param$field;
 		}
 
 		/**
@@ -110,9 +110,9 @@ package Action.Model {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
 				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, Type$field);
 			}
-			if (hasArgs) {
+			if (hasParam) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, Args$field);
+				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, Param$field);
 			}
 			for (var effects$index:uint = 0; effects$index < this.effects.length; ++effects$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
@@ -129,7 +129,7 @@ package Action.Model {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var UnitSID$count:uint = 0;
 			var Type$count:uint = 0;
-			var Args$count:uint = 0;
+			var Param$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
 				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 				switch (tag >> 3) {
@@ -148,11 +148,11 @@ package Action.Model {
 					this.type = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
 					break;
 				case 3:
-					if (Args$count != 0) {
-						throw new flash.errors.IOError('Bad data format: BattleAction.args cannot be set twice.');
+					if (Param$count != 0) {
+						throw new flash.errors.IOError('Bad data format: BattleAction.param cannot be set twice.');
 					}
-					++Args$count;
-					this.args = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					++Param$count;
+					this.param = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
 					break;
 				case 4:
 					this.effects.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new Action.Model.BattleEffect()));

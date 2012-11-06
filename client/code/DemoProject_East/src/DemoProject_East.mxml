@@ -63,12 +63,12 @@
 				Alert.show(text);
 			}
 			
-			public function write(text:String):void
+			public function write(text:Object):void
 			{
-				txtTestOutput.text += text;
+				txtTestOutput.text += text.toString();
 			}
 			
-			public function writeLine(text:String):void
+			public function writeLine(text:Object):void
 			{
 				write(text + "\n");
 			}

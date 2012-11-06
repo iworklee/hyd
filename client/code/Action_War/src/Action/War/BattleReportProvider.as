@@ -18,17 +18,26 @@ package Action.War
 		}
 		
 		public function createTestReport():BattleReport
-		{
-			var unit:BattleUnit = new BattleUnit();
-			unit.sID = 0;
-			unit.id = 1;
-			unit.pos = 5;
-			unit.hP = 357;
-			unit.mP = 50;			
-			
+		{			
 			var report:BattleReport = new BattleReport();
-			report.uID = "qwerty123";
-			report.units.push(unit);
+			report.uID = "qwerty123";			
+				
+			for(var i:int=10; i<60;i++)
+			{
+				var unit:BattleUnit = new BattleUnit();
+				unit.sID = i;
+				if(i == 32 || i == 37)
+					unit.id = 1;
+				else if(int(i / 10) == 3)
+					unit.id = 103;
+				else
+					unit.id = 102;
+				unit.pos = i;
+				unit.hP = 357;
+				unit.mP = 50;
+				report.units.push(unit);
+			}
+			
 			return report;
 		}
 	}

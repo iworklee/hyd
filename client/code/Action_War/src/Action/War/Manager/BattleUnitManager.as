@@ -9,6 +9,9 @@ package Action.War.Manager
 	import Util.NumberWrapper;
 	
 	import flash.display.Bitmap;
+	import flash.geom.Point;
+	
+	import mx.controls.Image;
 
 	public class BattleUnitManager
 	{
@@ -22,6 +25,14 @@ package Action.War.Manager
 		{
 			return _battleUnit.id;	
 		}
+		
+		public function get alive():Boolean
+		{
+			return _battleUnit.hP > 0;
+		}
+		
+		//public var image:Image;
+		public var paintPoint:Point;
 		
 		public function get resourceManager():BattleResourceManager
 		{

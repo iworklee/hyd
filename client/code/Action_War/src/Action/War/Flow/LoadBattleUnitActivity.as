@@ -55,12 +55,6 @@ package Action.War.Flow
 		{
 			var sourceBmp:Bitmap = Bitmap(e.currentTarget.content);
 			_battleResourceStrategy.loadBitmaps(_battleResourceManager, sourceBmp);
-			/*var size:Point = _battleResourceStrategy.getBitmapSize();
-			for(var y:int = 0; y < size.y; y++)
-			{
-				var targetBmp:Bitmap = BitmapHelper.cutBitmap(sourceBmp, 0, y * size.x, size.x, size.x);
-				_battleBitmaps.push(targetBmp);
-			}*/
 			this.workflow.goon();
 		}
 	}

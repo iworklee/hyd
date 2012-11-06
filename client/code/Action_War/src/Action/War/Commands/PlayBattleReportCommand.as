@@ -7,6 +7,7 @@ package Action.War.Commands
 	import Action.Core.Page.IGameFrame;
 	import Action.Core.Serial.IGameDataSerializer;
 	import Action.Core.Serial.MessageSerializer;
+	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
 	import Action.Resource.Flow.LoadImageActivity;
@@ -47,20 +48,32 @@ package Action.War.Commands
 			frame.changePage(frame.loadingPage);
 			
 			//准备要加载的资源
-			var reportManager:BattleReportManager = BattleReportManager.getInstance(report.uID, report);
+			var reportManager:BattleReportManager = new BattleReportManager(report);
 			var loadings:Array = [new LoadImageActivity(WarModule.BgUrl)];
 			for each(var act:IActivity in reportManager.createLoadingActivities())
 				loadings.push(act);
 			
 			//加载资源
 			var workflow:Workflow = Workflow.create(loadings);
-			workflow.addEventListener(Event.COMPLETE, onWorkflowFinished);
+			workflow.addEventListener(Event.COMPLETE, workflowFinished(client, reportManager));
 			workflow.goon();
 		}	
 		
-		private function onWorkflowFinished(e:Event):void
+		private function workflowFinished(client:GameClient, reportManager:BattleReportManager):Function{
+			var func:Function=function(e:Event):void{
+				onWorkflowFinished(client, reportManager);
+			}
+			return func;
+		}
+		
+		private function onWorkflowFinished(client:GameClient, reportManager:BattleReportManager):void
 		{
-			GameClient.current.frame.changePage(new pgBattle());
+			var page:pgBattle = new pgBattle();
+			page.battleReportManager = reportManager;
+			GameClient.current.frame.changePage(page);
+			
+			var graphics:CanvasGraphics = new CanvasGraphics(page);
+			reportManager.play(graphics);
 		}
 	}
 }

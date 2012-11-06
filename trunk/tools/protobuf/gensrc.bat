@@ -1,9 +1,9 @@
-@echo off
+rem @echo off
 cd %~dp0
 
 rd /s/q C#
-md C#
 rd /s/q AS3
+md C#
 md AS3
 
 :==================	sample	================

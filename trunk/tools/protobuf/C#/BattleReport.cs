@@ -149,13 +149,13 @@ namespace Action.Model
       set { _Type = value; }
     }
 
-    private int _Args = default(int);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"Args", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private int _Param = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"Param", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
-    public int Args
+    public int Param
     {
-      get { return _Args; }
-      set { _Args = value; }
+      get { return _Param; }
+      set { _Param = value; }
     }
     private readonly global::System.Collections.Generic.List<Action.Model.BattleEffect> _Effects = new global::System.Collections.Generic.List<Action.Model.BattleEffect>();
     [global::ProtoBuf.ProtoMember(4, Name=@"Effects", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -239,17 +239,17 @@ namespace Action.Model
     public enum BattleEffectType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Miss", Value=0)]
-      Miss = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"Normal", Value=0)]
+      Normal = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Block", Value=1)]
-      Block = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"Critical", Value=1)]
+      Critical = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Normal", Value=2)]
-      Normal = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"Block", Value=2)]
+      Block = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Heavy", Value=3)]
-      Heavy = 3
+      [global::ProtoBuf.ProtoEnum(Name=@"Dodge", Value=3)]
+      Dodge = 3
     }
   
 }

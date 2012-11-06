@@ -161,7 +161,7 @@ namespace Action.War
             var ba = new BattleAction();
             ba.UnitSID = this.BattleID;
             ba.Type = BattleActionType.Cast; // 攻击
-            ba.Args = 0; // 普通攻击
+            ba.Param = 0; // 普通攻击
             ba.Effects.Add(new BattleEffect() { UnitSID = target.BattleID, Type = BattleEffectType.Normal, PlusHP = -damage, PlusMP = 0 });
             return ba;
         }
@@ -179,7 +179,7 @@ namespace Action.War
         /// 技能攻击
         /// </summary>
         /// <returns></returns>
-        public BattleAction SkillStrike()
+        public virtual BattleAction SkillStrike()
         {
             return null;
         }

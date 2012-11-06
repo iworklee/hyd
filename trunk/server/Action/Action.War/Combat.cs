@@ -169,7 +169,7 @@ namespace Action.War
             var ba = new BattleAction();
             ba.UnitSID = attacker.BattleID;
             ba.Type = BattleActionType.Move;    // 移动
-            ba.Args = attacker.Position.Pos2Int();// 位置
+            ba.Param = attacker.Position.Pos2Int();// 位置
             return ba;
         }
 

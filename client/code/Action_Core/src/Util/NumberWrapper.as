@@ -31,5 +31,14 @@ package Util
 			
 			return num2.length > 0 ? num1 + "." + num2 : num1;
 		}
+		
+		public function toText2():String
+		{
+			if(_num == 0)
+				return "";
+			if(_num > 0)
+				return "+" + _num.toString();
+			return _num.toString();
+		}
 	}
 }

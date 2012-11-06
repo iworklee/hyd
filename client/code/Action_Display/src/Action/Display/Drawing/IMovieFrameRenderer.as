@@ -2,7 +2,9 @@ package Action.Display.Drawing
 {
 	public interface IMovieFrameRenderer
 	{
-		function renderOnEnter(graphics:CanvasGraphics, player:MoviePlayer):void;
-		function renderOnTick(graphics:CanvasGraphics, player:MoviePlayer):void;
+		function get name():String;
+		function initialize(frame:int):void;
+		function render(graphics:CanvasGraphics, player:MoviePlayer):void;
+		function getFrameLength():int;
 	}
 }

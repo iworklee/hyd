@@ -1,12 +1,19 @@
 package Action.War.Manager
 {
 	import Action.Display.Drawing.CanvasGraphics;
+	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Display.Drawing.Movie;
 	import Action.Display.Drawing.MoviePlayer;
+	import Action.Model.BattleAction;
+	import Action.Model.BattleActionType;
+	import Action.Model.BattleBout;
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
 	import Action.War.BattleDefs;
 	import Action.War.Flow.LoadBattleUnitActivity;
+	import Action.War.Movie.BattleBoutFightRenderer;
+	import Action.War.Movie.BattleBoutMoveRenderer;
+	import Action.War.Movie.BattleBoutSkillRenderer;
 	import Action.War.Movie.BattleReportInitRenderer;
 	import Action.War.Movie.BattleReportOverRenderer;
 
@@ -40,21 +47,24 @@ package Action.War.Manager
 			return _buManagers[sid];
 		}
 		
-		private var _playSpeed:int = 1;
-		public function get playSpeed():int
-		{
-			return _playSpeed;
-		}
-		public function set playSpeed(spd:int):void
-		{
-			_playSpeed = spd;
-		}
-		
 		public function BattleReportManager(report:BattleReport)
 		{
 			_battleReport = report;
 			for each(var bu:BattleUnit in _battleReport.units)
-				_buManagers[bu.sID] = new BattleUnitManager(bu);
+			{
+				var bum:BattleUnitManager = new BattleUnitManager(bu);
+				if(bu.sID < 35)
+				{
+					bum.direction = BattleDefs.DIR_RIGHT;
+					bum.speed = BattleDefs.MOVE_POS_OFFSET;
+				}
+				else
+				{
+					bum.direction = BattleDefs.DIR_LEFT;
+					bum.speed = -BattleDefs.MOVE_POS_OFFSET;
+				}					
+				_buManagers[bu.sID] = bum;
+			}
 		}
 		
 		public function createLoadingActivities():Array
@@ -86,9 +96,42 @@ package Action.War.Manager
 		
 		private function buildMovie():Movie
 		{
+			//绘制初始移动
 			var movie:Movie = new Movie();
-			movie.setFrameRenderer(BattleDefs.FRAME_INIT, new BattleReportInitRenderer(this));
-			movie.setFrameRenderer(BattleDefs.FRAME_BOUNTS, new BattleReportOverRenderer(this));
+			movie.appendFrameRenderer(new BattleReportInitRenderer(this));
+			
+			//绘制每回合的行为
+			for each(var bout:BattleBout in _battleReport.bouts)
+			{
+				var moveActions:Array = new Array();
+				if(bout.sID % 2 == 1)
+				{
+					for each(var action:BattleAction in bout.actions)
+					{
+						if(action.type == BattleActionType.Cast)
+							movie.appendFrameRenderer(new BattleBoutSkillRenderer(this, action));
+						else
+							moveActions.push(action);
+					}
+				}
+				else
+				{
+					var fightActions:Array = new Array();
+					for each(action in bout.actions)
+					{
+						if(action.type == BattleActionType.Cast)
+							fightActions.push(action);
+						else
+							moveActions.push(action);
+					}
+					movie.appendFrameRenderer(new BattleBoutFightRenderer(this, fightActions));					
+				}
+				if(moveActions.length > 0)
+					movie.appendFrameRenderer(new BattleBoutMoveRenderer(this, moveActions));
+			}
+			
+			//绘制战斗结果
+			movie.appendFrameRenderer(new BattleReportOverRenderer(this));
 			return movie;
 		}
 		

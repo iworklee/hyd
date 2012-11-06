@@ -36,10 +36,10 @@ message BattleAction {
 }
 
 enum BattleEffectType {
-  Normal = 0;	//ÆÕÍ¨
-  Critical = 1;	//±©»÷
-  Block = 2;	//¸ñµ²
-  Dodge = 3;	//ÉÁ±Ü
+  Dodge = 0;	//ÉÁ±Ü
+  Block = 1;	//¸ñµ²
+  Normal = 2;	//ÆÕÍ¨
+  Critical = 3;	//±©»÷
 }
 
 message BattleEffect {

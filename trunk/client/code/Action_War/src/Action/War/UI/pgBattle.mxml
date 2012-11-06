@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
-				   xmlns:s="library://ns.adobe.com/flex/spark" implements="Action.Core.Page.IGamePage"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   implements="Action.Core.Page.IGamePage,Action.Display.Drawing.ICanvasContainer"
 				   xmlns:mx="library://ns.adobe.com/flex/mx" width="760" height="600" backgroundColor="#000000">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
@@ -13,9 +14,12 @@
 			import Action.Display.Decorator.DisplayDecoratorBuilder;
 			import Action.Display.Decorator.IDisplayDecorator;
 			import Action.Display.Drawing.BitmapHelper;
+			import Action.Display.Drawing.CanvasGraphics;
+			import Action.Model.BattleReport;
 			import Action.Model.BattleUnit;
 			import Action.Resource.Flow.LoadImageActivity;
 			import Action.Resource.ResourceManager;
+			import Action.War.Manager.BattleReportManager;
 			import Action.War.Manager.BattleResourceManager;
 			import Action.War.WarModule;
 			
@@ -23,7 +27,9 @@
 			
 			import mx.controls.Alert;
 			import mx.controls.Image;
-			import mx.core.IVisualElement;			
+			import mx.core.IVisualElement;
+			
+			private var _canvasGraphics:CanvasGraphics;
 						
 			public function onLoad():void
 			{
@@ -65,8 +71,39 @@
 					.build();
 				
 				//test				
-				test();
+				//test3();
 			}
+			
+			public var battleReportManager:BattleReportManager;
+			
+			public function onUnload():void
+			{
+				
+			}
+			
+			public function getCanvas():BorderContainer
+			{
+				return _bcCanvas;
+			}
+			
+			public function bindGraphics(graphics:CanvasGraphics):void
+			{
+				_canvasGraphics = graphics;
+			}
+			
+			protected function _lblGrid_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				_lblGrid.text = (_bcGrid.visible = !_bcGrid.visible) ? "隐藏网格" : "显示网格";
+			}
+			
+			protected function _lblPlay_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				_canvasGraphics.clear();
+				GamePlugins.console.clear();
+				battleReportManager.play(_canvasGraphics);
+			}			
 			
 			private function test():void
 			{
@@ -121,24 +158,41 @@
 				}
 			}
 			
-			public function onUnload():void
-			{
-				
-			}	
+			private var _imgTest:Image;
+			private var _idxTest:int;
 			
-			protected function _lblGrid_clickHandler(event:MouseEvent):void
+			private function test2():void
 			{
-				// TODO Auto-generated method stub
-				_lblGrid.text = (_bcGrid.visible = !_bcGrid.visible) ? "隐藏网格" : "显示网格";
+				_imgTest = new Image();
+				_bcCanvas.addElement(_imgTest);
+				_imgTest.source = BattleResourceManager.getInstance(1).moveBitmaps[0];
+				var timer:Timer = new Timer(1000);
+				timer.addEventListener(TimerEvent.TIMER, onTick);
+				timer.start();
 			}
 			
-			protected function _lblPlay_clickHandler(event:MouseEvent):void
+			private function test3():void
 			{
-				// TODO Auto-generated method stub
-				for(var i:int=0; i<10; i++)
-					GamePlugins.console.writeLine(NumberWrapper.wrap(1).toText(i));
+				var bmp:Bitmap  = BattleResourceManager.getInstance(1).moveBitmaps[0];
+				_bcCanvas.graphics.moveTo(25,0);
+				_bcCanvas.graphics.beginBitmapFill(bmp.bitmapData, new Matrix(1,0,0,1,25), false, false);
+				//_canvas.graphics.beginFill(0x00ff00);
+				_bcCanvas.graphics.lineStyle(3, 0xffff00);
+				_bcCanvas.graphics.drawRect(25,0, 48,48);
+				_bcCanvas.graphics.endFill();
 			}
 			
+			private function onTick(e:TimerEvent):void
+			{
+				var idx:int = _idxTest % 8;
+				_bcCanvas.removeElement(_imgTest);
+				_imgTest = new Image();
+				_bcCanvas.addElement(_imgTest);
+				_imgTest.source = BattleResourceManager.getInstance(1).moveBitmaps[idx];
+				_imgTest.move(50 * idx, 50);
+				GamePlugins.console.writeLine(idx.toString());
+				_idxTest ++;
+			}
 		]]>
 	</fx:Script>
 	<s:Label id="_lblPlayer1" x="50" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28"
@@ -158,5 +212,5 @@
 	<s:Label id="_lblGrid" x="490" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28"
 			 fontWeight="bold" text="显示网格" buttonMode="true" click="_lblGrid_clickHandler(event)"/>
 	<s:Label id="_lblPlay" x="620" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28"
-			 fontWeight="bold" text="加速播放" buttonMode="true" click="_lblPlay_clickHandler(event)" />
+			 fontWeight="bold" text="重新播放" buttonMode="true" click="_lblPlay_clickHandler(event)" />
 </s:BorderContainer>

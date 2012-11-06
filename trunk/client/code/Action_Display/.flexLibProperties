@@ -5,6 +5,11 @@
     <classEntry path="Action.Display.Decorator.DisplayDecoratorBuilder"/>
     <classEntry path="Action.Display.Decorator.CommonDisplayDecorator"/>
     <classEntry path="Action.Display.Drawing.BitmapHelper"/>
+    <classEntry path="Action.Display.Drawing.ICanvasContainer"/>
+    <classEntry path="Action.Display.Drawing.CanvasGraphics"/>
+    <classEntry path="Action.Display.Drawing.MoviePlayer"/>
+    <classEntry path="Action.Display.Drawing.IMovieFrameRenderer"/>
+    <classEntry path="Action.Display.Drawing.Movie"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

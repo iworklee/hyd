@@ -3,10 +3,14 @@ package Action.War.Manager
 	public class BattleResourceManager
 	{
 		private static var _managers:Array = new Array();
+		
+		public static function createInstance(rid:int):void
+		{
+			_managers[rid] = new BattleResourceManager(rid);
+		}
+		
 		public static function getInstance(rid:int):BattleResourceManager
 		{
-			if(_managers[rid] == null)
-				_managers[rid] = new BattleResourceManager(rid);
 			return _managers[rid];
 		}
 		

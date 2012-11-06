@@ -239,17 +239,17 @@ namespace Action.Model
     public enum BattleEffectType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Normal", Value=0)]
-      Normal = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"Dodge", Value=0)]
+      Dodge = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Critical", Value=1)]
-      Critical = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"Block", Value=1)]
+      Block = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Block", Value=2)]
-      Block = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"Normal", Value=2)]
+      Normal = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Dodge", Value=3)]
-      Dodge = 3
+      [global::ProtoBuf.ProtoEnum(Name=@"Critical", Value=3)]
+      Critical = 3
     }
   
 }

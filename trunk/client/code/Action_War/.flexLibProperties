@@ -16,6 +16,11 @@
     <classEntry path="Action.War.Movie.BattleReportInitRenderer"/>
     <classEntry path="Action.War.Movie.BattleReportOverRenderer"/>
     <classEntry path="Action.War.BattleDefs"/>
+    <classEntry path="Action.War.Movie.BattleBoutSkillRenderer"/>
+    <classEntry path="Action.War.Movie.BattleBoutFightRenderer"/>
+    <classEntry path="Action.War.Movie.BattleBoutMoveRenderer"/>
+    <classEntry path="Action.War.Movie.MovieFrameRendererBase"/>
+    <classEntry path="Action.War.BattleHelper"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

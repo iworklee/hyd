@@ -3,26 +3,27 @@ package Action.War.Movie
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Display.Drawing.MoviePlayer;
-	import Action.War.BattleDefs;
+	import Action.Model.BattleReport;
 	import Action.War.Manager.BattleReportManager;
-	import Action.War.Manager.BattleUnitManager;
 	
-	public class BattleReportOverRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
-	{		
-		public function BattleReportOverRenderer(reportMgr:BattleReportManager)
+	public class BattleBoutFightRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
+	{
+		private var _fightActions:Array;
+		
+		public function BattleBoutFightRenderer(reportMgr:BattleReportManager, actions:Array)
 		{
 			super(reportMgr);
+			_fightActions = actions;
 		}
 		
 		public function get name():String
 		{
-			return "ReportOver";
+			return "BoutFight";
 		}
 		
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
-		{			
+		{
 			super.drawWaitBitmaps(graphics);
-			//graphics.alert("战斗结束");
 		}
 		
 		public function getFrameLength():int

@@ -22,6 +22,7 @@
     <classEntry path="Action.Core.Flow.IActivity"/>
     <classEntry path="Action.Core.Flow.ActivityBase"/>
     <classEntry path="Util.NumberWrapper"/>
+    <classEntry path="Util.Random"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

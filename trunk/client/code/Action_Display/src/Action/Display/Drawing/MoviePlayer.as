@@ -2,6 +2,10 @@ package Action.Display.Drawing
 {
 	import Action.Core.GamePlugins;
 	
+	import Util.NumberWrapper;
+	
+	import avmplus.getQualifiedClassName;
+	
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 
@@ -58,15 +62,14 @@ package Action.Display.Drawing
 		
 		private function check():void
 		{
-			if(_movie == null || _movie.maxFrame == 0)
+			if(_movie == null || _movie.isEmpty())
 				throw new Error("Empty movie or empty frames");
 		}
 		
 		private function onTimerTicked(e:TimerEvent):void
 		{
 			_curFrame ++;
-			test();
-			if(_curFrame > _movie.maxFrame)
+			if(_movie.isEnd(_curFrame))
 			{
 				this.stop();
 				return;
@@ -74,19 +77,23 @@ package Action.Display.Drawing
 			var renderer:IMovieFrameRenderer = _movie.getFrameRenderer(_curFrame);
 			if(renderer != null)
 			{
-				_graphics.clear();
-				renderer.renderOnEnter(_graphics, this);
 				_curRenderer = renderer;
+				test("OnEnter");
+				_graphics.clear();
+				renderer.render(_graphics, this);
 			}
 			else if(_curRenderer != null)
 			{
+				test("OnTick");
 				_graphics.clear();
-				_curRenderer.renderOnTick(_graphics, this);
+				_curRenderer.render(_graphics, this);
 			}
 		}
 		
-		private function test():void
+		private function test(tag:String):void
 		{		
+			GamePlugins.console.writeLine(NumberWrapper.wrap(_curFrame).toText(3)
+				+ " : " + _curRenderer.name + "." + tag);
 			//GamePlugins.console.writeLine(_graphics.canvas.gete
 			//var date:Date = new Date();
 			//GamePlugins.console.writeLine(date.hours + ":" + date.minutes + ":" + date.seconds + "." + date.milliseconds);

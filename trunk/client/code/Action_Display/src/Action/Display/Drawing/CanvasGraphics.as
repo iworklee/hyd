@@ -9,6 +9,7 @@ package Action.Display.Drawing
 	
 	import mx.controls.Alert;
 	import mx.controls.Image;
+	import mx.controls.Label;
 	
 	import spark.components.BorderContainer;
 
@@ -29,7 +30,7 @@ package Action.Display.Drawing
 			_container.bindGraphics(this);	
 		}
 		
-		public function draw2(bitmap:Bitmap, point:Point, image:Image=null):Image
+		public function drawImage(bitmap:Bitmap, point:Point, image:Image=null):Image
 		{
 			if(image != null)
 				_canvas.removeElement(image);
@@ -45,18 +46,33 @@ package Action.Display.Drawing
 			return point.x >=0 && point.x <= _canvas.width - 50 && point.y >= 0 && point.y <= _canvas.height - 50;
 		}
 		
-		public function draw(bitmap:Bitmap, point:Point):void
+		public function drawBitmap(bitmap:Bitmap, point:Point):void
 		{
 			var rect:Rectangle = new Rectangle(point.x, point.y, bitmap.bitmapData.width, bitmap.bitmapData.height);
 			_canvas.graphics.beginBitmapFill(bitmap.bitmapData, new Matrix(1,0,0,1,rect.x, rect.y), false);
-			//_canvas.graphics.lineStyle(3, 0xff0000);
 			_canvas.graphics.drawRect(rect.x, rect.y, rect.width, rect.height);
 			_canvas.graphics.endFill();
-			//GamePlugins.console.writeLine("fill");
+		}
+		
+		public function drawBitmap2(bitmap:Bitmap, point:Point):void
+		{
+			drawBitmap(bitmap, new Point(point.x - 8, point.y - 8));
+		}
+		
+		public function drawText(text:String, point:Point, color:int=0xff0000, bold:Boolean=false):void
+		{
+			var label:Label = new Label();
+			label.x = point.x;
+			label.y = point.y;
+			label.text = text;
+			label.setStyle("color", color);
+			label.setStyle("fontWeight", bold ? "bold" : "");
+			_canvas.addElement(label);
 		}
 		
 		public function clear():void
 		{
+			_canvas.removeAllElements();
 			_canvas.graphics.clear();
 			//GamePlugins.console.writeLine("clear");
 		}
@@ -64,11 +80,6 @@ package Action.Display.Drawing
 		public function alert(text:String):void
 		{
 			Alert.show(text);
-		}
-		
-		public function getPaintPoint(pos:int):Point
-		{				
-			return new Point((int((pos+100) / 5)-20) * 50, (pos + 100) % 5 * 50);
 		}
 	}
 }

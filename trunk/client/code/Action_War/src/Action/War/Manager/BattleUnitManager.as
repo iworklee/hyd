@@ -3,6 +3,7 @@ package Action.War.Manager
 	import Action.Core.Flow.IActivity;
 	import Action.Model.BattleUnit;
 	import Action.Resource.ResourceManager;
+	import Action.War.BattleDefs;
 	import Action.War.BattleResourceEnum;
 	import Action.War.Flow.LoadBattleUnitActivity;
 	
@@ -12,6 +13,7 @@ package Action.War.Manager
 	import flash.geom.Point;
 	
 	import mx.controls.Image;
+	import mx.controls.Label;
 
 	public class BattleUnitManager
 	{
@@ -19,6 +21,11 @@ package Action.War.Manager
 		public function get battleUnit():BattleUnit
 		{
 			return _battleUnit;
+		}
+		
+		public function get SID():int
+		{
+			return _battleUnit.sID;
 		}
 
 		public function get resId():int
@@ -33,6 +40,13 @@ package Action.War.Manager
 		
 		//public var image:Image;
 		public var paintPoint:Point;
+		public var direction:int;
+		public var speed:int;
+		
+		public function getInitOffset():int
+		{
+			return _battleUnit.sID < BattleDefs.SPLIT_POS ? -BattleDefs.INIT_POS_OFFSET : BattleDefs.INIT_POS_OFFSET;
+		}
 		
 		public function get resourceManager():BattleResourceManager
 		{
@@ -41,22 +55,22 @@ package Action.War.Manager
 		
 		public function getAttackBitmap(idx:int):Bitmap
 		{
-			return resourceManager.attackBitmaps[idx];
+			return resourceManager.attackBitmaps[direction * 4 + idx];
 		}
 		
-		public function getDefendBitmap(idx:int):Bitmap
+		public function getDefendBitmap():Bitmap
 		{
-			return resourceManager.defendBitmaps[idx];
+			return resourceManager.defendBitmaps[direction];
 		}
 		
 		public function getMoveBitmap(idx:int):Bitmap
 		{
-			return resourceManager.moveBitmaps[idx];
+			return resourceManager.moveBitmaps[direction * 2 + idx];
 		}
 		
-		public function getWaitBitmap(idx:int):Bitmap
+		public function getWaitBitmap():Bitmap
 		{
-			return resourceManager.waitBitmaps[idx];
+			return resourceManager.waitBitmaps[direction];
 		}
 		
 		public function getHurtBitmap(idx:int):Bitmap

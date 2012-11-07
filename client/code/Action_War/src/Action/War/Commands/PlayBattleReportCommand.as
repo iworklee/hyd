@@ -12,8 +12,8 @@ package Action.War.Commands
 	import Action.Model.BattleUnit;
 	import Action.Resource.Flow.LoadImageActivity;
 	import Action.Resource.ResourceManager;
-	import Action.War.Manager.BattleReportManager;
-	import Action.War.Manager.BattleUnitManager;
+	import Action.War.Report.BattleReportManager;
+	import Action.War.Report.BattleUnitManager;
 	import Action.War.UI.pgBattle;
 	import Action.War.WarModule;
 	

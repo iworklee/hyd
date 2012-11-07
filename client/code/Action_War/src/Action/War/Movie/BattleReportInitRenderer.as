@@ -6,8 +6,8 @@ package Action.War.Movie
 	import Action.Display.Drawing.MoviePlayer;
 	import Action.War.BattleDefs;
 	import Action.War.BattleHelper;
-	import Action.War.Manager.BattleReportManager;
-	import Action.War.Manager.BattleUnitManager;
+	import Action.War.Report.BattleReportManager;
+	import Action.War.Report.BattleUnitManager;
 	
 	import flash.geom.Point;
 	

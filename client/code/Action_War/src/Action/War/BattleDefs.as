@@ -1,5 +1,7 @@
 package Action.War
 {
+	import flash.geom.Point;
+
 	public class BattleDefs
 	{
 		public function BattleDefs()
@@ -21,6 +23,11 @@ package Action.War
 			if(type < 0 || type >= _battleEffectTypeDescs.length)
 				return "";
 			return _battleEffectTypeDescs[type];
+		}
+		
+		public static function getSkillNamePoint():Point
+		{
+			return new Point(250, 20);
 		}
 	}
 }

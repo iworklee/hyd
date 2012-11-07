@@ -39,6 +39,8 @@ package Action.War
 					unit.id = 2;
 				else if(int(i / 10) == 3)
 					unit.id = 103;
+				else if(i < 20 || i > 49)
+					unit.id = 104;
 				else
 					unit.id = 102;
 				unit.pos = i;
@@ -63,7 +65,7 @@ package Action.War
 				var action:BattleAction = new BattleAction();
 				action.unitSID = 30 + i;
 				action.type = BattleActionType.Cast;
-				action.param = 0;
+				action.param = action.unitSID == 32 ? int(Random.select([0,1])) : 0;
 				bout.actions.push(action);
 				
 				var effect:BattleEffect = new BattleEffect();
@@ -77,7 +79,7 @@ package Action.War
 				action = new BattleAction();
 				action.unitSID = 35 + i;
 				action.type = BattleActionType.Cast;
-				action.param = 0;
+				action.param = action.unitSID == 37 ? int(Random.select([0,24])) : 0;
 				bout.actions.push(action);
 				
 				effect = new BattleEffect();

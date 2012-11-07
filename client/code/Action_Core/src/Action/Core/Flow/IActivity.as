@@ -5,5 +5,6 @@ package Action.Core.Flow
 		function get workflow():Workflow;
 		function set workflow(wf:Workflow):void;
 		function run():void;
+		function dispose():void;
 	}
 }

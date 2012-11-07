@@ -54,20 +54,23 @@ package Action.Display.Drawing
 			_canvas.graphics.endFill();
 		}
 		
-		public function drawBitmap2(bitmap:Bitmap, point:Point):void
+		public function drawBitmap2(bitmap:Bitmap, point:Point, fx:int=-8, fy:int=-8):void
 		{
-			drawBitmap(bitmap, new Point(point.x - 8, point.y - 8));
+			drawBitmap(bitmap, new Point(point.x + fx, point.y + fy));
 		}
 		
-		public function drawText(text:String, point:Point, color:int=0xff0000, bold:Boolean=false):void
+		public function drawText(text:String, point:Point, color:int=0xff0000, fontSize:int=12, bold:Boolean=false, fontFamily:String="Arial"):void
 		{
 			var label:Label = new Label();
 			label.x = point.x;
 			label.y = point.y;
 			label.text = text;
 			label.setStyle("color", color);
+			label.setStyle("fontSize", fontSize);
 			label.setStyle("fontWeight", bold ? "bold" : "");
+			label.setStyle("fontFamily", fontFamily);
 			_canvas.addElement(label);
+			//GamePlugins.console.writeLine(text);
 		}
 		
 		public function clear():void

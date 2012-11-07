@@ -14,6 +14,12 @@ package Action.Core.Flow
 		private var _activities:Array;
 		private var _index:int = 0;
 				
+		public function getPreviousActivity():IActivity
+		{
+			var idx:int = _index - 1;
+			return idx < _activities.length ? _activities[idx] as IActivity : null;
+		}
+		
 		public function getCurrentActivity():IActivity
 		{
 			return _index < _activities.length ? _activities[_index] as IActivity : null;
@@ -30,11 +36,14 @@ package Action.Core.Flow
 		
 		public function goon():void
 		{
-			var act:IActivity = getCurrentActivity();
-			if(act != null)
+			var preAct:IActivity = getPreviousActivity();
+			if(preAct != null)
+				preAct.dispose();
+			var curAct:IActivity = getCurrentActivity();
+			if(curAct != null)
 			{
 				_index++;
-				act.run();
+				curAct.run();
 			}
 			else if(_index >= _activities.length)
 			{

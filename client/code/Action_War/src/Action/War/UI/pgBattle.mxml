@@ -19,8 +19,8 @@
 			import Action.Model.BattleUnit;
 			import Action.Resource.Flow.LoadImageActivity;
 			import Action.Resource.ResourceManager;
-			import Action.War.Manager.BattleReportManager;
-			import Action.War.Manager.BattleResourceManager;
+			import Action.War.Report.BattleReportManager;
+			import Action.War.Resource.BattleUnitResource;
 			import Action.War.WarModule;
 			
 			import Util.NumberWrapper;
@@ -107,7 +107,7 @@
 			
 			private function test():void
 			{
-				var resMgr:BattleResourceManager = BattleResourceManager.getInstance(1);
+				var resMgr:BattleUnitResource = BattleUnitResource.getInstance(1);
 				for(var i:int=0; i<12; i++)
 				{
 					var img:Image = new Image();
@@ -165,7 +165,7 @@
 			{
 				_imgTest = new Image();
 				_bcCanvas.addElement(_imgTest);
-				_imgTest.source = BattleResourceManager.getInstance(1).moveBitmaps[0];
+				_imgTest.source = BattleUnitResource.getInstance(1).moveBitmaps[0];
 				var timer:Timer = new Timer(1000);
 				timer.addEventListener(TimerEvent.TIMER, onTick);
 				timer.start();
@@ -173,7 +173,7 @@
 			
 			private function test3():void
 			{
-				var bmp:Bitmap  = BattleResourceManager.getInstance(1).moveBitmaps[0];
+				var bmp:Bitmap  = BattleUnitResource.getInstance(1).moveBitmaps[0];
 				_bcCanvas.graphics.moveTo(25,0);
 				_bcCanvas.graphics.beginBitmapFill(bmp.bitmapData, new Matrix(1,0,0,1,25), false, false);
 				//_canvas.graphics.beginFill(0x00ff00);
@@ -188,7 +188,7 @@
 				_bcCanvas.removeElement(_imgTest);
 				_imgTest = new Image();
 				_bcCanvas.addElement(_imgTest);
-				_imgTest.source = BattleResourceManager.getInstance(1).moveBitmaps[idx];
+				_imgTest.source = BattleUnitResource.getInstance(1).moveBitmaps[idx];
 				_imgTest.move(50 * idx, 50);
 				GamePlugins.console.writeLine(idx.toString());
 				_idxTest ++;

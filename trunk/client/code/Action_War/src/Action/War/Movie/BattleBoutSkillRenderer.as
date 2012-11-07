@@ -7,8 +7,11 @@ package Action.War.Movie
 	import Action.Model.BattleEffect;
 	import Action.Model.BattleEffectType;
 	import Action.War.BattleDefs;
-	import Action.War.Manager.BattleReportManager;
-	import Action.War.Manager.BattleUnitManager;
+	import Action.War.Report.BattleReportManager;
+	import Action.War.Report.BattleUnitManager;
+	import Action.War.Skill.BattleSkill;
+	import Action.War.Skill.ISkillRenderer;
+	import Action.War.WarPlugins;
 	
 	import Util.NumberWrapper;
 	
@@ -18,13 +21,25 @@ package Action.War.Movie
 	public class BattleBoutSkillRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
 	{
 		private var _action:BattleAction;
+		public function get action():BattleAction
+		{
+			return _action;
+		}
+		
 		private var _attacker:BattleUnitManager;
+		public function get attacker():BattleUnitManager
+		{
+			return _attacker;
+		}
+		
+		private var _skillRenderer:ISkillRenderer;
 		
 		public function BattleBoutSkillRenderer(reportMgr:BattleReportManager, action:BattleAction)
 		{
 			super(reportMgr);
 			_action = action;
 			_attacker = _battleReportManager.getBattleUnitManager(_action.unitSID);
+			_skillRenderer = BattleSkill(WarPlugins.skills[_action.param]).createRenderer();
 		}
 		
 		public function get name():String
@@ -35,32 +50,13 @@ package Action.War.Movie
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
 		{			
 			var index:int = player.currentFrame - _initialFrame;
-			var exception:Array = new Array();			
-			exception[_attacker.SID] = _attacker;
-			graphics.drawBitmap2(_attacker.getAttackBitmap(index < 4 ? index : 3), _attacker.paintPoint);
-			if(index >= 3)
-			{
-				for each(var effect:BattleEffect in _action.effects)
-				{
-					var bum:BattleUnitManager = _battleReportManager.getBattleUnitManager(effect.unitSID);
-					exception[bum.SID] = bum;
-					if(effect.type < 2)
-						graphics.drawBitmap(bum.getDefendBitmap(), bum.paintPoint);
-					else
-						graphics.drawBitmap(bum.getHurtBitmap(0), bum.paintPoint);
-					
-					var lblPnt:Point = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 50 - index * 10);						
-					var text:String = BattleDefs.getBattleEffectTypeDesc(effect.type)
-						+ NumberWrapper.wrap(effect.plusHP).toText2();
-					graphics.drawText(text, lblPnt, 0x00ff00);
-				}
-			}
-			super.drawWaitBitmaps(graphics, exception);
+			_skillRenderer.render(graphics, index, this);
+			
 		}
 		
 		public function getFrameLength():int
 		{
-			return 8;
+			return _skillRenderer.getFrameLength();
 		}
 	}
 }

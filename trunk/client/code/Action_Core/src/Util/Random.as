@@ -20,5 +20,12 @@ package Util
 		{
 			return Math.round(Math.random() * (max - min)) + min;
 		}
+		
+		public static function select(array:Array):Object
+		{
+			if(array == null || array.length == 0)
+				return null;
+			return array[generate(0, array.length - 1)];
+		}
 	}
 }

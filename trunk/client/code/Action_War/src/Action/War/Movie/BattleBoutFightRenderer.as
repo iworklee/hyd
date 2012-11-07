@@ -4,7 +4,7 @@ package Action.War.Movie
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Display.Drawing.MoviePlayer;
 	import Action.Model.BattleReport;
-	import Action.War.Manager.BattleReportManager;
+	import Action.War.Report.BattleReportManager;
 	
 	public class BattleBoutFightRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
 	{

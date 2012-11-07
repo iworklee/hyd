@@ -4,11 +4,11 @@
     <classEntry path="Action.War.WarModule"/>
     <classEntry path="Action.War.BattleReportProvider"/>
     <classEntry path="Action.War.Commands.PlayBattleReportCommand"/>
-    <classEntry path="Action.War.Manager.BattleUnitManager"/>
+    <classEntry path="Action.War.Report.BattleUnitManager"/>
     <classEntry path="Action.War.Flow.LoadBattleUnitActivity"/>
-    <classEntry path="Action.War.Manager.BattleReportManager"/>
+    <classEntry path="Action.War.Report.BattleReportManager"/>
     <classEntry path="Action.War.BattleResourceEnum"/>
-    <classEntry path="Action.War.Manager.BattleResourceManager"/>
+    <classEntry path="Action.War.Resource.BattleUnitResource"/>
     <classEntry path="Action.War.Strategy.IBattleResourceStrategy"/>
     <classEntry path="Action.War.Strategy.BattleResourceStrategyFactory"/>
     <classEntry path="Action.War.Strategy.AttackResourceStrategy"/>
@@ -21,6 +21,13 @@
     <classEntry path="Action.War.Movie.BattleBoutMoveRenderer"/>
     <classEntry path="Action.War.Movie.MovieFrameRendererBase"/>
     <classEntry path="Action.War.BattleHelper"/>
+    <classEntry path="Action.War.Skill.ISkillRenderer"/>
+    <classEntry path="Action.War.Skill.SkillRendererFactory"/>
+    <classEntry path="Action.War.Skill.BattleSkill"/>
+    <classEntry path="Action.War.WarPlugins"/>
+    <classEntry path="Action.War.Skill.SkillRendererBase"/>
+    <classEntry path="Action.War.Skill.CommonSkillRenderer"/>
+    <classEntry path="Action.War.Skill.SpecialSkillRenderer"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

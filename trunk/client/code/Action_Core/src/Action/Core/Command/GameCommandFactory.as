@@ -1,8 +1,6 @@
 package Action.Core.Command
 {
 	import Action.Core.GamePlugins;
-	
-	import flash.utils.getDefinitionByName;
 
 	public class GameCommandFactory
 	{

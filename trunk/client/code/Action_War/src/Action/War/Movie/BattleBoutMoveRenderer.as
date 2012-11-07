@@ -3,7 +3,7 @@ package Action.War.Movie
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Display.Drawing.MoviePlayer;
-	import Action.War.Manager.BattleReportManager;
+	import Action.War.Report.BattleReportManager;
 	
 	public class BattleBoutMoveRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
 	{

@@ -1,7 +1,7 @@
 package Action.War.Strategy
 {
 	import Action.Display.Drawing.BitmapHelper;
-	import Action.War.Manager.BattleResourceManager;
+	import Action.War.Resource.BattleUnitResource;
 	
 	import Util.NumberWrapper;
 	
@@ -14,12 +14,12 @@ package Action.War.Strategy
 		{
 		}
 		
-		public function getBitmaps(resourceManager:BattleResourceManager):Array
+		public function getBitmaps(resourceManager:BattleUnitResource):Array
 		{
 			return resourceManager.moveBitmaps;
 		}
 		
-		public function loadBitmaps(resourceManager:BattleResourceManager,sourceBmp:Bitmap):void
+		public function loadBitmaps(resourceManager:BattleUnitResource,sourceBmp:Bitmap):void
 		{
 			var moveBmps:Array = resourceManager.moveBitmaps;
 			var waitBmps:Array = resourceManager.waitBitmaps;
@@ -54,7 +54,7 @@ package Action.War.Strategy
 			}
 		}
 		
-		public function getRequestUrl(resourceManager:BattleResourceManager):String
+		public function getRequestUrl(resourceManager:BattleUnitResource):String
 		{
 			return "BU/m" + NumberWrapper.wrap(resourceManager.resId).toText(3) + ".png";
 		}

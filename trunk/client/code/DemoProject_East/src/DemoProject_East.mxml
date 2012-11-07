@@ -83,8 +83,9 @@
 				parent.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
 				GameClient.create().frame = this;
 				GamePlugins.console = this;
-				GamePlugins.modules = [];
+				GamePlugins.modules = [new WarModule()];
 				GamePlugins.commands = [new PlayBattleReportCommand()];
+				GameModuleFactory.current.getModule("WarModule").onLoad();
 				GameCommandFactory.current.getCommand(9527).execute(GameClient.current,
 					BattleReportProvider.current.createTestReport());
 			}

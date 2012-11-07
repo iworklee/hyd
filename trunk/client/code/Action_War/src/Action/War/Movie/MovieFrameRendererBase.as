@@ -2,15 +2,20 @@ package Action.War.Movie
 {
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.War.BattleHelper;
-	import Action.War.Manager.BattleReportManager;
-	import Action.War.Manager.BattleUnitManager;
+	import Action.War.Report.BattleReportManager;
+	import Action.War.Report.BattleUnitManager;
 
 	public class MovieFrameRendererBase
 	{
 		protected var _battleReportManager:BattleReportManager;
+		public function get battleReportManager():BattleReportManager
+		{
+			return _battleReportManager;
+		}
+		
 		protected var _initialFrame:int;
 		
-		protected function drawWaitBitmaps(graphics:CanvasGraphics, exceptions:Array=null):void
+		public function drawWaitBitmaps(graphics:CanvasGraphics, exceptions:Array=null):void
 		{
 			for each(var unitMgr:BattleUnitManager in _battleReportManager.getBattleUnitManagers())
 			{

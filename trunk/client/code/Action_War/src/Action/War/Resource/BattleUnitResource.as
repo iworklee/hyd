@@ -1,15 +1,15 @@
-package Action.War.Manager
+package Action.War.Resource
 {
-	public class BattleResourceManager
+	public class BattleUnitResource
 	{
 		private static var _managers:Array = new Array();
 		
 		public static function createInstance(rid:int):void
 		{
-			_managers[rid] = new BattleResourceManager(rid);
+			_managers[rid] = new BattleUnitResource(rid);
 		}
 		
-		public static function getInstance(rid:int):BattleResourceManager
+		public static function getInstance(rid:int):BattleUnitResource
 		{
 			return _managers[rid];
 		}
@@ -20,9 +20,9 @@ package Action.War.Manager
 			return _resId;
 		}
 		
-		public function BattleResourceManager(id:int)
+		public function BattleUnitResource(rid:int)
 		{
-			_resId = id;
+			_resId = rid;
 		}
 		
 		public var attackBitmaps:Array = new Array();

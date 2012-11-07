@@ -1,4 +1,4 @@
-package Action.War.Manager
+package Action.War.Report
 {
 	import Action.Core.Flow.IActivity;
 	import Action.Model.BattleUnit;
@@ -14,6 +14,7 @@ package Action.War.Manager
 	
 	import mx.controls.Image;
 	import mx.controls.Label;
+	import Action.War.Resource.BattleUnitResource;
 
 	public class BattleUnitManager
 	{
@@ -48,9 +49,9 @@ package Action.War.Manager
 			return _battleUnit.sID < BattleDefs.SPLIT_POS ? -BattleDefs.INIT_POS_OFFSET : BattleDefs.INIT_POS_OFFSET;
 		}
 		
-		public function get resourceManager():BattleResourceManager
+		public function get resourceManager():BattleUnitResource
 		{
-			return BattleResourceManager.getInstance(resId);
+			return BattleUnitResource.getInstance(resId);
 		}
 		
 		public function getAttackBitmap(idx:int):Bitmap

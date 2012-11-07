@@ -1,4 +1,4 @@
-package Action.War.Manager
+package Action.War.Report
 {
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Display.Drawing.IMovieFrameRenderer;
@@ -16,6 +16,7 @@ package Action.War.Manager
 	import Action.War.Movie.BattleBoutSkillRenderer;
 	import Action.War.Movie.BattleReportInitRenderer;
 	import Action.War.Movie.BattleReportOverRenderer;
+	import Action.War.Resource.BattleUnitResource;
 
 	public class BattleReportManager
 	{
@@ -72,9 +73,9 @@ package Action.War.Manager
 			var acts:Array = new Array();
 			for each(var bum:BattleUnitManager in _buManagers)
 			{
-				if(BattleResourceManager.getInstance(bum.resId) == null)
+				if(BattleUnitResource.getInstance(bum.resId) == null)
 				{
-					BattleResourceManager.createInstance(bum.resId);
+					BattleUnitResource.createInstance(bum.resId);
 					for(var i:int = 0; i<3; i++)
 						acts.push(new LoadBattleUnitActivity(bum.resId, i));
 				}
@@ -104,7 +105,7 @@ package Action.War.Manager
 			for each(var bout:BattleBout in _battleReport.bouts)
 			{
 				var moveActions:Array = new Array();
-				if(bout.sID % 2 == 1)
+				if(true)
 				{
 					for each(var action:BattleAction in bout.actions)
 					{

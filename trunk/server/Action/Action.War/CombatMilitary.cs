@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Action.Model;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Action.War
     {
         private List<CombatUnit> _units = new List<CombatUnit>();
         private List<CombatUnit> _aliveUnits = new List<CombatUnit>();
+        private Dictionary<Vector2,CombatUnit> _unitsPos = new Dictionary<Vector2,CombatUnit>();
 
         /// <summary>
         /// 敌军
@@ -44,6 +46,35 @@ namespace Action.War
         {
             _units.Add(unit);
             _aliveUnits.Add(unit);
+            _unitsPos.Add(unit.Position, unit);
+        }
+
+        /// <summary>
+        /// 根据位置查找单位
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns></returns>
+        public CombatUnit GetAliveUnitByPos( Vector2 pos)
+        {
+            CombatUnit unit;
+            _unitsPos.TryGetValue(pos, out unit);
+            return unit;
+        }
+
+        /// <summary>
+        /// 移动
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <returns></returns>
+        public BattleAction Move(CombatUnit unit)
+        {
+            unit.Position = unit.Position + unit.Military.Forward;
+            var ba = new BattleAction();
+            ba.UnitSID = unit.BattleID;
+
+            ba.Type = BattleActionType.Move;    // 移动
+            ba.Param = unit.Position.Pos2Int();// 位置
+            return ba;
         }
     }
 }

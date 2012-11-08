@@ -73,12 +73,15 @@
     <Compile Include="CombatMilitary.cs" />
     <Compile Include="Commands\EmbattleCommand.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Skill\ISkill.cs" />
+    <Compile Include="Skill\SkillFactory.cs" />
     <Compile Include="WarModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CombatUnit.cs" />
+    <Compile Include="CombatUnit.Property.cs" />
     <Compile Include="CombatTacticUnit.cs" />
     <Compile Include="CombatStrategyUnit.cs" />
     <Compile Include="CombatCampUnit.cs" />
+    <Compile Include="CombatUnit.Method.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Action.Core\Action.Core.csproj">

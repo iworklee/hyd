@@ -20,11 +20,13 @@ namespace Action.War
         /// <summary>
         /// 可以释放技能
         /// </summary>
-        /// <returns></returns>
-        public override bool SkillReady()
+        public override bool SkillReady
         {
-            var rng = new Random();
-            return rng.NextDouble() < SkillChance;
+            get
+            {
+                var rng = new Random();
+                return rng.NextDouble() < SkillChance;
+            }
         }
     }
 }

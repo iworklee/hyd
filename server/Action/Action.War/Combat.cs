@@ -148,7 +148,7 @@ namespace Action.War
                         continue;
                     }
 
-                    action = Move(attacker);
+                    action = attacker.Move();
                     if (action != null)
                         bout.Actions.Add(action);
                 }
@@ -161,16 +161,6 @@ namespace Action.War
             }
 
             Report.Bouts.Add(bout);
-        }
-
-        private BattleAction Move(CombatUnit attacker)
-        {
-            attacker.Position = attacker.Position + attacker.Military.Forward;
-            var ba = new BattleAction();
-            ba.UnitSID = attacker.BattleID;
-            ba.Type = BattleActionType.Move;    // 移动
-            ba.Param = attacker.Position.Pos2Int();// 位置
-            return ba;
         }
 
 

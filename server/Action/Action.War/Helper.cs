@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Action.Model;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,18 +19,18 @@ namespace Action.War
             return new Vector2(pos / 5, pos % 5);
         }
 
-        public static DamageType Test(float criticalChance, float blockChance, float dodgeChance)
+        public static BattleEffectType Test(float criticalChance, float blockChance, float dodgeChance)
         {
             var rng = new Random();
             var n = rng.NextDouble();
             if (n < dodgeChance)
-                return DamageType.Dodge;
+                return BattleEffectType.Dodge;
             else if (n < dodgeChance + blockChance)
-                return DamageType.Block;
+                return BattleEffectType.Block;
             else if (n < dodgeChance + blockChance + criticalChance)
-                return DamageType.Critical;
+                return BattleEffectType.Critical;
             else
-                return DamageType.Normal;
+                return BattleEffectType.Normal;
         }
     }
 }

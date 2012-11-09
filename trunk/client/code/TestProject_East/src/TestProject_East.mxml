@@ -16,8 +16,7 @@
 			import Action.Model.BackdoorLoginArgs;
 			
 			import avmplus.getQualifiedClassName;
-			
-			import com.adobe.serialization.json.*;
+	
 			import com.netease.protobuf.Message;
 			
 			import flash.utils.describeType;
@@ -37,6 +36,11 @@
 			public function writeLine(text:Object):void
 			{
 				write(text + "\n");
+			}
+			
+			public function drawBitmap(bitmap:BitmapData):void
+			{
+				
 			}
 			
 			public function clear():void

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" implements="Action.Core.Page.IGameFrame,Action.Core.IConsole" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" width="960" height="600"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="1060" height="600"
 			   backgroundColor="#00aabb" creationComplete="application1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
@@ -19,6 +19,7 @@
 			import Action.War.WarModule;
 			
 			import mx.controls.Alert;
+			import mx.controls.Image;
 			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
 			
@@ -71,11 +72,26 @@
 			public function writeLine(text:Object):void
 			{
 				write(text + "\n");
+				scrollToBottom(txtTestOutput.scroller);
+			}
+			
+			public function drawBitmap(bitmap:BitmapData):void
+			{
+				var image:Image = new Image();
+				image.source = new Bitmap(bitmap);
+				_imageContainer.addElement(image);
+				//scrollToBottom(_scroll1);
 			}
 			
 			public function clear():void
 			{
 				txtTestOutput.text = "";
+				_imageContainer.removeAllElements();
+			}
+			
+			private function scrollToBottom(scroller:Scroller):void
+			{
+				scroller.verticalScrollBar.value = scroller.verticalScrollBar.maximum;
 			}
 			
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
@@ -118,5 +134,15 @@
 	<s:BorderContainer width="200" height="600" x="760">
 		<s:TextArea id="txtTestOutput" width="100%" height="100%" editable="false" color="#ff0000" text="" />
 		<s:BorderContainer width="93%" height="100%" backgroundColor="#0000ff" backgroundAlpha="0.3" />
+	</s:BorderContainer>
+	<s:BorderContainer width="100" height="600" x="960" backgroundColor="#556688">
+		<s:Scroller id="_scroll1" width="100%" height="100%"> 
+			<s:Group id="_imageContainer" width="100%" height="100%" clipAndEnableScrolling="true">			
+				<s:layout>
+					<s:VerticalLayout useVirtualLayout="true">
+					</s:VerticalLayout>
+				</s:layout>	
+			</s:Group>
+		</s:Scroller>
 	</s:BorderContainer>
 </s:Application>

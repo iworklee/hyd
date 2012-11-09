@@ -65,33 +65,56 @@ package Action.War
 				var action:BattleAction = new BattleAction();
 				action.unitSID = 30 + i;
 				action.type = BattleActionType.Cast;
-				action.param = action.unitSID == 32 ? int(Random.select([0,1])) : 0;
+				action.param = 0;
 				bout.actions.push(action);
 				
-				var effect:BattleEffect = new BattleEffect();
-				effect.unitSID = 35 + i;
-				effect.type = Random.generate(0, 3);
-				effect.plusHP = effect.type > 0 ?  -Random.generate(1, 200) : 0;
-				effect.plusMP = 0;
-				effect.buffId = 0;
-				action.effects.push(effect);
+				if(action.unitSID == 32)
+				{
+					action.param = int(Random.select([101, 106]));
+					if(action.param == 101)
+					{
+						for(var j:int = 0; j<3; j++)
+							addEffect(action, 36 + j);
+					}
+					else
+					{
+						for(j=0; j<3; j++)
+							addEffect(action, 26 + j, 4);
+						for(j=0; j<3; j++)
+							addEffect(action, 31 + j, 4);
+					}
+				}
+				else
+					addEffect(action, 35 + i);
 				
 				action = new BattleAction();
 				action.unitSID = 35 + i;
 				action.type = BattleActionType.Cast;
-				action.param = action.unitSID == 37 ? int(Random.select([0,24])) : 0;
+				action.param = 0;
 				bout.actions.push(action);
 				
-				effect = new BattleEffect();
-				effect.unitSID = 30 + i;
-				effect.type = Random.generate(0, 3);
-				effect.plusHP = effect.type > 0 ?  -Random.generate(1, 200) : 0;
-				effect.plusMP = 0;
-				effect.buffId = 0;
-				action.effects.push(effect);
+				if(action.unitSID == 37)
+				{
+					action.param = 1;
+					for(j = 0; j<3; j++)
+						addEffect(action, 22 + j * 5);
+				}
+				else
+					addEffect(action, 30 + i);
 			}
 			
 			return bout;
+		}
+		
+		private function addEffect(action:BattleAction, unitSID:int, type:int=-1):void
+		{
+			var effect:BattleEffect = new BattleEffect();
+			effect.unitSID = unitSID;
+			effect.type = type < 0 ? Random.generate(0, 3) : type;
+			effect.plusHP = effect.type > 0 ?  -Random.generate(1, 200) : 0;
+			effect.plusMP = 0;
+			effect.buffId = 0;
+			action.effects.push(effect);
 		}
 		
 		private function createBout2():BattleBout

@@ -5,26 +5,26 @@ package Action.War.Strategy
 	
 	import Util.NumberWrapper;
 	
-	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
-	public class MoveResourceStrategy implements IBattleResourceStrategy
+	public class UnitMoveResourceStrategy implements IUnitResourceStrategy
 	{
-		public function MoveResourceStrategy()
+		public function UnitMoveResourceStrategy()
 		{
 		}
 		
-		public function getBitmaps(resourceManager:BattleUnitResource):Array
+		public function getBitmaps(resource:BattleUnitResource):Array
 		{
-			return resourceManager.moveBitmaps;
+			return resource.moveBitmaps;
 		}
 		
-		public function loadBitmaps(resourceManager:BattleUnitResource,sourceBmp:Bitmap):void
+		public function loadBitmaps(resource:BattleUnitResource,sourceBmp:BitmapData):void
 		{
-			var moveBmps:Array = resourceManager.moveBitmaps;
-			var waitBmps:Array = resourceManager.waitBitmaps;
-			var hurtBmps:Array = resourceManager.hurtBitmaps;
-			var targetBmp:Bitmap = null;
+			var moveBmps:Array = resource.moveBitmaps;
+			var waitBmps:Array = resource.waitBitmaps;
+			var hurtBmps:Array = resource.hurtBitmaps;
+			var targetBmp:BitmapData = null;
 			
 			for(var y:int = 0; y < 6; y++)
 			{

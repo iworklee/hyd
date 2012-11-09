@@ -5,14 +5,15 @@ package Action.War.Flow
 	import Action.Display.Drawing.BitmapHelper;
 	import Action.Resource.ResourceManager;
 	import Action.War.BattleResourceEnum;
-	import Action.War.Resource.BattleUnitResource;
 	import Action.War.Report.BattleUnitManager;
+	import Action.War.Resource.BattleUnitResource;
 	import Action.War.Strategy.BattleResourceStrategyFactory;
-	import Action.War.Strategy.IBattleResourceStrategy;
+	import Action.War.Strategy.IUnitResourceStrategy;
 	
 	import Util.NumberWrapper;
 	
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -23,23 +24,23 @@ package Action.War.Flow
 	
 	import org.osmf.events.LoaderEvent;
 	
-	public class LoadBattleUnitActivity extends ActivityBase implements IActivity
+	public class LoadBattleUnitResourceActivity extends ActivityBase implements IActivity
 	{
-		private var _battleResourceManager:BattleUnitResource;
-		private var _battleResourceStrategy:IBattleResourceStrategy;
+		private var _battleUnitResource:BattleUnitResource;
+		private var _unitResourceStrategy:IUnitResourceStrategy;
 		private var _battleBitmaps:Array;
 		
 		private var _request:URLRequest;
 		private var _loader:Loader;
 		
-		public function LoadBattleUnitActivity(brid:int, enum:int)
+		public function LoadBattleUnitResourceActivity(brid:int, enum:int)
 		{
-			_battleResourceStrategy = BattleResourceStrategyFactory.strategies[enum];
-			_battleResourceManager = BattleUnitResource.getInstance(brid);
-			_battleBitmaps = _battleResourceStrategy.getBitmaps(_battleResourceManager);
+			_battleUnitResource = BattleUnitResource.getInstance(brid);
+			_unitResourceStrategy = BattleResourceStrategyFactory.getUnitStrategy(enum);
+			_battleBitmaps = _unitResourceStrategy.getBitmaps(_battleUnitResource);
 			
 			_request = new URLRequest();  
-			_request.url = ResourceManager.parseUrl(_battleResourceStrategy.getRequestUrl(_battleResourceManager));
+			_request.url = ResourceManager.parseUrl(_unitResourceStrategy.getRequestUrl(_battleUnitResource));
 			_request.method = URLRequestMethod.GET;
 			
 			_loader = new Loader();
@@ -63,8 +64,8 @@ package Action.War.Flow
 		
 		private function onImageLoaded(e:Event):void
 		{
-			var sourceBmp:Bitmap = Bitmap(e.currentTarget.content);
-			_battleResourceStrategy.loadBitmaps(_battleResourceManager, sourceBmp);
+			var sourceBmp:BitmapData = Bitmap(e.currentTarget.content).bitmapData;
+			_unitResourceStrategy.loadBitmaps(_battleUnitResource, sourceBmp);
 			this.workflow.goon();
 		}
 	}

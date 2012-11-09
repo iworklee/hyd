@@ -5,24 +5,24 @@ package Action.War.Strategy
 	
 	import Util.NumberWrapper;
 	
-	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
-	public class AttackResourceStrategy implements IBattleResourceStrategy
+	public class UnitAttackResourceStrategy implements IUnitResourceStrategy
 	{
-		public function AttackResourceStrategy()
+		public function UnitAttackResourceStrategy()
 		{
 		}
 		
-		public function getBitmaps(resourceManager:BattleUnitResource):Array
+		public function getBitmaps(resource:BattleUnitResource):Array
 		{
-			return resourceManager.attackBitmaps;
+			return resource.attackBitmaps;
 		}
 		
-		public function loadBitmaps(resourceManager:BattleUnitResource,sourceBmp:Bitmap):void
+		public function loadBitmaps(resource:BattleUnitResource,sourceBmp:BitmapData):void
 		{
-			var attackBmps:Array = resourceManager.attackBitmaps;
-			var targetBmp:Bitmap = null;
+			var attackBmps:Array = resource.attackBitmaps;
+			var targetBmp:BitmapData = null;
 			
 			for(var y:int=0; y<12; y++)
 			{
@@ -37,9 +37,9 @@ package Action.War.Strategy
 			}
 		}
 		
-		public function getRequestUrl(resourceManager:BattleUnitResource):String
+		public function getRequestUrl(resource:BattleUnitResource):String
 		{
-			return "BU/a" + NumberWrapper.wrap(resourceManager.resId).toText(3) + ".png";
+			return "BU/a" + NumberWrapper.wrap(resource.resId).toText(3) + ".png";
 		}
 		
 		public function getBitmapSize():Point

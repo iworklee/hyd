@@ -23,8 +23,12 @@ namespace Action.War
         /// <returns></returns>
         public BattleAction Strike()
         {
-            if (SkillReady)
-                return SkillStrike();
+            BattleAction ba;
+
+            // 使用技能攻击
+            ba = SkillStrike();
+            if (ba != null)
+                return ba;
 
             // 根据攻击范围，找攻击目标
             var target = StrikeRange
@@ -39,7 +43,7 @@ namespace Action.War
 
             var effect = Attacking(target, AttackType.Normal, damageType);
 
-            var ba = new BattleAction();
+            ba = new BattleAction();
             ba.UnitSID = this.BattleID;
             ba.Type = BattleActionType.Cast; // 攻击
             ba.Param = 0; // 普通攻击

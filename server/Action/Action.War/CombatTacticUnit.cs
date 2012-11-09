@@ -13,35 +13,18 @@ namespace Action.War
     public class CombatTacticUnit : CombatUnit
     {
         const int MAX_CHARGE = 100;
+        const int CHARGE_PLUS = 25;
 
         public CombatTacticUnit(CombatMilitary military) : base(military) { }
 
-        /// <summary>
-        /// 可以释放技能
-        /// </summary>
-        public override bool SkillReady
-        {
-            get
-            {
-                return Charge > 100;
-            }
-        }
-
         public override BattleAction SkillStrike()
         {
-            if (SkillStrikeRange == 0)
+            // 可以释放技能
+            if (Charge < 100)
                 return null;
 
-            switch (SkillID)
-            {
-                case 111:
-                    break;
-                case 112:
-                    break;
-            }
-
             // 根据攻击范围，找攻击目标
-            var target = StrikeRange
+            var target = _skill.Range
                 .Select(loc => Military.Enemy.GetAliveUnitByPos(this.Position + loc * Military.Forward))
                 .Where(unit => unit != null)
                 .FirstOrDefault();
@@ -59,6 +42,19 @@ namespace Action.War
             ba.Param = SkillID; // 战法攻击
             ba.Effects.Add(effect);
             return ba;
+        }
+        protected override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
+        {
+            if (effectType != BattleEffectType.Dodge)
+                Charge += CHARGE_PLUS;
+
+            return base.Attacking(target, attackType, effectType);
+        }
+
+        protected override void Attacked(BattleEffect effect)
+        {
+            if (effect.Type != BattleEffectType.Dodge)
+                Charge += CHARGE_PLUS;
         }
     }
 }

@@ -6,7 +6,7 @@ package Action.War.Resource
 		
 		public static function createInstance(rid:int):void
 		{
-			_managers[rid] = new BattleUnitResource(rid);
+			_managers[rid] = new BattleSkillResource(rid);
 		}
 		
 		public static function getInstance(rid:int):BattleSkillResource
@@ -25,7 +25,7 @@ package Action.War.Resource
 			_resId = rid;
 		}
 		
-		public var effectBitmaps:Array = new Array();
+		public var bitmaps:Array = new Array();
 		
 	}
 }

@@ -1,5 +1,7 @@
 package Action.Core.Flow
 {
+	import flash.events.IOErrorEvent;
+
 	public class ActivityBase
 	{
 		public function ActivityBase()
@@ -19,10 +21,10 @@ package Action.Core.Flow
 			_workflow = wf;
 		}
 		
-		protected function retry():void
+		protected function retry(e:IOErrorEvent):void
 		{
 			if(++_retryCount > 5)
-				throw new Error("Failed for 5 times.");
+				throw new Error("Failed for 5 times.\n" + e.toString());
 			if(this is IActivity)
 				IActivity(this).run();
 		}

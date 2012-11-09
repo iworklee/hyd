@@ -6,12 +6,15 @@ package Action.War.Skill
 	import Action.Model.BattleEffect;
 	import Action.War.BattleDefs;
 	import Action.War.Movie.BattleBoutSkillRenderer;
+	import Action.War.Report.BattleEffectWrapper;
 	import Action.War.Report.BattleUnitManager;
 	
 	import Util.NumberWrapper;
 	
 	import flash.display.Graphics;
 	import flash.geom.Point;
+	
+	import flashx.textLayout.factory.TruncationOptions;
 	
 	public class CommonSkillRenderer extends SkillRendererBase implements ISkillRenderer
 	{
@@ -44,10 +47,15 @@ package Action.War.Skill
 					else
 						graphics.drawBitmap(bum.getHurtBitmap(0), bum.paintPoint);
 					
-					var lblPnt:Point = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 50 - index * 10);						
-					var text:String = BattleDefs.getBattleEffectTypeDesc(effect.type)
-						+ NumberWrapper.wrap(effect.plusHP).toText2();
-					graphics.drawText(text, lblPnt, 0x00ff00);
+					var wrapper:BattleEffectWrapper = BattleEffectWrapper.wrap(effect);
+					
+					//print effect.type
+					var lblPnt:Point = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 20 - index * wrapper.getTypeUpSpeed());
+					graphics.drawText(wrapper.getTypeDesc(), lblPnt, wrapper.getTypeColor(), 15, true);
+					
+					//print effect.plusHP
+					lblPnt = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 50 - index * 10);
+					graphics.drawText(wrapper.getPlusHpDesc(), lblPnt, 0x00ff00, 15, true);
 				}
 			}
 			frameRenderer.drawWaitBitmaps(graphics, exception);

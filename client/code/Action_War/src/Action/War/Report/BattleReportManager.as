@@ -10,13 +10,17 @@ package Action.War.Report
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
 	import Action.War.BattleDefs;
-	import Action.War.Flow.LoadBattleUnitActivity;
+	import Action.War.Flow.LoadBattleSkillResourceActivity;
+	import Action.War.Flow.LoadBattleUnitResourceActivity;
 	import Action.War.Movie.BattleBoutFightRenderer;
 	import Action.War.Movie.BattleBoutMoveRenderer;
 	import Action.War.Movie.BattleBoutSkillRenderer;
 	import Action.War.Movie.BattleReportInitRenderer;
 	import Action.War.Movie.BattleReportOverRenderer;
+	import Action.War.Resource.BattleSkillResource;
 	import Action.War.Resource.BattleUnitResource;
+	import Action.War.Skill.BattleSkill;
+	import Action.War.WarPlugins;
 
 	public class BattleReportManager
 	{
@@ -48,6 +52,17 @@ package Action.War.Report
 			return _buManagers[sid];
 		}
 		
+		public function getBattleActions():Array
+		{
+			var actions:Array = new Array();
+			for each(var bout:BattleBout in _battleReport.bouts)
+			{
+				for each(var action:BattleAction in bout.actions)
+					actions.push(action);
+			}
+			return actions;
+		}
+		
 		public function BattleReportManager(report:BattleReport)
 		{
 			_battleReport = report;
@@ -71,15 +86,35 @@ package Action.War.Report
 		public function createLoadingActivities():Array
 		{
 			var acts:Array = new Array();
+			
+			//loading BattleUnitResource
 			for each(var bum:BattleUnitManager in _buManagers)
 			{
 				if(BattleUnitResource.getInstance(bum.resId) == null)
 				{
 					BattleUnitResource.createInstance(bum.resId);
 					for(var i:int = 0; i<3; i++)
-						acts.push(new LoadBattleUnitActivity(bum.resId, i));
+						acts.push(new LoadBattleUnitResourceActivity(bum.resId, i));
 				}
 			}
+			
+			//loading BattleSkillResource
+			for each(var action:BattleAction in getBattleActions())
+			{
+				var skill:BattleSkill = WarPlugins.skills[action.param] as BattleSkill;
+				if(skill != null)
+				{
+					for each(var rid:int in skill.resources)
+					{
+						if(BattleSkillResource.getInstance(rid) == null)
+						{
+							BattleSkillResource.createInstance(rid);
+							acts.push(new LoadBattleSkillResourceActivity(rid));
+						}
+					}
+				}
+			}
+			
 			return acts;
 		}
 		

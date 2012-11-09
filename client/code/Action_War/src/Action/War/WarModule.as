@@ -29,7 +29,8 @@ package Action.War
 		
 		public function onLoad():void
 		{
-			WarPlugins.skillRenderers = [new CommonSkillRenderer(), new SpecialSkillRenderer()];
+			WarPlugins.skillRenderers = [new CommonSkillRenderer(), new SpecialSkillRenderer(1), new SpecialSkillRenderer(2)];
+			WarPlugins.skillResources = [201, 204];
 			WarPlugins.skills = new Array();
 			
 			var skill:BattleSkill = new BattleSkill();
@@ -40,14 +41,22 @@ package Action.War
 			
 			skill = new BattleSkill();
 			skill.id = 1;
-			skill.name = "天火燎原";
+			skill.name = "长驱直入";
 			skill.type = 1;
 			WarPlugins.skills[skill.id] = skill;
 			
 			skill = new BattleSkill();
-			skill.id = 24;
-			skill.name = "风卷残云";
-			skill.type = 1;
+			skill.id = 101;
+			skill.name = "天火燎原";
+			skill.type = 2;
+			skill.resCurrent = skill.resPost = 1;
+			WarPlugins.skills[skill.id] = skill;
+			
+			skill = new BattleSkill();
+			skill.id = 106;
+			skill.name = "天下归心";
+			skill.type = 2;
+			skill.resPrevious = skill.resCurrent = 2;
 			WarPlugins.skills[skill.id] = skill;
 		}		
 		

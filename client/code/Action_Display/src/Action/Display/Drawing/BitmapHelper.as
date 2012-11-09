@@ -13,7 +13,7 @@ package Action.Display.Drawing
 			
 		}
 		
-		public static function cutBitmapData(source:BitmapData, x:int, y:int, width:int, height:int):BitmapData
+		public static function cutBitmap(source:BitmapData, x:int, y:int, width:int, height:int):BitmapData
 		{
 			var rect:Rectangle = new Rectangle(x, y, width, height);
 			var target:BitmapData = new BitmapData(width, height);
@@ -21,12 +21,7 @@ package Action.Display.Drawing
 			return target;
 		}
 		
-		public static function cutBitmap(source:Bitmap, x:int, y:int, width:int, height:int):Bitmap
-		{
-			return new Bitmap(cutBitmapData(source.bitmapData, x, y, width, height));
-		}
-		
-		public static function reverseBitmapData(source:BitmapData):BitmapData
+		public static function reverseBitmap(source:BitmapData):BitmapData
 		{
 			var target:BitmapData = new BitmapData(source.width, source.height);
 			for (var y:int=0; y<source.height; y++)
@@ -37,11 +32,6 @@ package Action.Display.Drawing
 				}
 			}
 			return target;
-		}
-		
-		public static function reverseBitmap(source:Bitmap):Bitmap
-		{
-			return new Bitmap(reverseBitmapData(source.bitmapData));
 		}
 	}
 }

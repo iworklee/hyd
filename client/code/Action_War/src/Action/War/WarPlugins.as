@@ -8,5 +8,6 @@ package Action.War
 		
 		public static var skills:Array;
 		public static var skillRenderers:Array;
+		public static var skillResources:Array;
 	}
 }

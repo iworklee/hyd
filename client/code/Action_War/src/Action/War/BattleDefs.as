@@ -1,5 +1,9 @@
 package Action.War
 {
+	import Action.Model.BattleEffect;
+	
+	import Util.NumberWrapper;
+	
 	import flash.geom.Point;
 
 	public class BattleDefs
@@ -17,17 +21,8 @@ package Action.War
 		public static const DIR_LEFT:int = 2;
 		public static const DIR_RIGHT:int = 3;
 		
-		private static var _battleEffectTypeDescs:Array = ["闪避", "格挡", "", "暴击"];		
-		public static function getBattleEffectTypeDesc(type:int):String
-		{
-			if(type < 0 || type >= _battleEffectTypeDescs.length)
-				return "";
-			return _battleEffectTypeDescs[type];
-		}
-		
-		public static function getSkillNamePoint():Point
-		{
-			return new Point(250, 20);
-		}
+		public static const SKILL_PHASE_PREVIOUS:int = 0;
+		public static const SKILL_PHASE_CURRENT:int = 1;
+		public static const SKILL_PHASE_POST:int = 2;
 	}
 }

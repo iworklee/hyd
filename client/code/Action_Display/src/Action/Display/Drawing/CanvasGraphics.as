@@ -3,9 +3,12 @@ package Action.Display.Drawing
 	import Action.Core.GamePlugins;
 	
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
 	
 	import mx.controls.Alert;
 	import mx.controls.Image;
@@ -18,9 +21,21 @@ package Action.Display.Drawing
 		private var _container:ICanvasContainer;
 		
 		private var _canvas:BorderContainer;
-		public function get canvas():BorderContainer
+		public function getCanvas():BorderContainer
 		{
 			return _canvas;
+		}
+		
+		private var _effectLayer:BorderContainer;
+		public function getEffectLayer():BorderContainer
+		{
+			return _effectLayer;
+		}
+		
+		private var _textLayer:BorderContainer;
+		public function getTextLayer():BorderContainer
+		{
+			return _textLayer;
 		}
 		
 		public function CanvasGraphics(canvasContainer:ICanvasContainer)
@@ -28,6 +43,8 @@ package Action.Display.Drawing
 			_container = canvasContainer;
 			_canvas = _container.getCanvas();
 			_container.bindGraphics(this);	
+			_effectLayer = _canvas.getElementAt(0) as BorderContainer;
+			_textLayer = _effectLayer.getElementAt(0) as BorderContainer;
 		}
 		
 		public function drawImage(bitmap:Bitmap, point:Point, image:Image=null):Image
@@ -46,22 +63,24 @@ package Action.Display.Drawing
 			return point.x >=0 && point.x <= _canvas.width - 50 && point.y >= 0 && point.y <= _canvas.height - 50;
 		}
 		
-		public function drawBitmap(bitmap:Bitmap, point:Point):void
+		public function drawBitmap(bitmap:BitmapData, point:Point, layer:BorderContainer=null):void
 		{
-			var rect:Rectangle = new Rectangle(point.x, point.y, bitmap.bitmapData.width, bitmap.bitmapData.height);
-			_canvas.graphics.beginBitmapFill(bitmap.bitmapData, new Matrix(1,0,0,1,rect.x, rect.y), false);
-			_canvas.graphics.drawRect(rect.x, rect.y, rect.width, rect.height);
-			_canvas.graphics.endFill();
+			if(layer == null)
+				layer = _canvas;
+			var rect:Rectangle = new Rectangle(point.x, point.y, bitmap.width, bitmap.height);
+			layer.graphics.beginBitmapFill(bitmap, new Matrix(1,0,0,1,rect.x, rect.y), false);
+			layer.graphics.drawRect(rect.x, rect.y, rect.width, rect.height);
+			layer.graphics.endFill();
 		}
 		
-		public function drawBitmap2(bitmap:Bitmap, point:Point, fx:int=-8, fy:int=-8):void
+		public function drawBitmap2(bitmap:BitmapData, point:Point, fx:int=-8, fy:int=-8, layer:BorderContainer=null):void
 		{
-			drawBitmap(bitmap, new Point(point.x + fx, point.y + fy));
+			drawBitmap(bitmap, new Point(point.x + fx, point.y + fy), layer);
 		}
 		
-		public function drawText(text:String, point:Point, color:int=0xff0000, fontSize:int=12, bold:Boolean=false, fontFamily:String="Arial"):void
+		public function drawText(text:String, point:Point, color:int=0xff0000, size:int=10, bold:Boolean=false, font:String="Arial"):void
 		{
-			var label:Label = new Label();
+			/*var label:Label = new Label();
 			label.x = point.x;
 			label.y = point.y;
 			label.text = text;
@@ -69,13 +88,30 @@ package Action.Display.Drawing
 			label.setStyle("fontSize", fontSize);
 			label.setStyle("fontWeight", bold ? "bold" : "");
 			label.setStyle("fontFamily", fontFamily);
-			_canvas.addElement(label);
-			//GamePlugins.console.writeLine(text);
+			//_canvas.addElement(label);
+			//GamePlugins.console.writeLine(text);*/
+			
+			var label:TextField = new TextField();
+			label.text = text;
+			var format:TextFormat = new TextFormat();
+			format.color = color;
+			format.size = 10;
+			format.bold = bold;
+			format.font = font;
+			label.setTextFormat(format);
+			
+			var bitmap:BitmapData = new BitmapData(label.textWidth + 1000, label.textHeight + 100, true, 0x00000000);
+			var matrix:Matrix = new Matrix();
+			matrix.scale(size / 10, size /10);
+			matrix.translate(-size / 5, -size / 5);
+			bitmap.draw(label, matrix);
+			drawBitmap(bitmap, point, _textLayer);
 		}
 		
 		public function clear():void
-		{
-			_canvas.removeAllElements();
+		{			
+			_textLayer.graphics.clear();
+			_effectLayer.graphics.clear();
 			_canvas.graphics.clear();
 			//GamePlugins.console.writeLine("clear");
 		}

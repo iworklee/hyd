@@ -5,11 +5,11 @@ package Action.War.Report
 	import Action.Resource.ResourceManager;
 	import Action.War.BattleDefs;
 	import Action.War.BattleResourceEnum;
-	import Action.War.Flow.LoadBattleUnitActivity;
+	import Action.War.Flow.LoadBattleUnitResourceActivity;
 	
 	import Util.NumberWrapper;
 	
-	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
 	import mx.controls.Image;
@@ -54,27 +54,27 @@ package Action.War.Report
 			return BattleUnitResource.getInstance(resId);
 		}
 		
-		public function getAttackBitmap(idx:int):Bitmap
+		public function getAttackBitmap(idx:int):BitmapData
 		{
 			return resourceManager.attackBitmaps[direction * 4 + idx];
 		}
 		
-		public function getDefendBitmap():Bitmap
+		public function getDefendBitmap():BitmapData
 		{
 			return resourceManager.defendBitmaps[direction];
 		}
 		
-		public function getMoveBitmap(idx:int):Bitmap
+		public function getMoveBitmap(idx:int):BitmapData
 		{
 			return resourceManager.moveBitmaps[direction * 2 + idx];
 		}
 		
-		public function getWaitBitmap():Bitmap
+		public function getWaitBitmap():BitmapData
 		{
 			return resourceManager.waitBitmaps[direction];
 		}
 		
-		public function getHurtBitmap(idx:int):Bitmap
+		public function getHurtBitmap(idx:int):BitmapData
 		{
 			return resourceManager.hurtBitmaps[idx];
 		}

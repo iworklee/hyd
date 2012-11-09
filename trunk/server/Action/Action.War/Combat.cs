@@ -10,6 +10,8 @@ namespace Action.War
     public class Combat
     {
         const int MAX_ROUND = 50;
+        static readonly Vector2 AttackDirection = new Vector2(1, 0);
+        static readonly Vector2 DefendDirection = new Vector2(-1, 0);
 
         private CombatMilitary _attacker = new CombatMilitary();
         private CombatMilitary _defender = new CombatMilitary();
@@ -58,7 +60,7 @@ namespace Action.War
             }
 
             _attackerLoaded = true;
-            Attacker.Forward = new Vector2(1, 0);
+            Attacker.Forward = AttackDirection;
             Defender.Enemy = Attacker;
         }
 
@@ -90,7 +92,7 @@ namespace Action.War
             }
 
             _defenderLoaded = true;
-            Attacker.Forward = new Vector2(-1, 0);
+            Attacker.Forward = DefendDirection;
             Attacker.Enemy = Defender;
         }
 
@@ -126,38 +128,18 @@ namespace Action.War
             BattleBout bout = new BattleBout();
             bout.SID = round;
 
-            if (round % 2 == 0)
+            foreach (var attacker in attackOrder.Values.Where(unit => unit.Military.AliveUnits.Contains(unit)))
             {
-                // skill round
-                foreach (var attacker in attackOrder.Values)
+                var action = attacker.Strike();
+                if (action != null)
                 {
-                    var action = attacker.SkillStrike();
-                    if (action != null)
-                        bout.Actions.Add(action);
+                    bout.Actions.Add(action);
+                    continue;
                 }
-            }
-            else
-            {
-                // normal round
-                foreach (var attacker in attackOrder.Values)
-                {
-                    var action = attacker.Strike();
-                    if (action != null)
-                    {
-                        bout.Actions.Add(action);
-                        continue;
-                    }
 
-                    action = attacker.Move();
-                    if (action != null)
-                        bout.Actions.Add(action);
-                }
-            }
-
-            foreach (var unit in attackOrder.Values)
-            {
-                if (unit.Health == 0)
-                    attackOrder.Remove(unit.CombatPower);
+                action = attacker.Move();
+                if (action != null)
+                    bout.Actions.Add(action);
             }
 
             Report.Bouts.Add(bout);

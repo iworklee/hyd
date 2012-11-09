@@ -55,6 +55,8 @@ namespace Action.War
         {
             if (effect.Type != BattleEffectType.Dodge)
                 Charge += CHARGE_PLUS;
+
+            base.Attacked(effect);
         }
     }
 }

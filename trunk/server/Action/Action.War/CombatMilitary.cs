@@ -68,13 +68,29 @@ namespace Action.War
         /// <returns></returns>
         public BattleAction Move(CombatUnit unit)
         {
-            unit.Position = unit.Position + unit.Military.Forward;
+            var pos = unit.Position + unit.Military.Forward;
+            if (GetAliveUnitByPos(pos) != null)
+                return null;
+
+            _unitsPos.Remove(unit.Position);
+            unit.Position = pos;
+            _unitsPos.Add(unit.Position, unit);
+
             var ba = new BattleAction();
             ba.UnitSID = unit.BattleID;
-
             ba.Type = BattleActionType.Move;    // 移动
             ba.Param = unit.Position.Pos2Int();// 位置
             return ba;
+        }
+
+        /// <summary>
+        /// 死亡
+        /// </summary>
+        /// <param name="unit"></param>
+        public void Die(CombatUnit unit)
+        {
+            _aliveUnits.Remove(unit);
+            _unitsPos.Remove(unit.Position);
         }
     }
 }

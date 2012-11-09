@@ -1,4 +1,5 @@
 ﻿using Action.Model;
+using Action.Skill;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -116,27 +117,12 @@ namespace Action.War
             }
         }
 
+        protected ISkill _skill;
+
         /// <summary>
         /// 技能ID
         /// </summary>
-        public int SkillID { get; set; }
-
-        /// <summary>
-        /// 技能攻击范围
-        /// </summary>
-        public int SkillStrikeRange { get; set; }
-
-        /// <summary>
-        /// 可以释放技能
-        /// </summary>
-        /// <returns></returns>
-        public virtual bool SkillReady
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public int SkillID { get { return _skill == null ? 0 : _skill.Id; } }
 
     }
 }

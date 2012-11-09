@@ -27,5 +27,6 @@ namespace Action.Model
 
         //War
         Embattle = 1400,
+        MakeWar = 1401,
     }
 }

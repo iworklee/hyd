@@ -72,6 +72,7 @@
     <Compile Include="CombatEnum.cs" />
     <Compile Include="CombatMilitary.cs" />
     <Compile Include="Commands\EmbattleCommand.cs" />
+    <Compile Include="Commands\MakeWarCommand.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Skill\ISkill.cs" />
     <Compile Include="Skill\SkillFactory.cs" />

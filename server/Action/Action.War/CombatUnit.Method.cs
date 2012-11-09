@@ -71,6 +71,8 @@ namespace Action.War
 
         protected virtual void Attacked(BattleEffect effect)
         {
+            if (Health <= 0)
+                Military.Die(this);
         }
 
         /// <summary>

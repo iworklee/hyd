@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleReport.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,9 +11,15 @@ namespace BattleReport.Web.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "欢迎使用 ASP.NET MVC!";
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(WarModel model)
+        {
+
+            return View("War");
         }
 
         public ActionResult About()

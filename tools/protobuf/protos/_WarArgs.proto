@@ -1,0 +1,14 @@
+
+import "protobuf-net.proto";
+
+package Action.Model;
+option (protobuf_net.namespace) = "Action.Model";
+
+message EmbattleArgs {
+  repeated UnitArgs Units = 1;
+}
+
+message UnitArgs {
+  optional int32 ID = 1;
+  optional int32 Position = 2;
+}

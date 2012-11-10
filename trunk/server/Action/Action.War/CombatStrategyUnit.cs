@@ -16,7 +16,9 @@ namespace Action.War
         /// </summary>
         public float SkillChance { get; set; }
 
-        public CombatStrategyUnit(CombatMilitary military) : base(military) { }
+        public CombatStrategyUnit(CombatMilitary military) : base(military) {
+            _skill = new EmbraveSkill();
+        }
 
         public override BattleAction SkillStrike()
         {

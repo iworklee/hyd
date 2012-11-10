@@ -14,7 +14,8 @@ package Action.War.Report
 	import Action.War.BattleDefs;
 	import Action.War.Flow.LoadBattleSkillResourceActivity;
 	import Action.War.Flow.LoadBattleUnitResourceActivity;
-	import Action.War.Movie.BattleBoutFightRenderer;
+	import Action.War.Movie.BattleBoutBeginRenderer;
+	import Action.War.Movie.BattleBoutDeadRenderer;
 	import Action.War.Movie.BattleBoutMoveRenderer;
 	import Action.War.Movie.BattleBoutSkillRenderer;
 	import Action.War.Movie.BattleReportInitRenderer;
@@ -48,14 +49,40 @@ package Action.War.Report
 		
 		private var _buManagers:Array = new Array();
 		
-		public function getBattleUnitManagers():Array
+		public function getBUMS():Array
 		{
 			return _buManagers;
 		}
 		
-		public function getBattleUnitManager(sid:int):BattleUnitManager
+		public function getDeadBUMS():Array
+		{
+			var bums:Array = new Array();
+			for each(var bum:BattleUnitManager in _buManagers)
+			{
+				if(bum.isDead)
+					bums.push(bum);
+			}
+			return bums;
+		}
+		
+		public function getBUM(sid:int):BattleUnitManager
 		{
 			return _buManagers[sid];
+		}
+		
+		public function getBUMbyPos(pos:int):BattleUnitManager
+		{
+			for each(var bum:BattleUnitManager in _buManagers)
+			{
+				if(bum.POS == pos)
+					return bum;
+			}
+			return null;
+		}
+		
+		public function delBUM(sid:int):void
+		{
+			delete _buManagers[sid];
 		}
 		
 		public function getBattleActions():Array
@@ -72,6 +99,11 @@ package Action.War.Report
 		public function BattleReportManager(report:BattleReport)
 		{
 			_battleReport = report;
+			reset();
+		}
+		
+		public function reset():void
+		{
 			for each(var bu:BattleUnit in _battleReport.units)
 			{
 				var bum:BattleUnitManager = new BattleUnitManager(bu);
@@ -112,7 +144,7 @@ package Action.War.Report
 			//loading BattleSkillResource
 			for each(var action:BattleAction in getBattleActions())
 			{
-				var skill:BattleSkill = WarPlugins.skills[action.param] as BattleSkill;
+				var skill:BattleSkill = BattleSkill.getInstance(action.param);
 				if(skill != null)
 				{
 					for each(var rid:int in skill.resources)
@@ -150,31 +182,20 @@ package Action.War.Report
 			//绘制每回合的行为
 			for each(var bout:BattleBout in _battleReport.bouts)
 			{
-				var moveActions:Array = new Array();
-				if(true)
+				movie.appendFrameRenderer(new BattleBoutBeginRenderer(this, bout));				
+				for each(var action:BattleAction in bout.actions)
 				{
-					for each(var action:BattleAction in bout.actions)
+					switch(action.type)
 					{
-						if(action.type == BattleActionType.Cast)
+						case BattleActionType.Cast:
 							movie.appendFrameRenderer(new BattleBoutSkillRenderer(this, action));
-						else
-							moveActions.push(action);
+							movie.appendFrameRenderer(new BattleBoutDeadRenderer(this));
+							break;
+						case BattleActionType.Move:
+							movie.appendFrameRenderer(new BattleBoutMoveRenderer(this, action));
+							break;
 					}
 				}
-				else
-				{
-					var fightActions:Array = new Array();
-					for each(action in bout.actions)
-					{
-						if(action.type == BattleActionType.Cast)
-							fightActions.push(action);
-						else
-							moveActions.push(action);
-					}
-					movie.appendFrameRenderer(new BattleBoutFightRenderer(this, fightActions));					
-				}
-				if(moveActions.length > 0)
-					movie.appendFrameRenderer(new BattleBoutMoveRenderer(this, moveActions));
 			}
 			
 			//绘制战斗结果

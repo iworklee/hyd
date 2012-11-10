@@ -1,5 +1,6 @@
 package Action.War.Movie
 {
+	import Action.Core.GamePlugins;
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Display.Drawing.MoviePlayer;
@@ -38,8 +39,8 @@ package Action.War.Movie
 		{
 			super(reportMgr);
 			_action = action;
-			_attacker = _battleReportManager.getBattleUnitManager(_action.unitSID);
-			_skillRenderer = BattleSkill(WarPlugins.skills[_action.param]).createRenderer();
+			_attacker = _battleReportManager.getBUM(_action.unitSID);
+			_skillRenderer = BattleSkill.getInstance(_action.param).createRenderer();
 		}
 		
 		public function get name():String
@@ -50,8 +51,21 @@ package Action.War.Movie
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
 		{			
 			var index:int = player.currentFrame - _initialFrame;
-			_skillRenderer.render(graphics, index, this);
-			
+			_skillRenderer.render(graphics, index, this);		
+		}
+		
+		public override function leave(graphics:CanvasGraphics, player:MoviePlayer):void
+		{
+			//GamePlugins.console.writeLine("BoutSkill.OnLeave");
+			for each(var effect:BattleEffect in _action.effects)
+			{
+				var bum:BattleUnitManager = _battleReportManager.getBUM(effect.unitSID);
+				if(bum != null)
+				{
+					bum.HP = Math.min(bum.maxHP, Math.max(0, bum.HP + effect.plusHP));
+					bum.MP = Math.max(0, bum.MP + effect.plusMP);
+				}
+			}
 		}
 		
 		public function getFrameLength():int

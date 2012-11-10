@@ -24,6 +24,11 @@ package Action.War
 			return new Point((int((pos+100) / 5)-20) * 50, (pos + 100) % 5 * 50);
 		}
 		
+		public static function getBattlePos(point:Point):int
+		{
+			return int(point.x / 50) * 5 + int(point.y / 50);
+		}
+		
 		public static function getBitmapOffset(bitmap:BitmapData):Point
 		{
 			return new Point((48 - bitmap.width) / 2, (48 - bitmap.height) / 2);

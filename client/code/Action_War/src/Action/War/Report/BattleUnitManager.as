@@ -11,6 +11,7 @@ package Action.War.Report
 	
 	import Util.NumberWrapper;
 	
+	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -18,7 +19,31 @@ package Action.War.Report
 	import mx.controls.Label;
 
 	public class BattleUnitManager
-	{
+	{		
+		public var HP:int;
+		public var MP:int;
+		public var POS:int;
+		public var BUFF:int;
+		
+		public function get maxHP():int
+		{
+			return _battleUnit.hP;
+		}
+		
+		public function get maxMP():int
+		{
+			return 100;
+		}
+		
+		public function BattleUnitManager(bu:BattleUnit)
+		{
+			_battleUnit = bu;
+			HP = bu.hP;
+			MP = bu.mP;
+			POS = bu.pos;
+			BUFF = 0;
+		}
+		
 		private var _battleUnit:BattleUnit;		
 		public function get battleUnit():BattleUnit
 		{
@@ -45,9 +70,9 @@ package Action.War.Report
 			return heroId < 100;
 		}
 		
-		public function get alive():Boolean
+		public function get isDead():Boolean
 		{
-			return _battleUnit.hP > 0;
+			return HP <= 0;
 		}
 		
 		//public var image:Image;
@@ -95,14 +120,19 @@ package Action.War.Report
 			return unitResource.waitBitmaps[direction];
 		}
 		
-		public function getHurtBitmap(idx:int):BitmapData
+		public function getHurtBitmap():BitmapData
 		{
-			return unitResource.hurtBitmaps[idx];
+			return unitResource.hurtBitmaps[0];
 		}
 		
-		public function BattleUnitManager(bu:BattleUnit)
+		public function getBuffBitmap():BitmapData
 		{
-			_battleUnit = bu;
+			return unitResource.hurtBitmaps[1];
+		}
+		
+		public function getDeadBitmap():BitmapData
+		{
+			return unitResource.hurtBitmaps[2];
 		}
 	}
 }

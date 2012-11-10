@@ -13,6 +13,7 @@ package Action.War.Skill
 	
 	import Util.NumberWrapper;
 	
+	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Graphics;
 	import flash.geom.Point;
@@ -36,11 +37,13 @@ package Action.War.Skill
 		
 		public function render(graphics:CanvasGraphics, index:int, frameRenderer:BattleBoutSkillRenderer):void
 		{
+			//GamePlugins.console.writeLine(_skill.id + "," + _skill.name);
+			
 			var action:BattleAction = frameRenderer.action;
 			var attacker:BattleUnitManager = frameRenderer.attacker;
 			
-			var exception:Array = new Array();			
-			exception[attacker.SID] = attacker;
+			var exceptions:Array = new Array();			
+			exceptions[attacker.SID] = attacker;
 			
 			//draw effect
 			if(index >= 0)
@@ -50,6 +53,12 @@ package Action.War.Skill
 			if(index >= 9)
 				drawEffect(BattleDefs.SKILL_PHASE_POST, graphics, index-9, frameRenderer);
 			
+			if(_type == 3)
+			{		
+				if(index >= 8 && index < 11)
+				drawEffectBitmap(graphics, attacker.getAttackBitmap(index-7), frameRenderer);
+			}
+		
 			if(index < 6)
 			{
 				graphics.drawBitmap2(attacker.getAttackBitmap(0), attacker.paintPoint);
@@ -59,7 +68,7 @@ package Action.War.Skill
 			else
 			{
 				index -= 6;
-				if(_type == 1)
+				if(_type % 2 == 1)
 					graphics.drawBitmap2(attacker.getAttackBitmap(index < 4 ? index : 3), attacker.paintPoint);
 				else
 					graphics.drawBitmap2(attacker.getAttackBitmap(0), attacker.paintPoint);
@@ -67,26 +76,31 @@ package Action.War.Skill
 				{
 					for each(var effect:BattleEffect in action.effects)
 					{
-						var bum:BattleUnitManager = frameRenderer.battleReportManager.getBattleUnitManager(effect.unitSID);
-						exception[bum.SID] = bum;
-						if(effect.type < 2)
-							graphics.drawBitmap(bum.getDefendBitmap(), bum.paintPoint);
-						else
-							graphics.drawBitmap(bum.getHurtBitmap(effect.type < 4 ? 0 : 1), bum.paintPoint);
-						
-						var wrapper:BattleEffectWrapper = BattleEffectWrapper.wrap(effect);
-						
-						//print effect.type
-						var lblPnt:Point = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 20 - index * wrapper.getTypeUpSpeed());
-						graphics.drawText(wrapper.getTypeDesc(), lblPnt, wrapper.getTypeColor(), 15, true);
-						
-						//print effect.plusHP
-						lblPnt = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 50 - index * 5);
-						graphics.drawText(wrapper.getPlusHpDesc(), lblPnt, 0xffff00, 15, true);
+						var bum:BattleUnitManager = frameRenderer.battleReportManager.getBUM(effect.unitSID);
+						if(bum != null)
+						{
+							if(bum.SID != attacker.SID)
+							{
+								exceptions[bum.SID] = bum;
+								if(effect.type < 2)
+									graphics.drawBitmap(bum.getDefendBitmap(), bum.paintPoint);
+								else
+									graphics.drawBitmap(effect.type < 4 ? bum.getHurtBitmap() : bum.getBuffBitmap(), bum.paintPoint);
+							}
+							var wrapper:BattleEffectWrapper = BattleEffectWrapper.wrap(effect);
+							
+							//print effect.type
+							var lblPnt:Point = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 20 - index * wrapper.getTypeUpSpeed());
+							graphics.drawText(wrapper.getTypeDesc(), lblPnt, wrapper.getTypeColor(), 15, true);
+							
+							//print effect.plusHP
+							lblPnt = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 50 - index * 5);
+							graphics.drawText(wrapper.getPlusHpDesc(), lblPnt, 0xffff00, 15, true);
+						}
 					}
 				}
 			}
-			frameRenderer.drawWaitBitmaps(graphics, exception);
+			frameRenderer.drawWaitBitmaps(graphics, exceptions);
 		}
 		
 		public function getFrameLength():int
@@ -96,18 +110,42 @@ package Action.War.Skill
 		
 		private function drawEffect(phase:int, graphics:CanvasGraphics, index:int, frameRenderer:BattleBoutSkillRenderer):void
 		{			
-			var effectBmp:BitmapData = _skill.getBitmap(phase, index);
+			/*var effectBmp:BitmapData = _skill.getBitmap(phase, index);
 			if(effectBmp != null)
 			{
 				var offsetPoint:Point = BattleHelper.getBitmapOffset(effectBmp);
 				for each(var effect:BattleEffect in frameRenderer.action.effects)
 				{
-					var bum:BattleUnitManager = frameRenderer.battleReportManager.getBattleUnitManager(effect.unitSID);
+					var bum:BattleUnitManager = frameRenderer.battleReportManager.getBUM(effect.unitSID);
 					graphics.drawBitmap2(effectBmp, bum.paintPoint, offsetPoint.x, offsetPoint.y, graphics.getEffectLayer());				
 				}
 				//GamePlugins.console.writeLine(index);
 				GamePlugins.console.drawBitmap(effectBmp);
+			}*/
+			drawEffectBitmap(graphics, _skill.getBitmap(phase, index), frameRenderer);
+		}
+		
+		private function drawEffectBitmap(graphics:CanvasGraphics, effectBmp:BitmapData, frameRenderer:BattleBoutSkillRenderer):void
+		{
+			if(effectBmp != null)
+			{
+				var offsetPoint:Point = BattleHelper.getBitmapOffset(effectBmp);
+				for each(var effect:BattleEffect in frameRenderer.action.effects)
+				{
+					var bum:BattleUnitManager = frameRenderer.battleReportManager.getBUM(effect.unitSID);
+					if(bum != null)
+						graphics.drawBitmap2(effectBmp, bum.paintPoint, offsetPoint.x, offsetPoint.y, graphics.getEffectLayer());				
+				}
+				//GamePlugins.console.writeLine(index);
+				//GamePlugins.console.drawBitmap(effectBmp);
 			}
+		}
+		
+		public function create(skill:BattleSkill):ISkillRenderer
+		{
+			var renderer:SpecialSkillRenderer = new SpecialSkillRenderer(_type);
+			renderer._skill = skill;
+			return renderer;
 		}
 	}
 }

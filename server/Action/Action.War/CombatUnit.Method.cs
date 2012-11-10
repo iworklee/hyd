@@ -51,7 +51,7 @@ namespace Action.War
             return ba;
         }
 
-        protected virtual BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
+        public virtual BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
         {
             var ratio = (int)effectType;
 

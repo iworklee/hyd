@@ -77,6 +77,8 @@
     <Compile Include="Helper.cs" />
     <Compile Include="Skill\ISkill.cs" />
     <Compile Include="Skill\SkillFactory.cs" />
+    <Compile Include="Skill\StrikeThroughSkill.cs" />
+    <Compile Include="Skill\EmbraveSkill.cs" />
     <Compile Include="WarModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CombatUnit.Property.cs" />

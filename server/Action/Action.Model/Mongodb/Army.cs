@@ -7,6 +7,7 @@ namespace Action.Model
 {
     public class Army
     {
-        public List<Unit> Units { get; set; }
+        private List<Unit> _units = new List<Unit>();
+        public List<Unit> Units { get { return _units; } }
     }
 }

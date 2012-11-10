@@ -36,13 +36,14 @@ namespace Action.War
         public void LoadAttacker(Army attacker)
         {
             // 初始化攻方单位
-            for (int i = 0; i < 25; i++)
+            foreach (var u in attacker.Units)
             {
                 var unit = new CombatUnit(Attacker);
-                unit.UnitTypeID = 1;
-                unit.Position = (i + 10).Int2Pos();
+                unit.UnitTypeID = u.ID;
+                unit.Position = (u.Positon + 10).Int2Pos();
                 Attacker.AddUnit(unit);
             }
+
             // 攻方城墙
             for (int i = 0; i < 5; i++)
             {
@@ -67,13 +68,13 @@ namespace Action.War
         public void LoadDefender(Army defender)
         {
             // 初始化守方单位
-            for (int i = 0; i < 25; i++)
+            foreach (var u in defender.Units)
             {
-                var j = i + 55 - i / 5 * 10;
+                var j = u.Positon + 55 - u.Positon / 5 * 10;
 
                 var unit = new CombatUnit(Defender);
+                unit.UnitTypeID = u.ID;
                 unit.Position = j.Int2Pos();
-
                 Defender.AddUnit(unit);
             }
 
@@ -81,6 +82,7 @@ namespace Action.War
             for (int i = 65; i < 70; i++)
             {
                 var unit = new CombatCampUnit(Defender);
+                unit.UnitTypeID = 0;
                 unit.Position = i.Int2Pos();
                 Attacker.AddUnit(unit);
             }
@@ -88,6 +90,7 @@ namespace Action.War
             foreach (var unit in Defender.Units)
             {
                 unit.BattleID = unit.Position.Pos2Int();
+                Report.Units.Add((BattleUnit)unit);
                 attackOrder.Add(unit.CombatPower, unit);
             }
 

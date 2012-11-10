@@ -25,24 +25,15 @@ namespace Action.War
             if (rng.NextDouble() > SkillChance)
                 return null;
 
-            // 根据攻击范围，找攻击目标
-            var target = _skill.Range
-                .Select(loc => Military.Enemy.GetAliveUnitByPos(this.Position + loc * Military.Forward))
-                .Where(unit => unit != null)
-                .FirstOrDefault();
-            if (target == null)
+            var effects = _skill.Cast(this);
+            if (effects == null)
                 return null;
-
-            // 计算闪避，暴击
-            var damageType = Helper.Test(this.CriticalChance, 0, target.DodgeChance);
-
-            var effect = Attacking(target, AttackType.Tactic, damageType);
 
             var ba = new BattleAction();
             ba.UnitSID = this.BattleID;
             ba.Type = BattleActionType.Cast; // 攻击
             ba.Param = SkillID; // 策略攻击
-            ba.Effects.Add(effect);
+            ba.Effects.AddRange(effects);
             return ba;
         }
     }

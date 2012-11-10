@@ -13,7 +13,7 @@ namespace Action.War
     {
         public CombatCampUnit(CombatMilitary military) : base(military) { }
 
-        protected override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
+        public override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
         {
             return null;
         }

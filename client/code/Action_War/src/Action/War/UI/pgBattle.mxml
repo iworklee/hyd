@@ -15,10 +15,11 @@
 			import Action.Display.Decorator.IDisplayDecorator;
 			import Action.Display.Drawing.BitmapHelper;
 			import Action.Display.Drawing.CanvasGraphics;
+			import Action.Display.Drawing.MoviePlayer;
 			import Action.Model.BattleReport;
 			import Action.Model.BattleUnit;
+			import Action.Resource.CommonResource;
 			import Action.Resource.Flow.LoadImageActivity;
-			import Action.Resource.ResourceManager;
 			import Action.War.Report.BattleReportManager;
 			import Action.War.Resource.BattleUnitResource;
 			import Action.War.WarModule;
@@ -28,13 +29,17 @@
 			import mx.controls.Alert;
 			import mx.controls.Image;
 			import mx.core.IVisualElement;
+			import mx.events.FlexEvent;
 			
 			private var _canvasGraphics:CanvasGraphics;
+			private var _moviePlayer:MoviePlayer;
+			
+			public var battleReportManager:BattleReportManager;
 						
 			public function onLoad():void
 			{
 				//加载背景
-				_bcMain.setStyle("backgroundImage", ResourceManager.imageSection.get(WarModule.BgUrl));
+				_bcMain.setStyle("backgroundImage", CommonResource.imageSection.get(WarModule.BgUrl));
 				
 				//生成网格
 				for(var i:int = 0; i<5; i++)
@@ -70,11 +75,34 @@
 					.appendDecorator(MouseEvent.MOUSE_OUT, decorator2)
 					.build();
 				
-				//test				
-				//test3();
+				loadMovie();				
 			}
 			
-			public var battleReportManager:BattleReportManager;
+			private function loadMovie():void
+			{
+				_canvasGraphics = new CanvasGraphics(this);
+				_canvasGraphics.clear();
+				GamePlugins.console.clear();
+				
+				battleReportManager.play(_canvasGraphics);
+				_moviePlayer = battleReportManager.moviePlayer;
+				_sldProgress.maximum = _moviePlayer.movie.maxFrame;
+				
+				_moviePlayer.removeEventListener(MoviePlayer.Event_Goto, onMovieGoto);
+				_moviePlayer.removeEventListener(MoviePlayer.Event_Stop, onMovieStop);
+				_moviePlayer.addEventListener(MoviePlayer.Event_Goto, onMovieGoto);
+				_moviePlayer.addEventListener(MoviePlayer.Event_Stop, onMovieStop);
+			}
+			
+			private function onMovieGoto(e:Event):void
+			{
+				_sldProgress.value = _moviePlayer.currentFrame;
+			}
+			
+			private function onMovieStop(e:Event):void
+			{
+				_btnPlay.label = "重播";
+			}
 			
 			public function onUnload():void
 			{
@@ -86,10 +114,6 @@
 				return _bcCanvas;
 			}
 			
-			public function bindGraphics(graphics:CanvasGraphics):void
-			{
-				_canvasGraphics = graphics;
-			}
 			
 			protected function _lblGrid_clickHandler(event:MouseEvent):void
 			{
@@ -103,96 +127,31 @@
 				_canvasGraphics.clear();
 				GamePlugins.console.clear();
 				battleReportManager.play(_canvasGraphics);
-			}			
-			
-			private function test():void
-			{
-				var resMgr:BattleUnitResource = BattleUnitResource.getInstance(1);
-				for(var i:int=0; i<12; i++)
-				{
-					var img:Image = new Image();
-					img.x = 42 + i * 50;
-					img.y = -8;
-					img.source = resMgr.attackBitmaps[i];
-					_bcCanvas.addElement(img);
-				}
-				for(i=0; i<4; i++)
-				{
-					img = new Image();
-					img.x = 42 + i * 50;
-					img.y = 42;
-					img.source = resMgr.attackBitmaps[i+12];
-					_bcCanvas.addElement(img);
-				}
-				for(i=0; i<4; i++)
-				{
-					img = new Image();
-					img.x = 50 + i * 50;
-					img.y = 100;
-					img.source = resMgr.defendBitmaps[i];
-					_bcCanvas.addElement(img);
-				}
-				for(i=0; i<8; i++)
-				{
-					img = new Image();
-					img.x = 50 + i * 50;
-					img.y = 150;
-					img.source = resMgr.moveBitmaps[i];
-					_bcCanvas.addElement(img);
-				}
-				for(i=0; i<4; i++)
-				{
-					img = new Image();
-					img.x = 50 + i * 50;
-					img.y = 200;
-					img.source = resMgr.waitBitmaps[i];
-					_bcCanvas.addElement(img);
-				}
-				for(i=0; i<4; i++)
-				{
-					img = new Image();
-					img.x = 450 + i * 50;
-					img.y = 200;
-					img.source = resMgr.hurtBitmaps[i];
-					_bcCanvas.addElement(img);
-				}
 			}
 			
-			private var _imgTest:Image;
-			private var _idxTest:int;
-			
-			private function test2():void
+			protected function _sldProgress_valueCommitHandler(event:FlexEvent):void
 			{
-				_imgTest = new Image();
-				_bcCanvas.addElement(_imgTest);
-				_imgTest.source = BattleUnitResource.getInstance(1).moveBitmaps[0];
-				var timer:Timer = new Timer(1000);
-				timer.addEventListener(TimerEvent.TIMER, onTick);
-				timer.start();
+				// TODO Auto-generated method stub
+				//GamePlugins.console.writeLine(_sldProgress.value);
+				//_moviePlayer.goto(_sldProgress.value);
 			}
 			
-			private function test3():void
+			protected function _btnPlay_clickHandler(event:MouseEvent):void
 			{
-				var bmp:Bitmap  = BattleUnitResource.getInstance(1).moveBitmaps[0];
-				_bcCanvas.graphics.moveTo(25,0);
-				_bcCanvas.graphics.beginBitmapFill(bmp.bitmapData, new Matrix(1,0,0,1,25), false, false);
-				//_canvas.graphics.beginFill(0x00ff00);
-				_bcCanvas.graphics.lineStyle(3, 0xffff00);
-				_bcCanvas.graphics.drawRect(25,0, 48,48);
-				_bcCanvas.graphics.endFill();
+				// TODO Auto-generated method stub
+				if(_btnPlay.label == "重播")
+					loadMovie();
+				else
+					_moviePlayer.pause(_moviePlayer.running);
+				_btnPlay.label = _moviePlayer.running ? "暂停" : "播放";
 			}
 			
-			private function onTick(e:TimerEvent):void
+			protected function _btnGrid_clickHandler(event:MouseEvent):void
 			{
-				var idx:int = _idxTest % 8;
-				_bcCanvas.removeElement(_imgTest);
-				_imgTest = new Image();
-				_bcCanvas.addElement(_imgTest);
-				_imgTest.source = BattleUnitResource.getInstance(1).moveBitmaps[idx];
-				_imgTest.move(50 * idx, 50);
-				GamePlugins.console.writeLine(idx.toString());
-				_idxTest ++;
+				// TODO Auto-generated method stub
+				_bcGrid.visible = !_bcGrid.visible;
 			}
+			
 		]]>
 	</fx:Script>
 	<s:Label id="_lblPlayer1" x="50" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28"
@@ -214,8 +173,11 @@
 			</s:BorderContainer>
 		</s:BorderContainer>
 	</s:BorderContainer>
-	<s:Label id="_lblGrid" x="490" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28"
+	<s:Label id="_lblGrid" x="490" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28" visible="false"
 			 fontWeight="bold" text="显示网格" buttonMode="true" click="_lblGrid_clickHandler(event)"/>
-	<s:Label id="_lblPlay" x="620" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28"
+	<s:Label id="_lblPlay" x="620" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28" visible="false"
 			 fontWeight="bold" text="重新播放" buttonMode="true" click="_lblPlay_clickHandler(event)" />
+	<s:HSlider id="_sldProgress" x="20" y="530" width="720" enabled="false" valueCommit="_sldProgress_valueCommitHandler(event)"/>
+	<s:Button id="_btnPlay" x="20" y="550" label="暂停" click="_btnPlay_clickHandler(event)"/>
+	<s:Button id="_btnGrid" x="100" y="550" label="网格" click="_btnGrid_clickHandler(event)"/>
 </s:BorderContainer>

@@ -11,7 +11,7 @@ package Action.War.Commands
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
 	import Action.Resource.Flow.LoadImageActivity;
-	import Action.Resource.ResourceManager;
+	import Action.Resource.CommonResource;
 	import Action.War.Report.BattleReportManager;
 	import Action.War.Report.BattleUnitManager;
 	import Action.War.UI.pgBattle;
@@ -71,9 +71,6 @@ package Action.War.Commands
 			var page:pgBattle = new pgBattle();
 			page.battleReportManager = reportManager;
 			GameClient.current.frame.changePage(page);
-			
-			var graphics:CanvasGraphics = new CanvasGraphics(page);
-			reportManager.play(graphics);
 		}
 	}
 }

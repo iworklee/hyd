@@ -2,7 +2,7 @@ package Action.Resource.Flow
 {
 	import Action.Core.Flow.ActivityBase;
 	import Action.Core.Flow.IActivity;
-	import Action.Resource.ResourceManager;
+	import Action.Resource.CommonResource;
 	
 	import flash.display.Loader;
 	import flash.events.Event;
@@ -24,7 +24,7 @@ package Action.Resource.Flow
 		{
 			_url = url;
 			_request = new URLRequest();  
-			_request.url = ResourceManager.parseUrl(url);
+			_request.url = CommonResource.parseUrl(url);
 			_request.method = URLRequestMethod.GET;
 			
 			_loader = new Loader();
@@ -34,7 +34,7 @@ package Action.Resource.Flow
 		
 		public function run():void
 		{
-			if(ResourceManager.imageSection.get(_url) == null)
+			if(CommonResource.imageSection.get(_url) == null)
 				_loader.load(_request);
 			else
 				this.workflow.goon();
@@ -48,7 +48,7 @@ package Action.Resource.Flow
 		
 		private function onImageLoaded(e:Event):void
 		{
-			ResourceManager.imageSection.set(_url, e.currentTarget.content);
+			CommonResource.imageSection.set(_url, e.currentTarget.content);
 			this.workflow.goon();
 		}
 	}

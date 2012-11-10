@@ -2,7 +2,7 @@ package Action.War.Flow
 {
 	import Action.Core.Flow.ActivityBase;
 	import Action.Core.Flow.IActivity;
-	import Action.Resource.ResourceManager;
+	import Action.Resource.CommonResource;
 	import Action.War.Resource.BattleSkillResource;
 	import Action.War.Strategy.BattleResourceStrategyFactory;
 	import Action.War.Strategy.ISkillResourceStrategy;
@@ -31,7 +31,7 @@ package Action.War.Flow
 			
 			_skillResId = srid;
 			_request = new URLRequest();  
-			_request.url = ResourceManager.parseUrl("skill/" + srid + ".png");
+			_request.url = CommonResource.parseUrl("skill/" + srid + ".png");
 			_request.method = URLRequestMethod.GET;
 			
 			_loader = new Loader();

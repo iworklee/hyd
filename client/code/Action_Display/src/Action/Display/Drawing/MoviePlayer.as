@@ -6,11 +6,16 @@ package Action.Display.Drawing
 	
 	import avmplus.getQualifiedClassName;
 	
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 
-	public class MoviePlayer
+	public class MoviePlayer extends EventDispatcher
 	{		
+		public static const Event_Stop:String = "Stop";
+		public static const Event_Goto:String = "Goto";
+		
 		private const _delay:int = 100;
 		private var _graphics:CanvasGraphics;
 		private var _movie:Movie;
@@ -23,9 +28,9 @@ package Action.Display.Drawing
 			return _curFrame;
 		}
 		
-		public function gotoFrame(frame:int):void
+		public function get movie():Movie
 		{
-			_curFrame = frame;
+			return _movie;
 		}
 		
 		public function MoviePlayer(graphics:CanvasGraphics)
@@ -57,18 +62,26 @@ package Action.Display.Drawing
 			{
 				_timer.stop();
 				_curFrame = 0;
+				this.dispatchEvent(new Event(Event_Stop));
 			}
 		}
 		
-		private function check():void
+		public function get running():Boolean
 		{
-			if(_movie == null || _movie.isEmpty())
-				throw new Error("Empty movie or empty frames");
+			return _timer.running;
 		}
 		
-		private function onTimerTicked(e:TimerEvent):void
+		public function pause(p:Boolean):void
 		{
-			_curFrame ++;
+			if(p)
+				_timer.stop();
+			else
+				_timer.start();
+		}
+		
+		public function goto(frame:int):void
+		{
+			_curFrame = frame;
 			if(_movie.isEnd(_curFrame))
 			{
 				this.stop();
@@ -88,6 +101,18 @@ package Action.Display.Drawing
 				_graphics.clear();
 				_curRenderer.render(_graphics, this);
 			}
+			this.dispatchEvent(new Event(Event_Goto));
+		}
+		
+		private function check():void
+		{
+			if(_movie == null || _movie.isEmpty())
+				throw new Error("Empty movie or empty frames");
+		}
+		
+		private function onTimerTicked(e:TimerEvent):void
+		{
+			goto(_curFrame + 1);			
 		}
 		
 		private function test(tag:String):void

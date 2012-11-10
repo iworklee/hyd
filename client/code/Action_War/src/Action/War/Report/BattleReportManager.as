@@ -9,6 +9,8 @@ package Action.War.Report
 	import Action.Model.BattleBout;
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
+	import Action.Resource.Flow.LoadHeroResourceActivity;
+	import Action.Resource.HeroResource;
 	import Action.War.BattleDefs;
 	import Action.War.Flow.LoadBattleSkillResourceActivity;
 	import Action.War.Flow.LoadBattleUnitResourceActivity;
@@ -33,6 +35,10 @@ package Action.War.Report
 		}*/
 		
 		private var _moviePlayer:MoviePlayer;
+		public function get moviePlayer():MoviePlayer
+		{
+			return _moviePlayer;
+		}
 		
 		private var _battleReport:BattleReport;
 		public function get battleReport():BattleReport
@@ -87,7 +93,7 @@ package Action.War.Report
 		{
 			var acts:Array = new Array();
 			
-			//loading BattleUnitResource
+			//loading BattleUnitResource and HeroResource
 			for each(var bum:BattleUnitManager in _buManagers)
 			{
 				if(BattleUnitResource.getInstance(bum.resId) == null)
@@ -95,6 +101,11 @@ package Action.War.Report
 					BattleUnitResource.createInstance(bum.resId);
 					for(var i:int = 0; i<3; i++)
 						acts.push(new LoadBattleUnitResourceActivity(bum.resId, i));
+				}
+				if(bum.isHero && HeroResource.getInstance(bum.heroId) == null)
+				{
+					HeroResource.createInstance(bum.heroId);
+					acts.push(new LoadHeroResourceActivity(bum.heroId));
 				}
 			}
 			

@@ -16,7 +16,7 @@ package Action.War.Movie
 		public function BattleReportInitRenderer(reportMgr:BattleReportManager)
 		{
 			super(reportMgr);
-			for each(var unitMgr:BattleUnitManager in _battleReportManager.getBattleUnitManagers())
+			for each(var unitMgr:BattleUnitManager in _battleReportManager.getBUMS())
 			{
 				var offset:int = unitMgr.getInitOffset();
 				unitMgr.paintPoint =  BattleHelper.getPaintPoint(unitMgr.battleUnit.pos + offset);
@@ -31,7 +31,7 @@ package Action.War.Movie
 		
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
 		{
-			for each(var unitMgr:BattleUnitManager in _battleReportManager.getBattleUnitManagers())
+			for each(var unitMgr:BattleUnitManager in _battleReportManager.getBUMS())
 			{
 				var idx:int = player.currentFrame % 2;
 				unitMgr.paintPoint = new Point(unitMgr.paintPoint.x + unitMgr.speed, unitMgr.paintPoint.y);

@@ -1,6 +1,6 @@
 package Action.Resource
 {
-	public class ResourceManager
+	public class CommonResource
 	{
 		private static const _root:String = "http://hyd.googlecode.com/svn/trunk/client/raw/Action/";
 		
@@ -11,8 +11,8 @@ package Action.Resource
 			return _root + url;
 		}
 		
-		private static var _imageSection:ResourceManager = new ResourceManager();
-		public static function get imageSection():ResourceManager
+		private static var _imageSection:CommonResource = new CommonResource();
+		public static function get imageSection():CommonResource
 		{
 			return _imageSection;
 		}
@@ -23,7 +23,7 @@ package Action.Resource
 			return _bumSection;
 		}*/
 		
-		public function ResourceManager()
+		public function CommonResource()
 		{
 		}
 		

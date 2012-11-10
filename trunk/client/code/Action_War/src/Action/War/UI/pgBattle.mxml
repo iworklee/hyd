@@ -20,8 +20,12 @@
 			import Action.Model.BattleUnit;
 			import Action.Resource.CommonResource;
 			import Action.Resource.Flow.LoadImageActivity;
+			import Action.War.BattleHelper;
+			import Action.War.Hero.BattleHero;
 			import Action.War.Report.BattleReportManager;
+			import Action.War.Report.BattleUnitManager;
 			import Action.War.Resource.BattleUnitResource;
+			import Action.War.Skill.BattleSkill;
 			import Action.War.WarModule;
 			
 			import Util.NumberWrapper;
@@ -65,6 +69,8 @@
 					}
 				}
 				
+				//_pgbMP.setStyle("trackColors", [0x0000ff, 0xffffff]);
+				
 				//装饰控件
 				var decorator1:CommonDisplayDecorator = new CommonDisplayDecorator();
 				decorator1.color = "#ffff00";
@@ -75,16 +81,32 @@
 					.appendDecorator(MouseEvent.MOUSE_OUT, decorator2)
 					.build();
 				
-				loadMovie();				
+				//test();
+				replay();				
 			}
 			
-			private function loadMovie():void
+			private function test():void
+			{
+				var array:Array = new Array();
+				array[2] = 20;
+				array[3] = 30;
+				array[5] = 50;
+				array[7] = 70;
+				delete array[3];
+				GamePlugins.console.writeLine(array[3]);
+				for each(var item:int in array)
+					GamePlugins.console.writeLine(item);
+			}
+			
+			private function replay():void
 			{
 				_canvasGraphics = new CanvasGraphics(this);
 				_canvasGraphics.clear();
 				GamePlugins.console.clear();
 				
+				battleReportManager.reset();
 				battleReportManager.play(_canvasGraphics);
+				
 				_moviePlayer = battleReportManager.moviePlayer;
 				_sldProgress.maximum = _moviePlayer.movie.maxFrame;
 				
@@ -101,7 +123,7 @@
 			
 			private function onMovieStop(e:Event):void
 			{
-				_btnPlay.label = "重播";
+				_btnPlay.enabled = false;
 			}
 			
 			public function onUnload():void
@@ -114,6 +136,31 @@
 				return _bcCanvas;
 			}
 			
+			private function showUnitInfo(pos:int, x:int, y:int):void
+			{
+				var bum:BattleUnitManager = battleReportManager.getBUMbyPos(pos);
+				if(bum != null)
+				{
+					var hero:BattleHero = BattleHero.getInstance(bum.heroId);
+					var skill:BattleSkill = BattleSkill.getInstance(hero.skill);
+					_lblName.text = hero.name;
+					_lblSkill.text = skill != null ? skill.name : "";
+					
+					_pgbHP.setProgress(bum.HP, bum.maxHP);
+					_pgbHP.label = bum.HP + " / " + bum.maxHP;
+					_pgbMP.setProgress(bum.MP, bum.maxMP);
+					_pgbMP.label = bum.MP + " / " + bum.maxMP;
+					
+					_bcUnitHidden.x = x;
+					_bcUnitHidden.y = y;
+					_bcUnitHidden.visible = true;
+				}
+			}			
+			
+			private function hideUnitInfo():void
+			{
+				_bcUnitHidden.visible = false;
+			}
 			
 			protected function _lblGrid_clickHandler(event:MouseEvent):void
 			{
@@ -136,13 +183,16 @@
 				//_moviePlayer.goto(_sldProgress.value);
 			}
 			
+			protected function _btnReplay_clickHandler(event:MouseEvent):void
+			{
+				replay();
+				_btnPlay.enabled = true;
+				_btnPlay.label = _moviePlayer.running ? "暂停" : "播放";
+			}
+			
 			protected function _btnPlay_clickHandler(event:MouseEvent):void
 			{
-				// TODO Auto-generated method stub
-				if(_btnPlay.label == "重播")
-					loadMovie();
-				else
-					_moviePlayer.pause(_moviePlayer.running);
+				_moviePlayer.pause(_moviePlayer.running);
 				_btnPlay.label = _moviePlayer.running ? "暂停" : "播放";
 			}
 			
@@ -150,6 +200,21 @@
 			{
 				// TODO Auto-generated method stub
 				_bcGrid.visible = !_bcGrid.visible;
+			}
+			
+			protected function _bcCanvas_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var point:Point = new Point(event.localX, event.localY);
+				var pos:int = BattleHelper.getBattlePos(point);
+				showUnitInfo(pos, point.x, point.y + 150);
+				//Alert.show(point.x + "," + point.y + " => " + pos.toString());
+			}
+			
+			protected function _bcCanvas_mouseMoveHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				hideUnitInfo();
 			}
 			
 		]]>
@@ -165,7 +230,8 @@
 						   backgroundAlpha="0" x="30" y="75" visible="false">			
 		</s:BorderContainer>
 		<s:BorderContainer id="_bcCanvas" width="700" height="250" x="30" y="75" borderVisible="false"
-						   backgroundAlpha="0">
+						   backgroundAlpha="0" buttonMode="true" click="_bcCanvas_clickHandler(event)"
+						   mouseMove="_bcCanvas_mouseMoveHandler(event)">
 			<s:BorderContainer id="_bcLayerEffect" width="100%" height="100%" backgroundAlpha="0" borderVisible="false">
 				<s:BorderContainer id="_bcLayerText" width="100%" height="100%" backgroundAlpha="0" borderVisible="false">
 					
@@ -178,6 +244,17 @@
 	<s:Label id="_lblPlay" x="620" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28" visible="false"
 			 fontWeight="bold" text="重新播放" buttonMode="true" click="_lblPlay_clickHandler(event)" />
 	<s:HSlider id="_sldProgress" x="20" y="530" width="720" enabled="false" valueCommit="_sldProgress_valueCommitHandler(event)"/>
-	<s:Button id="_btnPlay" x="20" y="550" label="暂停" click="_btnPlay_clickHandler(event)"/>
-	<s:Button id="_btnGrid" x="100" y="550" label="网格" click="_btnGrid_clickHandler(event)"/>
+	<s:Button id="_btnReplay" x="20" y="550" label="重播" click="_btnReplay_clickHandler(event)"/>
+	<s:Button id="_btnPlay" x="100" y="550" label="暂停" click="_btnPlay_clickHandler(event)"/>
+	<s:Button id="_btnGrid" x="180" y="550" label="网格" click="_btnGrid_clickHandler(event)"/>
+	<s:BorderContainer id="_bcUnitHidden" width="100" height="90" backgroundColor="#557788" backgroundAlpha="1" visible="false">
+		<s:Label id="_lblName" x="5" y="5" color="#ffff00" text="关羽" fontSize="15" />
+		<mx:ProgressBar id="_pgbHP" x="5" y="25" width="90" height="15" label="120 / 254"
+						chromeColor="#ff0000" color="#ffff00" labelPlacement="center"
+						maximum="400" minimum="0" mode="manual" trackSkin="Action.War.UI.SparkSkin"/>
+		<mx:ProgressBar id="_pgbMP" x="5" y="45" width="90" height="15" label="50 / 100"
+						chromeColor="0x0000ff" color="#ffff00" labelPlacement="center"
+						maximum="400" minimum="0" mode="manual" trackSkin="Action.War.UI.SparkSkin"/>
+		<s:Label id="_lblSkill" x="5" y="65" color="#00ff00" text="真武圣斩" fontSize="15" />
+	</s:BorderContainer>
 </s:BorderContainer>

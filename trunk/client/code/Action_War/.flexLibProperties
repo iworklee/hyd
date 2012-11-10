@@ -17,7 +17,7 @@
     <classEntry path="Action.War.Movie.BattleReportOverRenderer"/>
     <classEntry path="Action.War.BattleDefs"/>
     <classEntry path="Action.War.Movie.BattleBoutSkillRenderer"/>
-    <classEntry path="Action.War.Movie.BattleBoutFightRenderer"/>
+    <classEntry path="Action.War.Movie.BattleBoutBeginRenderer"/>
     <classEntry path="Action.War.Movie.BattleBoutMoveRenderer"/>
     <classEntry path="Action.War.Movie.MovieFrameRendererBase"/>
     <classEntry path="Action.War.BattleHelper"/>
@@ -32,6 +32,9 @@
     <classEntry path="Action.War.Strategy.ISkillResourceStrategy"/>
     <classEntry path="Action.War.Strategy.SkillNormalResourceStrategy"/>
     <classEntry path="Action.War.Report.BattleEffectWrapper"/>
+    <classEntry path="Action.War.Hero.BattleHero"/>
+    <classEntry path="Action.War.UI.SparkSkin"/>
+    <classEntry path="Action.War.Movie.BattleBoutDeadRenderer"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

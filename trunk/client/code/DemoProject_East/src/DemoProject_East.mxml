@@ -86,12 +86,13 @@
 			public function clear():void
 			{
 				txtTestOutput.text = "";
+				scrollToBottom(txtTestOutput.scroller);
 				_imageContainer.removeAllElements();
 			}
 			
 			private function scrollToBottom(scroller:Scroller):void
 			{
-				scroller.verticalScrollBar.value = scroller.verticalScrollBar.maximum;
+				scroller.verticalScrollBar.value = Math.max(0, scroller.verticalScrollBar.maximum);
 			}
 			
 			protected function application1_creationCompleteHandler(event:FlexEvent):void

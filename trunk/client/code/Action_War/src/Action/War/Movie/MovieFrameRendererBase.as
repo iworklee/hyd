@@ -1,6 +1,7 @@
 package Action.War.Movie
 {
 	import Action.Display.Drawing.CanvasGraphics;
+	import Action.Display.Drawing.MoviePlayer;
 	import Action.War.BattleHelper;
 	import Action.War.Report.BattleReportManager;
 	import Action.War.Report.BattleUnitManager;
@@ -17,12 +18,12 @@ package Action.War.Movie
 		
 		public function drawWaitBitmaps(graphics:CanvasGraphics, exceptions:Array=null):void
 		{
-			for each(var unitMgr:BattleUnitManager in _battleReportManager.getBattleUnitManagers())
+			for each(var bum:BattleUnitManager in _battleReportManager.getBUMS())
 			{
-				if(exceptions == null ||  exceptions[unitMgr.battleUnit.sID] == null)
+				if(exceptions == null ||  exceptions[bum.SID] == null)
 				{
-					unitMgr.paintPoint = BattleHelper.getPaintPoint(unitMgr.battleUnit.pos);
-					graphics.drawBitmap(unitMgr.getWaitBitmap(),	unitMgr.paintPoint);
+					bum.paintPoint = BattleHelper.getPaintPoint(bum.battleUnit.pos);
+					graphics.drawBitmap(bum.getWaitBitmap(), bum.paintPoint);
 				}
 			}
 		}
@@ -35,6 +36,16 @@ package Action.War.Movie
 		public function initialize(frame:int):void
 		{
 			_initialFrame = frame;
+		}
+		
+		public function enter(graphics:CanvasGraphics, player:MoviePlayer):void
+		{
+			
+		}
+		
+		public function leave(graphics:CanvasGraphics, player:MoviePlayer):void
+		{
+			
 		}
 	}
 }

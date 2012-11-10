@@ -2,10 +2,17 @@ package Action.War.Skill
 {
 	import Action.War.BattleDefs;
 	import Action.War.Resource.BattleSkillResource;
+	import Action.War.WarPlugins;
+	
 	import flash.display.BitmapData;
 	
 	public class BattleSkill
 	{
+		public static function getInstance(id:int):BattleSkill
+		{
+			return WarPlugins.skills[id] as BattleSkill;
+		}
+		
 		public var id:int;
 		public var name:String;
 		public var type:int;
@@ -66,9 +73,7 @@ package Action.War.Skill
 		public function createRenderer():ISkillRenderer
 		{
 			var renderer:ISkillRenderer = SkillRendererFactory.current.getSkillRenderer(type);
-			if(renderer != null)
-				renderer.loadSkill(this);
-			return renderer;
+			return renderer != null ? renderer.create(this) : null;
 		}
 	}
 }

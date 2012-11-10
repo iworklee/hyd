@@ -21,14 +21,9 @@ package Action.War.Skill
 				_skillRenderers[renderer.type] = renderer;
 		}
 		
-		public function getSkillRenderers():Array
-		{
-			return _skillRenderers
-		}
-		
 		public function getSkillRenderer(type:int):ISkillRenderer
 		{
-			return _skillRenderers[type];
+			return _skillRenderers[type] as ISkillRenderer;
 		}
 	}
 }

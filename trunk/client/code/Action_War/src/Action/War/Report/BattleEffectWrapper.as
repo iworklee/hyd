@@ -24,7 +24,7 @@ package Action.War.Report
 			_effect = effect;
 		}
 		
-		private var _typeDescs:Array = ["闪避", "格挡", "", "暴击", "士气↑"];
+		private var _typeDescs:Array = ["闪避", "格挡", "", "暴击", "攻击↑"];
 		public function getTypeDesc():String
 		{
 			return _typeDescs[_effect.type];
@@ -36,7 +36,7 @@ package Action.War.Report
 			return _colorDescs[_effect.type];
 		}
 		
-		private var _upSpeeds:Array = [1, 1, 0, 1, 3];
+		private var _upSpeeds:Array = [1, 1, 0, 1, 2];
 		public function getTypeUpSpeed():int
 		{
 			return _upSpeeds[_effect.type];
@@ -44,7 +44,7 @@ package Action.War.Report
 		
 		public function getPlusHpDesc():String
 		{
-			return _effect.type > 0 && _effect.type < 4 ? NumberWrapper.wrap(_effect.plusHP).toText2() : "";
+			return NumberWrapper.wrap(_effect.plusHP).toText2();
 		}
 	}
 }

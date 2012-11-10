@@ -90,15 +90,18 @@ package Action.Display.Drawing
 			var renderer:IMovieFrameRenderer = _movie.getFrameRenderer(_curFrame);
 			if(renderer != null)
 			{
+				_graphics.clear();
+				if(_curRenderer != null)
+					_curRenderer.leave(_graphics, this);
 				_curRenderer = renderer;
 				test("OnEnter");
-				_graphics.clear();
+				_curRenderer.enter(_graphics, this);
 				renderer.render(_graphics, this);
 			}
 			else if(_curRenderer != null)
 			{
-				test("OnTick");
 				_graphics.clear();
+				//test("OnTick");
 				_curRenderer.render(_graphics, this);
 			}
 			this.dispatchEvent(new Event(Event_Goto));

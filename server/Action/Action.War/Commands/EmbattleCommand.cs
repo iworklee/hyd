@@ -14,32 +14,22 @@ using System.ComponentModel.Composition;
 namespace Action.Login.Commands
 {
     [GameCommand((int)CommandEnum.Embattle)]
-    public class EmbattleCommand : GameCommand
+    public class EmbattleCommand : GameCommand<EmbattleArgs>
     {
         [Import]
         private MongoDataAccess mongoDB = null;
-        
-        protected override bool Ready(GameSession session)
+        protected override bool Ready(GameSession session, EmbattleArgs args)
         {
             return true;
         }
 
-        protected override void Run(GameSession session)
+        protected override void Run(GameSession session, EmbattleArgs args)
         {
-            //if (args.Account != null && args.Account.Trim().ToLower().StartsWith("test"))
-            //{
-            //    session.EnterLogin(args.Account);
-            //    var allPlayers = mongoDB.DefaultDatabase
-            //        .GetCollection<Player>().AsQueryable();
-            //    var player = allPlayers.Where(p => p.Account == args.Account).FirstOrDefault();
-            //    if (player != null)
-            //        LoginHelper.EnterGame(session, player);
-            //    else
-            //        session.SendResponse(ID, (int)S2C.RoleMissing);
-            //}
-            //else
-            //    session.SendResponse(ID, (int)S2C.ErrorAccount);
+            var allPlayers = mongoDB.DefaultDatabase.GetCollection<Player>().AsQueryable();
+            var player = allPlayers.Where(p => p.Name == session.Player.Name).FirstOrDefault();
+            if (player == null)
+                return;
+            player.Army.Units.AddRange(args.Units.Select(u => new Unit { ID = u.ID, Positon = u.Position }));
         }
-
     }
 }

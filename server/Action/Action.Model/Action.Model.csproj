@@ -58,7 +58,9 @@
     <Compile Include="Mongodb\Army.cs" />
     <Compile Include="Mongodb\BsonClass.cs" />
     <Compile Include="Mongodb\Hero.cs" />
+    <Compile Include="Mongodb\Unit.cs" />
     <Compile Include="Protobuf\BattleReport.cs" />
+    <Compile Include="Protobuf\_WarArgs.cs" />
     <Compile Include="StructBsonSerializer.cs" />
     <Compile Include="CommandEnum.cs" />
     <Compile Include="CommonEnum.cs" />

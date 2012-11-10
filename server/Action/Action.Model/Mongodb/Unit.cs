@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Action.Model
 {
-    public class Army
+    public class Unit
     {
-        public List<Unit> Units { get; set; }
+        public int ID { get; set; }
+        public int Positon { get; set; }
     }
 }

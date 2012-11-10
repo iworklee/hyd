@@ -55,7 +55,7 @@ package Action.War.Skill
 					
 					//print effect.plusHP
 					lblPnt = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 50 - index * 10);
-					graphics.drawText(wrapper.getPlusHpDesc(), lblPnt, 0x00ff00, 15, true);
+					graphics.drawText(wrapper.getPlusHpDesc(), lblPnt, 0xffff00, 15, true);
 				}
 			}
 			frameRenderer.drawWaitBitmaps(graphics, exception);

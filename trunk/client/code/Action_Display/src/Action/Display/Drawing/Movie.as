@@ -5,6 +5,11 @@ package Action.Display.Drawing
 		private var _frameRenderers:Array = new Array();
 		
 		private var _maxFrame:int = 0;
+		public function get maxFrame():int
+		{
+			return _maxFrame;
+		}
+		
 		private var _curFrame:int = 1;
 		
 		public function Movie()

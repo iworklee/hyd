@@ -3,7 +3,7 @@ package Action.War.Flow
 	import Action.Core.Flow.ActivityBase;
 	import Action.Core.Flow.IActivity;
 	import Action.Display.Drawing.BitmapHelper;
-	import Action.Resource.ResourceManager;
+	import Action.Resource.CommonResource;
 	import Action.War.BattleResourceEnum;
 	import Action.War.Report.BattleUnitManager;
 	import Action.War.Resource.BattleUnitResource;
@@ -40,7 +40,7 @@ package Action.War.Flow
 			_battleBitmaps = _unitResourceStrategy.getBitmaps(_battleUnitResource);
 			
 			_request = new URLRequest();  
-			_request.url = ResourceManager.parseUrl(_unitResourceStrategy.getRequestUrl(_battleUnitResource));
+			_request.url = CommonResource.parseUrl(_unitResourceStrategy.getRequestUrl(_battleUnitResource));
 			_request.method = URLRequestMethod.GET;
 			
 			_loader = new Loader();

@@ -42,7 +42,6 @@ package Action.Display.Drawing
 		{
 			_container = canvasContainer;
 			_canvas = _container.getCanvas();
-			_container.bindGraphics(this);	
 			_effectLayer = _canvas.getElementAt(0) as BorderContainer;
 			_textLayer = _effectLayer.getElementAt(0) as BorderContainer;
 		}

@@ -46,17 +46,23 @@ package Action.War
 			WarPlugins.skills[skill.id] = skill;
 			
 			skill = new BattleSkill();
+			skill.id = 2;
+			skill.name = "横扫千军";
+			skill.type = 1;
+			WarPlugins.skills[skill.id] = skill;
+			
+			skill = new BattleSkill();
 			skill.id = 101;
 			skill.name = "天火燎原";
 			skill.type = 2;
-			skill.resCurrent = skill.resPost = 1;
+			skill.resCurrent = 1;
 			WarPlugins.skills[skill.id] = skill;
 			
 			skill = new BattleSkill();
 			skill.id = 106;
 			skill.name = "天下归心";
 			skill.type = 2;
-			skill.resPrevious = skill.resCurrent = 2;
+			skill.resPrevious = 2;
 			WarPlugins.skills[skill.id] = skill;
 		}		
 		

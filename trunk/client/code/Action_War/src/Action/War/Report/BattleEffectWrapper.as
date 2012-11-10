@@ -36,7 +36,7 @@ package Action.War.Report
 			return _colorDescs[_effect.type];
 		}
 		
-		private var _upSpeeds:Array = [0, 0, 0, 0, 3];
+		private var _upSpeeds:Array = [1, 1, 0, 1, 3];
 		public function getTypeUpSpeed():int
 		{
 			return _upSpeeds[_effect.type];

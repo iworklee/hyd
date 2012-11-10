@@ -2,10 +2,12 @@ package Action.War.Report
 {
 	import Action.Core.Flow.IActivity;
 	import Action.Model.BattleUnit;
-	import Action.Resource.ResourceManager;
+	import Action.Resource.CommonResource;
+	import Action.Resource.HeroResource;
 	import Action.War.BattleDefs;
 	import Action.War.BattleResourceEnum;
 	import Action.War.Flow.LoadBattleUnitResourceActivity;
+	import Action.War.Resource.BattleUnitResource;
 	
 	import Util.NumberWrapper;
 	
@@ -14,7 +16,6 @@ package Action.War.Report
 	
 	import mx.controls.Image;
 	import mx.controls.Label;
-	import Action.War.Resource.BattleUnitResource;
 
 	public class BattleUnitManager
 	{
@@ -28,10 +29,20 @@ package Action.War.Report
 		{
 			return _battleUnit.sID;
 		}
+		
+		public function get heroId():int
+		{
+			return _battleUnit.id;
+		}
 
 		public function get resId():int
 		{
 			return _battleUnit.id;	
+		}
+		
+		public function get isHero():Boolean
+		{
+			return heroId < 100;
 		}
 		
 		public function get alive():Boolean
@@ -49,34 +60,44 @@ package Action.War.Report
 			return _battleUnit.sID < BattleDefs.SPLIT_POS ? -BattleDefs.INIT_POS_OFFSET : BattleDefs.INIT_POS_OFFSET;
 		}
 		
-		public function get resourceManager():BattleUnitResource
+		public function get heroResource():HeroResource
+		{
+			return HeroResource.getInstance(heroId);
+		}
+		
+		public function get unitResource():BattleUnitResource
 		{
 			return BattleUnitResource.getInstance(resId);
 		}
 		
+		public function getHeadBitmap():BitmapData
+		{
+			return heroResource.headBitmap;
+		}
+		
 		public function getAttackBitmap(idx:int):BitmapData
 		{
-			return resourceManager.attackBitmaps[direction * 4 + idx];
+			return unitResource.attackBitmaps[direction * 4 + idx];
 		}
 		
 		public function getDefendBitmap():BitmapData
 		{
-			return resourceManager.defendBitmaps[direction];
+			return unitResource.defendBitmaps[direction];
 		}
 		
 		public function getMoveBitmap(idx:int):BitmapData
 		{
-			return resourceManager.moveBitmaps[direction * 2 + idx];
+			return unitResource.moveBitmaps[direction * 2 + idx];
 		}
 		
 		public function getWaitBitmap():BitmapData
 		{
-			return resourceManager.waitBitmaps[direction];
+			return unitResource.waitBitmaps[direction];
 		}
 		
 		public function getHurtBitmap(idx:int):BitmapData
 		{
-			return resourceManager.hurtBitmaps[idx];
+			return unitResource.hurtBitmaps[idx];
 		}
 		
 		public function BattleUnitManager(bu:BattleUnit)

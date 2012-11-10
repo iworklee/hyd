@@ -95,9 +95,17 @@ package Action.War
 				
 				if(action.unitSID == 37)
 				{
-					action.param = 1;
-					for(j = 0; j<3; j++)
-						addEffect(action, 22 + j * 5);
+					action.param = int(Random.select([1, 2]))
+					if(action.param == 1)
+					{
+						for(j = 0; j<3; j++)
+							addEffect(action, 22 + j * 5);
+					}
+					else
+					{
+						for(j = 0; j<3; j++)
+							addEffect(action, 31 + j);
+					}
 				}
 				else
 					addEffect(action, 30 + i);

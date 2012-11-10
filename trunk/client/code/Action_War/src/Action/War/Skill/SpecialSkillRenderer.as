@@ -43,18 +43,18 @@ package Action.War.Skill
 			exception[attacker.SID] = attacker;
 			
 			//draw effect
-			if(index < 6)
+			if(index >= 0)
 				drawEffect(BattleDefs.SKILL_PHASE_PREVIOUS, graphics, index, frameRenderer);
-			else if(index < 9)
-				drawEffect(BattleDefs.SKILL_PHASE_CURRENT, graphics, index - 6, frameRenderer);
-			else if(index < 15)
-				drawEffect(BattleDefs.SKILL_PHASE_POST, graphics, index - 9, frameRenderer);
+			if(index >= 6)
+				drawEffect(BattleDefs.SKILL_PHASE_CURRENT, graphics, index-6, frameRenderer);
+			if(index >= 9)
+				drawEffect(BattleDefs.SKILL_PHASE_POST, graphics, index-9, frameRenderer);
 			
 			if(index < 6)
 			{
 				graphics.drawBitmap2(attacker.getAttackBitmap(0), attacker.paintPoint);
 				graphics.drawText(_skill.name, BattleHelper.getSkillNamePoint(), 0xffff00, 64, true, "华文楷体");
-				//var bmp:BitmapData = _skill.getPreviousBitmap(index);
+				graphics.drawBitmap(attacker.getHeadBitmap(), BattleHelper.getHeadBitmapPoint(attacker.SID), graphics.getEffectLayer());
 			}
 			else
 			{
@@ -82,7 +82,7 @@ package Action.War.Skill
 						
 						//print effect.plusHP
 						lblPnt = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 50 - index * 5);
-						graphics.drawText(wrapper.getPlusHpDesc(), lblPnt, 0x00ff00, 15, true);
+						graphics.drawText(wrapper.getPlusHpDesc(), lblPnt, 0xffff00, 15, true);
 					}
 				}
 			}
@@ -99,13 +99,14 @@ package Action.War.Skill
 			var effectBmp:BitmapData = _skill.getBitmap(phase, index);
 			if(effectBmp != null)
 			{
+				var offsetPoint:Point = BattleHelper.getBitmapOffset(effectBmp);
 				for each(var effect:BattleEffect in frameRenderer.action.effects)
 				{
 					var bum:BattleUnitManager = frameRenderer.battleReportManager.getBattleUnitManager(effect.unitSID);
-					var offsetPoint:Point = BattleHelper.getBitmapOffset(effectBmp);
-					graphics.drawBitmap2(effectBmp, bum.paintPoint, offsetPoint.x, offsetPoint.y, graphics.getEffectLayer());
-					GamePlugins.console.drawBitmap(effectBmp);
+					graphics.drawBitmap2(effectBmp, bum.paintPoint, offsetPoint.x, offsetPoint.y, graphics.getEffectLayer());				
 				}
+				//GamePlugins.console.writeLine(index);
+				GamePlugins.console.drawBitmap(effectBmp);
 			}
 		}
 	}

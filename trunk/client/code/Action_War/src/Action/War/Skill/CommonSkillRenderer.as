@@ -75,5 +75,10 @@ package Action.War.Skill
 			renderer._skill = skill;
 			return renderer;
 		}
+		
+		public function get description():String
+		{
+			return "开始攻击";
+		}
 	}
 }

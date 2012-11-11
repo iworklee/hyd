@@ -14,6 +14,8 @@
 			import Action.Core.Net.GameClient;
 			import Action.Core.Page.IGameDialog;
 			import Action.Core.Page.IGamePage;
+			import Action.Core.Util.Base64;
+			import Action.Model.BattleReport;
 			import Action.War.BattleReportProvider;
 			import Action.War.Commands.PlayBattleReportCommand;
 			import Action.War.WarModule;
@@ -66,6 +68,8 @@
 			
 			public function write(text:Object):void
 			{
+				if(text == null)
+					text = "";
 				txtTestOutput.text += text.toString();
 			}
 			
@@ -97,14 +101,34 @@
 			
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
+				/*var report:BattleReport = new BattleReport();
+				report.uID = "hello,world";
+				var bytes:ByteArray = new ByteArray();
+				report.writeTo(bytes);
+				var text:String = Base64.encode(bytes);
+				writeLine(text);				
+				
+				report.uID = "cctv";
+				bytes = Base64.decode(text);
+				report.mergeFrom(bytes);
+				writeLine(report.uID);
+				return;*/
+				
 				parent.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
 				GameClient.create().frame = this;
 				GamePlugins.console = this;
 				GamePlugins.modules = [new WarModule()];
 				GamePlugins.commands = [new PlayBattleReportCommand()];
 				GameModuleFactory.current.getModule("WarModule").onLoad();
-				GameCommandFactory.current.getCommand(9527).execute(GameClient.current,
-					BattleReportProvider.current.createTestReport());
+			
+				var buString:String = parent.loaderInfo.parameters.battleReport;
+				var report:BattleReport = buString != null && buString.length > 5
+					? BattleReportProvider.current.createBattleReport(buString)
+					: BattleReportProvider.current.createTestReport();
+				if(report != null)
+					GameCommandFactory.current.getCommand(9527).execute(GameClient.current,	report);
+				else
+					Alert.show("战报格式错误！");
 			}
 			
 			private function onUncaughtError(event:UncaughtErrorEvent):void

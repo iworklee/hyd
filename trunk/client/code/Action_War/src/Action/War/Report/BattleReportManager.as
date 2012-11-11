@@ -107,17 +107,8 @@ package Action.War.Report
 			for each(var bu:BattleUnit in _battleReport.units)
 			{
 				var bum:BattleUnitManager = new BattleUnitManager(bu);
-				if(bu.sID < 35)
-				{
-					bum.direction = BattleDefs.DIR_RIGHT;
-					bum.speed = BattleDefs.MOVE_POS_OFFSET;
-				}
-				else
-				{
-					bum.direction = BattleDefs.DIR_LEFT;
-					bum.speed = -BattleDefs.MOVE_POS_OFFSET;
-				}					
-				_buManagers[bu.sID] = bum;
+				bum.resetDir();				
+				_buManagers[bum.SID] = bum;
 			}
 		}
 		

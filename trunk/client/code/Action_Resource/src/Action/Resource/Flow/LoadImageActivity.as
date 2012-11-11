@@ -2,6 +2,7 @@ package Action.Resource.Flow
 {
 	import Action.Core.Flow.ActivityBase;
 	import Action.Core.Flow.IActivity;
+	import Action.Core.GamePlugins;
 	import Action.Resource.CommonResource;
 	
 	import flash.display.Loader;
@@ -26,6 +27,7 @@ package Action.Resource.Flow
 			_request = new URLRequest();  
 			_request.url = CommonResource.parseUrl(url);
 			_request.method = URLRequestMethod.GET;
+			GamePlugins.console.writeLine(_request.url);
 			
 			_loader = new Loader();
 			_loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoaded);

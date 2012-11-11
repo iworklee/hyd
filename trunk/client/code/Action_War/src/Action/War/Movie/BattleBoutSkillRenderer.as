@@ -43,9 +43,9 @@ package Action.War.Movie
 			_skillRenderer = BattleSkill.getInstance(_action.param).createRenderer();
 		}
 		
-		public function get name():String
+		public function get description():String
 		{
-			return "BoutSkill";
+			return descBUM(_attacker) + _skillRenderer.description;
 		}
 		
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void

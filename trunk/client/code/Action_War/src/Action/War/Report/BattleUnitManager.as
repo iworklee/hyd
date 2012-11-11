@@ -1,15 +1,15 @@
 package Action.War.Report
 {
 	import Action.Core.Flow.IActivity;
+	import Action.Core.Util.NumberWrapper;
 	import Action.Model.BattleUnit;
 	import Action.Resource.CommonResource;
 	import Action.Resource.HeroResource;
 	import Action.War.BattleDefs;
+	import Action.War.BattleHelper;
 	import Action.War.BattleResourceEnum;
 	import Action.War.Flow.LoadBattleUnitResourceActivity;
 	import Action.War.Resource.BattleUnitResource;
-	
-	import Action.Core.Util.NumberWrapper;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -44,11 +44,7 @@ package Action.War.Report
 			BUFF = 0;
 		}
 		
-		private var _battleUnit:BattleUnit;		
-		public function get battleUnit():BattleUnit
-		{
-			return _battleUnit;
-		}
+		private var _battleUnit:BattleUnit;
 		
 		public function get SID():int
 		{
@@ -80,9 +76,28 @@ package Action.War.Report
 		public var direction:int;
 		public var speed:int;
 		
+		public function get realPoint():Point
+		{
+			return BattleHelper.getPaintPoint(POS);
+		}
+		
 		public function getInitOffset():int
 		{
-			return _battleUnit.sID < BattleDefs.SPLIT_POS ? -BattleDefs.INIT_POS_OFFSET : BattleDefs.INIT_POS_OFFSET;
+			return _battleUnit.sID < BattleDefs.SPLIT_SID ? -BattleDefs.INIT_POS_OFFSET : BattleDefs.INIT_POS_OFFSET;
+		}
+		
+		public function resetDir():void
+		{
+			if(SID < BattleDefs.SPLIT_SID)
+			{
+				direction = BattleDefs.DIR_RIGHT;
+				speed = BattleDefs.MOVE_POS_OFFSET;
+			}
+			else
+			{
+				direction = BattleDefs.DIR_LEFT;
+				speed = -BattleDefs.MOVE_POS_OFFSET;
+			}	
 		}
 		
 		public function get heroResource():HeroResource

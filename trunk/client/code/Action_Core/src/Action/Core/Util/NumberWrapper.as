@@ -1,15 +1,23 @@
 package Action.Core.Util
 {
 	public class NumberWrapper
-	{
+	{		
+		private static var _current:NumberWrapper = new NumberWrapper();
+		
 		public static function wrap(num:Number):NumberWrapper
 		{
-			return new NumberWrapper(num);
+			_current.wrap(num);
+			return _current;
 		}
 		
 		private var _num:Number;
 		
-		public function NumberWrapper(num:Number)
+		public function NumberWrapper()
+		{
+			
+		}
+		
+		private function wrap(num:Number):void
 		{
 			_num = num;
 		}

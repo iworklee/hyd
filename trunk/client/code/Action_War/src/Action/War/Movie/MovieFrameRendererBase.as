@@ -3,8 +3,11 @@ package Action.War.Movie
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Display.Drawing.MoviePlayer;
 	import Action.War.BattleHelper;
+	import Action.War.Hero.BattleHero;
 	import Action.War.Report.BattleReportManager;
 	import Action.War.Report.BattleUnitManager;
+	
+	import mx.utils.Base64Decoder;
 
 	public class MovieFrameRendererBase
 	{
@@ -22,7 +25,7 @@ package Action.War.Movie
 			{
 				if(exceptions == null ||  exceptions[bum.SID] == null)
 				{
-					bum.paintPoint = BattleHelper.getPaintPoint(bum.battleUnit.pos);
+					bum.paintPoint = bum.realPoint;
 					graphics.drawBitmap(bum.getWaitBitmap(), bum.paintPoint);
 				}
 			}
@@ -40,12 +43,16 @@ package Action.War.Movie
 		
 		public function enter(graphics:CanvasGraphics, player:MoviePlayer):void
 		{
-			
 		}
 		
 		public function leave(graphics:CanvasGraphics, player:MoviePlayer):void
 		{
 			
+		}
+		
+		protected function descBUM(bum:BattleUnitManager):String
+		{
+			return "[" + BattleHero.getInstance(bum.heroId).name + "(" + bum.SID + ")] ";
 		}
 	}
 }

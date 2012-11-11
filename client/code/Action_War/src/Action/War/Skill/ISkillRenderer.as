@@ -7,6 +7,7 @@ package Action.War.Skill
 	public interface ISkillRenderer
 	{
 		function get type():int;
+		function get description():String;
 		function render(graphics:CanvasGraphics, index:int, frameRenderer:BattleBoutSkillRenderer):void;
 		function getFrameLength():int;
 		function create(skill:BattleSkill):ISkillRenderer;

@@ -1,7 +1,6 @@
 package Action.Display.Drawing
 {
 	import Action.Core.GamePlugins;
-	
 	import Action.Core.Util.NumberWrapper;
 	
 	import avmplus.getQualifiedClassName;
@@ -31,6 +30,11 @@ package Action.Display.Drawing
 		public function get movie():Movie
 		{
 			return _movie;
+		}
+		
+		public function get currentRenderer():IMovieFrameRenderer
+		{
+			return _curRenderer;
 		}
 		
 		public function MoviePlayer(graphics:CanvasGraphics)
@@ -94,7 +98,7 @@ package Action.Display.Drawing
 				if(_curRenderer != null)
 					_curRenderer.leave(_graphics, this);
 				_curRenderer = renderer;
-				test("OnEnter");
+				//test("OnEnter");
 				_curRenderer.enter(_graphics, this);
 				renderer.render(_graphics, this);
 			}
@@ -121,7 +125,7 @@ package Action.Display.Drawing
 		private function test(tag:String):void
 		{		
 			GamePlugins.console.writeLine(NumberWrapper.wrap(_curFrame).toText(3)
-				+ " : " + _curRenderer.name + "." + tag);
+				+ " : " + _curRenderer.description + "." + tag);
 			//GamePlugins.console.writeLine(_graphics.canvas.gete
 			//var date:Date = new Date();
 			//GamePlugins.console.writeLine(date.hours + ":" + date.minutes + ":" + date.seconds + "." + date.milliseconds);

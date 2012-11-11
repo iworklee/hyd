@@ -14,9 +14,9 @@ package Action.War.Movie
 			super(reportMgr);
 		}
 		
-		public function get name():String
+		public function get description():String
 		{
-			return "ReportOver";
+			return "战斗结束";
 		}
 		
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void

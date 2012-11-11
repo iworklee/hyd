@@ -17,9 +17,9 @@ package Action.War.Movie
 			super(brManager);
 		}
 		
-		public function get name():String
+		public function get description():String
 		{
-			return "BoutDead";
+			return _deadBUMS.length + "支部队败退";
 		}
 		
 		public override function enter(graphics:CanvasGraphics, player:MoviePlayer):void

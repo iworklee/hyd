@@ -1,6 +1,8 @@
 package Action.War
 {
 	import Action.Core.GamePlugins;
+	import Action.Core.Util.Base64;
+	import Action.Core.Util.Random;
 	import Action.Model.BattleAction;
 	import Action.Model.BattleActionType;
 	import Action.Model.BattleBout;
@@ -8,8 +10,6 @@ package Action.War
 	import Action.Model.BattleEffectType;
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
-	
-	import Action.Core.Util.Random;
 
 	public class BattleReportProvider
 	{
@@ -23,6 +23,21 @@ package Action.War
 		
 		public function BattleReportProvider()
 		{
+		}
+		
+		public function createBattleReport(text:String):BattleReport
+		{
+			try
+			{
+				var report:BattleReport = new BattleReport();
+				report.mergeFrom(Base64.decode(text));
+				return report;
+			}
+			catch(e:Error)
+			{
+				
+			}
+			return null;
 		}
 		
 		public function createTestReport():BattleReport
@@ -110,7 +125,7 @@ package Action.War
 				{
 					action.param = 101;
 					for(j = 0; j<3; j++)
-						addEffect(action, 37 + j, 75 + j * 50);
+						addEffect(action, 37 + j, 75 + j * 20);
 					for(j = 0; j<3; j++)
 						addEffect(action, 42 + j, 90);
 					for(j = 0; j<3; j++)
@@ -135,14 +150,21 @@ package Action.War
 				{
 					action.param = 1;
 					for(j = 0; j<3; j++)
-						addEffect(action, 24 + j * 5, j == 0 ? 277 : 232);
+						addEffect(action, 24 + j * 5, j == 0 ? 277 : 232, 3);
 				}
 				else
 					addEffect(action, 30 + i, 75);
 			}
 			
-			//for each(var action:BattleAction in bout.actions)
-			//	GamePlugins.console.writeLine(action.param);
+			for(i=0; i<2; i++)
+			{
+				action = new BattleAction();
+				action.unitSID = 19 - i * 5;
+				action.type = BattleActionType.Move;
+				action.param = 24 - i * 5;
+				bout.actions.push(action);
+			}
+			
 			return bout;
 		}
 		
@@ -152,6 +174,19 @@ package Action.War
 			bout.sID = 2;
 			
 			var action:BattleAction = new BattleAction();
+			action.unitSID = 39;
+			action.type = BattleActionType.Move;
+			action.param = 34;
+			bout.actions.push(action);			
+			
+			action = new BattleAction();
+			action.unitSID = 19;
+			action.type = BattleActionType.Cast;
+			action.param = 0;
+			addEffect(action, 39, 25);
+			bout.actions.push(action);	
+			
+			action = new BattleAction();
 			action.unitSID = 12;
 			action.type = BattleActionType.Cast;
 			action.param = 3;
@@ -162,6 +197,13 @@ package Action.War
 			for(j=0;j<3;j++)
 				addEffect(action, 46 + j, 357);
 			bout.actions.push(action);
+			
+			action = new BattleAction();
+			action.unitSID = 14;
+			action.type = BattleActionType.Cast;
+			action.param = 0;
+			addEffect(action, 39, 25);
+			bout.actions.push(action);	
 			
 			return bout;
 		}

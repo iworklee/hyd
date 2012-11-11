@@ -19,14 +19,14 @@ package Action.War.Movie
 			for each(var unitMgr:BattleUnitManager in _battleReportManager.getBUMS())
 			{
 				var offset:int = unitMgr.getInitOffset();
-				unitMgr.paintPoint =  BattleHelper.getPaintPoint(unitMgr.battleUnit.pos + offset);
+				unitMgr.paintPoint =  BattleHelper.getPaintPoint(unitMgr.POS + offset);
 				//graphics.draw(unitMgr.getWaitBitmap(i),	unitMgr.paintPoint);
 			}
 		}
 		
-		public function get name():String
+		public function get description():String
 		{
-			return "ReportInit";
+			return "战斗开始";
 		}
 		
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
@@ -34,7 +34,7 @@ package Action.War.Movie
 			for each(var unitMgr:BattleUnitManager in _battleReportManager.getBUMS())
 			{
 				var idx:int = player.currentFrame % 2;
-				unitMgr.paintPoint = new Point(unitMgr.paintPoint.x + unitMgr.speed, unitMgr.paintPoint.y);
+				unitMgr.paintPoint.x += unitMgr.speed;
 				if(graphics.contains(unitMgr.paintPoint))
 					graphics.drawBitmap(unitMgr.getMoveBitmap(idx), unitMgr.paintPoint);
 			}

@@ -14,9 +14,14 @@ package Action.War
 			return new Point(250, -50);
 		}
 		
+		public static function getBoutNamePoint():Point
+		{
+			return new Point(250, 50);
+		}
+		
 		public static function getHeadBitmapPoint(sid:int):Point
 		{
-			return sid < BattleDefs.SPLIT_POS ? new Point(50, -50) : new Point(586, -50);
+			return sid < BattleDefs.SPLIT_SID ? new Point(50, -50) : new Point(586, -50);
 		}
 		
 		public static function getPaintPoint(pos:int):Point

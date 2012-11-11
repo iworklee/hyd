@@ -72,14 +72,14 @@
 				//_pgbMP.setStyle("trackColors", [0x0000ff, 0xffffff]);
 				
 				//装饰控件
-				var decorator1:CommonDisplayDecorator = new CommonDisplayDecorator();
+				/*var decorator1:CommonDisplayDecorator = new CommonDisplayDecorator();
 				decorator1.color = "#ffff00";
 				var decorator2:CommonDisplayDecorator = new CommonDisplayDecorator();
 				decorator2.color = "#ff8800";
 				DisplayDecoratorBuilder.create([_lblGrid, _lblPlay])
 					.appendDecorator(MouseEvent.MOUSE_OVER, decorator1)
 					.appendDecorator(MouseEvent.MOUSE_OUT, decorator2)
-					.build();
+					.build();*/
 				
 				//test();
 				replay();				
@@ -119,6 +119,9 @@
 			private function onMovieGoto(e:Event):void
 			{
 				_sldProgress.value = _moviePlayer.currentFrame;
+				_lblProgress.text = NumberWrapper.wrap(_moviePlayer.currentFrame).toText(4)
+					+ " / " + NumberWrapper.wrap(_moviePlayer.movie.maxFrame).toText(4);
+				_lblCurRenderer.text = _moviePlayer.currentRenderer.description;
 			}
 			
 			private function onMovieStop(e:Event):void
@@ -160,12 +163,6 @@
 			private function hideUnitInfo():void
 			{
 				_bcUnitHidden.visible = false;
-			}
-			
-			protected function _lblGrid_clickHandler(event:MouseEvent):void
-			{
-				// TODO Auto-generated method stub
-				_lblGrid.text = (_bcGrid.visible = !_bcGrid.visible) ? "隐藏网格" : "显示网格";
 			}
 			
 			protected function _lblPlay_clickHandler(event:MouseEvent):void
@@ -239,14 +236,12 @@
 			</s:BorderContainer>
 		</s:BorderContainer>
 	</s:BorderContainer>
-	<s:Label id="_lblGrid" x="490" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28" visible="false"
-			 fontWeight="bold" text="显示网格" buttonMode="true" click="_lblGrid_clickHandler(event)"/>
-	<s:Label id="_lblPlay" x="620" y="540" color="#ff8800" fontFamily="华文楷体" fontSize="28" visible="false"
-			 fontWeight="bold" text="重新播放" buttonMode="true" click="_lblPlay_clickHandler(event)" />
-	<s:HSlider id="_sldProgress" x="20" y="530" width="720" enabled="false" valueCommit="_sldProgress_valueCommitHandler(event)"/>
-	<s:Button id="_btnReplay" x="20" y="550" label="重播" click="_btnReplay_clickHandler(event)"/>
-	<s:Button id="_btnPlay" x="100" y="550" label="暂停" click="_btnPlay_clickHandler(event)"/>
-	<s:Button id="_btnGrid" x="180" y="550" label="网格" click="_btnGrid_clickHandler(event)"/>
+	<s:Label id="_lblProgress" x="20" y="520" color="#00ff00" fontFamily="微软雅黑" fontSize="18" text="0 / 0" />
+	<s:Label id="_lblCurRenderer" x="140" y="520" color="#ffff00" fontFamily="微软雅黑" fontSize="18" text="Init" />
+	<s:HSlider id="_sldProgress" x="20" y="540" width="720" enabled="false" valueCommit="_sldProgress_valueCommitHandler(event)"/>
+	<s:Button id="_btnReplay" x="20" y="560" label="重播" click="_btnReplay_clickHandler(event)"/>
+	<s:Button id="_btnPlay" x="100" y="560" label="暂停" click="_btnPlay_clickHandler(event)"/>
+	<s:Button id="_btnGrid" x="180" y="560" label="网格" click="_btnGrid_clickHandler(event)"/>
 	<s:BorderContainer id="_bcUnitHidden" width="100" height="90" backgroundColor="#557788" backgroundAlpha="1" visible="false">
 		<s:Label id="_lblName" x="5" y="5" color="#ffff00" text="关羽" fontSize="15" />
 		<mx:ProgressBar id="_pgbHP" x="5" y="25" width="90" height="15" label="120 / 254"

@@ -20,15 +20,15 @@ package Action.War.Movie
 			_bout = bout;
 		}
 		
-		public function get name():String
+		public function get description():String
 		{
-			return "BoutBegin";
+			return "进入第" + _bout.sID + "回合";
 		}
 		
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
 		{
 			var text:String = "第" + _bout.sID + "回合";
-			graphics.drawText(text, BattleHelper.getSkillNamePoint(), 0xffff00, 64, true, "微软雅黑");
+			graphics.drawText(text, BattleHelper.getBoutNamePoint(), 0xffff00, 64, true, "微软雅黑");
 			super.drawWaitBitmaps(graphics);
 		}
 		

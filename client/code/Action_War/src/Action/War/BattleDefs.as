@@ -12,7 +12,7 @@ package Action.War
 		{
 		}
 		
-		public static const SPLIT_POS:int = 35;
+		public static const SPLIT_SID:int = 35;
 		public static const INIT_POS_OFFSET:int = 25;
 		public static const MOVE_POS_OFFSET:int = 10;
 		

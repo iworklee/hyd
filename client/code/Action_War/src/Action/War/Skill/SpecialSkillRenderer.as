@@ -1,6 +1,7 @@
 package Action.War.Skill
 {
 	import Action.Core.GamePlugins;
+	import Action.Core.Util.NumberWrapper;
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Model.BattleAction;
@@ -10,8 +11,6 @@ package Action.War.Skill
 	import Action.War.Movie.BattleBoutSkillRenderer;
 	import Action.War.Report.BattleEffectWrapper;
 	import Action.War.Report.BattleUnitManager;
-	
-	import Action.Core.Util.NumberWrapper;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -146,6 +145,13 @@ package Action.War.Skill
 			var renderer:SpecialSkillRenderer = new SpecialSkillRenderer(_type);
 			renderer._skill = skill;
 			return renderer;
+		}
+		
+		public function get description():String
+		{
+			var desc:String = _type % 2 == 0 ? "施放策略 [" : "发动战法 [";
+			desc += _skill.name + "]";
+			return desc;
 		}
 	}
 }

@@ -2,7 +2,7 @@ package Action.War.Report
 {
 	import Action.Model.BattleEffect;
 	
-	import Util.NumberWrapper;
+	import Action.Core.Util.NumberWrapper;
 
 	public class BattleEffectWrapper
 	{

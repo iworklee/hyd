@@ -1,4 +1,4 @@
-package Util
+package Action.Core.Util
 {
 	public class Random
 	{

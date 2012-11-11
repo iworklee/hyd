@@ -14,7 +14,7 @@ package Action.War.Movie
 	import Action.War.Skill.ISkillRenderer;
 	import Action.War.WarPlugins;
 	
-	import Util.NumberWrapper;
+	import Action.Core.Util.NumberWrapper;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;

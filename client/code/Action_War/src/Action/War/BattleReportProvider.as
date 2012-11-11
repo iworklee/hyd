@@ -9,7 +9,7 @@ package Action.War
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
 	
-	import Util.Random;
+	import Action.Core.Util.Random;
 
 	public class BattleReportProvider
 	{

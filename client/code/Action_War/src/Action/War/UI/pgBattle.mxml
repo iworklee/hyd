@@ -28,7 +28,7 @@
 			import Action.War.Skill.BattleSkill;
 			import Action.War.WarModule;
 			
-			import Util.NumberWrapper;
+			import Action.Core.Util.NumberWrapper;
 			
 			import mx.controls.Alert;
 			import mx.controls.Image;

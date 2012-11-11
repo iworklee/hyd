@@ -9,7 +9,7 @@ package Action.War.Skill
 	import Action.War.Report.BattleEffectWrapper;
 	import Action.War.Report.BattleUnitManager;
 	
-	import Util.NumberWrapper;
+	import Action.Core.Util.NumberWrapper;
 	
 	import flash.display.Graphics;
 	import flash.geom.Point;

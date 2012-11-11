@@ -3,7 +3,7 @@ package Action.War.Strategy
 	import Action.Display.Drawing.BitmapHelper;
 	import Action.War.Resource.BattleUnitResource;
 	
-	import Util.NumberWrapper;
+	import Action.Core.Util.NumberWrapper;
 	
 	import flash.display.BitmapData;
 	import flash.geom.Point;

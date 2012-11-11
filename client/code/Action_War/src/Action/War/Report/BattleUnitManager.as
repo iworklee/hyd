@@ -9,7 +9,7 @@ package Action.War.Report
 	import Action.War.Flow.LoadBattleUnitResourceActivity;
 	import Action.War.Resource.BattleUnitResource;
 	
-	import Util.NumberWrapper;
+	import Action.Core.Util.NumberWrapper;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;

@@ -2,7 +2,7 @@ package Action.Display.Drawing
 {
 	import Action.Core.GamePlugins;
 	
-	import Util.NumberWrapper;
+	import Action.Core.Util.NumberWrapper;
 	
 	import avmplus.getQualifiedClassName;
 	

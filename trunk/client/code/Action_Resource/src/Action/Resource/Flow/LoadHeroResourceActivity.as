@@ -5,7 +5,7 @@ package Action.Resource.Flow
 	import Action.Resource.CommonResource;
 	import Action.Resource.HeroResource;
 	
-	import Util.NumberWrapper;
+	import Action.Core.Util.NumberWrapper;
 	
 	import flash.display.Bitmap;
 	import flash.display.Loader;

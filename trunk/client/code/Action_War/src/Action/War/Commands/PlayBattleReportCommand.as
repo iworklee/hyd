@@ -17,7 +17,7 @@ package Action.War.Commands
 	import Action.War.UI.pgBattle;
 	import Action.War.WarModule;
 	
-	import Util.NumberWrapper;
+	import Action.Core.Util.NumberWrapper;
 	
 	import flash.events.Event;
 	

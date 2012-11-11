@@ -10,7 +10,7 @@ package Action.War.Flow
 	import Action.War.Strategy.BattleResourceStrategyFactory;
 	import Action.War.Strategy.IUnitResourceStrategy;
 	
-	import Util.NumberWrapper;
+	import Action.Core.Util.NumberWrapper;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;

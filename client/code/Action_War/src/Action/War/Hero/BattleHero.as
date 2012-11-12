@@ -17,5 +17,11 @@ package Action.War.Hero
 		public function BattleHero()
 		{
 		}
+		
+		public function from(obj:Object):void
+		{
+			for(var name:String in obj)
+				this[name] = obj[name];
+		}
 	}
 }

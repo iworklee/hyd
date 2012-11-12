@@ -61,9 +61,14 @@ package Action.War.Report
 			return _battleUnit.id;	
 		}
 		
+		public function get isWall():Boolean
+		{
+			return heroId == 0;
+		}
+		
 		public function get isHero():Boolean
 		{
-			return heroId < 100;
+			return  heroId > 0 && heroId < 100;
 		}
 		
 		public function get isDead():Boolean

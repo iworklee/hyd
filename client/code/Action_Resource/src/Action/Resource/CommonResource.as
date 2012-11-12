@@ -1,8 +1,10 @@
 package Action.Resource
 {
+	import Action.Core.GameConfig;
+
 	public class CommonResource
 	{
-		private static const _root:String = "http://hyd.googlecode.com/svn/trunk/client/raw/Action/";
+		private static var _root:String;
 		
 		public static function parseUrl(url:String):String
 		{
@@ -22,6 +24,13 @@ package Action.Resource
 		{
 			return _bumSection;
 		}*/
+		
+		private static function initialize():void
+		{
+			var objRoot:Object = GameConfig.getValue("resRoot");
+			_root = objRoot != null ? objRoot.toString() : "http://hyd.googlecode.com/svn/trunk/client/raw/Action/";
+		}
+		initialize();
 		
 		public function CommonResource()
 		{

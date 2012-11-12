@@ -24,6 +24,8 @@
     <classEntry path="Action.Core.Util.NumberWrapper"/>
     <classEntry path="Action.Core.Util.Random"/>
     <classEntry path="Action.Core.Util.Base64"/>
+    <classEntry path="Action.Core.Util.SoundPlayer"/>
+    <classEntry path="Action.Core.GameConfig"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

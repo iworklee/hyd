@@ -9,7 +9,10 @@
 	<fx:Script>
 		<![CDATA[
 			import Action.Core.Flow.Workflow;
+			import Action.Core.GameConfig;
 			import Action.Core.GamePlugins;
+			import Action.Core.Util.NumberWrapper;
+			import Action.Core.Util.SoundPlayer;
 			import Action.Display.Decorator.CommonDisplayDecorator;
 			import Action.Display.Decorator.DisplayDecoratorBuilder;
 			import Action.Display.Decorator.IDisplayDecorator;
@@ -27,8 +30,6 @@
 			import Action.War.Resource.BattleUnitResource;
 			import Action.War.Skill.BattleSkill;
 			import Action.War.WarModule;
-			
-			import Action.Core.Util.NumberWrapper;
 			
 			import mx.controls.Alert;
 			import mx.controls.Image;
@@ -68,18 +69,10 @@
 						cell.addElement(lbl);
 					}
 				}
-				
-				//_pgbMP.setStyle("trackColors", [0x0000ff, 0xffffff]);
-				
-				//装饰控件
-				/*var decorator1:CommonDisplayDecorator = new CommonDisplayDecorator();
-				decorator1.color = "#ffff00";
-				var decorator2:CommonDisplayDecorator = new CommonDisplayDecorator();
-				decorator2.color = "#ff8800";
-				DisplayDecoratorBuilder.create([_lblGrid, _lblPlay])
-					.appendDecorator(MouseEvent.MOUSE_OVER, decorator1)
-					.appendDecorator(MouseEvent.MOUSE_OUT, decorator2)
-					.build();*/
+
+				//加载背景音乐
+				var soundPlayer:SoundPlayer = new SoundPlayer(CommonResource.parseUrl("sound/battle01.mp3"));
+				soundPlayer.play(5);
 				
 				//test();
 				replay();				
@@ -204,6 +197,7 @@
 				// TODO Auto-generated method stub
 				var point:Point = new Point(event.localX, event.localY);
 				var pos:int = BattleHelper.getBattlePos(point);
+				point = BattleHelper.getPaintPoint(pos);
 				showUnitInfo(pos, point.x, point.y + 150);
 				//Alert.show(point.x + "," + point.y + " => " + pos.toString());
 			}

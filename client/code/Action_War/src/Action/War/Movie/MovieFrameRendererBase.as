@@ -23,6 +23,8 @@ package Action.War.Movie
 		{
 			for each(var bum:BattleUnitManager in _battleReportManager.getBUMS())
 			{
+				if(bum.isWall)
+					continue;
 				if(exceptions == null ||  exceptions[bum.SID] == null)
 				{
 					bum.paintPoint = bum.realPoint;

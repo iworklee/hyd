@@ -22,10 +22,15 @@ namespace Action.War
         {
             return null;
         }
+
         protected override void Attacked(BattleEffect effect)
         {
             if (Health <= 0)
                 Military.Defeated = true;
+        }
+        public override BattleAction Move()
+        {
+            return null;
         }
     }
 }

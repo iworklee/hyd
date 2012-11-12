@@ -115,5 +115,10 @@ namespace Action.War
         /// </summary>
         public int SkillID { get; set; }
 
+        /// <summary>
+        /// 等级
+        /// </summary>
+        public int Level { get; set; }
+
     }
 }

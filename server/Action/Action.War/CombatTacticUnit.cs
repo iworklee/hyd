@@ -40,12 +40,12 @@ namespace Action.War
             ba.Effects.AddRange(effects);
             return ba;
         }
-        public override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
+        public override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType, float damageRatio)
         {
             if (effectType != BattleEffectType.Dodge)
                 Charge += CHARGE_PLUS;
 
-            return base.Attacking(target, attackType, effectType);
+            return base.Attacking(target, attackType, effectType, damageRatio);
         }
 
         protected override void Attacked(BattleEffect effect)

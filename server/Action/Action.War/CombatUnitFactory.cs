@@ -82,6 +82,7 @@ namespace Action.War
             unit.CriticalChance = 100;
             unit.DodgeChance = 100;
 
+            unit.CombatPower = unit.NormalAttack + unit.TacticAttack + unit.StrategyAttack;
             return unit;
         }
     }

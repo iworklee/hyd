@@ -114,6 +114,8 @@
 				writeLine(report.uID);
 				return;*/
 				
+				//flash.system.Security.allowDomain("*");
+				
 				parent.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
 				GameClient.create().frame = this;
 				GamePlugins.console = this;

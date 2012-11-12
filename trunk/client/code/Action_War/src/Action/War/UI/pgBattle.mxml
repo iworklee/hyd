@@ -95,7 +95,7 @@
 			{
 				_canvasGraphics = new CanvasGraphics(this);
 				_canvasGraphics.clear();
-				GamePlugins.console.clear();
+				//GamePlugins.console.clear();
 				
 				battleReportManager.reset();
 				battleReportManager.play(_canvasGraphics);

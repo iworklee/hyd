@@ -1,20 +1,20 @@
-var config = 
+ï»¿var config = 
 {
 	resRoot : "http://res.action.yuuhhe.com/action/",
 	getValue : function(name) { return config[name]; }
 };
 
-var heros = 
-[
-	{id:225, name:"Ë¾ÂíÜ²", skill:0, face:0},
-	{id:343, name:"²Ü²Ù", skill:106, face:1},
-	{id:98, name:"¹ØÓğ", skill:0, face:0},
-	{id:432, name:"ÕÅ·É", skill:0, face:0},		
-	{id:660, name:"ÂÀ²¼", skill:0, face:0},
-	{id:801, name:"²Ü²Ù", skill:0, face:0},
-	{id:801, name:"²Ü²Ù", skill:0, face:0},
-	{id:801, name:"²Ü²Ù", skill:0, face:0},
-	{id:801, name:"²Ü²Ù", skill:0, face:0},
-	{id:801, name:"²Ü²Ù", skill:0, face:0},
-	{id:801, name:"²Ü²Ù", skill:0, face:0}
-];
+var heros = [];
+heros[225] = {id:225, name:"å¸é©¬æ‡¿", skill:101, face:4};
+heros[343] = {id:343, name:"æ›¹æ“", skill:106, face:1};
+heros[98] = {id:98, name:"å…³ç¾½", skill:2, face:2};
+heros[432] = {id:432, name:"å¼ é£", skill:1, face:3};
+heros[660] = {id:660, name:"å•å¸ƒ", skill:3, face:5};
+heros[801] = {id:801, name:"æ›¹æ“", skill:0, face:0};
+heros[801] = {id:801, name:"æ›¹æ“", skill:0, face:0};
+
+var heroFactory =
+{
+	getHeros : function() { return heros; },
+	getHero : function(id) { return heros[id]; }
+}

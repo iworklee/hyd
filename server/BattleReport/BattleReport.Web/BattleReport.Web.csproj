@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Flash\assets\loading.JPG" />
+    <Content Include="Content\Flash\config.js" />
     <Content Include="Content\Flash\flash.swf" />
     <Content Include="Content\Flash\framework_4.6.0.22920.swf" />
     <Content Include="Content\Flash\mx_4.6.0.22920.swf" />

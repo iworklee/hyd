@@ -78,9 +78,9 @@ namespace Action.War
             unit.StrategyAttack = 100;
             unit.StrategyDefence = 100;
 
-            unit.BlockChance = 100;
-            unit.CriticalChance = 100;
-            unit.DodgeChance = 100;
+            unit.DodgeChance = 0.2f;
+            unit.BlockChance = 0.3f;
+            unit.CriticalChance = 0.4f;
 
             unit.CombatPower = unit.NormalAttack + unit.TacticAttack + unit.StrategyAttack;
             return unit;

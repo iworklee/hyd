@@ -32,6 +32,7 @@ namespace Action.Skill
 
         public ISkill GetSkill(int skillID)
         {
+            // 1、2、3战法，101、106策略
             ISkill skill;
             switch (skillID)
             {

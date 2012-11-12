@@ -75,7 +75,7 @@ namespace Action.War
 
             target.Health -= damage;
 
-            var effect = new BattleEffect { UnitSID = target.BattleID, PlusHP = damage, Type = effectType };
+            var effect = new BattleEffect { UnitSID = target.BattleID, PlusHP = -damage, Type = effectType };
 
             target.Attacked(effect);
 

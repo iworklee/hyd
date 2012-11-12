@@ -11,7 +11,7 @@ namespace Action.War
     /// </summary>
     public class CombatCampUnit : CombatUnit
     {
-        public CombatCampUnit(CombatMilitary military) : base(military) { }
+        //public CombatCampUnit(CombatMilitary military) : base(military) { }
 
         public override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
         {

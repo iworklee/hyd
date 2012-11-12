@@ -1,4 +1,5 @@
 ﻿using Action.Model;
+using Action.Skill;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,11 @@ namespace Action.War
         const int MAX_CHARGE = 100;
         const int CHARGE_PLUS = 25;
 
-        public CombatTacticUnit(CombatMilitary military)
-            : base(military)
-        {
-            _skill = new StrikeThroughSkill();
-        }
+        //public CombatTacticUnit(CombatMilitary military)
+        //    : base(military)
+        //{
+        //    _skill = new StrikeThroughSkill();
+        //}
 
         public override BattleAction SkillStrike()
         {
@@ -27,7 +28,8 @@ namespace Action.War
             if (Charge < 100)
                 return null;
 
-            var effects = _skill.Cast(this);
+            var skill = SkillFactory.Instance.GetSkill(this.SkillID);
+            var effects = skill.Cast(this);
             if (effects == null)
                 return null;
 

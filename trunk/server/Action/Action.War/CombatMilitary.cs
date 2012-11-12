@@ -44,6 +44,7 @@ namespace Action.War
         /// <param name="unit"></param>
         public void AddUnit(CombatUnit unit)
         {
+            unit.Military = this;
             _units.Add(unit);
             _aliveUnits.Add(unit);
             _unitsPos.Add(unit.Position, unit);

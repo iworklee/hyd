@@ -107,22 +107,12 @@ namespace Action.War
         /// <summary>
         /// 攻击范围
         /// </summary>
-        public IEnumerable<Vector2> StrikeRange
-        {
-            get
-            {
-                yield return new Vector2 { X = 1, Y = 0 };
-                yield return new Vector2 { X = 0, Y = -1 };
-                yield return new Vector2 { X = 0, Y = 1 };
-            }
-        }
-
-        protected ISkill _skill;
+        public IEnumerable<Vector2> StrikeRange { get; set; }
 
         /// <summary>
         /// 技能ID
         /// </summary>
-        public int SkillID { get { return _skill == null ? 0 : _skill.Id; } }
+        public int SkillID { get; set; }
 
     }
 }

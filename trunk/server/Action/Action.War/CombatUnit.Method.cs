@@ -12,10 +12,10 @@ namespace Action.War
     /// </summary>
     public partial class CombatUnit
     {
-        public CombatUnit(CombatMilitary military)
-        {
-            Military = military;
-        }
+        //public CombatUnit(CombatMilitary military)
+        //{
+        //    Military = military;
+        //}
 
         /// <summary>
         /// 普通攻击

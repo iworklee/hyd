@@ -30,5 +30,19 @@ namespace Action.Skill
             }
         }
 
+        public ISkill GetSkill(int skillID)
+        {
+            ISkill skill;
+            switch (skillID)
+            {
+                case 111:
+                    skill = new StrikeThroughSkill();
+                    break;
+                default:
+                    skill = new StrikeThroughSkill();
+                    break;
+            }
+            return skill;
+        }
     }
 }

@@ -99,7 +99,7 @@ namespace Action.War
 
             Report.UID = Guid.NewGuid().ToString("N");
 
-            for (int round = 0; round < MAX_ROUND; round++)
+            for (int round = 1; round <= MAX_ROUND; round++)
             {
                 PerformRound(round);
 

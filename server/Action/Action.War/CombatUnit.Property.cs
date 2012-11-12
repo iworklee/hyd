@@ -33,6 +33,8 @@ namespace Action.War
         /// </summary>
         public Vector2 Position { get; set; }
 
+        #region 攻防属性
+
         /// <summary>
         /// 攻击
         /// </summary>
@@ -43,34 +45,32 @@ namespace Action.War
         /// </summary>
         private Dictionary<AttackType, int> _defence = new Dictionary<AttackType, int>();
 
-        #region 攻防属性
-
         /// <summary>
         /// 普通攻击
         /// </summary>
-        public int NormalAttack { get; set; }
+        public int NormalAttack { get { return _attack[AttackType.Normal]; } set { _attack[AttackType.Normal] = value; } }
         /// <summary>
         /// 普通防御
         /// </summary>
-        public int NormalDefence { get; set; }
+        public int NormalDefence { get { return _defence[AttackType.Normal]; } set { _defence[AttackType.Normal] = value; } }
 
         /// <summary>
         /// 战法攻击
         /// </summary>
-        public int TacticAttack { get; set; }
+        public int TacticAttack { get { return _attack[AttackType.Tactic]; } set { _attack[AttackType.Tactic] = value; } }
         /// <summary>
         /// 战法防御
         /// </summary>
-        public int TacticDefence { get; set; }
+        public int TacticDefence { get { return _defence[AttackType.Tactic]; } set { _defence[AttackType.Tactic] = value; } }
 
         /// <summary>
         /// 策略攻击
         /// </summary>
-        public int StrategyAttack { get; set; }
+        public int StrategyAttack { get { return _attack[AttackType.Strategy]; } set { _attack[AttackType.Strategy] = value; } }
         /// <summary>
         /// 策略防御
         /// </summary>
-        public int StrategyDefence { get; set; }
+        public int StrategyDefence { get { return _defence[AttackType.Strategy]; } set { _defence[AttackType.Strategy] = value; } }
 
         #endregion
 
@@ -107,7 +107,8 @@ namespace Action.War
         /// <summary>
         /// 攻击范围
         /// </summary>
-        public IEnumerable<Vector2> StrikeRange { get; set; }
+        private IEnumerable<Vector2> _strikeRange = RangeProvider.Melee();
+        public IEnumerable<Vector2> StrikeRange { get { return _strikeRange; } set { _strikeRange = value; } }
 
         /// <summary>
         /// 技能ID

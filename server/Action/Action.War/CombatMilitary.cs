@@ -11,7 +11,7 @@ namespace Action.War
     {
         private List<CombatUnit> _units = new List<CombatUnit>();
         private List<CombatUnit> _aliveUnits = new List<CombatUnit>();
-        private Dictionary<Vector2,CombatUnit> _unitsPos = new Dictionary<Vector2,CombatUnit>();
+        private Dictionary<Vector2, CombatUnit> _unitsPos = new Dictionary<Vector2, CombatUnit>();
 
         /// <summary>
         /// 敌军
@@ -42,9 +42,12 @@ namespace Action.War
         /// 添加单位
         /// </summary>
         /// <param name="unit"></param>
-        public void AddUnit(CombatUnit unit)
+        public void PlaceUnit(CombatUnit unit, int pos)
         {
             unit.Military = this;
+            unit.BattleID = pos;
+            unit.Position = pos.Int2Pos();
+
             _units.Add(unit);
             _aliveUnits.Add(unit);
             _unitsPos.Add(unit.Position, unit);
@@ -55,7 +58,7 @@ namespace Action.War
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
-        public CombatUnit GetAliveUnitByPos( Vector2 pos)
+        public CombatUnit GetAliveUnitByPos(Vector2 pos)
         {
             CombatUnit unit;
             _unitsPos.TryGetValue(pos, out unit);

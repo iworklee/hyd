@@ -1,4 +1,5 @@
 ﻿using Action.Model;
+using Action.Skill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,11 @@ namespace Action.War
         /// </summary>
         public float SkillChance { get; set; }
 
-        public CombatStrategyUnit(CombatMilitary military) : base(military) {
-            _skill = new EmbraveSkill();
-        }
+        //public CombatStrategyUnit(CombatMilitary military)
+        //    : base(military)
+        //{
+        //    _skill = new EmbraveSkill();
+        //}
 
         public override BattleAction SkillStrike()
         {
@@ -27,7 +30,8 @@ namespace Action.War
             if (rng.NextDouble() > SkillChance)
                 return null;
 
-            var effects = _skill.Cast(this);
+            var skill = SkillFactory.Instance.GetSkill(this.SkillID);
+            var effects = skill.Cast(this);
             if (effects == null)
                 return null;
 

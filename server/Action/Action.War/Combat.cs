@@ -38,7 +38,7 @@ namespace Action.War
             // 初始化攻方单位
             foreach (var u in attacker.Units)
             {
-                var unit = new CombatUnit(Attacker);
+                var unit = new CombatUnit();
                 unit.UnitTypeID = u.ID;
                 unit.Position = (u.Positon + 10).Int2Pos();
                 Attacker.AddUnit(unit);
@@ -47,7 +47,7 @@ namespace Action.War
             // 攻方城墙
             for (int i = 0; i < 5; i++)
             {
-                var unit = new CombatCampUnit(Attacker);
+                var unit = new CombatCampUnit();
                 unit.UnitTypeID = 0;
                 unit.Position = i.Int2Pos();
                 Attacker.AddUnit(unit);
@@ -72,7 +72,7 @@ namespace Action.War
             {
                 var j = u.Positon + 55 - u.Positon / 5 * 10;
 
-                var unit = new CombatUnit(Defender);
+                var unit = new CombatUnit();
                 unit.UnitTypeID = u.ID;
                 unit.Position = j.Int2Pos();
                 Defender.AddUnit(unit);
@@ -81,7 +81,7 @@ namespace Action.War
             // 守方城墙
             for (int i = 65; i < 70; i++)
             {
-                var unit = new CombatCampUnit(Defender);
+                var unit = new CombatCampUnit();
                 unit.UnitTypeID = 0;
                 unit.Position = i.Int2Pos();
                 Attacker.AddUnit(unit);

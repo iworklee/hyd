@@ -3,8 +3,37 @@
     Layout = "";
 }
 
-<h2>@ViewBag.Message</h2>
-<p>
+<div id="flashContent">
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1060" height="600" id="DemoProject_East">
+        <param name="movie" value="@Url.Content("~/Content/Flash/flash.swf")" />
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#00aabb" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <param name="allowFullScreen" value="true" />
 
+        <param name="FlashVars" value="BattleReport=@ViewBag.Data" />
 
-</p>
+        <!--[if !IE]>-->
+        <object type="application/x-shockwave-flash" data="@Url.Content("~/Content/Flash/flash.swf")" width="1060" height="600">
+            <param name="quality" value="high" />
+            <param name="bgcolor" value="#00aabb" />
+            <param name="allowScriptAccess" value="sameDomain" />
+            <param name="allowFullScreen" value="true" />
+
+            <param name="FlashVars" value="BattleReport=@ViewBag.Data" />
+
+            <!--<![endif]-->
+            <!--[if gte IE 6]>-->
+            <p>
+                Either scripts and active content are not permitted to run or Adobe Flash Player version
+                        11.1.0 or greater is not installed.
+            </p>
+            <!--<![endif]-->
+            <a href="http://www.adobe.com/go/getflashplayer">
+                <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+            </a>
+            <!--[if !IE]>-->
+        </object>
+        <!--<![endif]-->
+    </object>
+</div>

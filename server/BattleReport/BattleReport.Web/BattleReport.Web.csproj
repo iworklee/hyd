@@ -41,6 +41,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="protobuf-net, Version=2.0.0.594, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\protobuf-net\r594\protobuf-net.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System" />
@@ -99,6 +103,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Flash\assets\loading.JPG" />
+    <Content Include="Content\Flash\flash.swf" />
+    <Content Include="Content\Flash\framework_4.6.0.22920.swf" />
+    <Content Include="Content\Flash\mx_4.6.0.22920.swf" />
+    <Content Include="Content\Flash\playerProductInstall.swf" />
+    <Content Include="Content\Flash\sparkskins_4.6.0.22920.swf" />
+    <Content Include="Content\Flash\spark_4.6.0.22920.swf" />
+    <Content Include="Content\Flash\textLayout_2.0.0.232.swf" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

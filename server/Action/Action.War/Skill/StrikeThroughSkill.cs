@@ -1,12 +1,12 @@
 ﻿using Action.Model;
-using Action.Skill;
+using Action.War;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Action.War
+namespace Action.Skill
 {
     public class StrikeThroughSkill : SkillBase<CombatTacticUnit>
     {

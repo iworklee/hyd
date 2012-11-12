@@ -62,6 +62,9 @@ package Action.Model {
 		}
 
 		public function get type():int {
+			if(!hasType) {
+				return Action.Model.BattleActionType.Cast;
+			}
 			return Type$field;
 		}
 

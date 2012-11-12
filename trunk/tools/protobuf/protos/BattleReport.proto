@@ -30,7 +30,7 @@ enum BattleActionType {
 
 message BattleAction {
   optional int32 UnitSID = 1;				//作战单位唯一号
-  optional BattleActionType Type = 2;			//行为类型，移动和施放技能
+  optional BattleActionType Type = 2 [default=Cast];			//行为类型，移动和施放技能
   optional int32 Param = 3;				//行为参数，如果类型是Cast，则为技能编号；类型是Move，则为目标位置
   repeated BattleEffect Effects = 4;			//行为产生的效果
 }

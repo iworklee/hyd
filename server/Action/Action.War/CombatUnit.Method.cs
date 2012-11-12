@@ -109,7 +109,7 @@ namespace Action.War
         }
 
 
-        public BattleAction Move()
+        public virtual BattleAction Move()
         {
             return Military.Move(this);
         }

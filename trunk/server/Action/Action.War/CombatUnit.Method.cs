@@ -17,6 +17,11 @@ namespace Action.War
         //    Military = military;
         //}
 
+        public CombatUnit()
+        {
+            Level = 1;
+        }
+
         /// <summary>
         /// 普通攻击
         /// </summary>
@@ -41,7 +46,7 @@ namespace Action.War
             // 计算格挡，暴击
             var damageType = Helper.Test(this.CriticalChance, target.BlockChance, 0);
 
-            var effect = Attacking(target, AttackType.Normal, damageType);
+            var effect = Attacking(target, AttackType.Normal, damageType, 1);
 
             ba = new BattleAction();
             ba.UnitSID = this.BattleID;
@@ -51,11 +56,19 @@ namespace Action.War
             return ba;
         }
 
-        public virtual BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
+        /// <summary>
+        /// 攻击计算
+        /// </summary>
+        /// <param name="target">攻击目标</param>
+        /// <param name="attackType">攻击类型（普通、战法、策略）</param>
+        /// <param name="effectType">攻击效果（闪避、格挡、重击）</param>
+        /// <param name="damageRatio">伤害系数</param>
+        /// <returns></returns>
+        public virtual BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType, float damageRatio)
         {
             var ratio = (int)effectType;
 
-            var damage = this._attack[attackType] - target._defence[attackType];
+            var damage = this._attack[attackType] - target._defence[attackType] + this.Level * 50;
             if (damage < 1)
                 damage = 1;
             damage = (int)(damage * ratio * 0.5);

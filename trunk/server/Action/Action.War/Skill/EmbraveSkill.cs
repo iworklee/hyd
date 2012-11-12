@@ -49,5 +49,10 @@ namespace Action.Skill
                 yield return new BattleEffect { UnitSID = target.BattleID, PlusMP = 50 };
             }
         }
+
+        public override float DamageRatio
+        {
+            get { return 0.8f; }
+        }
     }
 }

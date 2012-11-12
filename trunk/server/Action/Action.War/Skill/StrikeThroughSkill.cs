@@ -44,8 +44,13 @@ namespace Action.Skill
             {
                 // 计算格挡，暴击
                 var damageType = Helper.Test(unit.CriticalChance, target.BlockChance, 0);
-                yield return unit.Attacking(target, AttackType.Tactic, damageType);
+                yield return unit.Attacking(target, AttackType.Tactic, damageType, DamageRatio);
             }
+        }
+
+        public override float DamageRatio
+        {
+            get { return 0.8f; }
         }
     }
 }

@@ -16,7 +16,8 @@ namespace Action.War
         private CombatMilitary _attacker = new CombatMilitary();
         private CombatMilitary _defender = new CombatMilitary();
         private BattleReport _report = new BattleReport();
-        private SortedDictionary<int, CombatUnit> attackOrder = new SortedDictionary<int, CombatUnit>();
+        //private SortedDictionary<int, CombatUnit> attackOrder = new SortedDictionary<int, CombatUnit>();
+        private List<CombatUnit> attackOrder = new List<CombatUnit>();
         private bool _attackerLoaded;
         private bool _defenderLoaded;
 
@@ -54,7 +55,6 @@ namespace Action.War
             foreach (var unit in Attacker.Units)
             {
                 Report.Units.Add((BattleUnit)unit);
-                attackOrder.Add(unit.CombatPower, unit);
             }
 
             _attackerLoaded = true;
@@ -70,24 +70,23 @@ namespace Action.War
                 var j = u.Positon + 55 - u.Positon / 5 * 10;
 
                 var unit = CombatUnitFactory.Instance.CreateUnit(u.ID);
-                Attacker.PlaceUnit(unit, j);
+                Defender.PlaceUnit(unit, j);
             }
 
             // 守方城墙
             for (int i = 65; i < 70; i++)
             {
                 var unit = CombatUnitFactory.Instance.CreateUnit(0);
-                Attacker.PlaceUnit(unit, i);
+                Defender.PlaceUnit(unit, i);
             }
 
             foreach (var unit in Defender.Units)
             {
                 Report.Units.Add((BattleUnit)unit);
-                attackOrder.Add(unit.CombatPower, unit);
             }
 
             _defenderLoaded = true;
-            Attacker.Forward = DefendDirection;
+            Defender.Forward = DefendDirection;
             Attacker.Enemy = Defender;
         }
 
@@ -95,6 +94,8 @@ namespace Action.War
         {
             if (!_attackerLoaded || !_defenderLoaded)
                 return false;
+
+            attackOrder = Attacker.Units.Concat(Defender.Units).OrderByDescending(u => u.CombatPower).ToList();
 
             Report.UID = Guid.NewGuid().ToString("N");
 
@@ -123,7 +124,7 @@ namespace Action.War
             BattleBout bout = new BattleBout();
             bout.SID = round;
 
-            foreach (var attacker in attackOrder.Values.Where(unit => unit.Military.AliveUnits.Contains(unit)))
+            foreach (var attacker in attackOrder.Where(unit => unit.Military.AliveUnits.Contains(unit)))
             {
                 var action = attacker.Strike();
                 if (action != null)

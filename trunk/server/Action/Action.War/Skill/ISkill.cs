@@ -14,6 +14,7 @@ namespace Action.Skill
         IEnumerable<Vector2> Range { get; }
         int TargetCount { get; }
         IEnumerable<BattleEffect> Cast(CombatUnit unit);
+        float DamageRatio { get; }
     }
 
     public abstract class SkillBase<T> : ISkill where T : CombatUnit
@@ -30,6 +31,8 @@ namespace Action.Skill
         public abstract IEnumerable<Vector2> Range { get; }
 
         public abstract int TargetCount { get; }
+
+        public abstract float DamageRatio { get; }
     }
 }
 

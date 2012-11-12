@@ -76,6 +76,7 @@
     <Compile Include="Commands\EmbattleCommand.cs" />
     <Compile Include="Commands\MakeWarCommand.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="RangeProvider.cs" />
     <Compile Include="Skill\ISkill.cs" />
     <Compile Include="Skill\SkillFactory.cs" />
     <Compile Include="Skill\StrikeThroughSkill.cs" />

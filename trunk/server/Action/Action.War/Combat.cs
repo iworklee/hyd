@@ -38,24 +38,21 @@ namespace Action.War
             // 初始化攻方单位
             foreach (var u in attacker.Units)
             {
-                var unit = new CombatUnit();
-                unit.UnitTypeID = u.ID;
-                unit.Position = (u.Positon + 10).Int2Pos();
-                Attacker.AddUnit(unit);
+                var j = u.Positon + 10;
+
+                var unit = CombatUnitFactory.Instance.CreateUnit(u.ID);
+                Attacker.PlaceUnit(unit, j);
             }
 
             // 攻方城墙
             for (int i = 0; i < 5; i++)
             {
-                var unit = new CombatCampUnit();
-                unit.UnitTypeID = 0;
-                unit.Position = i.Int2Pos();
-                Attacker.AddUnit(unit);
+                var unit = CombatUnitFactory.Instance.CreateUnit(0);
+                Attacker.PlaceUnit(unit, i);
             }
 
             foreach (var unit in Attacker.Units)
             {
-                unit.BattleID = unit.Position.Pos2Int();
                 Report.Units.Add((BattleUnit)unit);
                 attackOrder.Add(unit.CombatPower, unit);
             }
@@ -72,24 +69,19 @@ namespace Action.War
             {
                 var j = u.Positon + 55 - u.Positon / 5 * 10;
 
-                var unit = new CombatUnit();
-                unit.UnitTypeID = u.ID;
-                unit.Position = j.Int2Pos();
-                Defender.AddUnit(unit);
+                var unit = CombatUnitFactory.Instance.CreateUnit(u.ID);
+                Attacker.PlaceUnit(unit, j);
             }
 
             // 守方城墙
             for (int i = 65; i < 70; i++)
             {
-                var unit = new CombatCampUnit();
-                unit.UnitTypeID = 0;
-                unit.Position = i.Int2Pos();
-                Attacker.AddUnit(unit);
+                var unit = CombatUnitFactory.Instance.CreateUnit(0);
+                Attacker.PlaceUnit(unit, i);
             }
 
             foreach (var unit in Defender.Units)
             {
-                unit.BattleID = unit.Position.Pos2Int();
                 Report.Units.Add((BattleUnit)unit);
                 attackOrder.Add(unit.CombatPower, unit);
             }

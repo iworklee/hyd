@@ -22,7 +22,7 @@ package Action.War
 		{
 		}
 		
-		public static const BgUrl:String = "battle/001.JPG?5";
+		public static const BgUrl:String = "battle/001.JPG";
 		
 		public function get name():String
 		{

@@ -119,6 +119,8 @@ package Action.War.Report
 			//loading BattleUnitResource and HeroResource
 			for each(var bum:BattleUnitManager in _buManagers)
 			{
+				if(bum.isWall)
+					continue;
 				if(BattleUnitResource.getInstance(bum.resId) == null)
 				{
 					BattleUnitResource.createInstance(bum.resId);

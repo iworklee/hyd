@@ -16,10 +16,12 @@ package Action.War.Movie
 		public function BattleReportInitRenderer(reportMgr:BattleReportManager)
 		{
 			super(reportMgr);
-			for each(var unitMgr:BattleUnitManager in _battleReportManager.getBUMS())
+			for each(var bum:BattleUnitManager in _battleReportManager.getBUMS())
 			{
-				var offset:int = unitMgr.getInitOffset();
-				unitMgr.paintPoint =  BattleHelper.getPaintPoint(unitMgr.POS + offset);
+				if(bum.isWall)
+					continue;
+				var offset:int = bum.getInitOffset();
+				bum.paintPoint =  BattleHelper.getPaintPoint(bum.POS + offset);
 				//graphics.draw(unitMgr.getWaitBitmap(i),	unitMgr.paintPoint);
 			}
 		}
@@ -31,12 +33,14 @@ package Action.War.Movie
 		
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
 		{
-			for each(var unitMgr:BattleUnitManager in _battleReportManager.getBUMS())
+			for each(var bum:BattleUnitManager in _battleReportManager.getBUMS())
 			{
+				if(bum.isWall)
+					continue;
 				var idx:int = player.currentFrame % 2;
-				unitMgr.paintPoint.x += unitMgr.speed;
-				if(graphics.contains(unitMgr.paintPoint))
-					graphics.drawBitmap(unitMgr.getMoveBitmap(idx), unitMgr.paintPoint);
+				bum.paintPoint.x += bum.speed;
+				if(graphics.contains(bum.paintPoint))
+					graphics.drawBitmap(bum.getMoveBitmap(idx), bum.paintPoint);
 			}
 		}
 		

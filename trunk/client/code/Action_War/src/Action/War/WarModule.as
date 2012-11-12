@@ -56,6 +56,12 @@ package Action.War
 			WarPlugins.heros = new Array();
 			
 			var hero:BattleHero = new BattleHero();
+			hero.id = 0;
+			hero.name = "城墙";
+			hero.skill = 0;
+			WarPlugins.heros[hero.id] = hero;
+			
+			hero = new BattleHero();
 			hero.id = 1;
 			hero.name = "曹操";
 			hero.skill = 106;

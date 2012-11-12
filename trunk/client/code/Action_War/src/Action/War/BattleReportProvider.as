@@ -48,7 +48,7 @@ package Action.War
 			for(var i:int=10; i<60;i++)
 			{
 				var unit:BattleUnit = new BattleUnit();
-				unit.sID = i;
+				unit.sID = unit.pos = i;
 				if(i == 12)
 				{
 					unit.id = 5;
@@ -89,8 +89,27 @@ package Action.War
 					unit.id = 102;
 					unit.hP = 280;
 				}
-				unit.pos = i;
 				unit.mP = 50;
+				report.units.push(unit);
+			}
+			
+			for(i=0; i<10; i++)
+			{
+				unit = new BattleUnit();
+				unit.sID = unit.pos = i;
+				unit.id = 0;
+				unit.hP = 2200;
+				unit.mP = 0;
+				report.units.push(unit);
+			}
+			
+			for(i=0; i<10; i++)
+			{
+				unit = new BattleUnit();
+				unit.sID = unit.pos = 60 + i;
+				unit.id = 0;
+				unit.hP = 1600;
+				unit.mP = 0;
 				report.units.push(unit);
 			}
 			

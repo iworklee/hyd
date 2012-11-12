@@ -1,6 +1,6 @@
 ﻿var config = 
 {
-	resRoot : "http://res.action.yuuhhe.com/action/",
+	resRoot : "http://res.action.yuuhhe.com/Action/",
 	getValue : function(name) { return config[name]; }
 };
 

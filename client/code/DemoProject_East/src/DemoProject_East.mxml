@@ -107,7 +107,7 @@
 				var bytes:ByteArray = new ByteArray();
 				report.writeTo(bytes);
 				var text:String = Base64.encode(bytes);
-				writeLine(text);				
+				writeLine(text);
 				
 				report.uID = "cctv";
 				bytes = Base64.decode(text);
@@ -115,7 +115,8 @@
 				writeLine(report.uID);
 				return;*/
 				
-				//flash.system.Security.allowDomain("*");
+				flash.system.Security.loadPolicyFile("http://res.action.yuuhhe.com/crossdomain.xml");
+//				flash.system.Security.allowDomain("*");
 				var obj:Object = ExternalInterface.call("heroFactory.getHero", 660);
 				var hero:BattleHero = new BattleHero();
 				hero.from(obj);

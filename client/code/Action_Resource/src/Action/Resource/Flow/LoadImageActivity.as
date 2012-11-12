@@ -50,6 +50,14 @@ package Action.Resource.Flow
 		
 		private function onImageLoaded(e:Event):void
 		{
+			/*try
+			{
+				_loader.content;
+			}
+			catch(e:SecurityError)
+			{
+				_loader.loadBytes(_loader.contentLoaderInfo.bytes);
+			}*/
 			CommonResource.imageSection.set(_url, e.currentTarget.content);
 			this.workflow.goon();
 		}

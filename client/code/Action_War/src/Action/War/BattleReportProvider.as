@@ -31,6 +31,7 @@ package Action.War
 			{
 				var report:BattleReport = new BattleReport();
 				report.mergeFrom(Base64.decode(text));
+				debugReport(report);
 				return report;
 			}
 			catch(e:Error)
@@ -38,6 +39,11 @@ package Action.War
 				
 			}
 			return null;
+		}
+		
+		private function debugReport(report:BattleReport):void
+		{
+			GamePlugins.console.writeLine(JSON.stringify(report));
 		}
 		
 		public function createTestReport():BattleReport

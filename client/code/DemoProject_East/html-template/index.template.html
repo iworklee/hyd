@@ -27,13 +27,56 @@
             object:focus { outline:none; }
             #flashContent { display:none; }
         </style>
+        
+        <!-- Enable Browser History by replacing useBrowserHistory tokens with two hyphens -->
+        <!-- BEGIN Browser History required section ${useBrowserHistory}>
+        <link rel="stylesheet" type="text/css" href="history/history.css" />
+        <script type="text/javascript" src="history/history.js"></script>
+        <!${useBrowserHistory} END Browser History required section -->  
+            
         <script type="text/javascript" src="config.js"></script>
+        <script type="text/javascript" src="swfobject.js"></script>
+        <script type="text/javascript">
+            // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+            var swfVersionStr = "${version_major}.${version_minor}.${version_revision}";
+            // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+            var xiSwfUrlStr = "${expressInstallSwf}";
+            var flashvars = {};
+            var params = {};
+            params.quality = "high";
+            params.bgcolor = "${bgcolor}";
+            params.allowscriptaccess = "sameDomain";
+            params.allowfullscreen = "true";
+            var attributes = {};
+            attributes.id = "${application}";
+            attributes.name = "${application}";
+            attributes.align = "middle";
+            
+            // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+            //swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+            
+            function loadSwf()
+            {
+	            document.getElementById("reportContent").style.display = "none";
+	            flashvars.battleReport = document.getElementById("txtReport").innerText;
+	            swfobject.embedSWF(
+	                "${swf}.swf", "flashContent", 
+	                "${width}", "${height}", 
+	                swfVersionStr, xiSwfUrlStr, 
+	                flashvars, params, attributes);
+            }
+        </script>
     </head>
     <body>
         <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
              JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
              when JavaScript is disabled.
         -->
+        <div id="reportContent">
+        	<font color="ffff00"><b>战报数据：</b></font><br/>
+        	<textarea id="txtReport" cols="100" rows="30"></textarea><br/>
+        	<input type="button" value="播放" onclick="loadSwf()" />
+        </div>
         <div id="flashContent">
             <p>
                 To view this page ensure that Adobe Flash Player version 
@@ -44,34 +87,35 @@
                 document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
                                 + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
             </script> 
-        </div>        
-        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="${width}" height="${height}" id="${application}">
-            <param name="movie" value="${swf}.swf" />
-            <param name="quality" value="high" />
-            <param name="bgcolor" value="${bgcolor}" />
-            <param name="allowScriptAccess" value="sameDomain" />
-            <param name="allowFullScreen" value="true" />
-            <param name="flashvars" value="battleReport=ie" />
-            <!--[if !IE]>-->
-            <object type="application/x-shockwave-flash" data="${swf}.swf" width="${width}" height="${height}">
+        </div>
+        
+        <noscript>
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="${width}" height="${height}" id="${application}">
+                <param name="movie" value="${swf}.swf" />
                 <param name="quality" value="high" />
                 <param name="bgcolor" value="${bgcolor}" />
                 <param name="allowScriptAccess" value="sameDomain" />
                 <param name="allowFullScreen" value="true" />
-            	<param name="flashvars" value="battleReport=google" />
-            <!--<![endif]-->
-            <!--[if gte IE 6]>-->
-                <p> 
-                    Either scripts and active content are not permitted to run or Adobe Flash Player version
-                    ${version_major}.${version_minor}.${version_revision} or greater is not installed.
-                </p>
-            <!--<![endif]-->
-                <a href="http://www.adobe.com/go/getflashplayer">
-                    <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
-                </a>
-            <!--[if !IE]>-->
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="${swf}.swf" width="${width}" height="${height}">
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="${bgcolor}" />
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <param name="allowFullScreen" value="true" />
+                <!--<![endif]-->
+                <!--[if gte IE 6]>-->
+                    <p> 
+                        Either scripts and active content are not permitted to run or Adobe Flash Player version
+                        ${version_major}.${version_minor}.${version_revision} or greater is not installed.
+                    </p>
+                <!--<![endif]-->
+                    <a href="http://www.adobe.com/go/getflashplayer">
+                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                    </a>
+                <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
             </object>
-            <!--<![endif]-->
-        </object>
+        </noscript>     
    </body>
 </html>

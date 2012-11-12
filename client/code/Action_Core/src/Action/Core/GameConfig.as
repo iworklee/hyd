@@ -6,7 +6,7 @@ package Action.Core
 	{
 		public static function getValue(name:String):Object
 		{
-			return ExternalInterface.call("config." + name);
+			return ExternalInterface.call("config.getValue", name);
 		}
 		
 		public function GameConfig()

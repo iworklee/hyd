@@ -11,6 +11,7 @@ package Action.War.Hero
 		
 		public var id:int;
 		public var name:String;
+		public var face:int;
 		public var skill:int;
 		
 		public function BattleHero()

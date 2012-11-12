@@ -1,4 +1,9 @@
 var config = 
 {
-	resRoot : function(){return "Http://hyd.googlecode.com/svn/trunk/client/raw/Action/";}
+	resRoot : "Http://hyd.googlecode.com/svn/trunk/client/raw/Action/",
+	getValue : function(name) { return config[name]; }
+};
+
+var heros = 
+{
 };

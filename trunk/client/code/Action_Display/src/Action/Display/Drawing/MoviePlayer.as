@@ -15,10 +15,11 @@ package Action.Display.Drawing
 		public static const Event_Stop:String = "Stop";
 		public static const Event_Goto:String = "Goto";
 		
-		private const _delay:int = 100;
+		private const _delay:int = 25;
 		private var _graphics:CanvasGraphics;
 		private var _movie:Movie;
 		private var _timer:Timer;
+		private var _index:int = 0;
 		private var _curRenderer:IMovieFrameRenderer;
 		
 		private var _curFrame:int = 0;
@@ -54,6 +55,7 @@ package Action.Display.Drawing
 			check();
 			if(!_timer.running)
 			{
+				_index = 0;
 				_timer.start();
 				onTimerTicked(null);
 			}
@@ -64,6 +66,7 @@ package Action.Display.Drawing
 			check();
 			if(_timer.running)
 			{
+				_index = 0;
 				_timer.stop();
 				_curFrame = 0;
 				this.dispatchEvent(new Event(Event_Stop));
@@ -81,6 +84,18 @@ package Action.Display.Drawing
 				_timer.stop();
 			else
 				_timer.start();
+		}
+		
+		private var _speed:int = 1;
+		public function get speed():int
+		{
+			return _speed;
+		}
+		public function speedUp():void
+		{
+			_speed *= 2;
+			if(_speed > 4)
+				_speed = 1;
 		}
 		
 		public function goto(frame:int):void
@@ -119,7 +134,11 @@ package Action.Display.Drawing
 		
 		private function onTimerTicked(e:TimerEvent):void
 		{
-			goto(_curFrame + 1);			
+			if(_index % (4 / _speed) == 0)
+				goto(_curFrame + 1);
+			_index ++;
+			if(_index == 10000)
+				_index = 0;
 		}
 		
 		private function test(tag:String):void

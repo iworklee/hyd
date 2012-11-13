@@ -108,6 +108,8 @@
 				_moviePlayer.removeEventListener(MoviePlayer.Event_Stop, onMovieStop);
 				_moviePlayer.addEventListener(MoviePlayer.Event_Goto, onMovieGoto);
 				_moviePlayer.addEventListener(MoviePlayer.Event_Stop, onMovieStop);
+				
+				refreshButton();
 			}
 			
 			private function onMovieGoto(e:Event):void
@@ -120,7 +122,7 @@
 			
 			private function onMovieStop(e:Event):void
 			{
-				_btnPlay.enabled = false;
+				_btnPlay.enabled = _btnSpeed.enabled = false;
 			}
 			
 			public function onUnload():void
@@ -158,6 +160,12 @@
 				_bcUnitHidden.visible = false;
 			}
 			
+			private function refreshButton():void
+			{
+				_btnPlay.label = _moviePlayer.running ? "暂停" : "播放";
+				_btnSpeed.label = "加速[×" + _moviePlayer.speed + "]";
+			}
+			
 			protected function _lblPlay_clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
@@ -176,14 +184,20 @@
 			protected function _btnReplay_clickHandler(event:MouseEvent):void
 			{
 				replay();
-				_btnPlay.enabled = true;
-				_btnPlay.label = _moviePlayer.running ? "暂停" : "播放";
+				_btnPlay.enabled = _btnSpeed.enabled = true;
+				refreshButton();
 			}
 			
 			protected function _btnPlay_clickHandler(event:MouseEvent):void
 			{
 				_moviePlayer.pause(_moviePlayer.running);
-				_btnPlay.label = _moviePlayer.running ? "暂停" : "播放";
+				refreshButton();
+			}
+			
+			protected function _btnSpeed_clickHandler(event:MouseEvent):void
+			{
+				_moviePlayer.speedUp();
+				refreshButton();
 			}
 			
 			protected function _btnGrid_clickHandler(event:MouseEvent):void
@@ -235,7 +249,8 @@
 	<s:HSlider id="_sldProgress" x="20" y="540" width="720" enabled="false" valueCommit="_sldProgress_valueCommitHandler(event)"/>
 	<s:Button id="_btnReplay" x="20" y="560" label="重播" click="_btnReplay_clickHandler(event)"/>
 	<s:Button id="_btnPlay" x="100" y="560" label="暂停" click="_btnPlay_clickHandler(event)"/>
-	<s:Button id="_btnGrid" x="180" y="560" label="网格" click="_btnGrid_clickHandler(event)"/>
+	<s:Button id="_btnSpeed" x="180" y="560" label="加速" click="_btnSpeed_clickHandler(event)"/>
+	<s:Button id="_btnGrid" x="260" y="560" label="网格" click="_btnGrid_clickHandler(event)"/>
 	<s:BorderContainer id="_bcUnitHidden" width="100" height="90" backgroundColor="#557788" backgroundAlpha="1" visible="false">
 		<s:Label id="_lblName" x="5" y="5" color="#ffff00" text="关羽" fontSize="15" />
 		<mx:ProgressBar id="_pgbHP" x="5" y="25" width="90" height="15" label="120 / 254"

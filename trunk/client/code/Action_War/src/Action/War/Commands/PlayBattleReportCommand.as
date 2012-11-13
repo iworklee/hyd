@@ -10,7 +10,7 @@ package Action.War.Commands
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
-	import Action.Resource.Flow.LoadImageActivity;
+	import Action.Resource.Flow.LoadImageResourceActivity;
 	import Action.Resource.CommonResource;
 	import Action.War.Report.BattleReportManager;
 	import Action.War.Report.BattleUnitManager;
@@ -49,7 +49,7 @@ package Action.War.Commands
 			
 			//准备要加载的资源
 			var reportManager:BattleReportManager = new BattleReportManager(report);
-			var loadings:Array = [new LoadImageActivity(WarModule.BgUrl)];
+			var loadings:Array = [new LoadImageResourceActivity(WarModule.BgUrl)];
 			for each(var act:IActivity in reportManager.createLoadingActivities())
 				loadings.push(act);
 			

@@ -10,6 +10,11 @@ package Action.War
 	import Action.Model.BattleEffectType;
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
+	import Action.Resource.HeroFaceResource;
+	import Action.War.Config.BattleConfigFactory;
+	import Action.War.Config.BattleHero;
+	
+	import mx.messaging.AbstractConsumer;
 
 	public class BattleReportProvider
 	{
@@ -46,6 +51,11 @@ package Action.War
 			GamePlugins.console.writeLine(JSON.stringify(report));
 		}
 		
+		private function $(name:String):BattleHero
+		{
+			return BattleConfigFactory.findHero(name);
+		}
+		
 		public function createTestReport():BattleReport
 		{			
 			var report:BattleReport = new BattleReport();
@@ -57,42 +67,42 @@ package Action.War
 				unit.sID = unit.pos = i;
 				if(i == 12)
 				{
-					unit.id = 5;
+					unit.id = $("吕布").id;
 					unit.hP = 404;
 				}
 				else if(i == 32)
 				{
-					unit.id = 1;					
+					unit.id = $("曹操").id;		
 					unit.hP = 322;
 				}
 				else if(i == 37)
 				{
-					unit.id = 2;					
+					unit.id = $("关羽").id;				
 					unit.hP = 387;
 				}
 				else if(i == 33)
 				{
-					unit.id = 4;					
+					unit.id = $("司马懿").id;				
 					unit.hP = 305;
 				}
 				else if(i == 39)
 				{
-					unit.id = 3;
+					unit.id = $("张飞").id;
 					unit.hP = 382;
 				}
 				else if(int(i / 10) == 3)
 				{
-					unit.id = 103;
+					unit.id = 802;
 					unit.hP = 220
 				}
 				else if(i < 20 || i > 49)
 				{
-					unit.id = 104;
+					unit.id = 804;
 					unit.hP = 160;
 				}
 				else
 				{
-					unit.id = 102;
+					unit.id = 801;
 					unit.hP = 280;
 				}
 				unit.mP = 50;
@@ -140,7 +150,7 @@ package Action.War
 				
 				if(action.unitSID == 32)
 				{
-					action.param = 106;
+					action.param = 1;
 					for(var j:int=0; j<3; j++)
 						addEffect(action, 26 + j, 120, 4);
 					for(j=0; j<3; j++)
@@ -148,7 +158,7 @@ package Action.War
 				}
 				else if(action.unitSID == 33)
 				{
-					action.param = 101;
+					action.param = 2;
 					for(j = 0; j<3; j++)
 						addEffect(action, 37 + j, 75 + j * 20);
 					for(j = 0; j<3; j++)
@@ -167,13 +177,13 @@ package Action.War
 				
 				if(action.unitSID == 37)
 				{
-					action.param = 2;
+					action.param = 4;
 					for(j = 0; j<3; j++)
 						addEffect(action, 31 + j, j == 0 ? 268 : 137);
 				}
 				else if(action.unitSID == 39)
 				{
-					action.param = 1;
+					action.param = 5;
 					for(j = 0; j<3; j++)
 						addEffect(action, 24 + j * 5, j == 0 ? 277 : 232, 3);
 				}

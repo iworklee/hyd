@@ -4,7 +4,7 @@ package Action.War.Movie
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Display.Drawing.MoviePlayer;
 	import Action.Model.BattleAction;
-	import Action.Resource.HeroResource;
+	import Action.Resource.HeroFaceResource;
 	import Action.War.BattleDefs;
 	import Action.War.Report.BattleReportManager;
 	import Action.War.Report.BattleUnitManager;

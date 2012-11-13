@@ -1,6 +1,7 @@
 package Action.War.Movie
 {
 	import Action.Core.GamePlugins;
+	import Action.Core.Util.NumberWrapper;
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Display.Drawing.MoviePlayer;
@@ -8,13 +9,12 @@ package Action.War.Movie
 	import Action.Model.BattleEffect;
 	import Action.Model.BattleEffectType;
 	import Action.War.BattleDefs;
+	import Action.War.Config.BattleConfigFactory;
+	import Action.War.Config.BattleSkill;
 	import Action.War.Report.BattleReportManager;
 	import Action.War.Report.BattleUnitManager;
-	import Action.War.Skill.BattleSkill;
 	import Action.War.Skill.ISkillRenderer;
 	import Action.War.WarPlugins;
-	
-	import Action.Core.Util.NumberWrapper;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -40,7 +40,7 @@ package Action.War.Movie
 			super(reportMgr);
 			_action = action;
 			_attacker = _battleReportManager.getBUM(_action.unitSID);
-			_skillRenderer = BattleSkill.getInstance(_action.param).createRenderer();
+			_skillRenderer = BattleConfigFactory.getSkill(_action.param).createRenderer();
 		}
 		
 		public function get description():String

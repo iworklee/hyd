@@ -18,6 +18,7 @@ package Action.War.Skill
 	import flash.geom.Point;
 	
 	import flashx.textLayout.factory.TruncationOptions;
+	import Action.War.Config.BattleSkill;
 	
 	public class SpecialSkillRenderer extends SkillRendererBase implements ISkillRenderer
 	{
@@ -62,7 +63,7 @@ package Action.War.Skill
 			{
 				graphics.drawBitmap2(attacker.getAttackBitmap(0), attacker.paintPoint);
 				graphics.drawText(_skill.name, BattleHelper.getSkillNamePoint(), 0xffff00, 64, true, "华文楷体");
-				graphics.drawBitmap(attacker.getHeadBitmap(), BattleHelper.getHeadBitmapPoint(attacker.SID), graphics.getEffectLayer());
+				graphics.drawBitmap(attacker.hero.getFaceBitmap(), BattleHelper.getHeadBitmapPoint(attacker.SID), graphics.getEffectLayer());
 			}
 			else
 			{

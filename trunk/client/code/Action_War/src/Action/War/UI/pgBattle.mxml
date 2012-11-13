@@ -22,13 +22,14 @@
 			import Action.Model.BattleReport;
 			import Action.Model.BattleUnit;
 			import Action.Resource.CommonResource;
-			import Action.Resource.Flow.LoadImageActivity;
+			import Action.Resource.Flow.LoadImageResourceActivity;
 			import Action.War.BattleHelper;
-			import Action.War.Hero.BattleHero;
+			import Action.War.Config.BattleConfigFactory;
+			import Action.War.Config.BattleHero;
+			import Action.War.Config.BattleSkill;
 			import Action.War.Report.BattleReportManager;
 			import Action.War.Report.BattleUnitManager;
 			import Action.War.Resource.BattleUnitResource;
-			import Action.War.Skill.BattleSkill;
 			import Action.War.WarModule;
 			
 			import mx.controls.Alert;
@@ -137,9 +138,8 @@
 				var bum:BattleUnitManager = battleReportManager.getBUMbyPos(pos);
 				if(bum != null)
 				{
-					var hero:BattleHero = BattleHero.getInstance(bum.heroId);
-					var skill:BattleSkill = BattleSkill.getInstance(hero.skill);
-					_lblName.text = hero.name;
+					var skill:BattleSkill = BattleConfigFactory.getSkill(bum.hero.skill);
+					_lblName.text = bum.hero.name;
 					_lblSkill.text = skill != null ? skill.name : "";
 					
 					_pgbHP.setProgress(bum.HP, bum.maxHP);

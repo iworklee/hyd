@@ -4,7 +4,6 @@ package Action.War.Flow
 	import Action.Core.Flow.IActivity;
 	import Action.Display.Drawing.BitmapHelper;
 	import Action.Resource.CommonResource;
-	import Action.War.BattleResourceEnum;
 	import Action.War.Report.BattleUnitManager;
 	import Action.War.Resource.BattleUnitResource;
 	import Action.War.Strategy.BattleResourceStrategyFactory;

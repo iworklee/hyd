@@ -1,18 +1,16 @@
-package Action.War.Skill
+package Action.War.Config
 {
+	import Action.Core.Util.JsonObject;
 	import Action.War.BattleDefs;
 	import Action.War.Resource.BattleSkillResource;
+	import Action.War.Skill.ISkillRenderer;
+	import Action.War.Skill.SkillRendererFactory;
 	import Action.War.WarPlugins;
 	
 	import flash.display.BitmapData;
 	
-	public class BattleSkill
-	{
-		public static function getInstance(id:int):BattleSkill
-		{
-			return WarPlugins.skills[id] as BattleSkill;
-		}
-		
+	public class BattleSkill extends JsonObject
+	{		
 		public var id:int;
 		public var name:String;
 		public var type:int;

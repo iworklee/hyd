@@ -2,32 +2,30 @@ package Action.Resource.Flow
 {
 	import Action.Core.Flow.ActivityBase;
 	import Action.Core.Flow.IActivity;
-	import Action.Core.GamePlugins;
 	import Action.Resource.CommonResource;
+	import Action.Resource.HeroFaceResource;
 	
+	import Action.Core.Util.NumberWrapper;
+	
+	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
-	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	
-	import org.osmf.events.LoaderEvent;
-	import org.osmf.media.LoadableElementBase;
-	
-	public class LoadImageActivity extends ActivityBase implements IActivity
+	public class LoadHeroFaceResourceActivity extends ActivityBase implements IActivity
 	{
-		private var _url:String;
+		private var _heroResource:HeroFaceResource;
 		private var _request:URLRequest;
 		private var _loader:Loader;
-				
-		public function LoadImageActivity(url:String)
+		
+		public function LoadHeroFaceResourceActivity(heroId:int)
 		{
-			_url = url;
+			_heroResource = HeroFaceResource.getInstance(heroId);
 			_request = new URLRequest();  
-			_request.url = CommonResource.parseUrl(url);
+			_request.url = CommonResource.parseUrl("hero/h" + NumberWrapper.wrap(heroId).toText(3) + ".png");
 			_request.method = URLRequestMethod.GET;
-			GamePlugins.console.writeLine(_request.url);
 			
 			_loader = new Loader();
 			_loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoaded);
@@ -36,7 +34,7 @@ package Action.Resource.Flow
 		
 		public function run():void
 		{
-			if(CommonResource.imageSection.get(_url) == null)
+			if(_heroResource.bitmap == null)
 				_loader.load(_request);
 			else
 				this.workflow.goon();
@@ -50,15 +48,7 @@ package Action.Resource.Flow
 		
 		private function onImageLoaded(e:Event):void
 		{
-			/*try
-			{
-				_loader.content;
-			}
-			catch(e:SecurityError)
-			{
-				_loader.loadBytes(_loader.contentLoaderInfo.bytes);
-			}*/
-			CommonResource.imageSection.set(_url, e.currentTarget.content);
+			_heroResource.bitmap = Bitmap(e.currentTarget.content).bitmapData;
 			this.workflow.goon();
 		}
 	}

@@ -2,16 +2,16 @@ package Action.Resource
 {
 	import flash.display.BitmapData;
 
-	public class HeroResource
+	public class HeroFaceResource
 	{
 		private static var _resources:Array = new Array();
 		
 		public static function createInstance(rid:int):void
 		{
-			_resources[rid] = new HeroResource(rid);
+			_resources[rid] = new HeroFaceResource(rid);
 		}
 		
-		public static function getInstance(rid:int):HeroResource
+		public static function getInstance(rid:int):HeroFaceResource
 		{
 			return _resources[rid];
 		}
@@ -22,12 +22,11 @@ package Action.Resource
 			return _resId;
 		}
 		
-		public function HeroResource(rid:int)
+		public function HeroFaceResource(rid:int)
 		{
 			_resId = rid;
 		}
 		
-		public var headBitmap:BitmapData;
-		public var bodyBitmaps:Array = new Array();
+		public var bitmap:BitmapData;
 	}
 }

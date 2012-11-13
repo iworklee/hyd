@@ -15,6 +15,7 @@ package Action.War.Skill
 	import flash.geom.Point;
 	
 	import flashx.textLayout.factory.TruncationOptions;
+	import Action.War.Config.BattleSkill;
 	
 	public class CommonSkillRenderer extends SkillRendererBase implements ISkillRenderer
 	{

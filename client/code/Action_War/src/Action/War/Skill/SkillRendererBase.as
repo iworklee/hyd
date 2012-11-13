@@ -1,5 +1,7 @@
 package Action.War.Skill
 {
+	import Action.War.Config.BattleSkill;
+
 	public class SkillRendererBase
 	{
 		public function SkillRendererBase()

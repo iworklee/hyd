@@ -4,10 +4,11 @@ package Action.War.Report
 	import Action.Core.Util.NumberWrapper;
 	import Action.Model.BattleUnit;
 	import Action.Resource.CommonResource;
-	import Action.Resource.HeroResource;
+	import Action.Resource.HeroFaceResource;
 	import Action.War.BattleDefs;
 	import Action.War.BattleHelper;
-	import Action.War.BattleResourceEnum;
+	import Action.War.Config.BattleConfigFactory;
+	import Action.War.Config.BattleHero;
 	import Action.War.Flow.LoadBattleUnitResourceActivity;
 	import Action.War.Resource.BattleUnitResource;
 	
@@ -42,33 +43,31 @@ package Action.War.Report
 			MP = bu.mP;
 			POS = bu.pos;
 			BUFF = 0;
+			
+			_hero = BattleConfigFactory.getHero(bu.id);
 		}
 		
 		private var _battleUnit:BattleUnit;
+		
+		private var _hero:BattleHero;
+		public function get hero():BattleHero
+		{
+			return _hero;
+		}
 		
 		public function get SID():int
 		{
 			return _battleUnit.sID;
 		}
 		
-		public function get heroId():int
-		{
-			return _battleUnit.id;
-		}
-
-		public function get resId():int
-		{
-			return _battleUnit.id;	
-		}
-		
 		public function get isWall():Boolean
 		{
-			return heroId == 0;
+			return _hero.id == 0;
 		}
 		
 		public function get isHero():Boolean
 		{
-			return  heroId > 0 && heroId < 100;
+			return  _hero.id > 0 && _hero.id < 800;
 		}
 		
 		public function get isDead():Boolean
@@ -105,19 +104,9 @@ package Action.War.Report
 			}	
 		}
 		
-		public function get heroResource():HeroResource
-		{
-			return HeroResource.getInstance(heroId);
-		}
-		
 		public function get unitResource():BattleUnitResource
 		{
-			return BattleUnitResource.getInstance(resId);
-		}
-		
-		public function getHeadBitmap():BitmapData
-		{
-			return heroResource.headBitmap;
+			return BattleUnitResource.getInstance(_hero.unit);
 		}
 		
 		public function getAttackBitmap(idx:int):BitmapData

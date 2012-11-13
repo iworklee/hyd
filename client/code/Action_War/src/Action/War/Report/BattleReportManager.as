@@ -9,9 +9,11 @@ package Action.War.Report
 	import Action.Model.BattleBout;
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
-	import Action.Resource.Flow.LoadHeroResourceActivity;
-	import Action.Resource.HeroResource;
+	import Action.Resource.Flow.LoadHeroFaceResourceActivity;
+	import Action.Resource.HeroFaceResource;
 	import Action.War.BattleDefs;
+	import Action.War.Config.BattleConfigFactory;
+	import Action.War.Config.BattleSkill;
 	import Action.War.Flow.LoadBattleSkillResourceActivity;
 	import Action.War.Flow.LoadBattleUnitResourceActivity;
 	import Action.War.Movie.BattleBoutBeginRenderer;
@@ -22,7 +24,6 @@ package Action.War.Report
 	import Action.War.Movie.BattleReportOverRenderer;
 	import Action.War.Resource.BattleSkillResource;
 	import Action.War.Resource.BattleUnitResource;
-	import Action.War.Skill.BattleSkill;
 	import Action.War.WarPlugins;
 
 	public class BattleReportManager
@@ -121,23 +122,23 @@ package Action.War.Report
 			{
 				if(bum.isWall)
 					continue;
-				if(BattleUnitResource.getInstance(bum.resId) == null)
+				if(BattleUnitResource.getInstance(bum.hero.id) == null)
 				{
-					BattleUnitResource.createInstance(bum.resId);
+					BattleUnitResource.createInstance(bum.hero.unit);
 					for(var i:int = 0; i<3; i++)
-						acts.push(new LoadBattleUnitResourceActivity(bum.resId, i));
+						acts.push(new LoadBattleUnitResourceActivity(bum.hero.unit, i));
 				}
-				if(bum.isHero && HeroResource.getInstance(bum.heroId) == null)
+				if(bum.isHero && HeroFaceResource.getInstance(bum.hero.face) == null)
 				{
-					HeroResource.createInstance(bum.heroId);
-					acts.push(new LoadHeroResourceActivity(bum.heroId));
+					HeroFaceResource.createInstance(bum.hero.face);
+					acts.push(new LoadHeroFaceResourceActivity(bum.hero.face));
 				}
 			}
 			
 			//loading BattleSkillResource
 			for each(var action:BattleAction in getBattleActions())
 			{
-				var skill:BattleSkill = BattleSkill.getInstance(action.param);
+				var skill:BattleSkill = BattleConfigFactory.getSkill(action.param);
 				if(skill != null)
 				{
 					for each(var rid:int in skill.resources)

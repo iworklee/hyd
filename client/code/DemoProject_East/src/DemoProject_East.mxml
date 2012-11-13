@@ -9,6 +9,7 @@
 	<fx:Script>
 		<![CDATA[
 			import Action.Core.Command.GameCommandFactory;
+			import Action.Core.GameConfig;
 			import Action.Core.GamePlugins;
 			import Action.Core.Module.GameModuleFactory;
 			import Action.Core.Net.GameClient;
@@ -18,7 +19,8 @@
 			import Action.Model.BattleReport;
 			import Action.War.BattleReportProvider;
 			import Action.War.Commands.PlayBattleReportCommand;
-			import Action.War.Hero.BattleHero;
+			import Action.War.Config.BattleConfigFactory;
+			import Action.War.Config.BattleHero;
 			import Action.War.WarModule;
 			
 			import mx.controls.Alert;
@@ -115,12 +117,9 @@
 				writeLine(report.uID);
 				return;*/
 				
-				flash.system.Security.loadPolicyFile("http://res.action.yuuhhe.com/crossdomain.xml");
-//				flash.system.Security.allowDomain("*");
-				var obj:Object = ExternalInterface.call("heroFactory.getHero", 660);
-				var hero:BattleHero = new BattleHero();
-				hero.from(obj);
-			    Alert.show(hero.name + "," + hero.face);
+				var policy:String = GameConfig.getString("policy");
+				if(policy != null)
+					flash.system.Security.loadPolicyFile(policy);
 				
 				parent.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
 				GameClient.create().frame = this;

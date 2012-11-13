@@ -3,6 +3,7 @@ package Action.War.Skill
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.War.Movie.BattleBoutSkillRenderer;
+	import Action.War.Config.BattleSkill;
 
 	public interface ISkillRenderer
 	{

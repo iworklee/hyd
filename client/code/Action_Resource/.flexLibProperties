@@ -2,9 +2,9 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="Action.Resource.CommonResource"/>
-    <classEntry path="Action.Resource.Flow.LoadImageActivity"/>
-    <classEntry path="Action.Resource.HeroResource"/>
-    <classEntry path="Action.Resource.Flow.LoadHeroResourceActivity"/>
+    <classEntry path="Action.Resource.Flow.LoadImageResourceActivity"/>
+    <classEntry path="Action.Resource.HeroFaceResource"/>
+    <classEntry path="Action.Resource.Flow.LoadHeroFaceResourceActivity"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

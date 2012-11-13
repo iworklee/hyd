@@ -2,30 +2,32 @@ package Action.Resource.Flow
 {
 	import Action.Core.Flow.ActivityBase;
 	import Action.Core.Flow.IActivity;
+	import Action.Core.GamePlugins;
 	import Action.Resource.CommonResource;
-	import Action.Resource.HeroResource;
 	
-	import Action.Core.Util.NumberWrapper;
-	
-	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
+	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	
-	public class LoadHeroResourceActivity extends ActivityBase implements IActivity
+	import org.osmf.events.LoaderEvent;
+	import org.osmf.media.LoadableElementBase;
+	
+	public class LoadImageResourceActivity extends ActivityBase implements IActivity
 	{
-		private var _heroResource:HeroResource;
+		private var _url:String;
 		private var _request:URLRequest;
 		private var _loader:Loader;
-		
-		public function LoadHeroResourceActivity(heroId:int)
+				
+		public function LoadImageResourceActivity(url:String)
 		{
-			_heroResource = HeroResource.getInstance(heroId);
+			_url = url;
 			_request = new URLRequest();  
-			_request.url = CommonResource.parseUrl("hero/h" + NumberWrapper.wrap(heroId).toText(3) + ".png");
+			_request.url = CommonResource.parseUrl(url);
 			_request.method = URLRequestMethod.GET;
+			GamePlugins.console.writeLine(_request.url);
 			
 			_loader = new Loader();
 			_loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoaded);
@@ -34,7 +36,7 @@ package Action.Resource.Flow
 		
 		public function run():void
 		{
-			if(_heroResource.headBitmap == null)
+			if(CommonResource.imageSection.get(_url) == null)
 				_loader.load(_request);
 			else
 				this.workflow.goon();
@@ -48,7 +50,15 @@ package Action.Resource.Flow
 		
 		private function onImageLoaded(e:Event):void
 		{
-			_heroResource.headBitmap = Bitmap(e.currentTarget.content).bitmapData;
+			/*try
+			{
+				_loader.content;
+			}
+			catch(e:SecurityError)
+			{
+				_loader.loadBytes(_loader.contentLoaderInfo.bytes);
+			}*/
+			CommonResource.imageSection.set(_url, e.currentTarget.content);
 			this.workflow.goon();
 		}
 	}

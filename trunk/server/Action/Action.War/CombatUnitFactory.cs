@@ -31,12 +31,12 @@ namespace Action.War
             switch (unitID)
             {
                 // 步兵
-                case 11:
+                case 801:
                     unit = new CombatUnit();
                     break;
 
                 // 弓兵
-                case 12:
+                case 804:
                     unit = new CombatUnit();
                     unit.StrikeRange = RangeProvider.Archer();
                     break;

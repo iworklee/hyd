@@ -10,8 +10,13 @@ namespace Action.War
     public class Combat
     {
         const int MAX_ROUND = 50;
-        static readonly Vector2 AttackDirection = new Vector2(1, 0);
-        static readonly Vector2 DefendDirection = new Vector2(-1, 0);
+        const int ROW = 5;
+        const int COLUMN = 14;
+        const int ATTACKER_START_COLUMN = 6;
+        const int DEFENDER_START_COLUMN = 7;
+
+        static readonly Vector2 AttackDirection = new Vector2(1, 1);
+        static readonly Vector2 DefendDirection = new Vector2(-1, 1);
 
         private CombatMilitary _attacker = new CombatMilitary();
         private CombatMilitary _defender = new CombatMilitary();
@@ -39,14 +44,18 @@ namespace Action.War
             // 初始化攻方单位
             foreach (var u in attacker.Units)
             {
-                var j = u.Positon + 10;
+                var j = u.Positon + 30 - u.Positon / 5 * 10;
+
+                //var column = ATTACKER_START_COLUMN - u.Positon / ROW;
+                //var row = u.Positon % ROW;
 
                 var unit = CombatUnitFactory.Instance.CreateUnit(u.ID);
+                unit.EmbattlePos = u.Positon;
                 Attacker.PlaceUnit(unit, j);
             }
 
             // 攻方城墙
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < ROW; i++)
             {
                 var unit = CombatUnitFactory.Instance.CreateUnit(0);
                 Attacker.PlaceUnit(unit, i);
@@ -67,14 +76,18 @@ namespace Action.War
             // 初始化守方单位
             foreach (var u in defender.Units)
             {
-                var j = u.Positon + 55 - u.Positon / 5 * 10;
+                var j = u.Positon + 35;
+
+                //var column = DEFENDER_START_COLUMN + u.Positon / ROW;
+                //var row = u.Positon % ROW;
 
                 var unit = CombatUnitFactory.Instance.CreateUnit(u.ID);
+                unit.EmbattlePos = u.Positon;
                 Defender.PlaceUnit(unit, j);
             }
 
             // 守方城墙
-            for (int i = 65; i < 70; i++)
+            for (int i = ROW * COLUMN - 1; i <= ROW * COLUMN - ROW; i--)
             {
                 var unit = CombatUnitFactory.Instance.CreateUnit(0);
                 Defender.PlaceUnit(unit, i);
@@ -95,7 +108,7 @@ namespace Action.War
             if (!_attackerLoaded || !_defenderLoaded)
                 return false;
 
-            attackOrder = Attacker.Units.Concat(Defender.Units).OrderByDescending(u => u.CombatPower).ToList();
+            attackOrder = Attacker.Units.Concat(Defender.Units).OrderBy(u => u.EmbattlePos).ThenByDescending(u => u.CombatPower).ToList();
 
             Report.UID = Guid.NewGuid().ToString("N");
 
@@ -103,13 +116,13 @@ namespace Action.War
             {
                 PerformRound(round);
 
-                if (Attacker.Defeated || Attacker.AliveUnits.Count() == 5)
+                if (Attacker.Defeated || Attacker.AliveUnits.Count() == ROW)
                 {
                     // 攻方胜
                     break;
                 }
 
-                if (Defender.Defeated || Defender.AliveUnits.Count() == 5)
+                if (Defender.Defeated || Defender.AliveUnits.Count() == ROW)
                 {
                     // 守方胜
                     break;

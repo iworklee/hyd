@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace Action.War
 {
@@ -19,18 +20,22 @@ namespace Action.War
             return new Vector2(pos / 5, pos % 5);
         }
 
+        private static Random rng = new Random();
         public static BattleEffectType Test(float criticalChance, float blockChance, float dodgeChance)
         {
-            var rng = new Random();
             var n = rng.NextDouble();
+            BattleEffectType effect;
             if (n < dodgeChance)
-                return BattleEffectType.Dodge;
+                effect = BattleEffectType.Dodge;
             else if (n < dodgeChance + blockChance)
-                return BattleEffectType.Block;
+                effect = BattleEffectType.Block;
             else if (n < dodgeChance + blockChance + criticalChance)
-                return BattleEffectType.Critical;
+                effect = BattleEffectType.Critical;
             else
-                return BattleEffectType.Normal;
+                effect = BattleEffectType.Normal;
+
+            Debug.WriteLine("Random {0}, {1}", n, effect);
+            return effect;
         }
     }
 }

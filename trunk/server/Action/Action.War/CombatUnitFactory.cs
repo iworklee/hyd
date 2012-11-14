@@ -9,6 +9,7 @@ namespace Action.War
 {
     public class CombatUnitFactory
     {
+        private Random _rng = new Random();
 
         private CombatUnitFactory()
         {
@@ -69,18 +70,18 @@ namespace Action.War
                     break;
             }
             unit.UnitTypeID = unitID;
-            unit.Health = 1000;
+            unit.Health = _rng.Next(800, 1000);
 
-            unit.NormalAttack = 100;
-            unit.NormalDefence = 100;
-            unit.TacticAttack = 100;
-            unit.TacticDefence = 100;
-            unit.StrategyAttack = 100;
-            unit.StrategyDefence = 100;
+            unit.NormalAttack = _rng.Next(80, 100);
+            unit.NormalDefence = _rng.Next(80, 100);
+            unit.TacticAttack = _rng.Next(80, 100);
+            unit.TacticDefence = _rng.Next(80, 100);
+            unit.StrategyAttack = _rng.Next(80, 100);
+            unit.StrategyDefence = _rng.Next(80, 100);
 
-            unit.DodgeChance = 0.2f;
-            unit.BlockChance = 0.3f;
-            unit.CriticalChance = 0.4f;
+            unit.DodgeChance = _rng.Next(0, 20) / 100f;
+            unit.BlockChance = _rng.Next(0, 30) / 100f;
+            unit.CriticalChance = _rng.Next(0, 40) / 100f;
 
             unit.CombatPower = unit.NormalAttack + unit.TacticAttack + unit.StrategyAttack;
             return unit;

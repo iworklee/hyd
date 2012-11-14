@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleReport.Web", "BattleReport.Web\BattleReport.Web.csproj", "{4C9A986F-5AF1-4141-A520-DF0AD4D81B1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Action.War", "Action.War\Action.War.csproj", "{C3AE09BD-C508-4690-BAB0-CDBA77FADCEF}"

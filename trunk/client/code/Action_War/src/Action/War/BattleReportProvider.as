@@ -2,6 +2,7 @@ package Action.War
 {
 	import Action.Core.GamePlugins;
 	import Action.Core.Util.Base64;
+	import Action.Core.Util.Base64_2;
 	import Action.Core.Util.Random;
 	import Action.Model.BattleAction;
 	import Action.Model.BattleActionType;
@@ -13,6 +14,9 @@ package Action.War
 	import Action.Resource.HeroFaceResource;
 	import Action.War.Config.BattleConfigFactory;
 	import Action.War.Config.BattleHero;
+	
+	import flash.utils.ByteArray;
+	import flash.utils.Endian;
 	
 	import mx.messaging.AbstractConsumer;
 
@@ -34,14 +38,17 @@ package Action.War
 		{
 			try
 			{
+				//Base64_2.defaultEndian = Endian.LITTLE_ENDIAN;
+				//var bytes:ByteArray = Base64_2.decodeToByteArray(text);
+				var bytes:ByteArray = Base64.decode(text);
 				var report:BattleReport = new BattleReport();
-				report.mergeFrom(Base64.decode(text));
+				report.mergeFrom(bytes);
 				debugReport(report);
 				return report;
 			}
 			catch(e:Error)
 			{
-				
+				trace(e);
 			}
 			return null;
 		}

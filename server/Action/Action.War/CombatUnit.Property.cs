@@ -29,6 +29,11 @@ namespace Action.War
         public int BattleID { get; set; }
 
         /// <summary>
+        /// 布阵位置
+        /// </summary>
+        public int EmbattlePos { get; set; }
+
+        /// <summary>
         /// 位置坐标
         /// </summary>
         public Vector2 Position { get; set; }

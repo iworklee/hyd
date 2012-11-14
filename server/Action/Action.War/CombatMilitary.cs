@@ -72,7 +72,7 @@ namespace Action.War
         /// <returns></returns>
         public BattleAction Move(CombatUnit unit)
         {
-            var pos = unit.Position + unit.Military.Forward;
+            var pos = unit.Position + Vector2.UnitX * unit.Military.Forward;
             if (GetAliveUnitByPos(pos) != null)
                 return null;
 

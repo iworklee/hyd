@@ -28,6 +28,7 @@
     <classEntry path="Action.Core.GameConfig"/>
     <classEntry path="Action.Core.Util.JsonObject"/>
     <classEntry path="Action.Core.Util.Base64_2"/>
+    <classEntry path="Action.Core.Util.Base16"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

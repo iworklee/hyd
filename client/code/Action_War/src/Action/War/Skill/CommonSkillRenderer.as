@@ -45,19 +45,22 @@ package Action.War.Skill
 					if(bum != null)
 					{
 						exceptions[bum.SID] = bum;
-						if(effect.type < 2)
-							graphics.drawBitmap(bum.getDefendBitmap(), bum.paintPoint);
-						else
-							graphics.drawBitmap(bum.getHurtBitmap(), bum.paintPoint);
+						if(!bum.isWall)
+						{
+							if(effect.type < 2)
+								graphics.drawBitmap(bum.getDefendBitmap(), bum.paintPoint);
+							else
+								graphics.drawBitmap(bum.getHurtBitmap(), bum.paintPoint);
+						}
 						
 						var wrapper:BattleEffectWrapper = BattleEffectWrapper.wrap(effect);
 						
 						//print effect.type
-						var lblPnt:Point = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 20 - index * wrapper.getTypeUpSpeed());
+						var lblPnt:Point = new Point(bum.realPoint.x + 10, bum.realPoint.y + 20 - index * wrapper.getTypeUpSpeed());
 						graphics.drawText(wrapper.getTypeDesc(), lblPnt, wrapper.getTypeColor(), 15, true);
 						
 						//print effect.plusHP
-						lblPnt = new Point(bum.paintPoint.x + 10, bum.paintPoint.y + 50 - index * 10);
+						lblPnt = new Point(bum.realPoint.x + 10, bum.realPoint.y + 50 - index * 10);
 						graphics.drawText(wrapper.getPlusHpDesc(), lblPnt, 0xffff00, 15, true);
 					}
 				}

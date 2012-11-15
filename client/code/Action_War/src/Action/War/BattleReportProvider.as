@@ -1,6 +1,7 @@
 package Action.War
 {
 	import Action.Core.GamePlugins;
+	import Action.Core.Util.Base16;
 	import Action.Core.Util.Base64;
 	import Action.Core.Util.Base64_2;
 	import Action.Core.Util.Random;
@@ -40,7 +41,7 @@ package Action.War
 			{
 				//Base64_2.defaultEndian = Endian.LITTLE_ENDIAN;
 				//var bytes:ByteArray = Base64_2.decodeToByteArray(text);
-				var bytes:ByteArray = Base64.decode(text);
+				var bytes:ByteArray = Base64_2.decodeToByteArray(text);
 				var report:BattleReport = new BattleReport();
 				report.mergeFrom(bytes);
 				debugReport(report);
@@ -51,6 +52,21 @@ package Action.War
 				trace(e);
 			}
 			return null;
+		}
+		
+		private function debugBase16(bytes:ByteArray):void
+		{
+			var i:int=0;
+			var str:String = "";
+			while(bytes.bytesAvailable)
+			{
+				str += "[" + i + "]:" + bytes.readUnsignedByte() + "\n";
+				i++;
+				if(i==100)
+					break;
+			}
+			GamePlugins.console.writeLine(str);
+			bytes.position = 0;
 		}
 		
 		private function debugReport(report:BattleReport):void
@@ -245,6 +261,7 @@ package Action.War
 			action.type = BattleActionType.Cast;
 			action.param = 0;
 			addEffect(action, 39, 25);
+			addEffect(action, 69, 235);
 			bout.actions.push(action);	
 			
 			return bout;

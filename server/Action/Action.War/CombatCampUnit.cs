@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Action.War
 {
@@ -13,6 +14,16 @@ namespace Action.War
     {
         //public CombatCampUnit(CombatMilitary military) : base(military) { }
 
+        public override IEnumerable<Vector2> StrikeRange
+        {
+            get
+            {
+                return Enumerable.Empty<Vector2>();
+            }
+            set
+            {
+            }
+        }
         public override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType, float damageRatio)
         {
             return null;

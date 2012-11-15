@@ -40,17 +40,28 @@ namespace BattleReport.Web.Controllers
             var combat = new Combat();
 
             var attacker = new Army();
-            attacker.Units.AddRange(
-                model.Attacker.Where(id => !string.IsNullOrWhiteSpace(id))
-                .Select((id, pos) => { return new Unit { ID = int.Parse(id), Positon = pos }; })
-                );
+            //attacker.Units.AddRange(
+            //    model.Attacker.Where(id => !string.IsNullOrWhiteSpace(id))
+            //    .Select((id, pos) => { return new Unit { ID = int.Parse(id), Positon = pos }; })
+            //    );
+
+            for (int i = 0; i < model.Attacker.Count; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(model.Attacker[i]))
+                    attacker.Units.Add(new Unit { ID = int.Parse(model.Attacker[i]), Positon = i });
+            }
             combat.LoadAttacker(attacker);
 
             var defender = new Army();
-            defender.Units.AddRange(
-                model.Defender.Where(id => !string.IsNullOrWhiteSpace(id))
-                .Select((id, pos) => { return new Unit { ID = int.Parse(id), Positon = pos }; })
-                );
+            //defender.Units.AddRange(
+            //    model.Defender.Where(id => !string.IsNullOrWhiteSpace(id))
+            //    .Select((id, pos) => { return new Unit { ID = int.Parse(id), Positon = pos }; })
+            //    );
+            for (int i = 0; i < model.Defender.Count; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(model.Defender[i]))
+                    defender.Units.Add(new Unit { ID = int.Parse(model.Defender[i]), Positon = i });
+            }
             combat.LoadDefender(defender);
 
             if (!combat.Perform())

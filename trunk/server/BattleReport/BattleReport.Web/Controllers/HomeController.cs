@@ -70,14 +70,14 @@ namespace BattleReport.Web.Controllers
             using (var ms = new MemoryStream())
             {
                 ProtoBuf.Serializer.Serialize(ms, combat.Report);
-                ViewBag.Data = Convert.ToBase64String(ms.ToArray());
-                //var data = ms.ToArray();
-                //var sb = new StringBuilder();
-                //foreach (var b in data)
-                //{
-                //    sb.Append(b.ToString("x2"));
-                //}
-                //ViewBag.Data = sb.ToString();
+                //ViewBag.Data = Convert.ToBase64String(ms.ToArray());
+                var data = ms.ToArray();
+                var sb = new StringBuilder();
+                foreach (var b in data)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+                ViewBag.Data = sb.ToString();
             }
             return View("War");
         }

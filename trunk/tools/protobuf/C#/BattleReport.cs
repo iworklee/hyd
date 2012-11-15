@@ -39,6 +39,15 @@ namespace Action.Model
       get { return _Bouts; }
     }
   
+
+    private string _Winner = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"Winner", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string Winner
+    {
+      get { return _Winner; }
+      set { _Winner = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -118,6 +127,13 @@ namespace Action.Model
     public global::System.Collections.Generic.List<Action.Model.BattleAction> Actions
     {
       get { return _Actions; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<Action.Model.BattleEffect> _Effects = new global::System.Collections.Generic.List<Action.Model.BattleEffect>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"Effects", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Action.Model.BattleEffect> Effects
+    {
+      get { return _Effects; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;

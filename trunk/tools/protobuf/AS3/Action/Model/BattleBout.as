@@ -8,6 +8,7 @@ package Action.Model {
 	import flash.utils.IExternalizable;
 	import flash.errors.IOError;
 	import Action.Model.BattleAction;
+	import Action.Model.BattleEffect;
 	// @@protoc_insertion_point(imports)
 
 	// @@protoc_insertion_point(class_metadata)
@@ -50,6 +51,14 @@ package Action.Model {
 		/**
 		 *  @private
 		 */
+		public static const EFFECTS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("Action.Model.BattleBout.Effects", "effects", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return Action.Model.BattleEffect; });
+
+		[ArrayElementType("Action.Model.BattleEffect")]
+		public var effects:Array = [];
+
+		/**
+		 *  @private
+		 */
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSID) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
@@ -58,6 +67,10 @@ package Action.Model {
 			for (var actions$index:uint = 0; actions$index < this.actions.length; ++actions$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
 				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.actions[actions$index]);
+			}
+			for (var effects$index:uint = 0; effects$index < this.effects.length; ++effects$index) {
+				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
+				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.effects[effects$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -81,6 +94,9 @@ package Action.Model {
 					break;
 				case 2:
 					this.actions.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new Action.Model.BattleAction()));
+					break;
+				case 3:
+					this.effects.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new Action.Model.BattleEffect()));
 					break;
 				default:
 					super.readUnknown(input, tag);

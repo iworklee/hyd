@@ -55,6 +55,29 @@ package Action.Model {
 		/**
 		 *  @private
 		 */
+		public static const WINNER:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("Action.Model.BattleReport.Winner", "winner", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+
+		private var Winner$field:String;
+
+		public function clearWinner():void {
+			Winner$field = null;
+		}
+
+		public function get hasWinner():Boolean {
+			return Winner$field != null;
+		}
+
+		public function set winner(value:String):void {
+			Winner$field = value;
+		}
+
+		public function get winner():String {
+			return Winner$field;
+		}
+
+		/**
+		 *  @private
+		 */
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasUID) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
@@ -68,6 +91,10 @@ package Action.Model {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
 				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.bouts[bouts$index]);
 			}
+			if (hasWinner) {
+				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
+				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, Winner$field);
+			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
 			}
@@ -78,6 +105,7 @@ package Action.Model {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var UID$count:uint = 0;
+			var Winner$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
 				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 				switch (tag >> 3) {
@@ -93,6 +121,13 @@ package Action.Model {
 					break;
 				case 3:
 					this.bouts.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new Action.Model.BattleBout()));
+					break;
+				case 4:
+					if (Winner$count != 0) {
+						throw new flash.errors.IOError('Bad data format: BattleReport.winner cannot be set twice.');
+					}
+					++Winner$count;
+					this.winner = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

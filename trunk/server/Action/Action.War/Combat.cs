@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace Action.War
 {
@@ -87,7 +88,7 @@ namespace Action.War
             }
 
             // 守方城墙
-            for (int i = ROW * COLUMN - 1; i <= ROW * COLUMN - ROW; i--)
+            for (int i = ROW * COLUMN - 1; i >= ROW * COLUMN - ROW; i--)
             {
                 var unit = CombatUnitFactory.Instance.CreateUnit(0);
                 Defender.PlaceUnit(unit, i);
@@ -111,23 +112,24 @@ namespace Action.War
             attackOrder = Attacker.Units.Concat(Defender.Units).OrderBy(u => u.EmbattlePos).ThenByDescending(u => u.CombatPower).ToList();
 
             Report.UID = Guid.NewGuid().ToString("N");
-
-            for (int round = 1; round <= MAX_ROUND; round++)
+            int round;
+            for (round = 1; round <= MAX_ROUND; round++)
             {
                 PerformRound(round);
 
                 if (Attacker.Defeated || Attacker.AliveUnits.Count() == ROW)
                 {
-                    // 攻方胜
+                    // 守方胜
                     break;
                 }
 
                 if (Defender.Defeated || Defender.AliveUnits.Count() == ROW)
                 {
-                    // 守方胜
+                    // 攻方胜
                     break;
                 }
             }
+            Debug.WriteLine("PerformRound : {0}", round);
 
             return true;
         }

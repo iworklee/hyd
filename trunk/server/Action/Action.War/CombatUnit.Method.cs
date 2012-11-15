@@ -47,6 +47,8 @@ namespace Action.War
             var damageType = Helper.Test(this.CriticalChance, target.BlockChance, 0);
 
             var effect = Attacking(target, AttackType.Normal, damageType, 1);
+            if (effect == null)
+                return null;
 
             ba = new BattleAction();
             ba.UnitSID = this.BattleID;

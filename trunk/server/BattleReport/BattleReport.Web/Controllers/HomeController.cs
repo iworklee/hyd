@@ -8,6 +8,7 @@ using Action.Model;
 using System.IO;
 using Action.War;
 using System.Diagnostics;
+using System.Text;
 
 namespace BattleReport.Web.Controllers
 {
@@ -59,6 +60,13 @@ namespace BattleReport.Web.Controllers
             {
                 ProtoBuf.Serializer.Serialize(ms, combat.Report);
                 ViewBag.Data = Convert.ToBase64String(ms.ToArray());
+                //var data = ms.ToArray();
+                //var sb = new StringBuilder();
+                //foreach (var b in data)
+                //{
+                //    sb.Append(b.ToString("x2"));
+                //}
+                //ViewBag.Data = sb.ToString();
             }
             return View("War");
         }

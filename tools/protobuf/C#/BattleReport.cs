@@ -40,13 +40,31 @@ namespace Action.Model
     }
   
 
-    private string _Winner = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"Winner", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private string _Player1 = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"Player1", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
-    public string Winner
+    public string Player1
     {
-      get { return _Winner; }
-      set { _Winner = value; }
+      get { return _Player1; }
+      set { _Player1 = value; }
+    }
+
+    private string _Player2 = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"Player2", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string Player2
+    {
+      get { return _Player2; }
+      set { _Player2 = value; }
+    }
+
+    private bool _Win = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"Win", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool Win
+    {
+      get { return _Win; }
+      set { _Win = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

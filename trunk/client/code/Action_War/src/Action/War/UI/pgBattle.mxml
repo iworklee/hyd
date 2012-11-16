@@ -130,6 +130,16 @@
 				
 			}
 			
+			public function get title():String
+			{
+				return _lblTitle.text;
+			}
+			
+			public function set title(value:String):void
+			{
+				_lblTitle.text = value;
+			}
+			
 			public function getCanvas():BorderContainer
 			{
 				return _bcCanvas;
@@ -226,8 +236,8 @@
 	</fx:Script>
 	<s:Label id="_lblPlayer1" x="50" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28"
 			 fontWeight="bold" text=" 神仙一枝花"  buttonMode="true"/>
-	<s:Label id="_lblVS" x="350" y="40" color="#00ff00" fontFamily="微软雅黑" fontSize="28"
-			 fontWeight="bold" text=" VS " />
+	<s:Label id="_lblTitle" x="320" y="40" color="#00ff00" fontFamily="微软雅黑" fontSize="32"
+			 fontWeight="bold" text="准备战斗" />
 	<s:Label id="_lblPlayer2" x="550" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28"
 			 fontWeight="bold" text="万寿落雪"  buttonMode="true"/>
 	<s:BorderContainer id="_bcMain" y="100" width="100%" height="400" useHandCursor="false">		

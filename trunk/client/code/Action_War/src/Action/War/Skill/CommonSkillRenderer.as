@@ -36,7 +36,7 @@ package Action.War.Skill
 			
 			var exceptions:Array = new Array();			
 			exceptions[attacker.SID] = attacker;
-			graphics.drawBitmap2(attacker.getAttackBitmap(index < 4 ? index : 3), attacker.paintPoint);
+			graphics.drawBitmap2(attacker.getAttackBitmap(index < 4 ? index : 3), attacker.tempPoint);
 			if(index >= 3)
 			{
 				for each(var effect:BattleEffect in action.effects)
@@ -48,9 +48,9 @@ package Action.War.Skill
 						if(!bum.isWall)
 						{
 							if(effect.type < 2)
-								graphics.drawBitmap(bum.getDefendBitmap(), bum.paintPoint);
+								graphics.drawBitmap(bum.getDefendBitmap(), bum.tempPoint);
 							else
-								graphics.drawBitmap(bum.getHurtBitmap(), bum.paintPoint);
+								graphics.drawBitmap(bum.getHurtBitmap(), bum.tempPoint);
 						}
 						
 						var wrapper:BattleEffectWrapper = BattleEffectWrapper.wrap(effect);

@@ -48,6 +48,20 @@ package Action.War.Movie
 			return descBUM(_attacker) + _skillRenderer.description;
 		}
 		
+		public override function enter(graphics:CanvasGraphics, player:MoviePlayer):void
+		{
+			if(_action.effects.length > 0)
+			{
+				var sid:int = BattleEffect(_action.effects[0]).unitSID;
+				if(sid != _action.unitSID)
+				{
+					var bum:BattleUnitManager = _battleReportManager.getBUM(sid);
+					if(bum != null)
+						_attacker.turnTo(bum.POS);
+				}
+			}
+		}
+		
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
 		{			
 			var index:int = player.currentFrame - _initialFrame;

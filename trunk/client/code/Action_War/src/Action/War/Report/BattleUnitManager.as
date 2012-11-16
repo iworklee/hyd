@@ -1,6 +1,7 @@
 package Action.War.Report
 {
 	import Action.Core.Flow.IActivity;
+	import Action.Core.GamePlugins;
 	import Action.Core.Util.NumberWrapper;
 	import Action.Model.BattleUnit;
 	import Action.Resource.CommonResource;
@@ -76,7 +77,7 @@ package Action.War.Report
 		}
 		
 		//public var image:Image;
-		public var paintPoint:Point;
+		public var tempPoint:Point;
 		public var direction:int;
 		public var speed:int;
 		
@@ -104,6 +105,21 @@ package Action.War.Report
 			}	
 		}
 		
+		public function turnTo(pos:int):void
+		{
+			if(pos == POS)
+				return;
+			if(int(pos / 5) == int(POS / 5))
+			{
+				if(pos < POS)
+					direction = BattleDefs.DIR_UP;
+				else
+					direction = BattleDefs.DIR_DOWN;
+			}
+			else
+				resetDir();
+		}
+		
 		public function get unitResource():BattleUnitResource
 		{
 			return BattleUnitResource.getInstance(_hero.unit);
@@ -111,6 +127,8 @@ package Action.War.Report
 		
 		public function getAttackBitmap(idx:int):BitmapData
 		{
+			if(unitResource == null)
+				GamePlugins.console.writeLine(this.SID);
 			return unitResource.attackBitmaps[direction * 4 + idx];
 		}
 		

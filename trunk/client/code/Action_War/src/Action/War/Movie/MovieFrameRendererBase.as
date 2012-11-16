@@ -27,8 +27,8 @@ package Action.War.Movie
 					continue;
 				if(exceptions == null ||  exceptions[bum.SID] == null)
 				{
-					bum.paintPoint = bum.realPoint;
-					graphics.drawBitmap(bum.getWaitBitmap(), bum.paintPoint);
+					bum.tempPoint = bum.realPoint;
+					graphics.drawBitmap(bum.getWaitBitmap(), bum.tempPoint);
 				}
 			}
 		}

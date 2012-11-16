@@ -34,8 +34,7 @@
     <Reference Include="MonoGame.Framework.Windows">
       <HintPath>..\Reference\MonoGame\2.5.1\MonoGame.Framework.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="protobuf-net, Version=2.0.0.594, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="protobuf-net">
       <HintPath>..\Reference\protobuf-net\r594\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="SuperSocket.Common, Version=1.4.5.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">

@@ -120,16 +120,20 @@ namespace Action.War
                 if (Attacker.Defeated || Attacker.AliveUnits.Count() == ROW)
                 {
                     // 守方胜
-                    break;
+                    Report.Win = false;
+                    return true;
                 }
 
                 if (Defender.Defeated || Defender.AliveUnits.Count() == ROW)
                 {
                     // 攻方胜
-                    break;
+                    Report.Win = true;
+                    return true;
                 }
             }
             Debug.WriteLine("PerformRound : {0}", round);
+
+            Report.Win = Attacker.AliveUnits.Sum(u => u.CombatPower) > Defender.AliveUnits.Sum(u => u.CombatPower);
 
             return true;
         }

@@ -8,7 +8,9 @@ message BattleReport {
   optional string UID = 1;				//战报唯一号
   repeated BattleUnit Units = 2;			//战斗开始前所有作战单位的数据
   repeated BattleBout Bouts = 3;			//战斗开始后每一回合的数据
-  optional string Winner = 4;				//最终胜利的玩家名
+  optional string Player1 = 4;				//玩家1
+  optional string Player2 = 5;				//玩家2
+  optional bool Win = 6;				//是否胜利（相对玩家1）
 }
 
 message BattleUnit {

@@ -61,7 +61,7 @@ package Action.War.Skill
 		
 			if(index < 6)
 			{
-				graphics.drawBitmap2(attacker.getAttackBitmap(0), attacker.paintPoint);
+				graphics.drawBitmap2(attacker.getAttackBitmap(0), attacker.tempPoint);
 				graphics.drawText(_skill.name, BattleHelper.getSkillNamePoint(), 0xffff00, 64, true, "华文楷体");
 				graphics.drawBitmap(attacker.hero.getFaceBitmap(), BattleHelper.getHeadBitmapPoint(attacker.SID), graphics.getEffectLayer());
 			}
@@ -69,9 +69,9 @@ package Action.War.Skill
 			{
 				index -= 6;
 				if(_type % 2 == 1)
-					graphics.drawBitmap2(attacker.getAttackBitmap(index < 4 ? index : 3), attacker.paintPoint);
+					graphics.drawBitmap2(attacker.getAttackBitmap(index < 4 ? index : 3), attacker.tempPoint);
 				else
-					graphics.drawBitmap2(attacker.getAttackBitmap(0), attacker.paintPoint);
+					graphics.drawBitmap2(attacker.getAttackBitmap(0), attacker.tempPoint);
 				if(index >= 3)
 				{
 					for each(var effect:BattleEffect in action.effects)
@@ -85,9 +85,9 @@ package Action.War.Skill
 								if(!bum.isWall)
 								{
 									if(effect.type < 2)
-										graphics.drawBitmap(bum.getDefendBitmap(), bum.paintPoint);
+										graphics.drawBitmap(bum.getDefendBitmap(), bum.tempPoint);
 									else
-										graphics.drawBitmap(effect.type < 4 ? bum.getHurtBitmap() : bum.getBuffBitmap(), bum.paintPoint);
+										graphics.drawBitmap(effect.type < 4 ? bum.getHurtBitmap() : bum.getBuffBitmap(), bum.tempPoint);
 								}
 							}
 							var wrapper:BattleEffectWrapper = BattleEffectWrapper.wrap(effect);
@@ -137,7 +137,7 @@ package Action.War.Skill
 				{
 					var bum:BattleUnitManager = frameRenderer.battleReportManager.getBUM(effect.unitSID);
 					if(bum != null)
-						graphics.drawBitmap2(effectBmp, bum.paintPoint, offsetPoint.x, offsetPoint.y, graphics.getEffectLayer());				
+						graphics.drawBitmap2(effectBmp, bum.tempPoint, offsetPoint.x, offsetPoint.y, graphics.getEffectLayer());				
 				}
 				//GamePlugins.console.writeLine(index);
 				//GamePlugins.console.drawBitmap(effectBmp);

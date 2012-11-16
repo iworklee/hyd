@@ -21,7 +21,7 @@ package Action.War.Movie
 				if(bum.isWall)
 					continue;
 				var offset:int = bum.getInitOffset();
-				bum.paintPoint =  BattleHelper.getPaintPoint(bum.POS + offset);
+				bum.tempPoint =  BattleHelper.getPaintPoint(bum.POS + offset);
 				//graphics.draw(unitMgr.getWaitBitmap(i),	unitMgr.paintPoint);
 			}
 		}
@@ -38,9 +38,9 @@ package Action.War.Movie
 				if(bum.isWall)
 					continue;
 				var idx:int = player.currentFrame % 2;
-				bum.paintPoint.x += bum.speed;
-				if(graphics.contains(bum.paintPoint))
-					graphics.drawBitmap(bum.getMoveBitmap(idx), bum.paintPoint);
+				bum.tempPoint.x += bum.speed;
+				if(graphics.contains(bum.tempPoint))
+					graphics.drawBitmap(bum.getMoveBitmap(idx), bum.tempPoint);
 			}
 		}
 		

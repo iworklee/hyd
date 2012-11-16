@@ -33,6 +33,8 @@ package Action.War
 		
 		public function BattleReportProvider()
 		{
+			if(_current != null)
+				throw new Error("Singleton");
 		}
 		
 		public function createBattleReport(text:String):BattleReport
@@ -41,7 +43,8 @@ package Action.War
 			{
 				//Base64_2.defaultEndian = Endian.LITTLE_ENDIAN;
 				//var bytes:ByteArray = Base64_2.decodeToByteArray(text);
-				var bytes:ByteArray = Base64_2.decodeToByteArray(text);
+				//var bytes:ByteArray = Base64_2.decodeToByteArray(text);
+				var bytes:ByteArray = Base16.decode(text);
 				var report:BattleReport = new BattleReport();
 				report.mergeFrom(bytes);
 				debugReport(report);
@@ -71,7 +74,13 @@ package Action.War
 		
 		private function debugReport(report:BattleReport):void
 		{
-			GamePlugins.console.writeLine(JSON.stringify(report));
+			var text:String = "";
+			for each(var bout:BattleBout in report.bouts)
+			{
+				for each(var action:BattleAction in bout.actions)
+					text += action.unitSID + "," + action.type + "\n";
+			}
+			GamePlugins.console.writeLine(text);
 		}
 		
 		private function $(name:String):BattleHero

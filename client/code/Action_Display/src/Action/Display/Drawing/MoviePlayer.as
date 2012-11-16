@@ -100,30 +100,38 @@ package Action.Display.Drawing
 		
 		public function goto(frame:int):void
 		{
-			_curFrame = frame;
-			if(_movie.isEnd(_curFrame))
+			try
 			{
-				this.stop();
-				return;
+				_curFrame = frame;
+				if(_movie.isEnd(_curFrame))
+				{
+					this.stop();
+					return;
+				}
+				var renderer:IMovieFrameRenderer = _movie.getFrameRenderer(_curFrame);
+				if(renderer != null)
+				{
+					_graphics.clear();
+					if(_curRenderer != null)
+						_curRenderer.leave(_graphics, this);
+					_curRenderer = renderer;
+					//test("OnEnter");
+					_curRenderer.enter(_graphics, this);
+					renderer.render(_graphics, this);
+				}
+				else if(_curRenderer != null)
+				{
+					_graphics.clear();
+					//test("OnTick");
+					_curRenderer.render(_graphics, this);
+				}
+				this.dispatchEvent(new Event(Event_Goto));
 			}
-			var renderer:IMovieFrameRenderer = _movie.getFrameRenderer(_curFrame);
-			if(renderer != null)
+			catch(e:Error)
 			{
-				_graphics.clear();
-				if(_curRenderer != null)
-					_curRenderer.leave(_graphics, this);
-				_curRenderer = renderer;
-				//test("OnEnter");
-				_curRenderer.enter(_graphics, this);
-				renderer.render(_graphics, this);
+				stop();
+				throw e;
 			}
-			else if(_curRenderer != null)
-			{
-				_graphics.clear();
-				//test("OnTick");
-				_curRenderer.render(_graphics, this);
-			}
-			this.dispatchEvent(new Event(Event_Goto));
 		}
 		
 		private function check():void

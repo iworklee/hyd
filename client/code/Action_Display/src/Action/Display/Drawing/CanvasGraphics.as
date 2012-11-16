@@ -19,6 +19,10 @@ package Action.Display.Drawing
 	public class CanvasGraphics
 	{
 		private var _container:ICanvasContainer;
+		public function get container():ICanvasContainer
+		{
+			return _container;
+		}
 		
 		private var _canvas:BorderContainer;
 		public function getCanvas():BorderContainer

@@ -4,6 +4,8 @@ package Action.Display.Drawing
 
 	public interface ICanvasContainer
 	{
+		function get title():String;
+		function set title(value:String):void;
 		function getCanvas():BorderContainer;
 	}
 }

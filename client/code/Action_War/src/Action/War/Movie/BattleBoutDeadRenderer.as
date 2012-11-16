@@ -38,9 +38,11 @@ package Action.War.Movie
 			var exceptions:Array = new Array();
 			for each(var bum:BattleUnitManager in _deadBUMS)
 			{
+				if(bum.isWall)
+					continue;
 				exceptions[bum.SID] = bum;
 				if(index % 4 < 2)
-					graphics.drawBitmap(bum.getDeadBitmap(), bum.paintPoint);
+					graphics.drawBitmap(bum.getDeadBitmap(), bum.tempPoint);
 			}
 			super.drawWaitBitmaps(graphics, exceptions);
 		}

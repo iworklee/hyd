@@ -28,6 +28,7 @@ package Action.War.Movie
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
 		{
 			var text:String = "第" + _bout.sID + "回合";
+			graphics.container.title = text;
 			graphics.drawText(text, BattleHelper.getBoutNamePoint(), 0xffff00, 64, true, "微软雅黑");
 			super.drawWaitBitmaps(graphics);
 		}

@@ -48,6 +48,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
@@ -112,6 +113,7 @@
     <Content Include="Content\Flash\sparkskins_4.6.0.22920.swf" />
     <Content Include="Content\Flash\spark_4.6.0.22920.swf" />
     <Content Include="Content\Flash\textLayout_2.0.0.232.swf" />
+    <Content Include="Content\images\icon_versus.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

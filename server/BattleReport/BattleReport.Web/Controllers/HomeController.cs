@@ -9,14 +9,18 @@ using System.IO;
 using Action.War;
 using System.Diagnostics;
 using System.Text;
+using System.Web.UI;
 
 namespace BattleReport.Web.Controllers
 {
+    [ValidateInput(false)]
+    [OutputCache(Location = OutputCacheLocation.None)]
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
             var model = new WarModel();
+            model.AttackerName = "进攻方";
             model.Attacker = new List<string> { 
                 "801", "801", "801", "801", "801",
                 "804", "804", "804", "804", "804",
@@ -24,13 +28,23 @@ namespace BattleReport.Web.Controllers
                 "", "", "", "", "",
                 "", "", "", "", "",
             };
+            model.DefenderName = "防守方";
             model.Defender = new List<string> { 
                 "801", "801", "801", "801", "801",
                 "804", "804", "804", "804", "804",
                 "", "", "", "", "",
                 "", "", "", "", "",
                 "", "", "", "", "",
-            }; ;
+            };
+            //model.DataSource = new SelectList(new[] {
+            //    new SelectListItem { Text = "步兵", Value = "801" },
+            //    new SelectListItem { Text = "弓手", Value = "804" },
+            //}, "Value", "Text");
+            model.DataSource = new List<SelectListItem> {
+                new SelectListItem { Text = "步兵", Value = "801" },
+                new SelectListItem { Text = "弓手", Value = "804" },
+            };
+
             return View(model);
         }
 
@@ -66,6 +80,9 @@ namespace BattleReport.Web.Controllers
 
             if (!combat.Perform())
                 return View();
+
+            combat.Report.Player1 = model.AttackerName;
+            combat.Report.Player2 = model.DefenderName;
 
             using (var ms = new MemoryStream())
             {

@@ -9,9 +9,14 @@ namespace BattleReport.Web.Models
 {
     public class WarModel
     {
+        public string AttackerName { get; set; }
+
         public List<string> Attacker { get; set; }
 
-        public List<string> Defender { get; set; }
-    }
+        public string DefenderName { get; set; }
 
+        public List<string> Defender { get; set; }
+
+        public IEnumerable<SelectListItem> DataSource { get; set; }
+    }
 }

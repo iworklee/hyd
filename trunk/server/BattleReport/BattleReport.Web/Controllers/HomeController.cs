@@ -10,6 +10,7 @@ using Action.War;
 using System.Diagnostics;
 using System.Text;
 using System.Web.UI;
+using System.Xml.Linq;
 
 namespace BattleReport.Web.Controllers
 {
@@ -19,31 +20,33 @@ namespace BattleReport.Web.Controllers
     {
         public ActionResult Index()
         {
+            var xmlFile = XElement.Load(Server.MapPath("~/App_Data/UnitType.xml"));
+            var data = xmlFile.Elements().Select(x =>
+                new SelectListItem { Text = (string)x.Element("Name"), Value = (string)x.Element("ID") });
+
+            var rng = new Random();
+            const int MIN = 801;
+            const int MAX = 806;
+
             var model = new WarModel();
             model.AttackerName = "进攻方";
             model.Attacker = new List<string> { 
-                "801", "801", "801", "801", "801",
-                "804", "804", "804", "804", "804",
+                rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
+                rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
                 "", "", "", "", "",
                 "", "", "", "", "",
                 "", "", "", "", "",
             };
             model.DefenderName = "防守方";
             model.Defender = new List<string> { 
-                "801", "801", "801", "801", "801",
-                "804", "804", "804", "804", "804",
+                rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
+                rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
                 "", "", "", "", "",
                 "", "", "", "", "",
                 "", "", "", "", "",
             };
-            //model.DataSource = new SelectList(new[] {
-            //    new SelectListItem { Text = "步兵", Value = "801" },
-            //    new SelectListItem { Text = "弓手", Value = "804" },
-            //}, "Value", "Text");
-            model.DataSource = new List<SelectListItem> {
-                new SelectListItem { Text = "步兵", Value = "801" },
-                new SelectListItem { Text = "弓手", Value = "804" },
-            };
+
+            model.DataSource = data;
 
             return View(model);
         }

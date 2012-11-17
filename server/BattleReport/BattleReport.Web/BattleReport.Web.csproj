@@ -224,6 +224,10 @@
       <Project>{fcb49407-1470-44c8-8d9b-aaba921ff088}</Project>
       <Name>Action.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Action.ResourceManager\Action.ResourceManager.csproj">
+      <Project>{07618A8F-56CE-49D5-89E4-353EDA438F0C}</Project>
+      <Name>Action.ResourceManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Action.War\Action.War.csproj">
       <Project>{c3ae09bd-c508-4690-bab0-cdba77fadcef}</Project>
       <Name>Action.War</Name>

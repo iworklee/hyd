@@ -105,6 +105,10 @@
       <Project>{FCB49407-1470-44C8-8D9B-AABA921FF088}</Project>
       <Name>Action.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Action.ResourceManager\Action.ResourceManager.csproj">
+      <Project>{07618A8F-56CE-49D5-89E4-353EDA438F0C}</Project>
+      <Name>Action.ResourceManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

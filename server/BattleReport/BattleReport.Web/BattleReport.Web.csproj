@@ -103,6 +103,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\UnitType.xml" />
     <Content Include="Content\Flash\assets\loading.JPG" />
     <Content Include="Content\Flash\config.js" />
     <Content Include="Content\Flash\flash.swf" />
@@ -213,9 +214,7 @@
     </Content>
     <Content Include="Views\Home\War.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

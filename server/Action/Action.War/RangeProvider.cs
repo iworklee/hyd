@@ -8,6 +8,12 @@ namespace Action.War
 {
     public class RangeProvider
     {
+        public static IEnumerable<Vector2> Generate(string range)
+        {
+            return range.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(p => int.Parse(p).Int2Pos());
+        }
+
         public static IEnumerable<Vector2> None()
         {
             return Enumerable.Empty<Vector2>();

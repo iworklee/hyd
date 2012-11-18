@@ -40,12 +40,24 @@ namespace Action.Skill
                 .Where(u => u != null)
                 .Take(TargetCount);
 
-            foreach (var target in targets)
+            //foreach (var target in targets)
+            //{
+            //    // 计算格挡，暴击
+            //    var damageType = Helper.Test(unit.CriticalChance, target.BlockChance, 0);
+            //    yield return unit.DoAttack(target, AttackType.Tactic, damageType, DamageRatio);
+            //}
+
+            yield return new BattleEffect { UnitSID = unit.BattleID, PlusMP = -unit.Charge };
+            unit.Charge = 0;
+
+            var effects =  targets.SelectMany(target =>
             {
                 // 计算格挡，暴击
                 var damageType = Helper.Test(unit.CriticalChance, target.BlockChance, 0);
-                yield return unit.Attacking(target, AttackType.Tactic, damageType, DamageRatio);
-            }
+                return unit.DoAttack(target, AttackType.Tactic, damageType, DamageRatio);
+            });
+            foreach (var e in effects)
+                yield return e;
         }
 
         public override float DamageRatio

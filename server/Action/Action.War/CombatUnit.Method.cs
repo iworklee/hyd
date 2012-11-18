@@ -46,15 +46,15 @@ namespace Action.War
             // 计算格挡，暴击
             var damageType = Helper.Test(this.CriticalChance, target.BlockChance, 0);
 
-            var effect = Attacking(target, AttackType.Normal, damageType, 1);
-            if (effect == null)
-                return null;
+
+            var effect = Attacking(target, AttackType.Normal, damageType)
+                .Concat(DoAttack(target, AttackType.Normal, damageType, 1));
 
             ba = new BattleAction();
             ba.UnitSID = this.BattleID;
             ba.Type = BattleActionType.Cast; // 攻击
             ba.Param = 0; // 普通攻击
-            ba.Effects.Add(effect);
+            ba.Effects.AddRange(effect);
             return ba;
         }
 
@@ -66,7 +66,7 @@ namespace Action.War
         /// <param name="effectType">攻击效果（闪避、格挡、重击）</param>
         /// <param name="damageRatio">伤害系数</param>
         /// <returns></returns>
-        public virtual BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType, float damageRatio)
+        public IEnumerable<BattleEffect> DoAttack(CombatUnit target, AttackType attackType, BattleEffectType effectType, float damageRatio)
         {
             var ratio = (int)effectType;
 
@@ -79,15 +79,21 @@ namespace Action.War
 
             var effect = new BattleEffect { UnitSID = target.BattleID, PlusHP = -damage, Type = effectType };
 
-            target.Attacked(effect);
-
-            return effect;
+            return Enumerable.Repeat(effect, 1)
+                .Concat(target.UnderAttack(effect));
         }
 
-        protected virtual void Attacked(BattleEffect effect)
+        protected virtual IEnumerable<BattleEffect> Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
+        {
+            return Enumerable.Empty<BattleEffect>();
+        }
+
+        protected virtual IEnumerable<BattleEffect> UnderAttack(BattleEffect effect)
         {
             if (Health <= 0)
                 Military.Die(this);
+
+            return Enumerable.Empty<BattleEffect>();
         }
 
         /// <summary>

@@ -40,20 +40,37 @@ namespace Action.War
             ba.Effects.AddRange(effects);
             return ba;
         }
-        public override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType, float damageRatio)
-        {
-            if (effectType != BattleEffectType.Dodge)
-                Charge += CHARGE_PLUS;
 
-            return base.Attacking(target, attackType, effectType, damageRatio);
+        //public override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType, float damageRatio)
+        //{
+        //    if (effectType != BattleEffectType.Dodge)
+        //        Charge += CHARGE_PLUS;
+
+        //    return base.Attacking(target, attackType, effectType, damageRatio);
+        //}
+
+        protected override IEnumerable<BattleEffect> Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
+        {
+            if (effectType != BattleEffectType.Dodge && attackType == AttackType.Normal)
+            {
+                Charge += CHARGE_PLUS;
+                yield return new BattleEffect { UnitSID = this.BattleID, PlusMP = CHARGE_PLUS };
+            }
+
+            foreach (var e in base.Attacking(target, attackType, effectType))
+                yield return e;
         }
 
-        protected override void Attacked(BattleEffect effect)
+        protected override IEnumerable<BattleEffect> UnderAttack(BattleEffect effect)
         {
             if (effect.Type != BattleEffectType.Dodge)
+            {
                 Charge += CHARGE_PLUS;
+                yield return new BattleEffect { UnitSID = this.BattleID, PlusMP = CHARGE_PLUS };
+            }
 
-            base.Attacked(effect);
+            foreach (var e in base.UnderAttack(effect))
+                yield return e;
         }
     }
 }

@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Action.Buff;
 
-namespace Action.Buff
+namespace Action.Skill
 {
     public class Effect
     {

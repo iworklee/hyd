@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using SuperSocket.Common;
+using System;
 
 namespace Action.Engine
 {
@@ -12,7 +13,8 @@ namespace Action.Engine
         static Composition()
         {
             //Create the CompositionContainer with the parts in the catalog
-            var dirCatalog = new DirectoryCatalog(".", "Action.*.dll");
+            var path = AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory;
+            var dirCatalog = new DirectoryCatalog(path, "Action.*.dll");
             _container = new CompositionContainer(dirCatalog);
         }
 

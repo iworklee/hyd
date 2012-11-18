@@ -45,7 +45,7 @@ namespace Action.Skill
                 {
                     Range = new Area(x.Element("Area")),
                     Buffs = x.Element("Buffs").Elements()
-                    .Select(b => BuffFactory.Create((int)b.Element("ID"), (float)b.Element("Value")))
+                    .Select(b => BuffFactory.Instance.CreateBuff((int)b.Element("ID"), (float)b.Element("Value")))
                 });
             return skill;
 

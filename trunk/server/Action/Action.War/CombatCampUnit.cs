@@ -24,21 +24,20 @@ namespace Action.War
             {
             }
         }
-        public override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType, float damageRatio)
-        {
-            return null;
-        }
 
         public override BattleAction SkillStrike()
         {
             return null;
         }
 
-        protected override void Attacked(BattleEffect effect)
+        protected override IEnumerable<BattleEffect> UnderAttack(BattleEffect effect)
         {
             if (Health <= 0)
                 Military.Defeated = true;
+
+            return base.UnderAttack(effect);
         }
+
         public override BattleAction Move()
         {
             return null;

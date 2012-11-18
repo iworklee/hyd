@@ -187,7 +187,7 @@
 		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>5</StrikeRange>
 		<Health>376</Health>
-		<SkillID>0</SkillID>
+		<SkillID>1</SkillID>
 		<Charge>50</Charge>
 		<NormalAttack>132</NormalAttack>
 		<NormalDefence>84</NormalDefence>

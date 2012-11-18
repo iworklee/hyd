@@ -13,16 +13,33 @@ namespace Action.Buff
     public class BuffFactory
     {
         [ImportMany]
-        private static IEnumerable<IBuff> _buffs;
+        private IEnumerable<Lazy<IBuff, BuffMetaData>> _buffs = null;
 
-        static BuffFactory()
+        private Dictionary<int, Type> _buffTypes;
+
+        private BuffFactory()
         {
-            Composition.ComposeParts(_buffs);
+            Composition.ComposeParts(this);
+            _buffTypes = _buffs.ToDictionary(k => k.Metadata.BuffId, v => v.Value.GetType());
         }
 
-        public static IBuff Create(int buffID, float value)
+        private static readonly Lazy<BuffFactory> instance = new Lazy<BuffFactory>(() => new BuffFactory());
+        public static BuffFactory Instance
         {
-            return null;
+            get
+            {
+                return instance.Value;
+            }
+        }
+
+        public IBuff CreateBuff(int buffID, float value)
+        {
+            Type t;
+            _buffTypes.TryGetValue(buffID, out t);
+            IBuff buff = Activator.CreateInstance(t) as IBuff;
+            buff.Id = buffID;
+            buff.Value = value;
+            return buff;
         }
     }
 }

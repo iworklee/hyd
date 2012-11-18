@@ -8,11 +8,9 @@ using System.Text;
 
 namespace Action.Buff
 {
-    public interface IBuff
+    public interface BuffMetaData
     {
-        int Id { get; set; }
-        float Value { get; set; }
-        BattleEffect Affect(CombatUnit self, CombatUnit target);
+        int BuffId { get; }
     }
 }
 

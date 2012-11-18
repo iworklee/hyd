@@ -20,6 +20,8 @@ namespace Test
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var path = AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory;
+
             var data = new List<byte>();
             for (int i = 0; i < textBox1.Text.Length; i += 2)
             {

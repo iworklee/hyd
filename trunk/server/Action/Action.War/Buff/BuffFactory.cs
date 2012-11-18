@@ -7,6 +7,7 @@ using System.Text;
 using System.Xml.Linq;
 using Action.ResourceManager;
 using Action.War;
+using System.Diagnostics;
 
 namespace Action.Buff
 {
@@ -36,6 +37,7 @@ namespace Action.Buff
         {
             Type t;
             _buffTypes.TryGetValue(buffID, out t);
+            Debug.Assert(t != null);
             IBuff buff = Activator.CreateInstance(t) as IBuff;
             buff.Id = buffID;
             buff.Value = value;

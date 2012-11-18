@@ -5,7 +5,7 @@
 		<ID>801</ID>
 		<Name>近卫军</Name>
 		<Type>Action.War.CombatUnit</Type>
-		<StrikeRange>5,-1,1</StrikeRange>
+		<StrikeRange>1,0;0,-1;0,1</StrikeRange>
 		<Health>319</Health>
 		<SkillID>0</SkillID>
 		<Charge>0</Charge>
@@ -23,7 +23,7 @@
 		<ID>802</ID>
 		<Name>亲卫队</Name>
 		<Type>Action.War.CombatUnit</Type>
-		<StrikeRange>5</StrikeRange>
+		<StrikeRange>1,0</StrikeRange>
 		<Health>290</Health>
 		<SkillID>0</SkillID>
 		<Charge>0</Charge>
@@ -41,7 +41,7 @@
 		<ID>803</ID>
 		<Name>战弓骑</Name>
 		<Type>Action.War.CombatUnit</Type>
-		<StrikeRange>5,10</StrikeRange>
+		<StrikeRange>1,0;2,0</StrikeRange>
 		<Health>290</Health>
 		<SkillID>0</SkillID>
 		<Charge>0</Charge>
@@ -59,7 +59,7 @@
 		<ID>804</ID>
 		<Name>弓弩手</Name>
 		<Type>Action.War.CombatUnit</Type>
-		<StrikeRange>5,-1,1,10,-2,2</StrikeRange>
+		<StrikeRange>1,0;0,-1;0,1;2,0;0,-2;0,2</StrikeRange>
 		<Health>261</Health>
 		<SkillID>0</SkillID>
 		<Charge>0</Charge>
@@ -77,7 +77,7 @@
 		<ID>805</ID>
 		<Name>霹雳车</Name>
 		<Type>Action.War.CombatUnit</Type>
-		<StrikeRange>5,10,15</StrikeRange>
+		<StrikeRange>1,0;2,0;3,0</StrikeRange>
 		<Health>261</Health>
 		<SkillID>0</SkillID>
 		<Charge>0</Charge>
@@ -95,7 +95,7 @@
 		<ID>806</ID>
 		<Name>谋略家</Name>
 		<Type>Action.War.CombatUnit</Type>
-		<StrikeRange>5,10</StrikeRange>
+		<StrikeRange>1,0;2,0</StrikeRange>
 		<Health>232</Health>
 		<SkillID>0</SkillID>
 		<Charge>0</Charge>
@@ -113,7 +113,7 @@
 		<ID>98</ID>
 		<Name>关羽</Name>
 		<Type>Action.War.CombatTacticUnit</Type>
-		<StrikeRange>5</StrikeRange>
+		<StrikeRange>1,0</StrikeRange>
 		<Health>420</Health>
 		<SkillID>0</SkillID>
 		<Charge>50</Charge>
@@ -131,7 +131,7 @@
 		<ID>225</ID>
 		<Name>司马懿</Name>
 		<Type>Action.War.CombatStrategyUnit</Type>
-		<StrikeRange>5</StrikeRange>
+		<StrikeRange>1,0</StrikeRange>
 		<Health>334</Health>
 		<SkillID>0</SkillID>
 		<Charge>0</Charge>
@@ -149,7 +149,7 @@
 		<ID>245</ID>
 		<Name>周瑜</Name>
 		<Type>Action.War.CombatStrategyUnit</Type>
-		<StrikeRange>5,-1,1,10,-2,2</StrikeRange>
+		<StrikeRange>1,0;0,-1;0,1;2,0;0,-2;0,2</StrikeRange>
 		<Health>328</Health>
 		<SkillID>0</SkillID>
 		<Charge>0</Charge>
@@ -167,7 +167,7 @@
 		<ID>289</ID>
 		<Name>诸葛亮</Name>
 		<Type>Action.War.CombatStrategyUnit</Type>
-		<StrikeRange>5,10</StrikeRange>
+		<StrikeRange>1,0;2,0</StrikeRange>
 		<Health>218</Health>
 		<SkillID>0</SkillID>
 		<Charge>0</Charge>
@@ -185,7 +185,7 @@
 		<ID>343</ID>
 		<Name>曹操</Name>
 		<Type>Action.War.CombatTacticUnit</Type>
-		<StrikeRange>5</StrikeRange>
+		<StrikeRange>1,0</StrikeRange>
 		<Health>376</Health>
 		<SkillID>1</SkillID>
 		<Charge>50</Charge>
@@ -203,7 +203,7 @@
 		<ID>370</ID>
 		<Name>孙策</Name>
 		<Type>Action.War.CombatTacticUnit</Type>
-		<StrikeRange>5,10</StrikeRange>
+		<StrikeRange>1,0;2,0</StrikeRange>
 		<Health>405</Health>
 		<SkillID>0</SkillID>
 		<Charge>50</Charge>
@@ -221,7 +221,7 @@
 		<ID>395</ID>
 		<Name>赵云</Name>
 		<Type>Action.War.CombatTacticUnit</Type>
-		<StrikeRange>5</StrikeRange>
+		<StrikeRange>1,0</StrikeRange>
 		<Health>412</Health>
 		<SkillID>0</SkillID>
 		<Charge>50</Charge>
@@ -239,7 +239,7 @@
 		<ID>424</ID>
 		<Name>貂蝉</Name>
 		<Type>Action.War.CombatStrategyUnit</Type>
-		<StrikeRange>5,10</StrikeRange>
+		<StrikeRange>1,0;2,0</StrikeRange>
 		<Health>129</Health>
 		<SkillID>0</SkillID>
 		<Charge>0</Charge>
@@ -257,7 +257,7 @@
 		<ID>432</ID>
 		<Name>张飞</Name>
 		<Type>Action.War.CombatTacticUnit</Type>
-		<StrikeRange>5</StrikeRange>
+		<StrikeRange>1,0</StrikeRange>
 		<Health>416</Health>
 		<SkillID>0</SkillID>
 		<Charge>50</Charge>
@@ -275,7 +275,7 @@
 		<ID>660</ID>
 		<Name>吕布</Name>
 		<Type>Action.War.CombatTacticUnit</Type>
-		<StrikeRange>5</StrikeRange>
+		<StrikeRange>1,0</StrikeRange>
 		<Health>435</Health>
 		<SkillID>0</SkillID>
 		<Charge>50</Charge>

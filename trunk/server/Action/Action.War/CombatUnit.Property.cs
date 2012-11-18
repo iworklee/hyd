@@ -112,8 +112,7 @@ namespace Action.War
         /// <summary>
         /// 攻击范围
         /// </summary>
-        private IEnumerable<Vector2> _strikeRange = RangeProvider.Melee();
-        public virtual IEnumerable<Vector2> StrikeRange { get { return _strikeRange; } set { _strikeRange = value; } }
+        public IEnumerable<Vector2> StrikeRange { get; set; }
 
         /// <summary>
         /// 技能ID

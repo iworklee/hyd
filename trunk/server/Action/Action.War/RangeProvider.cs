@@ -10,30 +10,14 @@ namespace Action.War
     {
         public static IEnumerable<Vector2> Generate(string range)
         {
-            return range.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(p => int.Parse(p).Int2Pos());
+            return range.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(p =>
+                {
+                    var v = p.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    return new Vector2(int.Parse(v[0]), int.Parse(v[1]));
+                });
         }
 
-        public static IEnumerable<Vector2> None()
-        {
-            return Enumerable.Empty<Vector2>();
-        }
 
-        public static IEnumerable<Vector2> Melee()
-        {
-            yield return new Vector2(1, 0);
-            yield return new Vector2(0, -1);
-            yield return new Vector2(0, 1);
-        }
-
-        public static IEnumerable<Vector2> Archer()
-        {
-            yield return new Vector2(1, 0);
-            yield return new Vector2(2, 0);
-            yield return new Vector2(0, -1);
-            yield return new Vector2(0, 1);
-            yield return new Vector2(0, -2);
-            yield return new Vector2(0, 2);
-        }
     }
 }

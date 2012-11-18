@@ -8,31 +8,10 @@ using System.Text;
 
 namespace Action.Skill
 {
-    public class StrikeThroughSkill 
+    public class TacticSkill : SkillBase
     {
-        public  int Id
-        {
-            get { return 111; }
-        }
-
-        public  IEnumerable<Vector2> Range
-        {
-            get
-            {
-                yield return new Vector2 { X = 1, Y = 0 };
-                yield return new Vector2 { X = 2, Y = 0 };
-                yield return new Vector2 { X = 3, Y = 0 };
-                yield return new Vector2 { X = 4, Y = 0 };
-                yield return new Vector2 { X = 5, Y = 0 };
-            }
-        }
-
-        public  int TargetCount
-        {
-            get { return 5; }
-        }
-
-        public  IEnumerable<BattleEffect> Casting(CombatTacticUnit unit)
+        /*
+        public override IEnumerable<BattleEffect> Casting(CombatTacticUnit unit)
         {
             // 根据攻击范围，找攻击目标
             var targets = Range
@@ -60,9 +39,10 @@ namespace Action.Skill
                 yield return e;
         }
 
-        public  float DamageRatio
+        public override float DamageRatio
         {
             get { return 0.8f; }
         }
+        */
     }
 }

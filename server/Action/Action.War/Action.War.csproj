@@ -68,6 +68,10 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Area.cs" />
+    <Compile Include="Buff\IBuff.cs" />
+    <Compile Include="Buff\BuffFactory.cs" />
+    <Compile Include="Buff\Effect.cs" />
     <Compile Include="Combat.cs" />
     <Compile Include="CombatEnum.cs" />
     <Compile Include="CombatMilitary.cs" />
@@ -80,6 +84,8 @@
     <Compile Include="Skill\SkillFactory.cs" />
     <Compile Include="Skill\StrikeThroughSkill.cs" />
     <Compile Include="Skill\EmbraveSkill.cs" />
+    <Compile Include="Skill\TacticSkill.cs" />
+    <Compile Include="Skill\StrategySkill.cs" />
     <Compile Include="WarModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CombatUnit.Property.cs" />

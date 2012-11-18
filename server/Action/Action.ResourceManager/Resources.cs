@@ -37,8 +37,12 @@ namespace Action.ResourceManager
             LoadSkills();
         }
 
+        private Dictionary<int, XElement> _skills;
+        public Dictionary<int, XElement> Skills { get { return _skills; } }
         private void LoadSkills()
         {
+            var xmlFile = XElement.Load(Path.Combine(_resPath, "Skills.xml"));
+            _skills = xmlFile.Elements().ToDictionary(x => (int)x.Element("ID"));
         }
 
         private Dictionary<int, XElement> _unitType;

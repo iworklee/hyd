@@ -17,16 +17,10 @@ namespace Action.War
         /// </summary>
         public float SkillChance { get; set; }
 
-        //public CombatStrategyUnit(CombatMilitary military)
-        //    : base(military)
-        //{
-        //    _skill = new EmbraveSkill();
-        //}
-
         public override BattleAction SkillStrike()
         {
             // 可以释放技能
-            var rng = new Random();
+            var rng = new Random(); // TODO 统一随机函数生成
             if (rng.NextDouble() > SkillChance)
                 return null;
 

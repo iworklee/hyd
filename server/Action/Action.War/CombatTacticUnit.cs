@@ -16,12 +16,6 @@ namespace Action.War
         const int MAX_CHARGE = 100;
         const int CHARGE_PLUS = 25;
 
-        //public CombatTacticUnit(CombatMilitary military)
-        //    : base(military)
-        //{
-        //    _skill = new StrikeThroughSkill();
-        //}
-
         public override BattleAction SkillStrike()
         {
             // 可以释放技能
@@ -40,14 +34,6 @@ namespace Action.War
             ba.Effects.AddRange(effects);
             return ba;
         }
-
-        //public override BattleEffect Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType, float damageRatio)
-        //{
-        //    if (effectType != BattleEffectType.Dodge)
-        //        Charge += CHARGE_PLUS;
-
-        //    return base.Attacking(target, attackType, effectType, damageRatio);
-        //}
 
         protected override IEnumerable<BattleEffect> Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
         {

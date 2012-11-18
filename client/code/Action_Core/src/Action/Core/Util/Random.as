@@ -13,10 +13,10 @@ package Action.Core.Util
 		
 		public function next():int
 		{
-			return generate(_min, _max);
+			return range(_min, _max);
 		}
 		
-		public static function generate(min:int, max:int):int
+		public static function range(min:int, max:int):int
 		{
 			return Math.round(Math.random() * (max - min)) + min;
 		}
@@ -25,7 +25,7 @@ package Action.Core.Util
 		{
 			if(array == null || array.length == 0)
 				return null;
-			return array[generate(0, array.length - 1)];
+			return array[range(0, array.length - 1)];
 		}
 	}
 }

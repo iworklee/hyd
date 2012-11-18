@@ -5,34 +5,59 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Action.Buff;
 
 namespace Action.Skill
 {
     public interface ISkill
     {
-        int Id { get; }
-        IEnumerable<Vector2> Range { get; }
-        int TargetCount { get; }
-        IEnumerable<BattleEffect> Cast(CombatUnit unit);
-        float DamageRatio { get; }
+        int Id { get; set; }
+        Area Range { get; set; }
+        IEnumerable<Effect> Effects { get; set; }
+        IEnumerable<BattleEffect> Cast(CombatUnit self);
     }
 
-    public abstract class SkillBase<T> : ISkill where T : CombatUnit
+    public abstract class SkillBase : ISkill
     {
-        public abstract IEnumerable<BattleEffect> Casting(T unit);
+        public int Id { get; set; }
+        public Area Range { get; set; }
+        public IEnumerable<Effect> Effects { get; set; }
 
-        public IEnumerable<BattleEffect> Cast(CombatUnit unit)
+        //protected abstract bool Ready(CombatUnit self);
+        //protected abstract BattleEffectType GetDamageType();
+        //private AttackType _attackType;
+        //protected SkillBase(AttackType type)
+        //{
+        //    _attackType = type;
+        //}
+
+        public IEnumerable<BattleEffect> Cast(CombatUnit self)
         {
-            return Casting((T)unit);
+            //if (!Ready(self))
+            //    return null;
+
+            var targets = Range.FindBy(self);
+            if (!targets.Any())
+                return null;
+
+            var target = targets.First();
+
+            return Effects.SelectMany(
+                effect => effect.Range.FindBy(target).SelectMany(
+                    unit => effect.Buffs.Select(
+                        buff => buff.Affect(self, unit))));
+
+            //foreach (var effect in Effects)
+            //{
+            //    foreach (var unit in effect.Range.FindBy(target))
+            //    {
+            //        foreach (var buff in effect.Buffs)
+            //        {
+            //            yield return buff.Affect(unit);
+            //        }
+            //    }
+            //}
         }
-
-        public abstract int Id { get; }
-
-        public abstract IEnumerable<Vector2> Range { get; }
-
-        public abstract int TargetCount { get; }
-
-        public abstract float DamageRatio { get; }
     }
 }
 

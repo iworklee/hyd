@@ -4,21 +4,18 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
+using Action.ResourceManager;
+using Action.War;
+using Action.Buff;
 
 namespace Action.Skill
 {
     public class SkillFactory
     {
-        [ImportMany]
-        private ISkill[] _skills = null;
-        public ISkill[] AllSkill
-        {
-            get { return _skills; }
-        }
-
         private SkillFactory()
         {
-            Composition.ComposeParts(this);
+            //Composition.ComposeParts(this);
         }
 
         private static readonly Lazy<SkillFactory> instance = new Lazy<SkillFactory>(() => new SkillFactory());
@@ -32,6 +29,27 @@ namespace Action.Skill
 
         public ISkill GetSkill(int skillID)
         {
+            XElement xml;
+            if (!Resources.Instance.Skills.TryGetValue(skillID, out xml))
+            {
+                xml = new XElement("Skill",
+                        new XElement("ID", 0),
+                        new XElement("Type", "Action.Skill.TacticSkill")
+                        );
+            }
+            var t = Type.GetType((string)xml.Element("Type"));
+            ISkill skill = Activator.CreateInstance(t) as ISkill;
+            skill.Range = new Area(xml.Element("Area"));
+            skill.Effects = xml.Element("Effects").Elements()
+                .Select(x => new Effect
+                {
+                    Range = new Area(x.Element("Area")),
+                    Buffs = x.Element("Buffs").Elements()
+                    .Select(b => BuffFactory.Create((int)b.Element("ID"), (float)b.Element("Value")))
+                });
+            return skill;
+
+            /*
             // 1、2、3战法，101、106策略
             ISkill skill;
             switch (skillID)
@@ -43,7 +61,7 @@ namespace Action.Skill
                     skill = new StrikeThroughSkill();
                     break;
             }
-            return skill;
+             */
         }
     }
 }

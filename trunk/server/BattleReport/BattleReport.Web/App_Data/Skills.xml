@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2010 rel. 3 (http://www.altova.com) by MESMERiZE (MSM) -->
+<Skills>
+	<Skill>
+		<ID>1</ID>
+		<Name>天下归心</Name>
+		<Type>Action.Skill.TacticSkill</Type>
+		<Area>
+			<Enemy>false</Enemy>
+			<Range>0</Range>
+			<Count>1</Count>
+		</Area>
+		<Effects>
+			<Effect>
+				<Area>
+					<Enemy>false</Enemy>
+					<Range>4,5,6,-1,1,-4,-5,-6</Range>
+					<Count>8</Count>
+				</Area>
+				<Buffs>
+					<Buff>
+						<ID>1</ID>
+						<Value>120</Value>
+					</Buff>
+					<Buff>
+						<ID>2</ID>
+						<Value>100</Value>
+					</Buff>
+				</Buffs>
+			</Effect>
+			<Effect>
+				<Area>
+					<Enemy>false</Enemy>
+					<Range>0</Range>
+					<Count>1</Count>
+				</Area>
+				<Buffs>
+					<Buff>
+						<ID>1</ID>
+						<Value>1</Value>
+					</Buff>
+					<Buff>
+						<ID>2</ID>
+						<Value>1</Value>
+					</Buff>
+				</Buffs>
+			</Effect>
+		</Effects>
+	</Skill>
+</Skills>

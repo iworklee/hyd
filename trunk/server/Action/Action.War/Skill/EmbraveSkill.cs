@@ -8,14 +8,14 @@ using System.Text;
 
 namespace Action.Skill
 {
-    public class EmbraveSkill : SkillBase<CombatStrategyUnit>
+    public class EmbraveSkill 
     {
-        public override int Id
+        public  int Id
         {
             get { return 101; }
         }
 
-        public override IEnumerable<Vector2> Range
+        public  IEnumerable<Vector2> Range
         {
             get
             {
@@ -30,12 +30,12 @@ namespace Action.Skill
             }
         }
 
-        public override int TargetCount
+        public  int TargetCount
         {
             get { return 8; }
         }
 
-        public override IEnumerable<BattleEffect> Casting(CombatStrategyUnit unit)
+        public  IEnumerable<BattleEffect> Casting(CombatStrategyUnit unit)
         {
             // 根据攻击范围，找攻击目标
             var targets = Range
@@ -50,7 +50,7 @@ namespace Action.Skill
             }
         }
 
-        public override float DamageRatio
+        public  float DamageRatio
         {
             get { return 0.8f; }
         }

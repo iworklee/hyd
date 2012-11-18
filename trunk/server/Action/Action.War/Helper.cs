@@ -20,7 +20,7 @@ namespace Action.War
             return new Vector2(pos / 5, pos % 5);
         }
 
-        private static Random rng = new Random();
+        private static Random rng = new Random();   // TODO 统一随机函数生成
         public static BattleEffectType Test(float criticalChance, float blockChance, float dodgeChance)
         {
             var n = rng.NextDouble();

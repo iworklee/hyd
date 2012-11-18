@@ -29,6 +29,8 @@
     <classEntry path="Action.Core.Util.JsonObject"/>
     <classEntry path="Action.Core.Util.Base64_2"/>
     <classEntry path="Action.Core.Util.Base16"/>
+    <classEntry path="Action.Core.UI.SparkSkin"/>
+    <classEntry path="Action.Core.Page.ILoadingPage"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

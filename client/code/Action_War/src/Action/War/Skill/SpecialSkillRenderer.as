@@ -61,17 +61,18 @@ package Action.War.Skill
 		
 			if(index < 6)
 			{
-				graphics.drawBitmap2(attacker.getAttackBitmap(0), attacker.tempPoint);
+				graphics.drawBitmap(attacker.getAttackBitmap(0), attacker.tempPoint, null, -8, -8);
 				graphics.drawText(_skill.name, BattleHelper.getSkillNamePoint(), 0xffff00, 64, true, "华文楷体");
-				graphics.drawBitmap(attacker.hero.getFaceBitmap(), BattleHelper.getHeadBitmapPoint(attacker.SID), graphics.getEffectLayer());
+				graphics.drawBitmap(attacker.hero.getFaceBitmap(), BattleHelper.getHeadBitmapPoint(attacker.SID),
+					graphics.getEffectLayer(), 0, 0, 2);
 			}
 			else
 			{
 				index -= 6;
 				if(_type % 2 == 1)
-					graphics.drawBitmap2(attacker.getAttackBitmap(index < 4 ? index : 3), attacker.tempPoint);
+					graphics.drawBitmap(attacker.getAttackBitmap(index < 4 ? index : 3), attacker.tempPoint, null, -8, -8);
 				else
-					graphics.drawBitmap2(attacker.getAttackBitmap(0), attacker.tempPoint);
+					graphics.drawBitmap(attacker.getAttackBitmap(0), attacker.tempPoint, null, -8, -8);
 				if(index >= 3)
 				{
 					for each(var effect:BattleEffect in action.effects)
@@ -137,7 +138,7 @@ package Action.War.Skill
 				{
 					var bum:BattleUnitManager = frameRenderer.battleReportManager.getBUM(effect.unitSID);
 					if(bum != null)
-						graphics.drawBitmap2(effectBmp, bum.tempPoint, offsetPoint.x, offsetPoint.y, graphics.getEffectLayer());				
+						graphics.drawBitmap(effectBmp, bum.tempPoint, graphics.getEffectLayer(), offsetPoint.x, offsetPoint.y);				
 				}
 				//GamePlugins.console.writeLine(index);
 				//GamePlugins.console.drawBitmap(effectBmp);

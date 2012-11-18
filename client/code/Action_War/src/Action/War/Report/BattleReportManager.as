@@ -120,15 +120,13 @@ package Action.War.Report
 			//loading BattleUnitResource and HeroResource
 			for each(var bum:BattleUnitManager in _buManagers)
 			{
-				if(bum.isWall)
-					continue;
-				if(BattleUnitResource.getInstance(bum.hero.id) == null)
+				if(!bum.isWall && BattleUnitResource.getInstance(bum.hero.id) == null)
 				{
 					BattleUnitResource.createInstance(bum.hero.unit);
 					for(var i:int = 0; i<3; i++)
 						acts.push(new LoadBattleUnitResourceActivity(bum.hero.unit, i));
 				}
-				if(bum.isHero && HeroFaceResource.getInstance(bum.hero.face) == null)
+				if(HeroFaceResource.getInstance(bum.hero.face) == null)
 				{
 					HeroFaceResource.createInstance(bum.hero.face);
 					acts.push(new LoadHeroFaceResourceActivity(bum.hero.face));

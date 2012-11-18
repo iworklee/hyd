@@ -21,7 +21,7 @@ package Action.War
 		
 		public static function getHeadBitmapPoint(sid:int):Point
 		{
-			return sid < BattleDefs.SPLIT_SID ? new Point(50, -50) : new Point(586, -50);
+			return sid < BattleDefs.SPLIT_SID ? new Point(50, -50) : new Point(522, -50);
 		}
 		
 		public static function getPaintPoint(pos:int):Point

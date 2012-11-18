@@ -3,6 +3,8 @@ package Action.Core.Flow
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.Timer;
+	
+	import mx.messaging.AbstractConsumer;
 
 	public class Workflow extends EventDispatcher
 	{
@@ -34,6 +36,16 @@ package Action.Core.Flow
 				act.workflow = this;
 		}
 		
+		public function get currentIndex():int
+		{
+			return _index;
+		}
+		
+		public function get totalCount():int
+		{
+			return _activities.length;
+		}
+		
 		public function goon():void
 		{
 			var preAct:IActivity = getPreviousActivity();
@@ -44,6 +56,7 @@ package Action.Core.Flow
 			{
 				_index++;
 				curAct.run();
+				this.dispatchEvent(new Event("Step"));
 			}
 			else if(_index >= _activities.length)
 			{

@@ -66,19 +66,15 @@ package Action.Display.Drawing
 			return point.x >=0 && point.x <= _canvas.width - 50 && point.y >= 0 && point.y <= _canvas.height - 50;
 		}
 		
-		public function drawBitmap(bitmap:BitmapData, point:Point, layer:BorderContainer=null):void
+		public function drawBitmap(bitmap:BitmapData, point:Point, layer:BorderContainer=null, fx:int=0, fy:int=0, scale:Number=1):void
 		{
 			if(layer == null)
 				layer = _canvas;
+			point = new Point(point.x + fx, point.y + fy);
 			var rect:Rectangle = new Rectangle(point.x, point.y, bitmap.width, bitmap.height);
-			layer.graphics.beginBitmapFill(bitmap, new Matrix(1,0,0,1,rect.x, rect.y), false);
-			layer.graphics.drawRect(rect.x, rect.y, rect.width, rect.height);
+			layer.graphics.beginBitmapFill(bitmap, new Matrix(scale,0,0,scale,rect.x, rect.y), false);
+			layer.graphics.drawRect(rect.x, rect.y, rect.width * scale, rect.height * scale);
 			layer.graphics.endFill();
-		}
-		
-		public function drawBitmap2(bitmap:BitmapData, point:Point, fx:int=-8, fy:int=-8, layer:BorderContainer=null):void
-		{
-			drawBitmap(bitmap, new Point(point.x + fx, point.y + fy), layer);
 		}
 		
 		public function drawText(text:String, point:Point, color:int=0xff0000, size:int=10, bold:Boolean=false, font:String="Arial"):void

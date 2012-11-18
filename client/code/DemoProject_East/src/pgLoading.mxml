@@ -1,26 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
-				   xmlns:s="library://ns.adobe.com/flex/spark" implements="Action.Core.Page.IGamePage"
+				   xmlns:s="library://ns.adobe.com/flex/spark" implements="Action.Core.Page.ILoadingPage"
 				   xmlns:mx="library://ns.adobe.com/flex/mx" width="760" height="600"
-				   backgroundImage="@Embed(source='assets/loading.jpg')">
+				   backgroundColor="#000000">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			private var _timer:Timer;
+			private var _tips:Array = ["点击部队可查看详细信息", "战法武将士气达到100可发动战法", "策略武将有一定概率施放策略"];
+			private var _index:int = 0;
+			
 			public function onLoad():void
 			{
-				
+				if(_timer == null)
+				{
+					_timer = new Timer(2000);
+					_timer.addEventListener(TimerEvent.TIMER, onTick);
+				}
+				_timer.start();
+				onTick(null);
+			}
+			
+			private function onTick(e:TimerEvent):void
+			{
+				_lblTip.text = _tips[_index];
+				_lblTip.x = 400 - _lblTip.text.length * 10;
+				if(_index >= _tips.length - 1)
+					_index = 0;
+				else
+					_index ++;
 			}
 			
 			public function onUnload():void
 			{
-				
+				if(_timer != null)
+					_timer.stop();
+			}
+			
+			public function setProgress(value:int, total:int):void
+			{
+				_progressBar.setProgress(value, total);
+				_progressBar.label = value + " / " + total;
 			}
 		]]>
 	</fx:Script>
-	<s:Label x="150" y="450" color="#ffff00" fontFamily="微软雅黑" fontSize="48" fontWeight="bold"
-			 text="正在加载，请稍侯……">
+	<s:BorderContainer x="0" y="0" width="760" height="500" backgroundImage="@Embed(source='assets/loading.jpg')">
 		
-	</s:Label>
+	</s:BorderContainer>
+	<s:Label x="220" y="150" color="#ffff00" fontFamily="华文行楷" fontSize="72" fontWeight="bold" text="王 者 天 下" />
+	<s:Label x="300" y="250" color="#00ff00" fontFamily="微软雅黑" fontSize="28" fontWeight="bold" text="Action工作室" />
+	<mx:ProgressBar id="_progressBar" x="20" y="520" width="720" height="30" label="120 / 254"
+					chromeColor="#008844" color="#ffffbb" labelPlacement="center"
+					maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
+	<s:Label id="_lblTip" x="300" y="560" color="#ffff00" fontFamily="微软雅黑" fontSize="18" text="" />
 </s:BorderContainer>

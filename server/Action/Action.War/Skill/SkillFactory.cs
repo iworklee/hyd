@@ -39,6 +39,7 @@ namespace Action.Skill
             }
             var t = Type.GetType((string)xml.Element("Type"));
             ISkill skill = Activator.CreateInstance(t) as ISkill;
+            skill.Id = skillID;
             skill.Range = new Area(xml.Element("Area"));
             skill.Effects = xml.Element("Effects").Elements()
                 .Select(x => new Effect

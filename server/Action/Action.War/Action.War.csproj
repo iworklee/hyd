@@ -74,6 +74,8 @@
     <Compile Include="Buff\BuffFactory.cs" />
     <Compile Include="Buff\HealBuff.cs" />
     <Compile Include="Buff\BuffMetaData.cs" />
+    <Compile Include="Buff\ExciteBuff.cs" />
+    <Compile Include="Buff\ResetChargeBuff.cs" />
     <Compile Include="Skill\Effect.cs" />
     <Compile Include="Combat.cs" />
     <Compile Include="CombatEnum.cs" />

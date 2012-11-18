@@ -45,7 +45,8 @@ namespace Action.Skill
             return Effects.SelectMany(
                 effect => effect.Range.FindBy(target).SelectMany(
                     unit => effect.Buffs.Select(
-                        buff => buff.Affect(self, unit))));
+                        buff => buff.Affect(self, unit))))
+                        .Where(effect => effect != null);
 
             //foreach (var effect in Effects)
             //{

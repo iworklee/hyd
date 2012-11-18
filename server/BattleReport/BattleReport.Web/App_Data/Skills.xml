@@ -7,23 +7,23 @@
 		<Type>Action.Skill.TacticSkill</Type>
 		<Area>
 			<Enemy>false</Enemy>
-			<Range>0</Range>
+			<Range>0,0</Range>
 			<Count>1</Count>
 		</Area>
 		<Effects>
 			<Effect>
 				<Area>
 					<Enemy>false</Enemy>
-					<Range>4,5,6,-1,1,-4,-5,-6</Range>
+					<Range>1,0;1,-1;1,1;0,-1;0,1;-1,0;-1,-1;-1,1</Range>
 					<Count>8</Count>
 				</Area>
 				<Buffs>
 					<Buff>
-						<ID>1</ID>
+						<ID>11</ID>
 						<Value>120</Value>
 					</Buff>
 					<Buff>
-						<ID>2</ID>
+						<ID>12</ID>
 						<Value>100</Value>
 					</Buff>
 				</Buffs>
@@ -31,17 +31,13 @@
 			<Effect>
 				<Area>
 					<Enemy>false</Enemy>
-					<Range>0</Range>
+					<Range>0,0</Range>
 					<Count>1</Count>
 				</Area>
 				<Buffs>
 					<Buff>
 						<ID>1</ID>
-						<Value>1</Value>
-					</Buff>
-					<Buff>
-						<ID>2</ID>
-						<Value>1</Value>
+						<Value>0</Value>
 					</Buff>
 				</Buffs>
 			</Effect>

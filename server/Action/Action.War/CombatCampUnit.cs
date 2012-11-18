@@ -14,16 +14,16 @@ namespace Action.War
     {
         //public CombatCampUnit(CombatMilitary military) : base(military) { }
 
-        public override IEnumerable<Vector2> StrikeRange
-        {
-            get
-            {
-                return Enumerable.Empty<Vector2>();
-            }
-            set
-            {
-            }
-        }
+        //public override IEnumerable<Vector2> StrikeRange
+        //{
+        //    get
+        //    {
+        //        return Enumerable.Empty<Vector2>();
+        //    }
+        //    set
+        //    {
+        //    }
+        //}
 
         public override BattleAction SkillStrike()
         {

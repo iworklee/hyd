@@ -15,6 +15,7 @@
 			import Action.Core.Net.GameClient;
 			import Action.Core.Page.IGameDialog;
 			import Action.Core.Page.IGamePage;
+			import Action.Core.Page.ILoadingPage;
 			import Action.Core.Util.Base64;
 			import Action.Model.BattleReport;
 			import Action.War.BattleReportProvider;
@@ -29,14 +30,14 @@
 			import mx.events.FlexEvent;
 			
 			private var _currentPage:IGamePage;
-			private var _loadingPage:IGamePage = new pgLoading();
+			private var _loadingPage:ILoadingPage = new pgLoading();
 			
 			public function get currentPage():IGamePage
 			{
 				return _currentPage;
 			}
 			
-			public function get loadingPage():IGamePage
+			public function get loadingPage():ILoadingPage
 			{
 				return _loadingPage;
 			}

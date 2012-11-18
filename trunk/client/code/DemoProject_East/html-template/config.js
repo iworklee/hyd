@@ -12,11 +12,11 @@ var heroFactory = {
 		{id:343, name:"曹操", skill:1, face:1, body:1, unit:1},
 		{id:432, name:"张飞", skill:5, face:5, body:5, unit:5},
 		{id:660, name:"吕布", skill:3, face:3, body:3, unit:3},
-		{id:801, name:"步兵", skill:0, face:101, body:101, unit:101},
-		{id:802, name:"骑兵", skill:0, face:102, body:102, unit:102},
-		{id:803, name:"骑弓", skill:0, face:103, body:103, unit:103},
-		{id:804, name:"弓兵", skill:0, face:104, body:104, unit:104},
-		{id:805, name:"兵器", skill:0, face:105, body:105, unit:105}
+		{id:801, name:"步兵", skill:0, face:100, body:101, unit:101},
+		{id:802, name:"骑兵", skill:0, face:100, body:102, unit:102},
+		{id:803, name:"骑弓", skill:0, face:100, body:103, unit:103},
+		{id:804, name:"弓兵", skill:0, face:100, body:104, unit:104},
+		{id:805, name:"兵器", skill:0, face:100, body:105, unit:105}
 	],
 	_test:{name:"cctv"},
 	getHeros : function() { return this._heros; }

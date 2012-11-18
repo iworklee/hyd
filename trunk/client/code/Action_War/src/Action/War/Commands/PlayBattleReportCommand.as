@@ -7,17 +7,16 @@ package Action.War.Commands
 	import Action.Core.Page.IGameFrame;
 	import Action.Core.Serial.IGameDataSerializer;
 	import Action.Core.Serial.MessageSerializer;
+	import Action.Core.Util.NumberWrapper;
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Model.BattleReport;
 	import Action.Model.BattleUnit;
-	import Action.Resource.Flow.LoadImageResourceActivity;
 	import Action.Resource.CommonResource;
+	import Action.Resource.Flow.LoadImageResourceActivity;
 	import Action.War.Report.BattleReportManager;
 	import Action.War.Report.BattleUnitManager;
 	import Action.War.UI.pgBattle;
 	import Action.War.WarModule;
-	
-	import Action.Core.Util.NumberWrapper;
 	
 	import flash.events.Event;
 	
@@ -55,9 +54,22 @@ package Action.War.Commands
 			
 			//加载资源
 			var workflow:Workflow = Workflow.create(loadings);
+			workflow.addEventListener("Step", workflowSteped(client, workflow));
 			workflow.addEventListener(Event.COMPLETE, workflowFinished(client, reportManager));
 			workflow.goon();
-		}	
+		}		
+		
+		private function workflowSteped(client:GameClient, workflow:Workflow):Function{
+			var func:Function=function(e:Event):void{
+				onWorkflowSteped(client, workflow);
+			}
+			return func;
+		}
+		
+		private function onWorkflowSteped(client:GameClient, workflow:Workflow):void
+		{
+			client.frame.loadingPage.setProgress(workflow.currentIndex, workflow.totalCount);
+		}
 		
 		private function workflowFinished(client:GameClient, reportManager:BattleReportManager):Function{
 			var func:Function=function(e:Event):void{

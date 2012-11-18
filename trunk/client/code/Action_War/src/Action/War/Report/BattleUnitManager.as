@@ -66,11 +66,6 @@ package Action.War.Report
 			return _hero.id == 0;
 		}
 		
-		public function get isHero():Boolean
-		{
-			return  _hero.id > 0 && _hero.id < 800;
-		}
-		
 		public function get isDead():Boolean
 		{
 			return HP <= 0;

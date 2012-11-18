@@ -151,6 +151,7 @@
 				if(bum != null)
 				{
 					var skill:BattleSkill = BattleConfigFactory.getSkill(bum.hero.skill);
+					_imgFace.source = bum.hero.getFaceBitmap();
 					_lblName.text = bum.hero.name;
 					_lblSkill.text = skill != null ? skill.name : "";
 					
@@ -261,14 +262,15 @@
 	<s:Button id="_btnPlay" x="100" y="560" label="暂停" click="_btnPlay_clickHandler(event)"/>
 	<s:Button id="_btnSpeed" x="180" y="560" label="加速" click="_btnSpeed_clickHandler(event)"/>
 	<s:Button id="_btnGrid" x="260" y="560" label="网格" click="_btnGrid_clickHandler(event)"/>
-	<s:BorderContainer id="_bcUnitHidden" width="100" height="90" backgroundColor="#557788" backgroundAlpha="1" visible="false">
-		<s:Label id="_lblName" x="5" y="5" color="#ffff00" text="关羽" fontSize="15" />
-		<mx:ProgressBar id="_pgbHP" x="5" y="25" width="90" height="15" label="120 / 254"
+	<s:BorderContainer id="_bcUnitHidden" width="80" height="180" backgroundColor="#557788" backgroundAlpha="1" visible="false">
+		<s:Image id="_imgFace" x="5" y="5"/>
+		<s:Label id="_lblName" x="5" y="95" color="#ffff00" text="关羽" fontSize="15" />
+		<mx:ProgressBar id="_pgbHP" x="5" y="115" width="70" height="15" label="120 / 254"
 						chromeColor="#ff0000" color="#ffff00" labelPlacement="center"
-						maximum="400" minimum="0" mode="manual" trackSkin="Action.War.UI.SparkSkin"/>
-		<mx:ProgressBar id="_pgbMP" x="5" y="45" width="90" height="15" label="50 / 100"
+						maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
+		<mx:ProgressBar id="_pgbMP" x="5" y="135" width="70" height="15" label="50 / 100"
 						chromeColor="0x0000ff" color="#ffff00" labelPlacement="center"
-						maximum="400" minimum="0" mode="manual" trackSkin="Action.War.UI.SparkSkin"/>
-		<s:Label id="_lblSkill" x="5" y="65" color="#00ff00" text="真武圣斩" fontSize="15" />
+						maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
+		<s:Label id="_lblSkill" x="5" y="155" color="#00ff00" text="真武圣斩" fontSize="15" />
 	</s:BorderContainer>
 </s:BorderContainer>

@@ -36,7 +36,7 @@ package Action.War.Skill
 			
 			var exceptions:Array = new Array();			
 			exceptions[attacker.SID] = attacker;
-			graphics.drawBitmap2(attacker.getAttackBitmap(index < 4 ? index : 3), attacker.tempPoint);
+			graphics.drawBitmap(attacker.getAttackBitmap(index < 4 ? index : 3), attacker.tempPoint, null, -8, -8);
 			if(index >= 3)
 			{
 				for each(var effect:BattleEffect in action.effects)

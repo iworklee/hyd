@@ -280,9 +280,9 @@ package Action.War
 		{
 			var effect:BattleEffect = new BattleEffect();
 			effect.unitSID = unitSID;
-			effect.type = type < 0 ? Random.generate(0, 3) : type;
+			effect.type = type < 0 ? Random.range(0, 3) : type;
 			var num:Number = effect.type < 4 ? effect.type / 2 : -1;
-			effect.plusHP = -int(Random.generate(hurt, hurt * 1.2) * num);
+			effect.plusHP = -int(Random.range(hurt, hurt * 1.2) * num);
 			effect.plusMP = 5;
 			effect.buffId = 0;
 			action.effects.push(effect);

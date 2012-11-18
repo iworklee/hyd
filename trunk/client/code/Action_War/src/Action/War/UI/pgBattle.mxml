@@ -262,15 +262,16 @@
 	<s:Button id="_btnPlay" x="100" y="560" label="暂停" click="_btnPlay_clickHandler(event)"/>
 	<s:Button id="_btnSpeed" x="180" y="560" label="加速" click="_btnSpeed_clickHandler(event)"/>
 	<s:Button id="_btnGrid" x="260" y="560" label="网格" click="_btnGrid_clickHandler(event)"/>
-	<s:BorderContainer id="_bcUnitHidden" width="80" height="180" backgroundColor="#557788" backgroundAlpha="1" visible="false">
+	<s:BorderContainer id="_bcUnitHidden" width="80" height="180" backgroundColor="#334466" backgroundAlpha="1" visible="false">
 		<s:Image id="_imgFace" x="5" y="5"/>
-		<s:Label id="_lblName" x="5" y="95" color="#ffff00" text="关羽" fontSize="15" />
+		<s:Label id="_lblName" x="5" y="95" color="#ffffff" text="关羽" fontSize="12" />
+		<s:Label id="_lblLevel" x="55" y="96" color="#ffffff" text="1级" fontSize="12" />
 		<mx:ProgressBar id="_pgbHP" x="5" y="115" width="70" height="15" label="120 / 254"
 						chromeColor="#ff0000" color="#ffff00" labelPlacement="center"
 						maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
 		<mx:ProgressBar id="_pgbMP" x="5" y="135" width="70" height="15" label="50 / 100"
 						chromeColor="0x0000ff" color="#ffff00" labelPlacement="center"
 						maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
-		<s:Label id="_lblSkill" x="5" y="155" color="#00ff00" text="真武圣斩" fontSize="15" />
+		<s:Label id="_lblSkill" x="5" y="155" color="#ffffff" text="真武圣斩" fontSize="12" />
 	</s:BorderContainer>
 </s:BorderContainer>

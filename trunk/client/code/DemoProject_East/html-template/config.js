@@ -1,6 +1,6 @@
 ﻿var config = {
-	resRoot : "http://hyd.googlecode.com/svn/trunk/client/raw/Action/",
-	policy : "http://res.action.yuuhhe.com/crossdomain.xml",
+	resRoot : "http://localhost/raw/Action/",
+	policy : "http://localhost/raw/crossdomain.xml",
 	getValue : function(name) { return config[name]; }
 };
 

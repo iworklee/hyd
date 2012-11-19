@@ -41,12 +41,11 @@ namespace Action.Skill
                 return null;
 
             var target = targets.First();
-
+            var direction = target.Position - self.Position;
             return Effects.SelectMany(
-                effect => effect.Range.FindBy(target).SelectMany(
-                    unit => effect.Buffs.Select(
-                        buff => buff.Affect(self, unit))))
-                        .Where(effect => effect != null);
+                effect => effect.Range.FindBy(self, direction).SelectMany(
+                    unit => effect.Buffs.SelectMany(
+                        buff => buff.Affect(self, unit))));
 
             //foreach (var effect in Effects)
             //{

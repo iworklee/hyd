@@ -23,6 +23,7 @@
 			import Action.Model.BattleUnit;
 			import Action.Resource.CommonResource;
 			import Action.Resource.Flow.LoadImageResourceActivity;
+			import Action.War.BattleDefs;
 			import Action.War.BattleHelper;
 			import Action.War.Config.BattleConfigFactory;
 			import Action.War.Config.BattleHero;
@@ -145,7 +146,7 @@
 				return _bcCanvas;
 			}
 			
-			private function showUnitInfo(pos:int, x:int, y:int):void
+			private function showUnitInfo(pos:int):void
 			{
 				var bum:BattleUnitManager = battleReportManager.getBUMbyPos(pos);
 				if(bum != null)
@@ -160,10 +161,13 @@
 					_pgbMP.setProgress(bum.MP, bum.maxMP);
 					_pgbMP.label = bum.MP + " / " + bum.maxMP;
 					
-					_bcUnitHidden.x = x;
-					_bcUnitHidden.y = y;
+					var point:Point = BattleHelper.getHeroDescPoint(bum.SID);
+					_bcUnitHidden.x = point.x;
+					_bcUnitHidden.y = point.y;
 					_bcUnitHidden.visible = true;
 				}
+				else
+					hideUnitInfo();
 			}			
 			
 			private function hideUnitInfo():void
@@ -217,19 +221,17 @@
 				_bcGrid.visible = !_bcGrid.visible;
 			}
 			
-			protected function _bcCanvas_clickHandler(event:MouseEvent):void
+			protected function _bcCanvas_mouseMoveHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
 				var point:Point = new Point(event.localX, event.localY);
 				var pos:int = BattleHelper.getBattlePos(point);
 				point = BattleHelper.getPaintPoint(pos);
-				showUnitInfo(pos, point.x, point.y + 150);
-				//Alert.show(point.x + "," + point.y + " => " + pos.toString());
+				showUnitInfo(pos);
 			}
 			
-			protected function _bcCanvas_mouseMoveHandler(event:MouseEvent):void
+			protected function _bcCanvas_mouseOutHandler(event:MouseEvent):void
 			{
-				// TODO Auto-generated method stub
 				hideUnitInfo();
 			}
 			
@@ -241,13 +243,13 @@
 			 fontWeight="bold" text="准备战斗" />
 	<s:Label id="_lblPlayer2" x="550" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28"
 			 fontWeight="bold" text="万寿落雪"  buttonMode="true"/>
-	<s:BorderContainer id="_bcMain" y="100" width="100%" height="400" useHandCursor="false">		
+	<s:BorderContainer id="_bcMain" y="100" width="100%" height="400">		
 		<s:BorderContainer id="_bcGrid" width="700" height="250" borderColor="#0000ff" borderWeight="0"
 						   backgroundAlpha="0" x="30" y="75" visible="false">			
 		</s:BorderContainer>
 		<s:BorderContainer id="_bcCanvas" width="700" height="250" x="30" y="75" borderVisible="false"
-						   backgroundAlpha="0" buttonMode="true" click="_bcCanvas_clickHandler(event)"
-						   mouseMove="_bcCanvas_mouseMoveHandler(event)">
+						   backgroundAlpha="0" mouseMove="_bcCanvas_mouseMoveHandler(event)"
+						   mouseOut="_bcCanvas_mouseOutHandler(event)">
 			<s:BorderContainer id="_bcLayerEffect" width="100%" height="100%" backgroundAlpha="0" borderVisible="false">
 				<s:BorderContainer id="_bcLayerText" width="100%" height="100%" backgroundAlpha="0" borderVisible="false">
 					
@@ -262,16 +264,16 @@
 	<s:Button id="_btnPlay" x="100" y="560" label="暂停" click="_btnPlay_clickHandler(event)"/>
 	<s:Button id="_btnSpeed" x="180" y="560" label="加速" click="_btnSpeed_clickHandler(event)"/>
 	<s:Button id="_btnGrid" x="260" y="560" label="网格" click="_btnGrid_clickHandler(event)"/>
-	<s:BorderContainer id="_bcUnitHidden" width="80" height="180" backgroundColor="#334466" backgroundAlpha="1" visible="false">
+	<s:BorderContainer id="_bcUnitHidden" width="150" height="90" backgroundColor="#334466" backgroundAlpha="1" visible="false">
 		<s:Image id="_imgFace" x="5" y="5"/>
-		<s:Label id="_lblName" x="5" y="95" color="#ffffff" text="关羽" fontSize="12" />
-		<s:Label id="_lblLevel" x="55" y="96" color="#ffffff" text="1级" fontSize="12" />
-		<mx:ProgressBar id="_pgbHP" x="5" y="115" width="70" height="15" label="120 / 254"
+		<s:Label id="_lblName" x="75" y="5" color="#ffffff" text="关羽" fontSize="12" />
+		<s:Label id="_lblLevel" x="125" y="6" color="#ffffff" text="1级" fontSize="12" />
+		<mx:ProgressBar id="_pgbHP" x="75" y="25" width="70" height="15" label="120 / 254"
 						chromeColor="#ff0000" color="#ffff00" labelPlacement="center"
 						maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
-		<mx:ProgressBar id="_pgbMP" x="5" y="135" width="70" height="15" label="50 / 100"
+		<mx:ProgressBar id="_pgbMP" x="75" y="45" width="70" height="15" label="50 / 100"
 						chromeColor="0x0000ff" color="#ffff00" labelPlacement="center"
 						maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
-		<s:Label id="_lblSkill" x="5" y="155" color="#ffffff" text="真武圣斩" fontSize="12" />
+		<s:Label id="_lblSkill" x="75" y="70" color="#ffffff" text="真武圣斩" fontSize="12" />
 	</s:BorderContainer>
 </s:BorderContainer>

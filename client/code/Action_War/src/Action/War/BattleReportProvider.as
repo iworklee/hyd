@@ -114,8 +114,8 @@ package Action.War
 				}
 				else if(i == 33)
 				{
-					unit.id = $("司马懿").id;				
-					unit.hP = 305;
+					unit.id = $("周瑜").id;				
+					unit.hP = 340;
 				}
 				else if(i == 39)
 				{
@@ -184,13 +184,13 @@ package Action.War
 				{
 					action.param = 1;
 					for(var j:int=0; j<3; j++)
-						addEffect(action, 26 + j, 120, 4);
+						addEffect(action, 26 + j, 120, 2);
 					for(j=0; j<3; j++)
-						addEffect(action, 31 + j, 120, 4);
+						addEffect(action, 31 + j, 120, 2);
 				}
 				else if(action.unitSID == 33)
 				{
-					action.param = 2;
+					action.param = 9;
 					for(j = 0; j<3; j++)
 						addEffect(action, 37 + j, 75 + j * 20);
 					for(j = 0; j<3; j++)

@@ -13,11 +13,20 @@
 			import mx.events.FlexEvent;
 			
 			private var _timer:Timer;
-			private var _tips:Array = ["点击部队可查看详细信息", "战法武将士气达到100可发动战法", "策略武将有一定概率施放策略"];
-			private var _index:int = Random.range(0, _tips.length-1);
+			private var _tips:Array = [];
+			private var _index:int = 0;
+			
+			private function loadConfig():void
+			{
+				var objs:Object = ExternalInterface.call("loadingPage.getTips");
+				for each(var obj:String in objs)
+					_tips.push(obj.toString());
+				_index = Random.range(0, _tips.length-1);
+			}
 			
 			public function onLoad():void
 			{
+				loadConfig();
 				if(_timer == null)
 				{
 					_timer = new Timer(2000);

@@ -204,15 +204,15 @@
 		<Name>孙策</Name>
 		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0;2,0</StrikeRange>
-		<Health>405</Health>
+		<Health>403</Health>
 		<SkillID>7</SkillID>
 		<Charge>50</Charge>
-		<NormalAttack>115</NormalAttack>
-		<NormalDefence>58</NormalDefence>
+		<NormalAttack>113</NormalAttack>
+		<NormalDefence>57</NormalDefence>
 		<TacticAttack>150</TacticAttack>
 		<TacticDefence>100</TacticDefence>
-		<StrategyAttack>90</StrategyAttack>
-		<StrategyDefence>60</StrategyDefence>
+		<StrategyAttack>87</StrategyAttack>
+		<StrategyDefence>58</StrategyDefence>
 		<DodgeChance>0.05</DodgeChance>
 		<BlockChance>0</BlockChance>
 		<CriticalChance>0.15</CriticalChance>
@@ -258,11 +258,11 @@
 		<Name>张飞</Name>
 		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0</StrikeRange>
-		<Health>416</Health>
+		<Health>421</Health>
 		<SkillID>5</SkillID>
 		<Charge>50</Charge>
-		<NormalAttack>99</NormalAttack>
-		<NormalDefence>63</NormalDefence>
+		<NormalAttack>104</NormalAttack>
+		<NormalDefence>66</NormalDefence>
 		<TacticAttack>169</TacticAttack>
 		<TacticDefence>113</TacticDefence>
 		<StrategyAttack>66</StrategyAttack>
@@ -276,11 +276,11 @@
 		<Name>吕布</Name>
 		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0</StrikeRange>
-		<Health>435</Health>
+		<Health>448</Health>
 		<SkillID>3</SkillID>
 		<Charge>50</Charge>
-		<NormalAttack>104</NormalAttack>
-		<NormalDefence>66</NormalDefence>
+		<NormalAttack>118</NormalAttack>
+		<NormalDefence>75</NormalDefence>
 		<TacticAttack>180</TacticAttack>
 		<TacticDefence>120</TacticDefence>
 		<StrategyAttack>43</StrategyAttack>

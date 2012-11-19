@@ -332,6 +332,19 @@
 					</Buff>
 				</Buffs>
 			</Effect>
+			<Effect>
+				<Area>
+					<Enemy>false</Enemy>
+					<Range>-1,0;-2,0</Range>
+					<Count>1</Count>
+				</Area>
+				<Buffs>
+					<Buff>
+						<ID>13</ID>
+						<Value>0</Value>
+					</Buff>
+				</Buffs>
+			</Effect>
 		</Effects>
 	</Skill>
 	<Skill>
@@ -357,6 +370,19 @@
 					</Buff>
 				</Buffs>
 			</Effect>
+			<Effect>
+				<Area>
+					<Enemy>false</Enemy>
+					<Range>-1,0;-2,0</Range>
+					<Count>1</Count>
+				</Area>
+				<Buffs>
+					<Buff>
+						<ID>13</ID>
+						<Value>0</Value>
+					</Buff>
+				</Buffs>
+			</Effect>
 		</Effects>
 	</Skill>
 	<Skill>
@@ -378,6 +404,19 @@
 				<Buffs>
 					<Buff>
 						<ID>3</ID>
+						<Value>0</Value>
+					</Buff>
+				</Buffs>
+			</Effect>
+			<Effect>
+				<Area>
+					<Enemy>false</Enemy>
+					<Range>-1,0;-2,0</Range>
+					<Count>1</Count>
+				</Area>
+				<Buffs>
+					<Buff>
+						<ID>13</ID>
 						<Value>0</Value>
 					</Buff>
 				</Buffs>

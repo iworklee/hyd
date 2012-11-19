@@ -40,12 +40,18 @@ namespace Action.Skill
             if (!targets.Any())
                 return null;
 
-            var target = targets.First();
-            var direction = target.Position - self.Position;
-            return Effects.SelectMany(
-                effect => effect.Range.FindBy(self, direction).SelectMany(
-                    unit => effect.Buffs.SelectMany(
-                        buff => buff.Affect(self, unit))));
+            //var target = targets.First();
+            //var direction = target.Position - self.Position;
+            //return Effects.SelectMany(
+            //    effect => effect.Range.FindBy(self, direction).SelectMany(
+            //        unit => effect.Buffs.SelectMany(
+            //            buff => buff.Affect(self, unit))));
+
+            return targets.SelectMany(t =>
+                Effects.SelectMany(effect =>
+                    effect.Range.FindBy(self, t.Position - self.Position).SelectMany(unit =>
+                        effect.Buffs.SelectMany(buff =>
+                            buff.Affect(self, unit)))));
 
             //foreach (var effect in Effects)
             //{

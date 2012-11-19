@@ -148,11 +148,11 @@
 	<Unit>
 		<ID>245</ID>
 		<Name>周瑜</Name>
-		<Type>Action.War.CombatStrategyUnit</Type>
+		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0;0,-1;0,1;2,0;0,-2;0,2</StrikeRange>
 		<Health>328</Health>
 		<SkillID>9</SkillID>
-		<Charge>0</Charge>
+		<Charge>50</Charge>
 		<NormalAttack>113</NormalAttack>
 		<NormalDefence>79</NormalDefence>
 		<TacticAttack>114</TacticAttack>
@@ -166,11 +166,11 @@
 	<Unit>
 		<ID>289</ID>
 		<Name>诸葛亮</Name>
-		<Type>Action.War.CombatStrategyUnit</Type>
+		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0;2,0</StrikeRange>
 		<Health>218</Health>
 		<SkillID>8</SkillID>
-		<Charge>0</Charge>
+		<Charge>50</Charge>
 		<NormalAttack>77</NormalAttack>
 		<NormalDefence>61</NormalDefence>
 		<TacticAttack>57</TacticAttack>
@@ -238,11 +238,11 @@
 	<Unit>
 		<ID>424</ID>
 		<Name>貂蝉</Name>
-		<Type>Action.War.CombatStrategyUnit</Type>
+		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0;2,0</StrikeRange>
 		<Health>129</Health>
 		<SkillID>10</SkillID>
-		<Charge>0</Charge>
+		<Charge>50</Charge>
 		<NormalAttack>8</NormalAttack>
 		<NormalDefence>6</NormalDefence>
 		<TacticAttack>39</TacticAttack>

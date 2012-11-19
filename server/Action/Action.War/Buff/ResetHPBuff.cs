@@ -20,7 +20,8 @@ namespace Action.Buff
         {
             var plus = (int)Value - target.Health;
             target.Health = (int)Value;
-            yield return new BattleEffect { UnitSID = target.BattleID, PlusMP = plus };
+            target.Military.Die(target);
+            yield return new BattleEffect { UnitSID = target.BattleID, PlusHP = plus };
         }
     }
 }

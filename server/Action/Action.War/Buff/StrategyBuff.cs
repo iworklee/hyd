@@ -9,18 +9,17 @@ using System.Text;
 namespace Action.Buff
 {
     /// <summary>
-    /// 重置气势
+    /// 策略技能攻击
     /// </summary>
-    [Buff(13)]
-    public class ResetChargeBuff : IBuff
+    [Buff(2)]
+    public class StrategyBuff : IBuff
     {
         public int Id { get; set; }
         public float Value { get; set; }
         public IEnumerable<BattleEffect> Affect(CombatUnit self, CombatUnit target)
         {
-            var plus = (int)Value - target.Charge;
-            target.Charge = (int)Value;
-            yield return new BattleEffect { UnitSID = target.BattleID, PlusMP = plus };
+            var damageType = Helper.Test(self.CriticalChance, 0, target.DodgeChance);
+            return self.DoAttack(target, AttackType.Strategy, damageType, Value);
         }
     }
 }

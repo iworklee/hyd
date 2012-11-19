@@ -12,7 +12,7 @@ namespace Action.Buff
     {
         int Id { get; set; }
         float Value { get; set; }
-        BattleEffect Affect(CombatUnit self, CombatUnit target);
+        IEnumerable<BattleEffect> Affect(CombatUnit self, CombatUnit target);
     }
 }
 

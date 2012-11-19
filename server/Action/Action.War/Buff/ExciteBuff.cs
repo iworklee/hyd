@@ -8,19 +8,21 @@ using System.Text;
 
 namespace Action.Buff
 {
+    /// <summary>
+    /// 加气势
+    /// </summary>
     [Buff(12)]
     public class ExciteBuff : IBuff
     {
         public int Id { get; set; }
         public float Value { get; set; }
-        public BattleEffect Affect(CombatUnit self, CombatUnit target)
+        public IEnumerable<BattleEffect> Affect(CombatUnit self, CombatUnit target)
         {
             if (target is CombatTacticUnit)
             {
                 target.Charge += (int)Value;
-                return new BattleEffect { UnitSID = target.BattleID, PlusMP = (int)Value };
+                yield return new BattleEffect { UnitSID = target.BattleID, PlusMP = (int)Value };
             }
-            return null;
         }
     }
 }

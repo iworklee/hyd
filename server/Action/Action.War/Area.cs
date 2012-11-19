@@ -23,13 +23,23 @@ namespace Action.War
                 _getMilitary = u => u.Military;
         }
 
-        public IEnumerable<CombatUnit> FindBy(CombatUnit unit)
+        public IEnumerable<CombatUnit> FindBy(CombatUnit self, Vector2 direction)
         {
-            var military = _getMilitary(unit);
+            var military = _getMilitary(self);
             return _range
-                .Select(loc => military.GetAliveUnitByPos(unit.Position + loc * unit.Military.Forward))
+                .Select(loc => military.GetAliveUnitByPos(self.Position + direction + loc * self.Military.Forward))
                 .Where(u => u != null)
                 .Take(_count);
+        }
+
+        public IEnumerable<CombatUnit> FindBy(CombatUnit self)
+        {
+            return FindBy(self, Vector2.Zero);
+            //var military = _getMilitary(self);
+            //return _range
+            //    .Select(loc => military.GetAliveUnitByPos(self.Position + loc * self.Military.Forward))
+            //    .Where(u => u != null)
+            //    .Take(_count);
         }
     }
 }

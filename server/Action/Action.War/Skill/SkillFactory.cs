@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using Action.ResourceManager;
 using Action.War;
 using Action.Buff;
+using System.Diagnostics;
 
 namespace Action.Skill
 {
@@ -30,13 +31,8 @@ namespace Action.Skill
         public ISkill GetSkill(int skillID)
         {
             XElement xml;
-            if (!Resources.Instance.Skills.TryGetValue(skillID, out xml))
-            {
-                xml = new XElement("Skill",
-                        new XElement("ID", 0),
-                        new XElement("Type", "Action.Skill.TacticSkill")
-                        );
-            }
+            Resources.Instance.Skills.TryGetValue(skillID, out xml);
+            Debug.Assert(xml != null);
             var t = Type.GetType((string)xml.Element("Type"));
             ISkill skill = Activator.CreateInstance(t) as ISkill;
             skill.Id = skillID;

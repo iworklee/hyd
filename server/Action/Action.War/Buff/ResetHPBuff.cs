@@ -9,17 +9,17 @@ using System.Text;
 namespace Action.Buff
 {
     /// <summary>
-    /// 重置气势
+    /// 重置生命值
     /// </summary>
-    [Buff(13)]
-    public class ResetChargeBuff : IBuff
+    [Buff(3)]
+    public class ResetHPBuff : IBuff
     {
         public int Id { get; set; }
         public float Value { get; set; }
         public IEnumerable<BattleEffect> Affect(CombatUnit self, CombatUnit target)
         {
-            var plus = (int)Value - target.Charge;
-            target.Charge = (int)Value;
+            var plus = (int)Value - target.Health;
+            target.Health = (int)Value;
             yield return new BattleEffect { UnitSID = target.BattleID, PlusMP = plus };
         }
     }

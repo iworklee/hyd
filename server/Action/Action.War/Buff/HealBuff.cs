@@ -8,12 +8,15 @@ using System.Text;
 
 namespace Action.Buff
 {
+    /// <summary>
+    /// 加血
+    /// </summary>
     [Buff(11)]
     public class HealBuff : IBuff
     {
         public int Id { get; set; }
         public float Value { get; set; }
-        public BattleEffect Affect(CombatUnit self, CombatUnit target)
+        public IEnumerable<BattleEffect> Affect(CombatUnit self, CombatUnit target)
         {
             var hp = target.Health + (int)Value;
             if (hp > target.HealthMax)
@@ -21,7 +24,7 @@ namespace Action.Buff
 
             var effect = new BattleEffect { UnitSID = target.BattleID, PlusHP = hp - target.Health };
             target.Health = hp;
-            return effect;
+            yield return effect;
         }
     }
 }

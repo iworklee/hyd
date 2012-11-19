@@ -115,7 +115,7 @@
 		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0</StrikeRange>
 		<Health>420</Health>
-		<SkillID>0</SkillID>
+		<SkillID>4</SkillID>
 		<Charge>50</Charge>
 		<NormalAttack>112</NormalAttack>
 		<NormalDefence>71</NormalDefence>
@@ -151,7 +151,7 @@
 		<Type>Action.War.CombatStrategyUnit</Type>
 		<StrikeRange>1,0;0,-1;0,1;2,0;0,-2;0,2</StrikeRange>
 		<Health>328</Health>
-		<SkillID>0</SkillID>
+		<SkillID>9</SkillID>
 		<Charge>0</Charge>
 		<NormalAttack>113</NormalAttack>
 		<NormalDefence>79</NormalDefence>
@@ -169,7 +169,7 @@
 		<Type>Action.War.CombatStrategyUnit</Type>
 		<StrikeRange>1,0;2,0</StrikeRange>
 		<Health>218</Health>
-		<SkillID>0</SkillID>
+		<SkillID>8</SkillID>
 		<Charge>0</Charge>
 		<NormalAttack>77</NormalAttack>
 		<NormalDefence>61</NormalDefence>
@@ -192,7 +192,7 @@
 		<NormalAttack>132</NormalAttack>
 		<NormalDefence>84</NormalDefence>
 		<TacticAttack>117</TacticAttack>
-		<TacticDefence>778</TacticDefence>
+		<TacticDefence>78</TacticDefence>
 		<StrategyAttack>115</StrategyAttack>
 		<StrategyDefence>76</StrategyDefence>
 		<DodgeChance>0.05</DodgeChance>
@@ -205,7 +205,7 @@
 		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0;2,0</StrikeRange>
 		<Health>405</Health>
-		<SkillID>0</SkillID>
+		<SkillID>7</SkillID>
 		<Charge>50</Charge>
 		<NormalAttack>115</NormalAttack>
 		<NormalDefence>58</NormalDefence>
@@ -223,7 +223,7 @@
 		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0</StrikeRange>
 		<Health>412</Health>
-		<SkillID>0</SkillID>
+		<SkillID>6</SkillID>
 		<Charge>50</Charge>
 		<NormalAttack>105</NormalAttack>
 		<NormalDefence>67</NormalDefence>
@@ -241,7 +241,7 @@
 		<Type>Action.War.CombatStrategyUnit</Type>
 		<StrikeRange>1,0;2,0</StrikeRange>
 		<Health>129</Health>
-		<SkillID>0</SkillID>
+		<SkillID>10</SkillID>
 		<Charge>0</Charge>
 		<NormalAttack>8</NormalAttack>
 		<NormalDefence>6</NormalDefence>
@@ -259,7 +259,7 @@
 		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0</StrikeRange>
 		<Health>416</Health>
-		<SkillID>0</SkillID>
+		<SkillID>5</SkillID>
 		<Charge>50</Charge>
 		<NormalAttack>99</NormalAttack>
 		<NormalDefence>63</NormalDefence>
@@ -277,7 +277,7 @@
 		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0</StrikeRange>
 		<Health>435</Health>
-		<SkillID>0</SkillID>
+		<SkillID>3</SkillID>
 		<Charge>50</Charge>
 		<NormalAttack>104</NormalAttack>
 		<NormalDefence>66</NormalDefence>

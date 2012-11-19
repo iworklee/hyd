@@ -15,9 +15,9 @@
 		<TacticDefence>60</TacticDefence>
 		<StrategyAttack>36</StrategyAttack>
 		<StrategyDefence>24</StrategyDefence>
-		<DodgeChance>0</DodgeChance>
-		<BlockChance>0.2</BlockChance>
-		<CriticalChance>0</CriticalChance>
+		<DodgeChance>0.15</DodgeChance>
+		<BlockChance>0.4</BlockChance>
+		<CriticalChance>0.25</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>802</ID>
@@ -33,9 +33,9 @@
 		<TacticDefence>60</TacticDefence>
 		<StrategyAttack>36</StrategyAttack>
 		<StrategyDefence>24</StrategyDefence>
-		<DodgeChance>0.05</DodgeChance>
-		<BlockChance>0.05</BlockChance>
-		<CriticalChance>0.1</CriticalChance>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.25</BlockChance>
+		<CriticalChance>0.35</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>803</ID>
@@ -51,9 +51,9 @@
 		<TacticDefence>60</TacticDefence>
 		<StrategyAttack>36</StrategyAttack>
 		<StrategyDefence>24</StrategyDefence>
-		<DodgeChance>0.05</DodgeChance>
-		<BlockChance>0</BlockChance>
-		<CriticalChance>0.15</CriticalChance>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.2</BlockChance>
+		<CriticalChance>0.4</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>804</ID>
@@ -69,9 +69,9 @@
 		<TacticDefence>60</TacticDefence>
 		<StrategyAttack>36</StrategyAttack>
 		<StrategyDefence>24</StrategyDefence>
-		<DodgeChance>0</DodgeChance>
-		<BlockChance>0</BlockChance>
-		<CriticalChance>0.2</CriticalChance>
+		<DodgeChance>0.15</DodgeChance>
+		<BlockChance>0.2</BlockChance>
+		<CriticalChance>0.45</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>805</ID>
@@ -87,9 +87,9 @@
 		<TacticDefence>60</TacticDefence>
 		<StrategyAttack>36</StrategyAttack>
 		<StrategyDefence>24</StrategyDefence>
-		<DodgeChance>0.15</DodgeChance>
-		<BlockChance>0</BlockChance>
-		<CriticalChance>0.05</CriticalChance>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.2</BlockChance>
+		<CriticalChance>0.3</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>806</ID>
@@ -105,9 +105,9 @@
 		<TacticDefence>60</TacticDefence>
 		<StrategyAttack>36</StrategyAttack>
 		<StrategyDefence>24</StrategyDefence>
-		<DodgeChance>0.2</DodgeChance>
-		<BlockChance>0</BlockChance>
-		<CriticalChance>0</CriticalChance>
+		<DodgeChance>0.35</DodgeChance>
+		<BlockChance>0.2</BlockChance>
+		<CriticalChance>0.25</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>98</ID>
@@ -123,9 +123,9 @@
 		<TacticDefence>109</TacticDefence>
 		<StrategyAttack>96</StrategyAttack>
 		<StrategyDefence>64</StrategyDefence>
-		<DodgeChance>0.05</DodgeChance>
-		<BlockChance>0.05</BlockChance>
-		<CriticalChance>0.1</CriticalChance>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.25</BlockChance>
+		<CriticalChance>0.35</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>225</ID>
@@ -141,9 +141,9 @@
 		<TacticDefence>63</TacticDefence>
 		<StrategyAttack>129</StrategyAttack>
 		<StrategyDefence>86</StrategyDefence>
-		<DodgeChance>0.05</DodgeChance>
-		<BlockChance>0.05</BlockChance>
-		<CriticalChance>0.1</CriticalChance>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.25</BlockChance>
+		<CriticalChance>0.35</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>245</ID>
@@ -159,9 +159,9 @@
 		<TacticDefence>76</TacticDefence>
 		<StrategyAttack>127</StrategyAttack>
 		<StrategyDefence>84</StrategyDefence>
-		<DodgeChance>0</DodgeChance>
-		<BlockChance>0</BlockChance>
-		<CriticalChance>0.2</CriticalChance>
+		<DodgeChance>0.15</DodgeChance>
+		<BlockChance>0.2</BlockChance>
+		<CriticalChance>0.45</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>289</ID>
@@ -177,9 +177,9 @@
 		<TacticDefence>38</TacticDefence>
 		<StrategyAttack>144</StrategyAttack>
 		<StrategyDefence>96</StrategyDefence>
-		<DodgeChance>0.2</DodgeChance>
-		<BlockChance>0</BlockChance>
-		<CriticalChance>0</CriticalChance>
+		<DodgeChance>0.35</DodgeChance>
+		<BlockChance>0.2</BlockChance>
+		<CriticalChance>0.25</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>343</ID>
@@ -195,9 +195,9 @@
 		<TacticDefence>78</TacticDefence>
 		<StrategyAttack>115</StrategyAttack>
 		<StrategyDefence>76</StrategyDefence>
-		<DodgeChance>0.05</DodgeChance>
-		<BlockChance>0.05</BlockChance>
-		<CriticalChance>0.1</CriticalChance>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.25</BlockChance>
+		<CriticalChance>0.35</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>370</ID>
@@ -213,9 +213,9 @@
 		<TacticDefence>100</TacticDefence>
 		<StrategyAttack>87</StrategyAttack>
 		<StrategyDefence>58</StrategyDefence>
-		<DodgeChance>0.05</DodgeChance>
-		<BlockChance>0</BlockChance>
-		<CriticalChance>0.15</CriticalChance>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.2</BlockChance>
+		<CriticalChance>0.4</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>395</ID>
@@ -231,9 +231,9 @@
 		<TacticDefence>108</TacticDefence>
 		<StrategyAttack>104</StrategyAttack>
 		<StrategyDefence>69</StrategyDefence>
-		<DodgeChance>0.05</DodgeChance>
-		<BlockChance>0.05</BlockChance>
-		<CriticalChance>0.1</CriticalChance>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.25</BlockChance>
+		<CriticalChance>0.35</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>424</ID>
@@ -249,9 +249,9 @@
 		<TacticDefence>26</TacticDefence>
 		<StrategyAttack>97</StrategyAttack>
 		<StrategyDefence>64</StrategyDefence>
-		<DodgeChance>0.2</DodgeChance>
-		<BlockChance>0</BlockChance>
-		<CriticalChance>0</CriticalChance>
+		<DodgeChance>0.35</DodgeChance>
+		<BlockChance>0.2</BlockChance>
+		<CriticalChance>0.25</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>432</ID>
@@ -267,9 +267,9 @@
 		<TacticDefence>113</TacticDefence>
 		<StrategyAttack>66</StrategyAttack>
 		<StrategyDefence>44</StrategyDefence>
-		<DodgeChance>0.05</DodgeChance>
-		<BlockChance>0.05</BlockChance>
-		<CriticalChance>0.1</CriticalChance>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.25</BlockChance>
+		<CriticalChance>0.35</CriticalChance>
 	</Unit>
 	<Unit>
 		<ID>660</ID>
@@ -285,8 +285,8 @@
 		<TacticDefence>120</TacticDefence>
 		<StrategyAttack>43</StrategyAttack>
 		<StrategyDefence>28</StrategyDefence>
-		<DodgeChance>0.05</DodgeChance>
-		<BlockChance>0.05</BlockChance>
-		<CriticalChance>0.1</CriticalChance>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.25</BlockChance>
+		<CriticalChance>0.35</CriticalChance>
 	</Unit>
 </UnitType>

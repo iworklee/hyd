@@ -130,11 +130,11 @@
 	<Unit>
 		<ID>225</ID>
 		<Name>司马懿</Name>
-		<Type>Action.War.CombatStrategyUnit</Type>
+		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0</StrikeRange>
 		<Health>334</Health>
-		<SkillID>0</SkillID>
-		<Charge>0</Charge>
+		<SkillID>2</SkillID>
+		<Charge>50</Charge>
 		<NormalAttack>129</NormalAttack>
 		<NormalDefence>82</NormalDefence>
 		<TacticAttack>94</TacticAttack>

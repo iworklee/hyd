@@ -15,8 +15,13 @@ namespace Action.Buff
         public float Value { get; set; }
         public BattleEffect Affect(CombatUnit self, CombatUnit target)
         {
-            target.Health += (int)Value;
-            return new BattleEffect { UnitSID = target.BattleID, PlusHP = (int)Value };
+            var hp = target.Health + (int)Value;
+            if (hp > target.HealthMax)
+                hp = target.HealthMax;
+
+            var effect = new BattleEffect { UnitSID = target.BattleID, PlusHP = hp - target.Health };
+            target.Health = hp;
+            return effect;
         }
     }
 }

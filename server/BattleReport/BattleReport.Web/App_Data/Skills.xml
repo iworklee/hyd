@@ -14,6 +14,19 @@
 			<Effect>
 				<Area>
 					<Enemy>false</Enemy>
+					<Range>0,0</Range>
+					<Count>1</Count>
+				</Area>
+				<Buffs>
+					<Buff>
+						<ID>11</ID>
+						<Value>120</Value>
+					</Buff>
+				</Buffs>
+			</Effect>
+			<Effect>
+				<Area>
+					<Enemy>false</Enemy>
 					<Range>1,0;1,-1;1,1;0,-1;0,1;-1,0;-1,-1;-1,1</Range>
 					<Count>8</Count>
 				</Area>
@@ -25,6 +38,61 @@
 					<Buff>
 						<ID>12</ID>
 						<Value>100</Value>
+					</Buff>
+				</Buffs>
+			</Effect>
+			<Effect>
+				<Area>
+					<Enemy>false</Enemy>
+					<Range>0,0</Range>
+					<Count>1</Count>
+				</Area>
+				<Buffs>
+					<Buff>
+						<ID>1</ID>
+						<Value>0</Value>
+					</Buff>
+				</Buffs>
+			</Effect>
+		</Effects>
+	</Skill>
+	<Skill>
+		<ID>2</ID>
+		<Name>天神守护</Name>
+		<Type>Action.Skill.TacticSkill</Type>
+		<Area>
+			<Enemy>false</Enemy>
+			<Range>0,0</Range>
+			<Count>1</Count>
+		</Area>
+		<Effects>
+			<Effect>
+				<Area>
+					<Enemy>false</Enemy>
+					<Range>0,0</Range>
+					<Count>1</Count>
+				</Area>
+				<Buffs>
+					<Buff>
+						<ID>11</ID>
+						<Value>180</Value>
+					</Buff>
+				</Buffs>
+			</Effect>
+			<Effect>
+				<Area>
+					<Enemy>false</Enemy>
+					<Range>1,0;1,-1;1,1;0,-1;0,1;-1,0;-1,-1;-1,1</Range>
+					<Count>8</Count>
+				</Area>
+				<Buffs>
+					<Buff>
+						<ID>11</ID>
+						<Value>180</Value>
+					</Buff>
+					<Buff>
+						<ID>12</ID>
+						<Value>50</Value>
 					</Buff>
 				</Buffs>
 			</Effect>

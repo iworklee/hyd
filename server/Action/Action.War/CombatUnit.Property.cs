@@ -95,6 +95,11 @@ namespace Action.War
         public float DodgeChance { get; set; }
 
         /// <summary>
+        /// 最大生命值
+        /// </summary>
+        public int HealthMax { get; set; }
+
+        /// <summary>
         /// 生命值
         /// </summary>
         public int Health { get; set; }

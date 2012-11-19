@@ -55,6 +55,7 @@ namespace Action.War
             unit.StrikeRange = RangeProvider.Generate((string)xml.Element("StrikeRange"));
 
             unit.Health = (int)xml.Element("Health");
+            unit.HealthMax = (int)xml.Element("Health");
             unit.SkillID = (int)xml.Element("SkillID");
             unit.Charge = (int)xml.Element("Charge");
 

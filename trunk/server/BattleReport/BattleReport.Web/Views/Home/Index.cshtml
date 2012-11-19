@@ -4,42 +4,46 @@
 }
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { target = "_blank" }))
 {
-    <div style="float: left; margin: 0px;">
+    <div style="float: left;">
         <h1 align="center">
             @Html.TextBoxFor(m => m.AttackerName)</h1>
-        <ol>
-            @for (int i = 0; i < Model.Attacker.Count; i++)
+        <div style="float: left; margin: 10px">
+            @for (int i = 20; i < 25; i++)
             {
-                <li style="float: left; margin: 0px 20px 0px 10px;">
-                    @Html.DropDownListFor(m => m.Attacker[i], new SelectList(Model.DataSource, "Value", "Text", Model.Attacker[i]), "空位")
-                </li>
-               if (i % 5 == 4)
-               {
+                for (int j = i; j >= 0; j -= 5)
+                {
+                <div style="float: left; width: 10px; margin: 10px">@(j + 1).
+                </div>
+                <div style="float: left; margin: 0px">
+                    @Html.DropDownListFor(m => m.Attacker[j], new SelectList(Model.DataSource, "Value", "Text", Model.Attacker[j]), "空位")
+                </div>
+                }
                 <div style="clear: both">
                 </div>
-               }
             }
-        </ol>
+        </div>
     </div>
     <div style="clear: both; width: 15%; margin-left: auto; margin-right: auto;">
         <input type="submit" value="开战" />
     </div>
-    <div style="float: right; margin: 0px;">
-        <h1 align="center" style="margin: 0px;">
+    <div style="float: right; margin-top: 0px;">
+        <h1 align="center" style="margin-top: 0px;">
             @Html.TextBoxFor(m => m.DefenderName)</h1>
-        <ol>
-            @for (int i = 0; i < Model.Defender.Count; i++)
+        <div style="float: right; margin: 10px">
+            @for (int i = 0; i < 5; i++)
             {
-                <li style="float: left; margin: 0px 20px 0px 10px;">
-                    @Html.DropDownListFor(m => m.Defender[i], new SelectList(Model.DataSource, "Value", "Text", Model.Defender[i]), "空位")
-                </li>
-               if (i % 5 == 4)
-               {
+                for (int j = i; j <= i + 20; j += 5)
+                {
+                <div style="float: left; width: 10px; margin: 10px">@(j + 1).
+                </div>
+                <div style="float: left; margin: 0px">
+                    @Html.DropDownListFor(m => m.Defender[j], new SelectList(Model.DataSource, "Value", "Text", Model.Defender[j]), "空位")
+                </div>
+                }
                 <div style="clear: both">
                 </div>
-               }
             }
-        </ol>
+        </div>
     </div>
     <div style="clear: both">
     </div>

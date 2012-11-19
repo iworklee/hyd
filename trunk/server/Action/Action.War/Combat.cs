@@ -115,7 +115,8 @@ namespace Action.War
             int round;
             for (round = 1; round <= MAX_ROUND; round++)
             {
-                PerformRound(round);
+                var bout = PerformRound(round);
+                Report.Bouts.Add(bout);
 
                 if (Attacker.Defeated || Attacker.AliveUnits.Count() == ROW)
                 {
@@ -138,7 +139,7 @@ namespace Action.War
             return true;
         }
 
-        private void PerformRound(int round)
+        private BattleBout PerformRound(int round)
         {
             BattleBout bout = new BattleBout();
             bout.SID = round;
@@ -149,15 +150,16 @@ namespace Action.War
                 if (action != null)
                 {
                     bout.Actions.Add(action);
-                    continue;
                 }
-
-                action = attacker.Move();
-                if (action != null)
-                    bout.Actions.Add(action);
+                else
+                {
+                    action = attacker.Move();
+                    if (action != null)
+                        bout.Actions.Add(action);
+                }
             }
 
-            Report.Bouts.Add(bout);
+            return bout;
         }
 
 

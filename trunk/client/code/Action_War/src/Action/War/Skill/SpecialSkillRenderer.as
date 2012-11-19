@@ -137,7 +137,7 @@ package Action.War.Skill
 				for each(var effect:BattleEffect in frameRenderer.action.effects)
 				{
 					var bum:BattleUnitManager = frameRenderer.battleReportManager.getBUM(effect.unitSID);
-					if(bum != null)
+					if(bum != null && !bum.isWall)
 						graphics.drawBitmap(effectBmp, bum.tempPoint, graphics.getEffectLayer(), offsetPoint.x, offsetPoint.y);				
 				}
 				//GamePlugins.console.writeLine(index);

@@ -120,31 +120,6 @@ package Action.Model {
 		/**
 		 *  @private
 		 */
-		public static const BUFFID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("Action.Model.BattleEffect.BuffId", "buffId", (5 << 3) | com.netease.protobuf.WireType.VARINT);
-
-		private var BuffId$field:int;
-
-		public function clearBuffId():void {
-			hasField$0 &= 0xffffffef;
-			BuffId$field = new int();
-		}
-
-		public function get hasBuffId():Boolean {
-			return (hasField$0 & 0x10) != 0;
-		}
-
-		public function set buffId(value:int):void {
-			hasField$0 |= 0x10;
-			BuffId$field = value;
-		}
-
-		public function get buffId():int {
-			return BuffId$field;
-		}
-
-		/**
-		 *  @private
-		 */
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasUnitSID) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
@@ -162,10 +137,6 @@ package Action.Model {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
 				com.netease.protobuf.WriteUtils.write$TYPE_SINT32(output, PlusMP$field);
 			}
-			if (hasBuffId) {
-				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, BuffId$field);
-			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
 			}
@@ -179,7 +150,6 @@ package Action.Model {
 			var Type$count:uint = 0;
 			var PlusHP$count:uint = 0;
 			var PlusMP$count:uint = 0;
-			var BuffId$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
 				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 				switch (tag >> 3) {
@@ -210,13 +180,6 @@ package Action.Model {
 					}
 					++PlusMP$count;
 					this.plusMP = com.netease.protobuf.ReadUtils.read$TYPE_SINT32(input);
-					break;
-				case 5:
-					if (BuffId$count != 0) {
-						throw new flash.errors.IOError('Bad data format: BattleEffect.buffId cannot be set twice.');
-					}
-					++BuffId$count;
-					this.buffId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

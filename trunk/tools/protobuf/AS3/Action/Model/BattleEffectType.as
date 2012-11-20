@@ -4,5 +4,7 @@ package Action.Model {
 		public static const Block:int = 1;
 		public static const Normal:int = 2;
 		public static const Critical:int = 3;
+		public static const Cure:int = 4;
+		public static const Wait:int = 5;
 	}
 }

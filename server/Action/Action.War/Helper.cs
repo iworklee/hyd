@@ -32,7 +32,7 @@ namespace Action.War
             else if (n < dodgeChance + blockChance + criticalChance)
                 effect = BattleEffectType.Critical;
             else
-                effect = BattleEffectType.Normal;
+                effect = BattleEffectType.Attack;
 
             Debug.WriteLine("Random {0}, {1}", n, effect);
             return effect;

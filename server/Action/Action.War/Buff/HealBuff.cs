@@ -22,7 +22,7 @@ namespace Action.Buff
             if (hp > target.HealthMax)
                 hp = target.HealthMax;
 
-            var effect = new BattleEffect { UnitSID = target.BattleID, PlusHP = hp - target.Health };
+            var effect = new BattleEffect { Type = BattleEffectType.Cure, UnitSID = target.BattleID, PlusHP = hp - target.Health };
             target.Health = hp;
             yield return effect;
         }

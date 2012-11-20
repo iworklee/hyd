@@ -19,7 +19,8 @@ namespace Action.Buff
         public IEnumerable<BattleEffect> Affect(CombatUnit self, CombatUnit target)
         {
             var damageType = Helper.Test(self.CriticalChance, 0, target.DodgeChance);
-            return self.DoAttack(target, AttackType.Strategy, damageType, Value);
+            var ratio = Value * self.Charge / 100f;
+            return self.DoAttack(target, AttackType.Strategy, damageType, ratio);
         }
     }
 }

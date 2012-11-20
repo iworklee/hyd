@@ -37,7 +37,7 @@
 					</Buff>
 					<Buff>
 						<ID>12</ID>
-						<Value>100</Value>
+						<Value>25</Value>
 					</Buff>
 				</Buffs>
 			</Effect>
@@ -88,11 +88,11 @@
 				<Buffs>
 					<Buff>
 						<ID>11</ID>
-						<Value>180</Value>
+						<Value>120</Value>
 					</Buff>
 					<Buff>
 						<ID>12</ID>
-						<Value>50</Value>
+						<Value>25</Value>
 					</Buff>
 				</Buffs>
 			</Effect>

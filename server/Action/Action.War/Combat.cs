@@ -115,22 +115,38 @@ namespace Action.War
             int round;
             for (round = 1; round <= MAX_ROUND; round++)
             {
-                var bout = PerformRound(round);
+                BattleBout bout = new BattleBout();
                 Report.Bouts.Add(bout);
+                bout.SID = round;
 
-                if (Attacker.Defeated || Attacker.AliveUnits.Count() == ROW)
+                foreach (var attacker in attackOrder.Where(unit => unit.Military.AliveUnits.Contains(unit)))
                 {
-                    // 守方胜
-                    Report.Win = false;
-                    return true;
+                    var action = attacker.Strike();
+                    if (action != null)
+                    {
+                        bout.Actions.Add(action);
+                        if (Attacker.Defeated || Attacker.AliveUnits.Count() == ROW)
+                        {
+                            // 守方胜
+                            Report.Win = false;
+                            return true;
+                        }
+
+                        if (Defender.Defeated || Defender.AliveUnits.Count() == ROW)
+                        {
+                            // 攻方胜
+                            Report.Win = true;
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        action = attacker.Move();
+                        if (action != null)
+                            bout.Actions.Add(action);
+                    }
                 }
 
-                if (Defender.Defeated || Defender.AliveUnits.Count() == ROW)
-                {
-                    // 攻方胜
-                    Report.Win = true;
-                    return true;
-                }
             }
             Debug.WriteLine("PerformRound : {0}", round);
 
@@ -138,30 +154,6 @@ namespace Action.War
 
             return true;
         }
-
-        private BattleBout PerformRound(int round)
-        {
-            BattleBout bout = new BattleBout();
-            bout.SID = round;
-
-            foreach (var attacker in attackOrder.Where(unit => unit.Military.AliveUnits.Contains(unit)))
-            {
-                var action = attacker.Strike();
-                if (action != null)
-                {
-                    bout.Actions.Add(action);
-                }
-                else
-                {
-                    action = attacker.Move();
-                    if (action != null)
-                        bout.Actions.Add(action);
-                }
-            }
-
-            return bout;
-        }
-
-
+        
     }
 }

@@ -21,7 +21,7 @@ namespace Action.Buff
             if (target is CombatTacticUnit)
             {
                 target.Charge += (int)Value;
-                yield return new BattleEffect { UnitSID = target.BattleID, PlusMP = (int)Value };
+                yield return new BattleEffect { Type = BattleEffectType.AddMP, UnitSID = target.BattleID, PlusMP = (int)Value };
             }
         }
     }

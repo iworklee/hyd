@@ -20,7 +20,7 @@ namespace Action.Buff
         {
             var plus = (int)Value - target.Charge;
             target.Charge = (int)Value;
-            yield return new BattleEffect { UnitSID = target.BattleID, PlusMP = plus };
+            yield return new BattleEffect { Type = BattleEffectType.ReduceMP, UnitSID = target.BattleID, PlusMP = plus };
         }
     }
 }

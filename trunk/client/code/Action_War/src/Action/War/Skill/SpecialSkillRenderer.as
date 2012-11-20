@@ -6,8 +6,10 @@ package Action.War.Skill
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Model.BattleAction;
 	import Action.Model.BattleEffect;
+	import Action.Model.BattleEffectType;
 	import Action.War.BattleDefs;
 	import Action.War.BattleHelper;
+	import Action.War.Config.BattleSkill;
 	import Action.War.Movie.BattleBoutSkillRenderer;
 	import Action.War.Report.BattleEffectWrapper;
 	import Action.War.Report.BattleUnitManager;
@@ -18,7 +20,6 @@ package Action.War.Skill
 	import flash.geom.Point;
 	
 	import flashx.textLayout.factory.TruncationOptions;
-	import Action.War.Config.BattleSkill;
 	
 	public class SpecialSkillRenderer extends SkillRendererBase implements ISkillRenderer
 	{
@@ -77,6 +78,8 @@ package Action.War.Skill
 				{
 					for each(var effect:BattleEffect in action.effects)
 					{
+						if(effect.type == BattleEffectType.None)
+							continue;
 						var bum:BattleUnitManager = frameRenderer.battleReportManager.getBUM(effect.unitSID);
 						if(bum != null)
 						{
@@ -87,19 +90,27 @@ package Action.War.Skill
 								{
 									if(effect.type < 2)
 										graphics.drawBitmap(bum.getDefendBitmap(), bum.tempPoint);
-									else
-										graphics.drawBitmap(effect.type < 4 ? bum.getHurtBitmap() : bum.getBuffBitmap(), bum.tempPoint);
+									else if(effect.type < 4)
+										graphics.drawBitmap(bum.getHurtBitmap(), bum.tempPoint);
+									else if(effect.type == BattleEffectType.Cure)
+										graphics.drawBitmap(bum.getCureBitmap(), bum.tempPoint);
 								}
 							}
-							var wrapper:BattleEffectWrapper = BattleEffectWrapper.wrap(effect);
 							
+							var wrapper:BattleEffectWrapper = BattleEffectWrapper.wrap(effect);							
 							//print effect.type
-							var lblPnt:Point = new Point(bum.realPoint.x + 10, bum.realPoint.y + 20 - index * wrapper.getTypeUpSpeed());
-							graphics.drawText(wrapper.getTypeDesc(), lblPnt, wrapper.getTypeColor(), 15, true);
-							
-							//print effect.plusHP
-							lblPnt = new Point(bum.realPoint.x + 10, bum.realPoint.y + 50 - index * 5);
-							graphics.drawText(wrapper.getPlusHpDesc(), lblPnt, 0xffff00, 15, true);
+							var typeDesc:String = wrapper.getTypeDesc();
+							if(typeDesc != null && typeDesc != "")
+							{
+								var lblPnt:Point = new Point(bum.realPoint.x + 10, bum.realPoint.y + 20 - index * wrapper.getTypeUpSpeed());
+								graphics.drawText(typeDesc, lblPnt, wrapper.getTypeColor(), 15, true);
+							}		
+							//print effect.plusHP					
+							if(effect.plusHP != 0)
+							{
+								lblPnt = new Point(bum.realPoint.x + 10, bum.realPoint.y + 50 - index * 5);
+								graphics.drawText(wrapper.getPlusHpDesc(), lblPnt, 0xffff00, 15, true);
+							}
 						}
 					}
 				}
@@ -136,6 +147,8 @@ package Action.War.Skill
 				var offsetPoint:Point = BattleHelper.getBitmapOffset(effectBmp);
 				for each(var effect:BattleEffect in frameRenderer.action.effects)
 				{
+					if(effect.type == BattleEffectType.None)
+						continue;
 					var bum:BattleUnitManager = frameRenderer.battleReportManager.getBUM(effect.unitSID);
 					if(bum != null && !bum.isWall)
 						graphics.drawBitmap(effectBmp, bum.tempPoint, graphics.getEffectLayer(), offsetPoint.x, offsetPoint.y);				

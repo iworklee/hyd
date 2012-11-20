@@ -105,6 +105,8 @@ package Action.Display.Drawing
 				_curFrame = frame;
 				if(_movie.isEnd(_curFrame))
 				{
+					if(_curRenderer != null)
+						_curRenderer.leave(_graphics, this);
 					this.stop();
 					return;
 				}

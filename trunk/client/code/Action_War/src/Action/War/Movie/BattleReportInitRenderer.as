@@ -31,6 +31,11 @@ package Action.War.Movie
 			return "战斗开始";
 		}
 		
+		public override function enter(graphics:CanvasGraphics, player:MoviePlayer):void
+		{
+			graphics.container.bindPlayers(_battleReportManager.player1, _battleReportManager.player2);
+		}
+		
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
 		{
 			for each(var bum:BattleUnitManager in _battleReportManager.getBUMS())

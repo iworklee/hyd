@@ -29,6 +29,6 @@ package Action.War.Resource
 		public var defendBitmaps:Array = new Array();
 		public var moveBitmaps:Array = new Array();
 		public var waitBitmaps:Array = new Array();
-		public var hurtBitmaps:Array = new Array();
+		public var otherBitmaps:Array = new Array();
 	}
 }

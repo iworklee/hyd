@@ -24,6 +24,7 @@ package Action.War.Report
 	import Action.War.Movie.BattleReportOverRenderer;
 	import Action.War.Resource.BattleSkillResource;
 	import Action.War.Resource.BattleUnitResource;
+	import Action.War.Strategy.UnitWallResourceStrategy;
 	import Action.War.WarPlugins;
 
 	public class BattleReportManager
@@ -42,12 +43,7 @@ package Action.War.Report
 			return _moviePlayer;
 		}
 		
-		private var _battleReport:BattleReport;
-		public function get battleReport():BattleReport
-		{
-			return _battleReport;
-		}
-		
+		private var _battleReport:BattleReport;		
 		private var _buManagers:Array = new Array();
 		
 		public function getBUMS():Array
@@ -97,6 +93,21 @@ package Action.War.Report
 			return actions;
 		}
 		
+		public function get player1():String
+		{
+			return _battleReport.player1;
+		}
+		
+		public function get player2():String
+		{
+			return _battleReport.player2;
+		}
+		
+		public function get win():Boolean
+		{
+			return _battleReport.win;
+		}
+		
 		public function BattleReportManager(report:BattleReport)
 		{
 			_battleReport = report;
@@ -107,7 +118,7 @@ package Action.War.Report
 		{
 			for each(var bu:BattleUnit in _battleReport.units)
 			{
-				var bum:BattleUnitManager = new BattleUnitManager(bu);
+				var bum:BattleUnitManager = new BattleUnitManager(this, bu);
 				bum.resetDir();				
 				_buManagers[bum.SID] = bum;
 			}
@@ -120,11 +131,16 @@ package Action.War.Report
 			//loading BattleUnitResource and HeroResource
 			for each(var bum:BattleUnitManager in _buManagers)
 			{
-				if(!bum.isWall && BattleUnitResource.getInstance(bum.hero.id) == null)
+				if(BattleUnitResource.getInstance(bum.unitResId) == null)
 				{
-					BattleUnitResource.createInstance(bum.hero.unit);
-					for(var i:int = 0; i<3; i++)
-						acts.push(new LoadBattleUnitResourceActivity(bum.hero.unit, i));
+					BattleUnitResource.createInstance(bum.unitResId);
+					if(bum.isWall)
+						acts.push(new LoadBattleUnitResourceActivity(bum.unitResId, 0));
+					else
+					{
+						for(var i:int = 1; i<4; i++)
+							acts.push(new LoadBattleUnitResourceActivity(bum.unitResId, i));
+					}
 				}
 				if(HeroFaceResource.getInstance(bum.hero.face) == null)
 				{
@@ -193,6 +209,14 @@ package Action.War.Report
 			//绘制战斗结果
 			movie.appendFrameRenderer(new BattleReportOverRenderer(this));
 			return movie;
+		}
+		
+		public function getResult():String
+		{
+			if(_battleReport.win)
+				return "[" + _battleReport.player1 + "] 战胜了 [" + _battleReport.player2 + "]";
+			else
+				return "[" + _battleReport.player2 + "] 战胜了 [" + _battleReport.player1 + "]";
 		}
 		
 		public function dispose():void

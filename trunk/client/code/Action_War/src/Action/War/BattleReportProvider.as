@@ -41,13 +41,10 @@ package Action.War
 		{
 			try
 			{
-				//Base64_2.defaultEndian = Endian.LITTLE_ENDIAN;
-				//var bytes:ByteArray = Base64_2.decodeToByteArray(text);
-				//var bytes:ByteArray = Base64_2.decodeToByteArray(text);
 				var bytes:ByteArray = Base16.decode(text);
 				var report:BattleReport = new BattleReport();
 				report.mergeFrom(bytes);
-				debugReport(report);
+				//debugReport(report);
 				return report;
 			}
 			catch(e:Error)
@@ -91,7 +88,10 @@ package Action.War
 		public function createTestReport():BattleReport
 		{			
 			var report:BattleReport = new BattleReport();
-			report.uID = "qwerty123";			
+			report.uID = "qwerty123";	
+			report.player1 = "小妞最倔。";
+			report.player2 = "万人迷陈好";
+			report.win = true;
 				
 			for(var i:int=10; i<60;i++)
 			{
@@ -146,7 +146,7 @@ package Action.War
 				unit = new BattleUnit();
 				unit.sID = unit.pos = i;
 				unit.id = 0;
-				unit.hP = 2200;
+				unit.hP = 1000;
 				unit.mP = 0;
 				report.units.push(unit);
 			}
@@ -156,7 +156,7 @@ package Action.War
 				unit = new BattleUnit();
 				unit.sID = unit.pos = 60 + i;
 				unit.id = 0;
-				unit.hP = 1600;
+				unit.hP = 1000;
 				unit.mP = 0;
 				report.units.push(unit);
 			}
@@ -184,9 +184,9 @@ package Action.War
 				{
 					action.param = 1;
 					for(var j:int=0; j<3; j++)
-						addEffect(action, 26 + j, 120, 2);
+						addEffect(action, 26 + j, 120, 4);
 					for(j=0; j<3; j++)
-						addEffect(action, 31 + j, 120, 2);
+						addEffect(action, 31 + j, 120, 4);
 				}
 				else if(action.unitSID == 33)
 				{
@@ -270,7 +270,10 @@ package Action.War
 			action.type = BattleActionType.Cast;
 			action.param = 0;
 			addEffect(action, 39, 25);
-			addEffect(action, 69, 235);
+			for(j=0; j<5; j++)
+				addEffect(action, j, 200 + j * 200, 2);
+			for(j=0; j<5; j++)
+				addEffect(action, j+65, 200 + j * 200, 2);
 			bout.actions.push(action);	
 			
 			return bout;

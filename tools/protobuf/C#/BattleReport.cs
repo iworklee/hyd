@@ -244,15 +244,6 @@ namespace Action.Model
       get { return _PlusMP; }
       set { _PlusMP = value; }
     }
-
-    private int _BuffId = default(int);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"BuffId", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int BuffId
-    {
-      get { return _BuffId; }
-      set { _BuffId = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -273,8 +264,8 @@ namespace Action.Model
     public enum BattleEffectType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"None", Value=10)]
-      None = 10,
+      [global::ProtoBuf.ProtoEnum(Name=@"None", Value=-1)]
+      None = -1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Dodge", Value=0)]
       Dodge = 0,
@@ -282,14 +273,38 @@ namespace Action.Model
       [global::ProtoBuf.ProtoEnum(Name=@"Block", Value=1)]
       Block = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"Normal", Value=2)]
-      Normal = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"Attack", Value=2)]
+      Attack = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Critical", Value=3)]
       Critical = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Cure", Value=4)]
-      Cure = 4
+      Cure = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"AddMP", Value=5)]
+      AddMP = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ReduceMP", Value=6)]
+      ReduceMP = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"AddAttack", Value=7)]
+      AddAttack = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ReduceAttack", Value=8)]
+      ReduceAttack = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"AddDefence", Value=9)]
+      AddDefence = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ReduceDefence", Value=10)]
+      ReduceDefence = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Stun", Value=11)]
+      Stun = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Poison", Value=12)]
+      Poison = 12
     }
   
 }

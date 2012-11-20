@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Web.UI;
 using System.Xml.Linq;
+using System.Web.Script.Serialization;
 
 namespace BattleReport.Web.Controllers
 {
@@ -20,32 +21,35 @@ namespace BattleReport.Web.Controllers
     {
         public ActionResult Index()
         {
+            HttpCookie cookie = Request.Cookies.Get("wardata");
+            var model = new JavaScriptSerializer().Deserialize<WarModel>(cookie.Value);
+            if (model == null)
+            {
+                var rng = new Random();
+                const int MIN = 801;
+                const int MAX = 806;
+
+                model = new WarModel();
+                model.AttackerName = "进攻方";
+                model.Attacker = new List<string> { 
+                    rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
+                    rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
+                    "", "", "", "", "",
+                    "", "", "", "", "",
+                    "", "", "", "", "",
+                };
+                model.DefenderName = "防守方";
+                model.Defender = new List<string> { 
+                    rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
+                    rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
+                    "", "", "", "", "",
+                    "", "", "", "", "",
+                    "", "", "", "", "",
+                };
+            }
             var xmlFile = XElement.Load(Server.MapPath("~/App_Data/UnitType.xml"));
             var data = xmlFile.Elements().Select(x =>
                 new SelectListItem { Text = (string)x.Element("Name"), Value = (string)x.Element("ID") });
-
-            var rng = new Random();
-            const int MIN = 801;
-            const int MAX = 806;
-
-            var model = new WarModel();
-            model.AttackerName = "进攻方";
-            model.Attacker = new List<string> { 
-                rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
-                rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
-                "", "", "", "", "",
-                "", "", "", "", "",
-                "", "", "", "", "",
-            };
-            model.DefenderName = "防守方";
-            model.Defender = new List<string> { 
-                rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
-                rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(), rng.Next(MIN, MAX).ToString(),
-                "", "", "", "", "",
-                "", "", "", "", "",
-                "", "", "", "", "",
-            };
-
             model.DataSource = data;
 
             return View(model);
@@ -54,6 +58,11 @@ namespace BattleReport.Web.Controllers
         [HttpPost]
         public ActionResult Index(WarModel model)
         {
+            HttpCookie cookie = new HttpCookie("wardata");
+            cookie.Value = new JavaScriptSerializer().Serialize(model);
+            Response.Cookies.Add(cookie);
+
+
             var combat = new Combat();
 
             var attacker = new Army();

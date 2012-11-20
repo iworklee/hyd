@@ -95,6 +95,7 @@
 			
 			private function replay():void
 			{
+				_bcResultHidden.visible = false;
 				_canvasGraphics = new CanvasGraphics(this);
 				_canvasGraphics.clear();
 				//GamePlugins.console.clear();
@@ -139,6 +140,18 @@
 			public function set title(value:String):void
 			{
 				_lblTitle.text = value;
+			}
+			
+			public function bindPlayers(player1:String, player2:String):void
+			{
+				_lblPlayer1.text = player1;
+				_lblPlayer2.text = player2;
+			}
+			
+			public function showMessage(text:String):void
+			{
+				_lblResult.text = text;
+				_bcResultHidden.visible = true;
 			}
 			
 			public function getCanvas():BorderContainer
@@ -237,17 +250,17 @@
 			
 		]]>
 	</fx:Script>
-	<s:Label id="_lblPlayer1" x="50" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28"
+	<s:Label id="_lblPlayer1" left="50" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28" textAlign="left"
 			 fontWeight="bold" text=" 神仙一枝花"  buttonMode="true"/>
-	<s:Label id="_lblTitle" x="320" y="40" color="#00ff00" fontFamily="微软雅黑" fontSize="32"
+	<s:Label id="_lblTitle" right="320" y="40" color="#00ff00" fontFamily="微软雅黑" fontSize="32"
 			 fontWeight="bold" text="准备战斗" />
-	<s:Label id="_lblPlayer2" x="550" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28"
+	<s:Label id="_lblPlayer2" right="50" y="40" color="#ffff00" fontFamily="微软雅黑" fontSize="28" textAlign="right"
 			 fontWeight="bold" text="万寿落雪"  buttonMode="true"/>
 	<s:BorderContainer id="_bcMain" y="100" width="100%" height="400">		
 		<s:BorderContainer id="_bcGrid" width="700" height="250" borderColor="#0000ff" borderWeight="0"
-						   backgroundAlpha="0" x="30" y="75" visible="false">			
+						   backgroundAlpha="0" x="27" y="60" visible="false">			
 		</s:BorderContainer>
-		<s:BorderContainer id="_bcCanvas" width="700" height="250" x="30" y="75" borderVisible="false"
+		<s:BorderContainer id="_bcCanvas" width="700" height="250" x="27" y="60" borderVisible="false"
 						   backgroundAlpha="0" mouseMove="_bcCanvas_mouseMoveHandler(event)"
 						   mouseOut="_bcCanvas_mouseOutHandler(event)">
 			<s:BorderContainer id="_bcLayerEffect" width="100%" height="100%" backgroundAlpha="0" borderVisible="false">
@@ -275,5 +288,10 @@
 						chromeColor="0x0000ff" color="#ffff00" labelPlacement="center"
 						maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
 		<s:Label id="_lblSkill" x="75" y="70" color="#ffffff" text="真武圣斩" fontSize="12" />
+	</s:BorderContainer>
+	<s:BorderContainer id="_bcResultHidden" width="400" height="100" x="180" y="250" backgroundColor="#334466"
+					   backgroundAlpha="0.7" visible="false">
+		<s:Label id="_lblResult" x="30" y="40" width="320" text="[齐天大圣] 战胜了 [二郎神杨戬]"
+				 color="#ffff00" fontSize="20" textAlign="center"/>
 	</s:BorderContainer>
 </s:BorderContainer>

@@ -6,6 +6,7 @@ package Action.War.Strategy
 	{
 		private static var _unitStrategies:Array = 
 			[
+				new UnitWallResourceStrategy(),
 				new UnitAttackResourceStrategy(),
 				new UnitDefendResourceStrategy(),
 				new UnitMoveResourceStrategy()

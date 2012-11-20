@@ -1,8 +1,7 @@
 package Action.War
 {
-	import Action.Model.BattleEffect;
-	
 	import Action.Core.Util.NumberWrapper;
+	import Action.Model.BattleEffect;
 	
 	import flash.geom.Point;
 
@@ -13,6 +12,7 @@ package Action.War
 		}
 		
 		public static const SPLIT_SID:int = 35;
+		public static const SPLIT_HERO_ID:int = 800;
 		public static const INIT_POS_OFFSET:int = 25;
 		public static const MOVE_POS_OFFSET:int = 10;
 		

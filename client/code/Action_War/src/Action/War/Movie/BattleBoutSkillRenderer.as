@@ -50,14 +50,24 @@ package Action.War.Movie
 		
 		public override function enter(graphics:CanvasGraphics, player:MoviePlayer):void
 		{
-			if(_action.effects.length > 0)
+			var attackerTurned:Boolean = false;
+			for each(var effect:BattleEffect in _action.effects)
 			{
-				var sid:int = BattleEffect(_action.effects[0]).unitSID;
-				if(sid != _action.unitSID)
+				if(effect.type > BattleEffectType.None && effect.type < BattleEffectType.Cure)
 				{
-					var bum:BattleUnitManager = _battleReportManager.getBUM(sid);
-					if(bum != null)
-						_attacker.turnTo(bum.POS);
+					if(effect.unitSID != _action.unitSID)
+					{
+						if(!attackerTurned)
+						{
+							var bum:BattleUnitManager = _battleReportManager.getBUM(effect.unitSID);
+							if(bum != null)
+								_attacker.turnTo(bum.POS);
+							attackerTurned = true;
+						}
+						bum = _battleReportManager.getBUM(effect.unitSID);
+						if(bum != null && !bum.isWall)
+							bum.turnTo(_attacker.POS);
+					}					
 				}
 			}
 		}

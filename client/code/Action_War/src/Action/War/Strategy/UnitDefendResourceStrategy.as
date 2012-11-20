@@ -22,7 +22,7 @@ package Action.War.Strategy
 		public function loadBitmaps(resource:BattleUnitResource,sourceBmp:BitmapData):void
 		{
 			var defendBmps:Array = resource.defendBitmaps;
-			var hurtBmps:Array = resource.hurtBitmaps;
+			var hurtBmps:Array = resource.otherBitmaps;
 			var targetBmp:BitmapData = null;
 			
 			for(var y:int = 0; y < 3; y++)

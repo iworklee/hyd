@@ -37,8 +37,9 @@ package Action.War.Report
 			return 100;
 		}
 		
-		public function BattleUnitManager(bu:BattleUnit)
+		public function BattleUnitManager(brm:BattleReportManager, bu:BattleUnit)
 		{
+			_battleReportManager = brm;
 			_battleUnit = bu;
 			HP = bu.hP;
 			MP = bu.mP;
@@ -48,6 +49,7 @@ package Action.War.Report
 			_hero = BattleConfigFactory.getHero(bu.id);
 		}
 		
+		private var _battleReportManager:BattleReportManager;
 		private var _battleUnit:BattleUnit;
 		
 		private var _hero:BattleHero;
@@ -69,6 +71,11 @@ package Action.War.Report
 		public function get isDead():Boolean
 		{
 			return HP <= 0;
+		}
+		
+		public function get isWinner():Boolean
+		{
+			return _battleUnit.sID < BattleDefs.SPLIT_SID ? _battleReportManager.win : !_battleReportManager.win;
 		}
 		
 		//public var image:Image;
@@ -115,15 +122,23 @@ package Action.War.Report
 				resetDir();
 		}
 		
+		public function get unitResId():int
+		{
+			if(_hero.id == 0)
+				return 0;
+			var rid:int = _hero.unit;
+			if(_hero.id >= BattleDefs.SPLIT_HERO_ID && _battleUnit.sID >= BattleDefs.SPLIT_SID)
+				rid += 100;
+			return rid;
+		}
+		
 		public function get unitResource():BattleUnitResource
 		{
-			return BattleUnitResource.getInstance(_hero.unit);
+			return BattleUnitResource.getInstance(unitResId);
 		}
 		
 		public function getAttackBitmap(idx:int):BitmapData
 		{
-			if(unitResource == null)
-				GamePlugins.console.writeLine(this.SID);
 			return unitResource.attackBitmaps[direction * 4 + idx];
 		}
 		
@@ -144,17 +159,22 @@ package Action.War.Report
 		
 		public function getHurtBitmap():BitmapData
 		{
-			return unitResource.hurtBitmaps[0];
+			return unitResource.otherBitmaps[0];
 		}
 		
-		public function getBuffBitmap():BitmapData
+		public function getCureBitmap():BitmapData
 		{
-			return unitResource.hurtBitmaps[1];
+			return unitResource.otherBitmaps[1];
 		}
 		
-		public function getDeadBitmap():BitmapData
+		public function getDeadBitmap(idx:int):BitmapData
 		{
-			return unitResource.hurtBitmaps[2];
+			return unitResource.otherBitmaps[idx + 2];
+		}
+		
+		public function getOtherBitmap(idx:int):BitmapData
+		{
+			return unitResource.otherBitmaps[idx];
 		}
 	}
 }

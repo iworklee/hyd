@@ -23,7 +23,7 @@ package Action.War.Strategy
 		{
 			var moveBmps:Array = resource.moveBitmaps;
 			var waitBmps:Array = resource.waitBitmaps;
-			var hurtBmps:Array = resource.hurtBitmaps;
+			var hurtBmps:Array = resource.otherBitmaps;
 			var targetBmp:BitmapData = null;
 			
 			for(var y:int = 0; y < 6; y++)

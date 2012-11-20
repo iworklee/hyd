@@ -43,6 +43,8 @@ package Action.Display.Drawing
 		{
 			setFrameRenderer(_curFrame, renderer);
 			_curFrame += renderer.getFrameLength();
+			if(_curFrame > _maxFrame)
+				_maxFrame = _curFrame;
 		}
 	}
 }

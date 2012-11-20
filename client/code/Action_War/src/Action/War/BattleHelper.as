@@ -21,7 +21,13 @@ package Action.War
 			return _boutNamePoint;
 		}
 		
-		private static var _heroDescPoints:Array = [new Point(80, 420), new Point(522, 420)];
+		private static var _resultPoint:Point = new Point(100, -50);
+		public static function getResultPoint():Point
+		{
+			return _resultPoint;
+		}
+		
+		private static var _heroDescPoints:Array = [new Point(80, 410), new Point(522, 410)];
 		public static function getHeroDescPoint(sid:int):Point
 		{
 			return _heroDescPoints[int(sid / BattleDefs.SPLIT_SID)] as Point;
@@ -46,6 +52,11 @@ package Action.War
 		public static function getBitmapOffset(bitmap:BitmapData):Point
 		{
 			return new Point((48 - bitmap.width) / 2, (48 - bitmap.height) / 2);
+		}
+		
+		public static function getWallOffsetX(sid:int):int
+		{
+			return sid < BattleDefs.SPLIT_SID ? 7 : 0;
 		}
 	}
 }

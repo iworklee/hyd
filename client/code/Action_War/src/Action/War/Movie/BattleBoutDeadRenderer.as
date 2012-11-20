@@ -42,7 +42,7 @@ package Action.War.Movie
 					continue;
 				exceptions[bum.SID] = bum;
 				if(index % 4 < 2)
-					graphics.drawBitmap(bum.getDeadBitmap(), bum.tempPoint);
+					graphics.drawBitmap(bum.getDeadBitmap(0), bum.tempPoint);
 			}
 			super.drawWaitBitmaps(graphics, exceptions);
 		}
@@ -50,7 +50,11 @@ package Action.War.Movie
 		public override function leave(graphics:CanvasGraphics, player:MoviePlayer):void
 		{
 			for each(var bum:BattleUnitManager in _deadBUMS)
+			{
+				if(bum.isWall)
+					continue;
 				_battleReportManager.delBUM(bum.SID);
+			}
 		}
 		
 		public function getFrameLength():int

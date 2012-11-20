@@ -3,7 +3,9 @@ package Action.War.Movie
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Display.Drawing.MoviePlayer;
+	import Action.Model.BattleReport;
 	import Action.War.BattleDefs;
+	import Action.War.BattleHelper;
 	import Action.War.Report.BattleReportManager;
 	import Action.War.Report.BattleUnitManager;
 	
@@ -20,14 +22,32 @@ package Action.War.Movie
 		}
 		
 		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
+		{
+			var index:int = player.currentFrame - _initialFrame;
+			var exceptions:Array = new Array();
+			for each(var bum:BattleUnitManager in _battleReportManager.getBUMS())
+			{
+				if(!bum.isWall)
+				{
+					exceptions[bum.SID] = bum;
+					bum.direction = BattleDefs.DIR_DOWN;
+					if(bum.isWinner)
+						graphics.drawBitmap(index % 8 < 2 ? bum.getCureBitmap() : bum.getWaitBitmap(), bum.realPoint);
+					else
+						graphics.drawBitmap(bum.getDeadBitmap(int(index % 8 / 4)), bum.realPoint);
+				}
+			}
+			super.drawWaitBitmaps(graphics, exceptions);
+		}
+		
+		public override function leave(graphics:CanvasGraphics, player:MoviePlayer):void
 		{			
-			super.drawWaitBitmaps(graphics);
-			//graphics.alert("战斗结束");
+			graphics.container.showMessage(_battleReportManager.getResult());
 		}
 		
 		public function getFrameLength():int
 		{
-			return 1;
+			return 24;
 		}
 	}
 }

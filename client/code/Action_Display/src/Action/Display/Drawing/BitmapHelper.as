@@ -33,5 +33,25 @@ package Action.Display.Drawing
 			}
 			return target;
 		}
+		
+		public static function reverseBitmapColor(source:BitmapData):BitmapData
+		{
+			var target:BitmapData = new BitmapData(source.width, source.height);
+			for (var y:int=0; y<source.height; y++)
+			{
+				for (var x:int=0; x<source.width; x++) 
+				{
+					var color:uint = source.getPixel32(x, y);
+					if(color > 0xC30000 && color < 0xFFFFFF)
+					{
+						color = source.getPixel(x, y);
+						target.setPixel(x, y, 0x0000ff);
+					}
+					else
+						target.setPixel32(x, y, color);	
+				}
+			}
+			return target;
+		}
 	}
 }

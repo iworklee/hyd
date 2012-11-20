@@ -1,21 +1,21 @@
 package Action.War.Skill
 {
+	import Action.Core.Util.NumberWrapper;
 	import Action.Display.Drawing.CanvasGraphics;
 	import Action.Display.Drawing.IMovieFrameRenderer;
 	import Action.Model.BattleAction;
 	import Action.Model.BattleEffect;
+	import Action.Model.BattleEffectType;
 	import Action.War.BattleDefs;
+	import Action.War.Config.BattleSkill;
 	import Action.War.Movie.BattleBoutSkillRenderer;
 	import Action.War.Report.BattleEffectWrapper;
 	import Action.War.Report.BattleUnitManager;
-	
-	import Action.Core.Util.NumberWrapper;
 	
 	import flash.display.Graphics;
 	import flash.geom.Point;
 	
 	import flashx.textLayout.factory.TruncationOptions;
-	import Action.War.Config.BattleSkill;
 	
 	public class CommonSkillRenderer extends SkillRendererBase implements ISkillRenderer
 	{
@@ -41,18 +41,22 @@ package Action.War.Skill
 			{
 				for each(var effect:BattleEffect in action.effects)
 				{
+					if(effect.type == BattleEffectType.None)
+						continue;
 					var bum:BattleUnitManager = frameRenderer.battleReportManager.getBUM(effect.unitSID);
 					if(bum != null)
 					{
-						exceptions[bum.SID] = bum;
-						if(!bum.isWall)
+						if(bum.SID != attacker.SID)					
 						{
-							if(effect.type < 2)
-								graphics.drawBitmap(bum.getDefendBitmap(), bum.tempPoint);
-							else
-								graphics.drawBitmap(bum.getHurtBitmap(), bum.tempPoint);
-						}
-						
+							exceptions[bum.SID] = bum;
+							if(!bum.isWall)
+							{
+								if(effect.type < 2)
+									graphics.drawBitmap(bum.getDefendBitmap(), bum.tempPoint);
+								else
+									graphics.drawBitmap(bum.getHurtBitmap(), bum.tempPoint);
+							}
+						}						
 						var wrapper:BattleEffectWrapper = BattleEffectWrapper.wrap(effect);
 						
 						//print effect.type

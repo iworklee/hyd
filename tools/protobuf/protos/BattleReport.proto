@@ -44,6 +44,8 @@ enum BattleEffectType {
   Block = 1;	//格挡
   Normal = 2;	//普通
   Critical = 3;	//暴击
+  Cure = 4;	//治疗
+  Wait = 5;	//待机
 }
 
 message BattleEffect {

@@ -283,7 +283,13 @@ namespace Action.Model
       Normal = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Critical", Value=3)]
-      Critical = 3
+      Critical = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Cure", Value=4)]
+      Cure = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"Wait", Value=5)]
+      Wait = 5
     }
   
 }

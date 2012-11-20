@@ -92,24 +92,6 @@
 		<CriticalChance>0.3</CriticalChance>
 	</Unit>
 	<Unit>
-		<ID>806</ID>
-		<Name>谋略家</Name>
-		<Type>Action.War.CombatUnit</Type>
-		<StrikeRange>1,0;0,-1;0,1;2,0;0,-2;0,2</StrikeRange>
-		<Health>232</Health>
-		<SkillID>0</SkillID>
-		<Charge>0</Charge>
-		<NormalAttack>56</NormalAttack>
-		<NormalDefence>44</NormalDefence>
-		<TacticAttack>90</TacticAttack>
-		<TacticDefence>60</TacticDefence>
-		<StrategyAttack>36</StrategyAttack>
-		<StrategyDefence>24</StrategyDefence>
-		<DodgeChance>0.35</DodgeChance>
-		<BlockChance>0.2</BlockChance>
-		<CriticalChance>0.25</CriticalChance>
-	</Unit>
-	<Unit>
 		<ID>98</ID>
 		<Name>关羽</Name>
 		<Type>Action.War.CombatTacticUnit</Type>

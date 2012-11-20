@@ -12,16 +12,13 @@ namespace Action.War
     /// </summary>
     public class CombatStrategyUnit : CombatUnit
     {
-        /// <summary>
-        /// 技能施放概率
-        /// </summary>
-        public float SkillChance { get; set; }
+        const int MAX_CHARGE = 100;
+        const int CHARGE_PLUS = 25;
 
         public override BattleAction SkillStrike()
         {
             // 可以释放技能
-            var rng = new Random(); // TODO 统一随机函数生成
-            if (rng.NextDouble() > SkillChance)
+            if (Charge < 100)
                 return null;
 
             var skill = SkillFactory.Instance.GetSkill(this.SkillID);
@@ -32,9 +29,33 @@ namespace Action.War
             var ba = new BattleAction();
             ba.UnitSID = this.BattleID;
             ba.Type = BattleActionType.Cast; // 攻击
-            ba.Param = SkillID; // 策略攻击
+            ba.Param = SkillID;
             ba.Effects.AddRange(effects);
             return ba;
+        }
+
+        protected override IEnumerable<BattleEffect> Attacking(CombatUnit target, AttackType attackType, BattleEffectType effectType)
+        {
+            if (effectType != BattleEffectType.Dodge && attackType == AttackType.Normal)
+            {
+                Charge += CHARGE_PLUS;
+                yield return new BattleEffect { UnitSID = this.BattleID, PlusMP = CHARGE_PLUS };
+            }
+
+            foreach (var e in base.Attacking(target, attackType, effectType))
+                yield return e;
+        }
+
+        protected override IEnumerable<BattleEffect> UnderAttack(BattleEffect effect)
+        {
+            if (effect.Type != BattleEffectType.Dodge)
+            {
+                Charge += CHARGE_PLUS;
+                yield return new BattleEffect { UnitSID = this.BattleID, PlusMP = CHARGE_PLUS };
+            }
+
+            foreach (var e in base.UnderAttack(effect))
+                yield return e;
         }
     }
 }

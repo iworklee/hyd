@@ -30,7 +30,7 @@ namespace Action.War
             var ba = new BattleAction();
             ba.UnitSID = this.BattleID;
             ba.Type = BattleActionType.Cast; // 攻击
-            ba.Param = SkillID; // 战法攻击
+            ba.Param = SkillID;
             ba.Effects.AddRange(effects);
             return ba;
         }

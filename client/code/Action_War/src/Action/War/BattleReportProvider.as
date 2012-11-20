@@ -273,7 +273,7 @@ package Action.War
 			for(j=0; j<5; j++)
 				addEffect(action, j, 200 + j * 200, 2);
 			for(j=0; j<5; j++)
-				addEffect(action, j+65, 200 + j * 200, 2);
+				addEffect(action, j+65, 1500 - j * 200, 2);
 			bout.actions.push(action);	
 			
 			return bout;

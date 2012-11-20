@@ -32,11 +32,16 @@ package Action.War.Movie
 					var hpPct:Number = bum.HP / bum.maxHP;
 					var bitmap:BitmapData = null;
 					if(hpPct == 0)
-						bitmap = bum.getOtherBitmap(2);
-					else if(hpPct < 0.5)
-						bitmap = bum.getOtherBitmap(1);
-					else if(hpPct < 1)
-						bitmap = bum.getOtherBitmap(0);
+						bitmap = bum.getOtherBitmap(3);
+					else if(bum.SID != 2 && bum.SID != 67)
+					{
+						if(hpPct < 0.2)
+							bitmap = bum.getOtherBitmap(2);
+						else if(hpPct < 0.5)
+							bitmap = bum.getOtherBitmap(1);
+						else if(hpPct < 1)
+							bitmap = bum.getOtherBitmap(0);
+					}
 					if(bitmap != null)
 					{
 						graphics.drawBitmap(bitmap, bum.realPoint, null, BattleHelper.getWallOffsetX(bum.SID));

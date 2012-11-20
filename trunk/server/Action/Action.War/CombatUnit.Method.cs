@@ -73,7 +73,7 @@ namespace Action.War
             var damage = this._attack[attackType] - target._defence[attackType] + this.Level * 50;
             if (damage < 1)
                 damage = 1;
-            damage = (int)(damage * ratio * 0.5);
+            damage = (int)(damage * ratio * 0.5 * damageRatio);
 
             target.Health -= damage;
 

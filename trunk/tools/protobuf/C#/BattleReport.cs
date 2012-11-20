@@ -218,9 +218,9 @@ namespace Action.Model
       set { _UnitSID = value; }
     }
 
-    private Action.Model.BattleEffectType _Type = Action.Model.BattleEffectType.Normal;
+    private Action.Model.BattleEffectType _Type = Action.Model.BattleEffectType.None;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(Action.Model.BattleEffectType.Normal)]
+    [global::System.ComponentModel.DefaultValue(Action.Model.BattleEffectType.None)]
     public Action.Model.BattleEffectType Type
     {
       get { return _Type; }
@@ -273,6 +273,9 @@ namespace Action.Model
     public enum BattleEffectType
     {
             
+      [global::ProtoBuf.ProtoEnum(Name=@"None", Value=10)]
+      None = 10,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"Dodge", Value=0)]
       Dodge = 0,
             
@@ -286,10 +289,7 @@ namespace Action.Model
       Critical = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"Cure", Value=4)]
-      Cure = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Wait", Value=5)]
-      Wait = 5
+      Cure = 4
     }
   
 }

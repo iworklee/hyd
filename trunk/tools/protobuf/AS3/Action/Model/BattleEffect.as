@@ -62,7 +62,7 @@ package Action.Model {
 
 		public function get type():int {
 			if(!hasType) {
-				return Action.Model.BattleEffectType.Normal;
+				return Action.Model.BattleEffectType.None;
 			}
 			return Type$field;
 		}

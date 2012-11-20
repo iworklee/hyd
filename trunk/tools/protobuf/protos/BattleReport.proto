@@ -40,17 +40,17 @@ message BattleAction {
 }
 
 enum BattleEffectType {
-  Dodge = 0;	//闪避
-  Block = 1;	//格挡
-  Normal = 2;	//普通
-  Critical = 3;	//暴击
-  Cure = 4;	//治疗
-  Wait = 5;	//待机
+  None = 10;	//无
+  Dodge = 0;	//攻击被闪避
+  Block = 1;	//攻击被格挡
+  Normal = 2;	//普通攻击
+  Critical = 3;	//暴击攻击
+  Cure = 4;	//施法治疗
 }
 
 message BattleEffect {
   optional int32 UnitSID = 1;		 		//效果作用的作战单位唯一号
-  optional BattleEffectType Type = 2 [default=Normal];	//效果类型（闪避、格挡、正常、暴击）
+  optional BattleEffectType Type = 2 [default=None];	//效果类型（闪避、格挡、正常、暴击）
   optional sint32 PlusHP = 3;				//HP增加值
   optional sint32 PlusMP = 4;				//MP增加值
   optional int32 BuffId = 5;				//Buff编号

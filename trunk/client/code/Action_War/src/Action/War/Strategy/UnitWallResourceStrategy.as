@@ -18,7 +18,7 @@ package Action.War.Strategy
 		
 		public function loadBitmaps(resource:BattleUnitResource, sourceBmp:BitmapData):void
 		{			
-			for(var i:int=0; i<3; i++)
+			for(var i:int=0; i<4; i++)
 			{
 				var targetBmp:BitmapData = BitmapHelper.cutBitmap(sourceBmp, 0, i * 48, 48, 48);
 				resource.otherBitmaps.push(targetBmp);
@@ -27,7 +27,7 @@ package Action.War.Strategy
 		
 		public function getRequestUrl(resource:BattleUnitResource):String
 		{
-			return "BU/wall.png";
+			return "BU/wall.png?2";
 		}
 	}
 }

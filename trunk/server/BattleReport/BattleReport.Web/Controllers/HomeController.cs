@@ -11,7 +11,6 @@ using System.Diagnostics;
 using System.Text;
 using System.Web.UI;
 using System.Xml.Linq;
-using System.Web.Script.Serialization;
 
 namespace BattleReport.Web.Controllers
 {
@@ -21,8 +20,17 @@ namespace BattleReport.Web.Controllers
     {
         public ActionResult Index()
         {
+            WarModel model = null;
+
             HttpCookie cookie = Request.Cookies.Get("wardata");
-            var model = new JavaScriptSerializer().Deserialize<WarModel>(cookie.Value);
+            if (cookie != null)
+            {
+                using (var ms = new MemoryStream(Convert.FromBase64String(cookie.Value)))
+                {
+                    model = ProtoBuf.Serializer.Deserialize<WarModel>(ms);
+                }
+            }
+
             if (model == null)
             {
                 var rng = new Random();
@@ -59,9 +67,12 @@ namespace BattleReport.Web.Controllers
         public ActionResult Index(WarModel model)
         {
             HttpCookie cookie = new HttpCookie("wardata");
-            cookie.Value = new JavaScriptSerializer().Serialize(model);
-            Response.Cookies.Add(cookie);
-
+            using (var ms = new MemoryStream())
+            {
+                ProtoBuf.Serializer.Serialize(ms, model);
+                cookie.Value = Convert.ToBase64String(ms.ToArray());
+                Response.Cookies.Add(cookie);
+            }
 
             var combat = new Combat();
 

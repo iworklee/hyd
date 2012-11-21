@@ -3,13 +3,16 @@
 <head>
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/game.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
 </head>
 <body>
     <div class="page">
         <div id="header">
             <div id="title">
-                <h1>排兵布阵</h1>
+                <h1>
+                    排兵布阵</h1>
             </div>
             <div id="logindisplay">
                 &nbsp;
@@ -27,5 +30,23 @@
         <div id="footer">
         </div>
     </div>
+    <div class="wrap">
+        <!--阵队1-->
+        <table class="tbl_ranks" id="tbl_rank1">
+        </table>
+        <!--阵队2-->
+        <table class="tbl_ranks" id="tbl_rank2">
+        </table>
+        <div style="clear: both">
+        </div>
+        <!--选择英雄-->
+        <ul class="list_heros">
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            var thisWar = new war($(".tbl_ranks"));
+        });
+    </script>
 </body>
 </html>

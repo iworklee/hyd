@@ -1,0 +1,75 @@
+﻿ul
+{
+    padding: 0px;
+    margin: 0px;
+}
+
+.tbl_ranks td
+{
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 0px;
+}
+
+    .tbl_ranks td.drop_hover
+    {
+        border: 1px solid yellow;
+    }
+
+.tbl_ranks
+{
+    border: 0px;
+    padding: 0px;
+    border-spacing: 0px;
+    float: left;
+}
+
+#tbl_rank1
+{
+    background: green;
+}
+
+#tbl_rank2
+{
+    margin-left: 50px;
+    background: red;
+}
+
+.list_heros
+{
+    margin-top: 40px;
+}
+
+.list_heros li
+{
+    float: left;
+    width: 80px;
+    height: 80px;
+    list-style: none;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.list_heros li img
+{
+    width: 80px;
+    height: 80px;
+    margin: 0px;
+}
+
+.tbl_ranks td .pnl_hero
+{
+    position:relative;
+}
+
+.tbl_ranks td .link_heroClose
+{
+    background:url(../images/ico_close.gif) no-repeat;
+    width:8px;
+    height:8px;
+    position:absolute;
+    right:5px;
+    top:5px;
+}

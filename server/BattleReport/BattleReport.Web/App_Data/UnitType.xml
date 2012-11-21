@@ -132,11 +132,11 @@
 		<Name>周瑜</Name>
 		<Type>Action.War.CombatTacticUnit</Type>
 		<StrikeRange>1,0;0,-1;0,1;2,0;0,-2;0,2</StrikeRange>
-		<Health>328</Health>
+		<Health>292</Health>
 		<SkillID>9</SkillID>
 		<Charge>50</Charge>
-		<NormalAttack>113</NormalAttack>
-		<NormalDefence>79</NormalDefence>
+		<NormalAttack>90</NormalAttack>
+		<NormalDefence>71</NormalDefence>
 		<TacticAttack>114</TacticAttack>
 		<TacticDefence>76</TacticDefence>
 		<StrategyAttack>127</StrategyAttack>

@@ -27,8 +27,9 @@ namespace Action.War
         {
             var military = _getMilitary(self);
 
-            var invert = Vector2.Zero - direction;
-            var matrix = new Matrix(direction.X, direction.Y, 0, 0, invert.Y, invert.X, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            var unitization = Vector2.Normalize(direction);
+            var invert = Vector2.Zero - unitization;
+            var matrix = new Matrix(unitization.X, unitization.Y, 0, 0, invert.Y, invert.X, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
             return _range
                 .Select(loc => military.GetAliveUnitByPos(self.Position + direction + Vector2.Transform(loc * self.Military.Forward, matrix)))

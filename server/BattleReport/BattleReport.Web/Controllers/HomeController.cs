@@ -25,9 +25,15 @@ namespace BattleReport.Web.Controllers
             HttpCookie cookie = Request.Cookies.Get("wardata");
             if (cookie != null)
             {
-                using (var ms = new MemoryStream(Convert.FromBase64String(cookie.Value)))
+                try
                 {
-                    model = ProtoBuf.Serializer.Deserialize<WarModel>(ms);
+                    using (var ms = new MemoryStream(Convert.FromBase64String(cookie.Value)))
+                    {
+                        model = ProtoBuf.Serializer.Deserialize<WarModel>(ms);
+                    }
+                }
+                catch
+                {
                 }
             }
 

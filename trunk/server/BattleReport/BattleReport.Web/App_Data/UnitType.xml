@@ -247,8 +247,8 @@
 		<NormalDefence>66</NormalDefence>
 		<TacticAttack>169</TacticAttack>
 		<TacticDefence>113</TacticDefence>
-		<StrategyAttack>66</StrategyAttack>
-		<StrategyDefence>44</StrategyDefence>
+		<StrategyAttack>79</StrategyAttack>
+		<StrategyDefence>52</StrategyDefence>
 		<DodgeChance>0.2</DodgeChance>
 		<BlockChance>0.25</BlockChance>
 		<CriticalChance>0.35</CriticalChance>

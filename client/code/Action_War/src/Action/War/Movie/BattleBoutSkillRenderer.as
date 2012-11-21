@@ -48,7 +48,7 @@ package Action.War.Movie
 			return descBUM(_attacker) + _skillRenderer.description;
 		}
 		
-		public override function enter(graphics:CanvasGraphics, player:MoviePlayer):void
+		public override function enter(graphics:CanvasGraphics):void
 		{
 			var attackerTurned:Boolean = false;
 			for each(var effect:BattleEffect in _action.effects)
@@ -72,13 +72,13 @@ package Action.War.Movie
 			}
 		}
 		
-		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
+		public function render(graphics:CanvasGraphics):void
 		{			
-			var index:int = player.currentFrame - _initialFrame;
+			var index:int = _moviePlayer.currentFrame - _initialFrame;
 			_skillRenderer.render(graphics, index, this);		
 		}
 		
-		public override function leave(graphics:CanvasGraphics, player:MoviePlayer):void
+		public override function leave(graphics:CanvasGraphics):void
 		{
 			//GamePlugins.console.writeLine("BoutSkill.OnLeave");
 			for each(var effect:BattleEffect in _action.effects)

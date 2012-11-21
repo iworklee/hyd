@@ -46,7 +46,7 @@
 			public function onLoad():void
 			{
 				//加载背景
-				_bcMain.setStyle("backgroundImage", CommonResource.imageSection.get(WarModule.BgUrl));
+				_bcMain.setStyle("backgroundImage", CommonResource.imageSection.get(BattleDefs.BgUrl));
 				
 				//生成网格
 				for(var i:int = 0; i<5; i++)

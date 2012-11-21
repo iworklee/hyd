@@ -120,7 +120,7 @@
 				
 				var policy:String = GameConfig.getString("policy");
 				if(policy != null)
-					flash.system.Security.loadPolicyFile(policy);
+					Security.loadPolicyFile(policy);
 				
 				parent.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
 				GameClient.create().frame = this;

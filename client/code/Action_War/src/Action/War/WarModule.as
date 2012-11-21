@@ -20,9 +20,7 @@ package Action.War
 	{
 		public function WarModule()
 		{
-		}
-		
-		public static const BgUrl:String = "battle/001.JPG";
+		}		
 		
 		public function get name():String
 		{

@@ -22,19 +22,19 @@ package Action.War.Movie
 			return _deadBUMS.length + "支部队败退";
 		}
 		
-		public override function enter(graphics:CanvasGraphics, player:MoviePlayer):void
+		public override function enter(graphics:CanvasGraphics):void
 		{
 			_deadBUMS = _battleReportManager.getDeadBUMS();
 		}
 		
-		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
+		public function render(graphics:CanvasGraphics):void
 		{
 			if(_deadBUMS.length == 0)
 			{
-				player.goto(player.currentFrame + getFrameLength());
+				_moviePlayer.goto(_moviePlayer.currentFrame + getFrameLength());
 				return;
 			}
-			var index:int = player.currentFrame - _initialFrame;
+			var index:int = _moviePlayer.currentFrame - _initialFrame;
 			var exceptions:Array = new Array();
 			for each(var bum:BattleUnitManager in _deadBUMS)
 			{
@@ -47,7 +47,7 @@ package Action.War.Movie
 			super.drawWaitBitmaps(graphics, exceptions);
 		}
 		
-		public override function leave(graphics:CanvasGraphics, player:MoviePlayer):void
+		public override function leave(graphics:CanvasGraphics):void
 		{
 			for each(var bum:BattleUnitManager in _deadBUMS)
 			{

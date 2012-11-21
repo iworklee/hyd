@@ -25,7 +25,7 @@ package Action.War.Movie
 			return "进入第" + _bout.sID + "回合";
 		}
 		
-		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
+		public function render(graphics:CanvasGraphics):void
 		{
 			var text:String = "第" + _bout.sID + "回合";
 			graphics.container.title = text;

@@ -28,21 +28,21 @@ package Action.War.Movie
 			return descBUM(_moveBUM) + "开始移动";
 		}
 		
-		public override function enter(graphics:CanvasGraphics, player:MoviePlayer):void
+		public override function enter(graphics:CanvasGraphics):void
 		{			
 			_moveBUM.resetDir();
 		}
 		
-		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
+		public function render(graphics:CanvasGraphics):void
 		{
 			var exceptions:Array = new Array();
 			exceptions[_moveBUM.SID] = _moveBUM;
 			_moveBUM.tempPoint.x += _moveBUM.speed;
-			graphics.drawBitmap(_moveBUM.getMoveBitmap(player.currentFrame % 2), _moveBUM.tempPoint);
+			graphics.drawBitmap(_moveBUM.getMoveBitmap(_moviePlayer.currentFrame % 2), _moveBUM.tempPoint);
 			super.drawWaitBitmaps(graphics, exceptions);
 		}
 		
-		public override function leave(graphics:CanvasGraphics, player:MoviePlayer):void
+		public override function leave(graphics:CanvasGraphics):void
 		{
 			_moveBUM.POS = _action.param;
 		}

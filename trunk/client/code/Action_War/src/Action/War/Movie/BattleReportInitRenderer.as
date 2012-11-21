@@ -31,18 +31,18 @@ package Action.War.Movie
 			return "战斗开始";
 		}
 		
-		public override function enter(graphics:CanvasGraphics, player:MoviePlayer):void
+		public override function enter(graphics:CanvasGraphics):void
 		{
 			graphics.container.bindPlayers(_battleReportManager.player1, _battleReportManager.player2);
 		}
 		
-		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
+		public function render(graphics:CanvasGraphics):void
 		{
 			for each(var bum:BattleUnitManager in _battleReportManager.getBUMS())
 			{
 				if(bum.isWall)
 					continue;
-				var idx:int = player.currentFrame % 2;
+				var idx:int = _moviePlayer.currentFrame % 2;
 				bum.tempPoint.x += bum.speed;
 				if(graphics.contains(bum.tempPoint))
 					graphics.drawBitmap(bum.getMoveBitmap(idx), bum.tempPoint);

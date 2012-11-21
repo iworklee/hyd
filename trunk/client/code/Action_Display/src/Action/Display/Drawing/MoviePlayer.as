@@ -28,6 +28,12 @@ package Action.Display.Drawing
 			return _curFrame;
 		}
 		
+		private var _renderCount:int = 0;
+		public function get renderCount():int
+		{
+			return _renderCount;
+		}
+		
 		public function get movie():Movie
 		{
 			return _movie;
@@ -106,27 +112,23 @@ package Action.Display.Drawing
 				if(_movie.isEnd(_curFrame))
 				{
 					if(_curRenderer != null)
-						_curRenderer.leave(_graphics, this);
+						_curRenderer.leave(_graphics);
 					this.stop();
 					return;
 				}
 				var renderer:IMovieFrameRenderer = _movie.getFrameRenderer(_curFrame);
 				if(renderer != null)
 				{
-					_graphics.clear();
 					if(_curRenderer != null)
-						_curRenderer.leave(_graphics, this);
+						_curRenderer.leave(_graphics);
 					_curRenderer = renderer;
 					//test("OnEnter");
-					_curRenderer.enter(_graphics, this);
-					renderer.render(_graphics, this);
+					_curRenderer.bind(this);
+					_curRenderer.enter(_graphics);
+					doRendering();
 				}
 				else if(_curRenderer != null)
-				{
-					_graphics.clear();
-					//test("OnTick");
-					_curRenderer.render(_graphics, this);
-				}
+					doRendering();
 				this.dispatchEvent(new Event(Event_Goto));
 			}
 			catch(e:Error)
@@ -134,6 +136,13 @@ package Action.Display.Drawing
 				stop();
 				throw e;
 			}
+		}
+		
+		private function doRendering():void
+		{
+			_renderCount++;
+			_graphics.clear();
+			_curRenderer.render(_graphics);
 		}
 		
 		private function check():void

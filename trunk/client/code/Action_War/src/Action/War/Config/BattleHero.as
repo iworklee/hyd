@@ -10,6 +10,7 @@ package Action.War.Config
 	{		
 		public var id:int;
 		public var name:String;
+		public var job:int;
 		public var face:int;
 		public var body:int;
 		public var unit:int;

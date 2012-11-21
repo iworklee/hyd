@@ -1,5 +1,8 @@
 package Action.War
 {
+	import Action.War.Config.BattleHero;
+	import Action.War.Resource.BattleSkillResource;
+	
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 
@@ -57,6 +60,12 @@ package Action.War
 		public static function getWallOffsetX(sid:int):int
 		{
 			return sid < BattleDefs.SPLIT_SID ? 7 : 0;
+		}
+		
+		public static function getPowerfullBitmap(hero:BattleHero, idx:int):BitmapData
+		{
+			var srid:int = hero.job != 6 ? BattleDefs.STATE_POWERFULL_1 : BattleDefs.STATE_POWERFULL_2;
+			return BattleSkillResource.getInstance(srid).bitmaps[idx];
 		}
 	}
 }

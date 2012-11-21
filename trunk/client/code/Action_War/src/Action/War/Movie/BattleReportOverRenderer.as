@@ -21,9 +21,9 @@ package Action.War.Movie
 			return "战斗结束";
 		}
 		
-		public function render(graphics:CanvasGraphics, player:MoviePlayer):void
+		public function render(graphics:CanvasGraphics):void
 		{
-			var index:int = player.currentFrame - _initialFrame;
+			var index:int = _moviePlayer.currentFrame - _initialFrame;
 			var exceptions:Array = new Array();
 			for each(var bum:BattleUnitManager in _battleReportManager.getBUMS())
 			{
@@ -40,7 +40,7 @@ package Action.War.Movie
 			super.drawWaitBitmaps(graphics, exceptions);
 		}
 		
-		public override function leave(graphics:CanvasGraphics, player:MoviePlayer):void
+		public override function leave(graphics:CanvasGraphics):void
 		{			
 			graphics.container.showMessage(_battleReportManager.getResult());
 		}

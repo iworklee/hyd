@@ -22,6 +22,7 @@ package Action.War.Movie
 		}
 		
 		protected var _initialFrame:int;
+		protected var _moviePlayer:MoviePlayer;
 		
 		public function drawWaitBitmaps(graphics:CanvasGraphics, exceptions:Array=null):void
 		{
@@ -48,11 +49,22 @@ package Action.War.Movie
 						//GamePlugins.console.drawBitmap(bitmap);
 					}
 				}
-				else if(exceptions == null ||  exceptions[bum.SID] == null)
+				else
 				{
-					bum.tempPoint = bum.realPoint;
-					graphics.drawBitmap(bum.getWaitBitmap(), bum.tempPoint);
-				}
+					if(exceptions == null ||  exceptions[bum.SID] == null)					
+					{
+						bum.tempPoint = bum.realPoint;
+						graphics.drawBitmap(bum.getWaitBitmap(), bum.tempPoint);
+					}
+					
+					//draw powerfull effect
+					var index:int = _moviePlayer.renderCount % 8;
+					if(bum.MP >= 100)
+					{
+						var pfBmp:BitmapData = BattleHelper.getPowerfullBitmap(bum.hero, index / 2);
+							graphics.drawBitmap(pfBmp, bum.tempPoint, graphics.getEffectLayer(), -8, -8);
+					}
+				}	
 			}
 		}
 		
@@ -66,11 +78,16 @@ package Action.War.Movie
 			_initialFrame = frame;
 		}
 		
-		public function enter(graphics:CanvasGraphics, player:MoviePlayer):void
+		public function bind(player:MoviePlayer):void
+		{
+			_moviePlayer = player;
+		}
+		
+		public function enter(graphics:CanvasGraphics):void
 		{
 		}
 		
-		public function leave(graphics:CanvasGraphics, player:MoviePlayer):void
+		public function leave(graphics:CanvasGraphics):void
 		{			
 		}
 		

@@ -166,6 +166,17 @@ package Action.War.Report
 				}
 			}
 			
+			//loading BattleSkillResource.State
+			var stateResIds:Array = [BattleDefs.STATE_POWERFULL_1, BattleDefs.STATE_POWERFULL_2];
+			for each(var srid:int in stateResIds)
+			{
+				if(BattleSkillResource.getInstance(srid) == null)
+				{
+					BattleSkillResource.createInstance(srid);
+					acts.push(new LoadBattleSkillResourceActivity(srid));
+				}
+			}
+			
 			return acts;
 		}
 		

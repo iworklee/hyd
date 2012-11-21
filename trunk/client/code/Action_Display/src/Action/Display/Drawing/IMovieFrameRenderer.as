@@ -4,9 +4,10 @@ package Action.Display.Drawing
 	{
 		function get description():String;
 		function initialize(frame:int):void;
-		function enter(graphics:CanvasGraphics, player:MoviePlayer):void;
-		function render(graphics:CanvasGraphics, player:MoviePlayer):void;
-		function leave(graphics:CanvasGraphics, player:MoviePlayer):void;
+		function bind(player:MoviePlayer):void;
+		function enter(graphics:CanvasGraphics):void;
+		function render(graphics:CanvasGraphics):void;
+		function leave(graphics:CanvasGraphics):void;
 		function getFrameLength():int;
 	}
 }

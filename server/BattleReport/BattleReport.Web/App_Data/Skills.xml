@@ -208,10 +208,6 @@
 						<ID>1</ID>
 						<Value>2</Value>
 					</Buff>
-					<Buff>
-						<ID>13</ID>
-						<Value>0</Value>
-					</Buff>
 				</Buffs>
 			</Effect>
 			<Effect>
@@ -223,7 +219,7 @@
 				<Buffs>
 					<Buff>
 						<ID>14</ID>
-						<Value>0</Value>
+						<Value>75</Value>
 					</Buff>
 				</Buffs>
 			</Effect>
@@ -286,7 +282,11 @@
 				<Buffs>
 					<Buff>
 						<ID>1</ID>
-						<Value>2</Value>
+						<Value>1.5</Value>
+					</Buff>					
+					<Buff>
+						<ID>13</ID>
+						<Value>0</Value>
 					</Buff>
 				</Buffs>
 			</Effect>

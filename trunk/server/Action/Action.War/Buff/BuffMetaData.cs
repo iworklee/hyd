@@ -8,9 +8,14 @@ using System.Text;
 
 namespace Action.Buff
 {
-    public interface BuffMetaData
+    public class BuffMetaData
     {
-        int BuffId { get; }
+        public int BuffId { get; set; }
+
+        public BuffMetaData(IDictionary<string, object> data)
+        {
+            BuffId = (int)data["BuffId"];
+        }
     }
 }
 

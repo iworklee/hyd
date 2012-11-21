@@ -124,7 +124,7 @@
 			<Effect>
 				<Area>
 					<Enemy>true</Enemy>
-					<Range>1,0;1,-1;1,1;0,-1;0,1;0,0;2,-1;2,1;2,0</Range>
+					<Range>0,0;1,0;1,-1;1,1;0,-1;0,1;2,-1;2,1;2,0</Range>
 					<Count>9</Count>
 				</Area>
 				<Buffs>
@@ -269,7 +269,7 @@
 		<Type>Action.Skill.TacticSkill</Type>
 		<Area>
 			<Enemy>true</Enemy>
-			<Range>1,0,0,-1;0,1;2,0;0,-2;0,2</Range>
+			<Range>1,0;0,-1;0,1;2,0;0,-2;0,2</Range>
 			<Count>1</Count>
 		</Area>
 		<Effects>
@@ -311,14 +311,14 @@
 		<Type>Action.Skill.StrategySkill</Type>
 		<Area>
 			<Enemy>true</Enemy>
-			<Range>1,0,0,-1;0,1;2,0;0,-2;0,2</Range>
+			<Range>1,0;0,-1;0,1;2,0;0,-2;0,2</Range>
 			<Count>1</Count>
 		</Area>
 		<Effects>
 			<Effect>
 				<Area>
 					<Enemy>true</Enemy>
-					<Range>1,0;1,-1;1,1;0,-1;0,1;0,0;2,-1;2,1;2,0</Range>
+					<Range>0,0;1,0;1,-1;1,1;0,-1;0,1;2,-1;2,1;2,0</Range>
 					<Count>9</Count>
 				</Area>
 				<Buffs>
@@ -353,14 +353,14 @@
 		<Type>Action.Skill.StrategySkill</Type>
 		<Area>
 			<Enemy>true</Enemy>
-			<Range>1,0,0,-1;0,1;2,0;0,-2;0,2</Range>
+			<Range>1,0;0,-1;0,1;2,0;0,-2;0,2</Range>
 			<Count>1</Count>
 		</Area>
 		<Effects>
 			<Effect>
 				<Area>
 					<Enemy>true</Enemy>
-					<Range>1,0;1,-1;1,1;0,-1;0,1;0,0;2,-1;2,1;2,0</Range>
+					<Range>0,0;1,0;1,-1;1,1;0,-1;0,1;2,-1;2,1;2,0</Range>
 					<Count>9</Count>
 				</Area>
 				<Buffs>

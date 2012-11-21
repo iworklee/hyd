@@ -27,12 +27,20 @@ namespace Action.War
         {
             var military = _getMilitary(self);
 
-            var unitization = Vector2.Normalize(direction);
-            var invert = Vector2.Zero - unitization;
-            var matrix = new Matrix(unitization.X, unitization.Y, 0, 0, invert.Y, invert.X, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            //var unitization = Vector2.Normalize(direction);
+            //var invert = Vector2.Zero - unitization;
+            //var matrix = new Matrix(unitization.X, unitization.Y, 0, 0, invert.Y, invert.X, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            var angle = (float)Math.Atan2(direction.Y, direction.X);
+            var matrix = Matrix.CreateRotationZ(angle);
 
             return _range
-                .Select(loc => military.GetAliveUnitByPos(self.Position + direction + Vector2.Transform(loc * self.Military.Forward, matrix)))
+                .Select(loc =>
+                {
+                    var rotate = Vector2.Transform(loc, matrix);
+                    var pos = self.Position + direction + rotate * self.Military.Forward;
+                    return military.GetAliveUnitByPos(new Vector2((float)Math.Round(pos.X), (float)Math.Round(pos.Y)));
+                })
                 .Where(u => u != null)
                 .Take(_count);
         }

@@ -104,7 +104,28 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        $(".hero").draggable({
+        $(".heroSeat").each(function () {
+            var heroSeat = $(this);
+            var unitId = heroSeat.children("input").val();
+            if (unitId != "") {
+                var hero = $(".heros").children(".hero[unitId='" + unitId + "']");
+                hero = hero.clone();
+                hero.append("<a class='heroCloser' href='javascript:return false;' onclick='javascript:$(this).parent().parent().children(\"input\").val(\"\");$(this).parent().remove();'>X</a>");
+                hero.appendTo(this);
+                hero.draggable({
+                    cursor: "none",
+                    revert: "invalid",
+                    revertDuration: 200,
+                    helper: function () {
+                        var clone = $(this).clone();
+                        clone.children(".heroCloser").remove();
+                        return clone;
+                    }
+                });
+            }
+        });
+
+        $(".heros").children(".hero").draggable({
             cursor: "none",
             helper: "clone",
             delay: 0
@@ -121,7 +142,7 @@
                 if (from.hasClass("heros")) {
                     $(this).children(".hero").remove();
                     hero = ui.draggable.clone();
-                    hero.append("<a class='heroCloser' href='javascript:return false;' onclick='$(this).parent().remove();'>X</a>");
+                    hero.append("<a class='heroCloser' href='javascript:return false;' onclick='javascript:$(this).parent().parent().children(\"input\").val(\"\");$(this).parent().remove();'>X</a>");
                 }
                 else {
                     var target = $(this).children(".hero");

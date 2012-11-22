@@ -38,7 +38,7 @@ namespace Action.War
                 .Select(loc =>
                 {
                     var rotate = Vector2.Transform(loc, matrix);
-                    var pos = self.Position + direction + rotate * self.Military.Forward;
+                    var pos = self.Position + direction + rotate;
                     return military.GetAliveUnitByPos(new Vector2((float)Math.Round(pos.X), (float)Math.Round(pos.Y)));
                 })
                 .Where(u => u != null)

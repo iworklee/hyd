@@ -28,14 +28,18 @@ package Action.War.Report
 	import Action.War.WarPlugins;
 
 	public class BattleReportManager
-	{
-		/*private static var _instances:Array = new Array();
-		public static function getInstance(buid:String, report:BattleReport = null):BattleReportManager
+	{		
+		private var _unitsCount1:int;
+		public function get unitsCount1():int
 		{
-			if(_instances[buid] == null)
-				_instances[buid] = new BattleReportManager(report);
-			return _instances[buid];
-		}*/
+			return _unitsCount1;
+		}
+		
+		private var _unitsCount2:int;
+		public function get unitsCount2():int
+		{
+			return _unitsCount2;
+		}
 		
 		private var _moviePlayer:MoviePlayer;
 		public function get moviePlayer():MoviePlayer
@@ -79,6 +83,14 @@ package Action.War.Report
 		
 		public function delBUM(sid:int):void
 		{
+			var bum:BattleUnitManager = _buManagers[sid] as BattleUnitManager;
+			if(bum != null && !bum.isWall)
+			{				
+				if(sid < BattleDefs.SPLIT_SID)
+					_unitsCount1--;
+				else
+					_unitsCount2--;
+			}
 			delete _buManagers[sid];
 		}
 		
@@ -116,11 +128,19 @@ package Action.War.Report
 		
 		public function reset():void
 		{
+			_unitsCount1 = _unitsCount2 = 0;
 			for each(var bu:BattleUnit in _battleReport.units)
 			{
 				var bum:BattleUnitManager = new BattleUnitManager(this, bu);
 				bum.resetDir();				
 				_buManagers[bum.SID] = bum;
+				if(!bum.isWall)
+				{
+					if(bum.SID < BattleDefs.SPLIT_SID)
+						_unitsCount1++;
+					else
+						_unitsCount2++;
+				}
 			}
 		}
 		

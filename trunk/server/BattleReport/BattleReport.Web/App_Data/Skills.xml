@@ -390,21 +390,21 @@
 		<Name>倾国倾城</Name>
 		<Type>Action.Skill.StrategySkill</Type>
 		<Area>
-			<Enemy>true</Enemy>
+			<Enemy>false</Enemy>
 			<Range>1,0;0,-1;0,1;2,0;0,-2;0,2</Range>
 			<Count>1</Count>
 		</Area>
 		<Effects>
 			<Effect>
 				<Area>
-					<Enemy>true</Enemy>
+					<Enemy>false</Enemy>
 					<Range>0,0</Range>
 					<Count>1</Count>
 				</Area>
 				<Buffs>
 					<Buff>
-						<ID>3</ID>
-						<Value>0</Value>
+						<ID>11</ID>
+						<Value>300</Value>
 					</Buff>
 				</Buffs>
 			</Effect>
@@ -417,7 +417,7 @@
 				<Buffs>
 					<Buff>
 						<ID>14</ID>
-						<Value>0</Value>
+						<Value>100</Value>
 					</Buff>
 				</Buffs>
 			</Effect>

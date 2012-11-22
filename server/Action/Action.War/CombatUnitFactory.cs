@@ -70,7 +70,8 @@ namespace Action.War
             unit.BlockChance = (float)xml.Element("BlockChance");
             unit.CriticalChance = (float)xml.Element("CriticalChance");
 
-            unit.CombatPower = unit.NormalAttack + unit.TacticAttack + unit.StrategyAttack;
+            //unit.CombatPower = unit.NormalAttack + unit.TacticAttack + unit.StrategyAttack;
+            unit.CombatPower = Math.Max(unit.NormalAttack, Math.Max(unit.TacticAttack, unit.StrategyAttack));
 
             return unit;
         }

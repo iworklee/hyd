@@ -116,21 +116,21 @@
     <Content Include="Content\game.css" />
     <Content Include="Content\images\icon_versus.png" />
     <Content Include="Content\images\ico_close.gif" />
-    <Content Include="Content\images\w001.png" />
-    <Content Include="Content\images\w002.png" />
-    <Content Include="Content\images\w003.png" />
-    <Content Include="Content\images\w004.png" />
-    <Content Include="Content\images\w005.png" />
-    <Content Include="Content\images\w006.png" />
-    <Content Include="Content\images\w007.png" />
-    <Content Include="Content\images\w008.png" />
-    <Content Include="Content\images\w009.png" />
-    <Content Include="Content\images\w010.png" />
-    <Content Include="Content\images\w101.png" />
-    <Content Include="Content\images\w102.png" />
-    <Content Include="Content\images\w103.png" />
-    <Content Include="Content\images\w104.png" />
-    <Content Include="Content\images\w105.png" />
+    <Content Include="Content\images\343.png" />
+    <Content Include="Content\images\225.png" />
+    <Content Include="Content\images\660.png" />
+    <Content Include="Content\images\98.png" />
+    <Content Include="Content\images\432.png" />
+    <Content Include="Content\images\395.png" />
+    <Content Include="Content\images\370.png" />
+    <Content Include="Content\images\289.png" />
+    <Content Include="Content\images\245.png" />
+    <Content Include="Content\images\424.png" />
+    <Content Include="Content\images\801.png" />
+    <Content Include="Content\images\802.png" />
+    <Content Include="Content\images\803.png" />
+    <Content Include="Content\images\804.png" />
+    <Content Include="Content\images\805.png" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\msi.pubxml" />
     <Content Include="Scripts\war.js" />
@@ -160,9 +160,6 @@
     <Content Include="Views\Home\War.cshtml" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Action.Model\Action.Model.csproj">
       <Project>{fcb49407-1470-44c8-8d9b-aaba921ff088}</Project>

@@ -19,7 +19,7 @@ war.prototype = {
         this.InitRanks(this.container, this.setting.usercount);
             
         //初始化英雄
-        this.InitHeros();
+        //this.InitHeros();
 
         //设置拖拽
         this.SetDraggle();
@@ -66,7 +66,7 @@ war.prototype = {
         //设置图片拖拽
         $(".list_heros .pnl_hero").draggable({
             stop: function () {
-                self.InitHeros(); self.SetDraggle()
+                self.SetDraggle()
             },
             helper:"clone"
         });

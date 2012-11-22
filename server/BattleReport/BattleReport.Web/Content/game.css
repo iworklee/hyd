@@ -1,75 +1,54 @@
-﻿ul
+﻿#attacker
 {
-    padding: 0px;
-    margin: 0px;
+	float: left;
+	margin-left: 3%;
 }
 
-.tbl_ranks td
+#vs
 {
-    width: 80px;
-    height: 80px;
-    border: 1px solid #ccc;
-    text-align: center;
-    padding: 0px;
+	float: left;
+	margin-top: 20%;
+	margin-left: 6%;
 }
 
-    .tbl_ranks td.drop_hover
-    {
-        border: 1px solid yellow;
-    }
-
-.tbl_ranks
+#defender
 {
-    border: 0px;
-    padding: 0px;
-    border-spacing: 0px;
-    float: left;
+	float: right;
+	margin-right: 3%;
 }
 
-#tbl_rank1
+h1
 {
-    background: green;
+	text-align: center;
 }
 
-#tbl_rank2
+.units
 {
-    margin-left: 50px;
-    background: red;
+	float: left;
+	margin: 10px;
 }
 
-.list_heros
+.hero
 {
-    margin-top: 40px;
+	float: left;
+	margin: 0px;
 }
 
-.list_heros li
+.hero a
 {
-    float: left;
-    width: 80px;
-    height: 80px;
-    list-style: none;
-    border: 1px solid #ccc;
-    text-align: center;
+	text-decoration: none;
 }
 
-.list_heros li img
+
+.heroSeat
 {
-    width: 80px;
-    height: 80px;
-    margin: 0px;
+	width: 60px;
+	height: 60px;
+	float: left;
+	margin: 1px;
 }
 
-.tbl_ranks td .pnl_hero
+.heroCloser
 {
-    position:relative;
-}
-
-.tbl_ranks td .link_heroClose
-{
-    background:url(../images/ico_close.gif) no-repeat;
-    width:8px;
-    height:8px;
-    position:absolute;
-    right:5px;
-    top:5px;
+	float: right;
 }

@@ -44,7 +44,7 @@ var skillFactory = {
 		{id:7, name:"恸天贯日", type:1, resPrevious:0, resCurrent:0, resPost:0},
 		{id:8, name:"奇门遁甲", type:2, resPrevious:5, resCurrent:0, resPost:0},
 		{id:9, name:"炼狱火海", type:2, resPrevious:0, resCurrent:1, resPost:0},
-		{id:10, name:"倾国倾城", type:2, resPrevious:3, resCurrent:0, resPost:0}
+		{id:10, name:"倾国倾城", type:2, resPrevious:2, resCurrent:0, resPost:0}
 	],
 	getSkills : function() { return this._skills; }
 }

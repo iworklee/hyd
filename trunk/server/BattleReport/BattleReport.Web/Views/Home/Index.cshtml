@@ -4,6 +4,7 @@
 }
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { target = "_blank" }))
 {
+@*
     <div style="float: left;">
         <h1 align="center">
             @Html.TextBoxFor(m => m.AttackerName)</h1>
@@ -47,4 +48,100 @@
     </div>
     <div style="clear: both">
     </div>
+*@
+    <div id="attacker">
+        <h1>
+            @Html.TextBoxFor(m => m.AttackerName)</h1>
+        <div class="units">
+            @for (int i = 20; i < 25; i++)
+            {
+                for (int j = i; j >= 0; j -= 5)
+                {
+                <div class="heroSeat ui-widget-content">
+                    @Html.HiddenFor(m => m.Attacker[j])
+                </div>
+                }
+                <div style="clear: both">
+                </div>
+            }
+        </div>
+    </div>
+    
+    <div id="vs">
+        <a onclick="javascript:$('form').submit();" href='javascript:return false;'>
+            <img src="@Url.Content("~/Content/images/icon_versus.png")" /></a>
+    </div>
+    
+    <div id="defender">
+        <h1>
+            @Html.TextBoxFor(m => m.DefenderName)</h1>
+        <div class="units">
+            @for (int i = 0; i < 5; i++)
+            {
+                for (int j = i; j <= i + 20; j += 5)
+                {
+                <div class="heroSeat ui-widget-content">
+                    @Html.HiddenFor(m => m.Defender[j])
+                </div>
+                }
+                <div style="clear: both">
+                </div>
+            }
+        </div>
+    </div>
+    <div style="clear: both">
+    </div>
 }
+<!--选择英雄-->
+<div class="heros">
+    @foreach (var item in Model.DataSource)
+    {
+        <div class="hero" unitId="@item.Value">
+            <img src="@Url.Content("~/Content/images/" + @item.Value + ".png")" title="@item.Text" /></div>
+    }
+</div>
+<div style="clear: both">
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".hero").draggable({
+            cursor: "none",
+            helper: "clone",
+            delay: 0
+        });
+
+        $(".heroSeat").droppable({
+            activeClass: "ui-state-default",
+            hoverClass: "ui-state-hover",
+            accept: ".hero",
+            drop: function (event, ui) {
+                // DOM
+                var hero = ui.draggable;
+                var from = hero.parent();
+                if (from.hasClass("heros")) {
+                    $(this).children(".hero").remove();
+                    hero = ui.draggable.clone();
+                    hero.append("<a class='heroCloser' href='javascript:return false;' onclick='$(this).parent().remove();'>X</a>");
+                }
+                else {
+                    var target = $(this).children(".hero");
+                    target.appendTo(from);
+                    from.children("input").val(target.attr("unitId"));
+                }
+                hero.appendTo(this);
+                hero.draggable({
+                    cursor: "none",
+                    revert: "invalid",
+                    revertDuration: 200,
+                    helper: function () {
+                        var clone = $(this).clone();
+                        clone.children(".heroCloser").remove();
+                        return clone;
+                    }
+                });
+                // Data
+                $(this).children("input").val(hero.attr("unitId"));
+            }
+        });
+    });
+</script>

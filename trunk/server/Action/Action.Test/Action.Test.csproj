@@ -39,6 +39,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Reference\MonoGame\2.5.1\MonoGame.Framework.Windows.dll</HintPath>
     </Reference>
+    <Reference Include="protobuf-net, Version=2.0.0.594, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\protobuf-net\r594\protobuf-net.dll</HintPath>
+    </Reference>
     <Reference Include="SuperSocket.SocketBase">
       <HintPath>..\Reference\SuperSocket\1.4\SuperSocket.SocketBase.dll</HintPath>
     </Reference>
@@ -52,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\TestMakeWarCommand.cs" />
     <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Commands\TestBoolCommand.cs" />
     <Compile Include="Commands\TestFloatCommand.cs" />
@@ -72,6 +77,10 @@
     <ProjectReference Include="..\Action.Model\Action.Model.csproj">
       <Project>{FCB49407-1470-44C8-8D9B-AABA921FF088}</Project>
       <Name>Action.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Action.War\Action.War.csproj">
+      <Project>{C3AE09BD-C508-4690-BAB0-CDBA77FADCEF}</Project>
+      <Name>Action.War</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

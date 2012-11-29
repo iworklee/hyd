@@ -13,6 +13,7 @@ namespace Action.Model
         {
             Role = new Role();
             Right = new Right();
+            Army = new Army();
         }
 
         public string Name { get; set; }

@@ -18,8 +18,7 @@ namespace Test
     [TestClass()]
     public class WarModuleTest : TestBase
     {
-        [ClassInitialize()]
-        //[AssemblyInitialize]
+        //[ClassInitialize()]
         public static void Initialize(TestContext testContext)
         {
             var unitIDs = new[] { 
@@ -50,20 +49,20 @@ namespace Test
             {
             }
         }
-        [ClassCleanup()]
-        //[AssemblyCleanup]
+
+        //[ClassCleanup()]
         public static void ClassCleanup()
         {
-            //var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
-            //var mongoDB = MongoServer.Create(connectionString).GetDatabase("Game");
-            //var table = mongoDB.GetCollection<Player>("Player");
+            var connectionString = ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString;
+            var mongoDB = MongoServer.Create(connectionString).GetDatabase("Game");
+            var table = mongoDB.GetCollection<Player>("Player");
 
-            //var query = Query<Player>.Where(p => p.Name.StartsWith("test"));
-            //table.Remove(query);
+            var query = Query<Player>.Where(p => p.Name.StartsWith("test"));
+            table.Remove(query);
         }
         private static List<string> playerNames = new List<string>();
 
-        private const int COUNT = 1;
+        private const int COUNT = 100000000;
 
         [TestMethod()]
         public void TestMakeWarCommand()

@@ -81,6 +81,7 @@
     <Compile Include="CommandTest.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="LoginModuleTest.cs" />
+    <Compile Include="WarModuleTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Action.Engine\Action.Engine.csproj">
@@ -97,6 +98,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="CommandTestLoad.loadtest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MakeWarCommandTestLoad.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="QueryMongoDBTestLoad.loadtest">

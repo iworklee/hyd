@@ -91,7 +91,7 @@ namespace Action.Engine
             using (var ms = new MemoryStream())
             {
                 Serializer.Serialize<T>(ms, data);
-                SendResponse(BitConverter.GetBytes(ms.Length));
+                SendResponse(BitConverter.GetBytes((int)ms.Length));
                 SendResponse(ms.ToArray());
             }
         }

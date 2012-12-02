@@ -71,10 +71,11 @@ package Action.Display.Drawing
 			if(layer == null)
 				layer = _canvas;
 			point = new Point(point.x + fx, point.y + fy);
-			var rect:Rectangle = new Rectangle(point.x, point.y, bitmap.width, bitmap.height);
+			BitmapHelper.drawBitmap(layer.graphics, bitmap, point, scale);
+			/*var rect:Rectangle = new Rectangle(point.x, point.y, bitmap.width, bitmap.height);
 			layer.graphics.beginBitmapFill(bitmap, new Matrix(scale,0,0,scale,rect.x, rect.y), false);
 			layer.graphics.drawRect(rect.x, rect.y, rect.width * scale, rect.height * scale);
-			layer.graphics.endFill();
+			layer.graphics.endFill();*/
 		}
 		
 		public function drawText(text:String, point:Point, color:int=0xff0000, size:int=10, bold:Boolean=false, font:String="Arial"):void

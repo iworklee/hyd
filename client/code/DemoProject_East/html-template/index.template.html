@@ -26,6 +26,7 @@
                    background-color: ${bgcolor}; }   
             object:focus { outline:none; }
             #flashContent { display:none; }
+            #reportContent {display:none;}
         </style>
         
         <!-- Enable Browser History by replacing useBrowserHistory tokens with two hyphens -->
@@ -66,6 +67,8 @@
 	                swfVersionStr, xiSwfUrlStr, 
 	                flashvars, params, attributes);
             }
+            
+            window.onload = loadSwf;
         </script>
     </head>
     <body>

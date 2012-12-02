@@ -1,6 +1,7 @@
 package Action.War.Config
 {
 	import Action.Core.Util.JsonObject;
+	import Action.Resource.HeroBodyResource;
 	import Action.Resource.HeroFaceResource;
 	import Action.War.WarPlugins;
 	
@@ -23,6 +24,11 @@ package Action.War.Config
 		public function getFaceBitmap():BitmapData
 		{
 			return HeroFaceResource.getInstance(face).bitmap;
+		}
+		
+		public function getBodyBitmap(idx:int):BitmapData
+		{
+			return HeroBodyResource.getInstance(body).bitmaps[idx];
 		}
 	}
 }

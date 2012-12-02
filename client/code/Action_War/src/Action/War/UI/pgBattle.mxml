@@ -23,6 +23,7 @@
 			import Action.Model.BattleUnit;
 			import Action.Resource.CommonResource;
 			import Action.Resource.Flow.LoadImageResourceActivity;
+			import Action.Resource.ResourceDefs;
 			import Action.War.BattleDefs;
 			import Action.War.BattleHelper;
 			import Action.War.Config.BattleConfigFactory;
@@ -46,7 +47,7 @@
 			public function onLoad():void
 			{
 				//加载背景
-				_bcMain.setStyle("backgroundImage", CommonResource.imageSection.get(BattleDefs.BgUrl));
+				_bcMain.setStyle("backgroundImage", CommonResource.imageSection.get(ResourceDefs.BG_Battle));
 				
 				//生成网格
 				for(var i:int = 0; i<5; i++)

@@ -20,11 +20,11 @@ package Action.Resource.Flow
 		private var _request:URLRequest;
 		private var _loader:Loader;
 		
-		public function LoadHeroFaceResourceActivity(heroId:int)
+		public function LoadHeroFaceResourceActivity(faceId:int)
 		{
-			_heroResource = HeroFaceResource.getInstance(heroId);
+			_heroResource = HeroFaceResource.getInstance(faceId);
 			_request = new URLRequest();  
-			_request.url = CommonResource.parseUrl("hero/h" + NumberWrapper.wrap(heroId).toText(3) + ".png");
+			_request.url = CommonResource.parseUrl("hero/h" + NumberWrapper.wrap(faceId).toText(3) + ".png");
 			_request.method = URLRequestMethod.GET;
 			
 			_loader = new Loader();

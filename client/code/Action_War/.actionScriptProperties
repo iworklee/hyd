@@ -13,6 +13,7 @@
       <libraryPathEntry kind="3" linkType="1" path="/Action_Display/bin/Action_Display.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/Action_Resource/bin/Action_Resource.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/Action_Model/bin/Action_Model.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Action_Reference/bin/greensock.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

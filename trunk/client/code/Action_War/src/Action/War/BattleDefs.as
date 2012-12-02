@@ -11,8 +11,6 @@ package Action.War
 		{
 		}
 		
-		public static const BgUrl:String = "battle/001.JPG";
-		
 		public static const SPLIT_SID:int = 35;
 		public static const SPLIT_HERO_ID:int = 800;
 		public static const INIT_POS_OFFSET:int = 25;

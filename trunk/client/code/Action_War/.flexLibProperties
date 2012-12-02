@@ -35,6 +35,8 @@
     <classEntry path="Action.War.Movie.BattleBoutDeadRenderer"/>
     <classEntry path="Action.War.Config.BattleConfigFactory"/>
     <classEntry path="Action.War.Strategy.UnitWallResourceStrategy"/>
+    <classEntry path="Action.War.Commands.GoHomeCommand"/>
+    <classEntry path="Action.War.UI.pgHome"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

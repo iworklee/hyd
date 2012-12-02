@@ -5,6 +5,7 @@
     <classEntry path="Action.Resource.Flow.LoadImageResourceActivity"/>
     <classEntry path="Action.Resource.HeroFaceResource"/>
     <classEntry path="Action.Resource.Flow.LoadHeroFaceResourceActivity"/>
+    <classEntry path="Action.Resource.ResourceDefs"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

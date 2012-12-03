@@ -41,8 +41,13 @@
 			
 			private var _canvasGraphics:CanvasGraphics;
 			private var _moviePlayer:MoviePlayer;
+			private var _soundPlayer:SoundPlayer;
 			
-			public var battleReportManager:BattleReportManager;
+			private var _battleReportManager:BattleReportManager;
+			public function setReportManager(bum:BattleReportManager):void
+			{
+				_battleReportManager = bum;
+			}
 						
 			public function onLoad():void
 			{
@@ -74,8 +79,9 @@
 				}
 
 				//加载背景音乐
-				var soundPlayer:SoundPlayer = new SoundPlayer(CommonResource.parseUrl("sound/battle01.mp3"));
-				soundPlayer.play(5);
+				if(_soundPlayer == null)
+					_soundPlayer = new SoundPlayer(CommonResource.parseUrl("sound/battle01.mp3"));
+				_soundPlayer.play(100);
 				
 				//test();
 				replay();				
@@ -101,10 +107,10 @@
 				_canvasGraphics.clear();
 				//GamePlugins.console.clear();
 				
-				battleReportManager.reset();
-				battleReportManager.play(_canvasGraphics);
+				_battleReportManager.reset();
+				_battleReportManager.play(_canvasGraphics);
 				
-				_moviePlayer = battleReportManager.moviePlayer;
+				_moviePlayer = _battleReportManager.moviePlayer;
 				_sldProgress.maximum = _moviePlayer.movie.maxFrame;
 				
 				_moviePlayer.removeEventListener(MoviePlayer.Event_Goto, onMovieGoto);
@@ -122,8 +128,8 @@
 					+ " / " + NumberWrapper.wrap(_moviePlayer.movie.maxFrame).toText(4);
 				_lblCurRenderer.text = _moviePlayer.currentRenderer.description;				
 				
-				_pgbSituation.setProgress(battleReportManager.unitsCount1, battleReportManager.unitsCount1 + battleReportManager.unitsCount2);
-				_pgbSituation.label = battleReportManager.unitsCount1 + " VS " + battleReportManager.unitsCount2;
+				_pgbSituation.setProgress(_battleReportManager.unitsCount1, _battleReportManager.unitsCount1 + _battleReportManager.unitsCount2);
+				_pgbSituation.label = _battleReportManager.unitsCount1 + " VS " + _battleReportManager.unitsCount2;
 			}
 			
 			private function onMovieStop(e:Event):void
@@ -133,7 +139,7 @@
 			
 			public function onUnload():void
 			{
-				
+				_soundPlayer.stop();
 			}
 			
 			public function get title():String
@@ -165,7 +171,7 @@
 			
 			private function showUnitInfo(pos:int):void
 			{
-				var bum:BattleUnitManager = battleReportManager.getBUMbyPos(pos);
+				var bum:BattleUnitManager = _battleReportManager.getBUMbyPos(pos);
 				if(bum != null)
 				{
 					var skill:BattleSkill = BattleConfigFactory.getSkill(bum.hero.skill);
@@ -203,7 +209,7 @@
 				// TODO Auto-generated method stub
 				_canvasGraphics.clear();
 				GamePlugins.console.clear();
-				battleReportManager.play(_canvasGraphics);
+				_battleReportManager.play(_canvasGraphics);
 			}
 			
 			protected function _sldProgress_valueCommitHandler(event:FlexEvent):void

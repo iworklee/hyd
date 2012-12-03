@@ -3,6 +3,7 @@ package Action.Core.Util
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.media.Sound;
+	import flash.media.SoundChannel;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 
@@ -10,6 +11,7 @@ package Action.Core.Util
 	{
 		private var _request:URLRequest;
 		private var _sound:Sound;
+		private var _channel:SoundChannel;
 		private var _loops:int;
 		
 		public function SoundPlayer(url:String)
@@ -33,9 +35,14 @@ package Action.Core.Util
 			_sound.load(_request);
 		}
 		
+		public function stop():void
+		{
+			_channel.stop();
+		}
+		
 		private function onSoundLoaded(e:Event):void
 		{
-			_sound.play(0, _loops);
+			_channel = _sound.play(0, _loops);
 		}
 		
 		private function onIOError(e:Event):void

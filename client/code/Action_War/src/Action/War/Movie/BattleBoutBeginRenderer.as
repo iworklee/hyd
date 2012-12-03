@@ -10,7 +10,7 @@ package Action.War.Movie
 	
 	import flashx.textLayout.factory.TruncationOptions;
 	
-	public class BattleBoutBeginRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
+	public class BattleBoutBeginRenderer extends BattleFrameRendererBase implements IMovieFrameRenderer
 	{		
 		private var _bout:BattleBout;
 		

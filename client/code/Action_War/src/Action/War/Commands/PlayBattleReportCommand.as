@@ -83,7 +83,7 @@ package Action.War.Commands
 		private function onWorkflowFinished(client:GameClient, reportManager:BattleReportManager):void
 		{
 			var page:pgBattle = new pgBattle();
-			page.battleReportManager = reportManager;
+			page.setReportManager(reportManager);
 			GameClient.current.frame.changePage(page);
 		}
 	}

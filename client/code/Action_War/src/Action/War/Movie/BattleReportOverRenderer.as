@@ -9,7 +9,7 @@ package Action.War.Movie
 	import Action.War.Report.BattleReportManager;
 	import Action.War.Report.BattleUnitManager;
 	
-	public class BattleReportOverRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
+	public class BattleReportOverRenderer extends BattleFrameRendererBase implements IMovieFrameRenderer
 	{		
 		public function BattleReportOverRenderer(reportMgr:BattleReportManager)
 		{

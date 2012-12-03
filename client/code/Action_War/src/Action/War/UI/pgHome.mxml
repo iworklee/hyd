@@ -12,7 +12,9 @@
 			import Action.Core.Command.GameCommandFactory;
 			import Action.Core.GamePlugins;
 			import Action.Core.Net.GameClient;
+			import Action.Core.Util.SoundPlayer;
 			import Action.Display.Drawing.BitmapHelper;
+			import Action.Model.BattleReport;
 			import Action.Resource.CommonResource;
 			import Action.Resource.HeroFaceResource;
 			import Action.Resource.ResourceDefs;
@@ -30,6 +32,8 @@
 			import spark.components.Button;
 			import spark.primitives.BitmapImage;
 			
+			private var _soundPlayer:SoundPlayer;
+			
 			public function onLoad():void
 			{
 				this.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
@@ -40,6 +44,11 @@
 				initCopyList();
 				initHeroPosition();
 				initHeroInfo();
+				
+				//加载背景音乐
+				if(_soundPlayer == null)
+					_soundPlayer = new SoundPlayer(CommonResource.parseUrl("sound/home01.mp3"));
+				_soundPlayer.play(100);
 			}
 			
 			private function onMouseMove(e:MouseEvent):void
@@ -50,7 +59,7 @@
 			
 			public function onUnload():void
 			{
-				
+				_soundPlayer.stop();
 			}
 			
 			private var _subBtns:Array = new Array();
@@ -167,8 +176,7 @@
 			
 			private function onCopyClick(e:MouseEvent):void
 			{
-				GameCommandFactory.current.getCommand(9527).execute(GameClient.current,
-					BattleReportProvider.current.createTestReport());
+				GameCommandFactory.current.getCommand(1).execute(GameClient.current, null);
 			}
 			
 			private function onFormClose(e:MouseEvent):void

@@ -19,6 +19,7 @@
 			import Action.Core.Util.Base64;
 			import Action.Model.BattleReport;
 			import Action.War.BattleReportProvider;
+			import Action.War.Commands.EnterCopyCommand;
 			import Action.War.Commands.GoHomeCommand;
 			import Action.War.Commands.PlayBattleReportCommand;
 			import Action.War.Config.BattleConfigFactory;
@@ -127,7 +128,8 @@
 				GameClient.create().frame = this;
 				GamePlugins.console = this;
 				GamePlugins.modules = [new WarModule()];
-				GamePlugins.commands = [new GoHomeCommand(), new PlayBattleReportCommand()];
+				GamePlugins.commands = [new GoHomeCommand(), new EnterCopyCommand(), new PlayBattleReportCommand()];
+				GamePlugins.parameters = parent.loaderInfo.parameters;
 				GameModuleFactory.current.getModule("WarModule").onLoad();
 			
 				/*var buString:String = parent.loaderInfo.parameters.battleReport;
@@ -146,8 +148,7 @@
 				var errorStr:String = "";
 				//synchronous Error
 				if(event.error is Error)
-				{
-					
+				{					
 					var error:Error = event.error as Error;
 					errorStr += "Error ID:"+ error.errorID + "\n";
 					errorStr += "Error Name:"+ error.name + "\n";

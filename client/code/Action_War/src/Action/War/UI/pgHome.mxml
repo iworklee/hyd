@@ -19,6 +19,7 @@
 			import Action.War.BattleReportProvider;
 			import Action.War.Config.BattleConfigFactory;
 			import Action.War.Config.BattleHero;
+			import Action.War.Report.BattleUnitManager;
 			import Action.War.Resource.BattleUnitResource;
 			
 			import com.greensock.TweenMax;
@@ -38,6 +39,7 @@
 				initToolbox();
 				initCopyList();
 				initHeroPosition();
+				initHeroInfo();
 			}
 			
 			private function onMouseMove(e:MouseEvent):void
@@ -104,10 +106,10 @@
 				}
 			}
 			
-			private function styleButton(btn:Button):void
+			private function styleButton(btn:Button, color:int=0x332211):void
 			{
 				btn.buttonMode = true;
-				btn.setStyle("chromeColor", 0x332211);
+				btn.setStyle("chromeColor", color);
 				btn.setStyle("color", 0xffffff);
 				btn.setStyle("fontWeight", "bold");
 			}
@@ -124,6 +126,8 @@
 				{
 					if(btn.label == "征战")
 						_bcCopyList.visible = true;
+					else if(btn.label == "情报")
+						showHeroInfo();
 					for each(sb in _subBtns)
 						sb.visible = false;
 				}
@@ -131,8 +135,6 @@
 			
 			private function initCopyList():void
 			{
-				_bcClose.addEventListener(MouseEvent.CLICK, onFormClose);
-				
 				for(var i:int =0; i<3; i++)
 				{
 					for(var j:int=0; j<5; j++)
@@ -171,15 +173,21 @@
 			
 			private function onFormClose(e:MouseEvent):void
 			{
-				_bcCopyList.visible = false;
+				var sender:BorderContainer = BorderContainer(e.currentTarget);
+				sender.parent.parent.parent.visible = false;
 			}
 			
 			private var _heroObjs:Array = [
-				{id:0, hero:BattleConfigFactory.getHero(635), pos:new Point(520, 190), idx1:0, idx2:38, talk:"吕布武艺高强，诸位千万小心。"},
-				{id:1, hero:BattleConfigFactory.getHero(289), pos:new Point(520, 290), idx1:0, idx2:10, talk:"出战，一举擒斩吕布！"},
-				{id:2, hero:BattleConfigFactory.getHero(98), pos:new Point(200, 210), idx1:1, idx2:56, talk:"大哥，请让关某出战！"},
-				{id:3, hero:BattleConfigFactory.getHero(432), pos:new Point(130, 260), idx1:1, idx2:56, talk:"今天俺要会一会那三姓家奴！"},
-				{id:4, hero:BattleConfigFactory.getHero(395), pos:new Point(60, 310), idx1:1, idx2:56, talk:"云当以此战报效主公！"}
+				{id:0, hero:BattleConfigFactory.getHero(635), pos:new Point(520, 190), idx1:0, idx2:38,
+					hp:374, ts:90, wy:84, zm:78, talk:"吕布武艺高强，诸位千万小心。"},
+				{id:1, hero:BattleConfigFactory.getHero(289), pos:new Point(520, 290), idx1:0, idx2:10,
+					hp:335, ts:97, wy:38, zm:120, talk:"出战，一举擒斩吕布！"},
+				{id:2, hero:BattleConfigFactory.getHero(98), pos:new Point(200, 210), idx1:1, idx2:56,
+					hp:411, ts:102, wy:109, zm:80, talk:"大哥，请让关某出战！"},
+				{id:3, hero:BattleConfigFactory.getHero(432), pos:new Point(130, 260), idx1:1, idx2:56,
+					hp:408, ts:95, wy:113, zm:66, talk:"今天俺要会一会那三姓家奴！"},
+				{id:4, hero:BattleConfigFactory.getHero(395), pos:new Point(60, 310), idx1:1, idx2:56,
+					hp:404, ts:96, wy:108, zm:87, talk:"云当以此战报效主公！"}
 			];
 			
 			private function initHeroPosition():void
@@ -193,7 +201,7 @@
 				var hero:BattleHero = BattleHero(heroObj.hero);
 				var bitmap:BitmapData = hero.getBodyBitmap(heroObj.idx1);
 				GamePlugins.console.drawBitmap(bitmap);
-				//BitmapHelper.drawBitmap(_bcCanvas.graphics, bitmap, heroObj.pos, 1);
+				
 				var div:BorderContainer = new BorderContainer();
 				heroObj.div = div;
 				div.name = heroObj.id.toString();
@@ -206,7 +214,15 @@
 				div.y = heroObj.pos.y;
 				div.addEventListener(MouseEvent.MOUSE_OVER, onHeroOver);
 				div.addEventListener(MouseEvent.MOUSE_OUT, onHeroOut);
+				div.addEventListener(MouseEvent.CLICK, onHeroClick);
 				_bcCanvas.addElement(div);
+				
+				var lbl:Label = new Label();
+				lbl.setStyle("color", 0xffffff);
+				lbl.text = hero.name;
+				lbl.x = div.x + 20 - lbl.text.length * 5;
+				lbl.y = div.y - 15;
+				_bcCanvas.addElement(lbl);
 			}
 			
 			private function onHeroOver(e:MouseEvent):void
@@ -238,6 +254,87 @@
 			{
 				// TODO Auto-generated method stub
 				_bcCopyList.visible = true;
+			}
+			
+			private var _heroBtns:Array = new Array();	
+			private function initHeroInfo():void
+			{
+				_pgbExp.setProgress(360, 500);
+				for(var i:int = 0; i<8; i++)
+				{
+					var btn:Button = new Button();
+					if(i == 0)
+						styleButton(btn, 0x666633);
+					else
+						styleButton(btn);
+					btn.name = i.toString();
+					btn.width = 80;
+					btn.height = 40;
+					btn.y = i * 40;
+					btn.addEventListener(MouseEvent.CLICK, onHeroClick);
+					_bcHeroMenu.addElement(btn);
+					_heroBtns.push(btn);
+					
+					var heroObj:Object = _heroObjs[i];
+					if(heroObj != null)
+						btn.label = _heroObjs[i].hero.name;
+					else
+					{
+						btn.label = "空位";
+						btn.enabled = false;
+					}					
+				}
+				
+				for(i=0; i<3; i++)
+				{
+					for(var j:int=0; j<2; j++)
+					{
+						var bc:BorderContainer = new BorderContainer();
+						bc.width = bc.height = 50;
+						bc.x = 10 + 160 * j;
+						bc.y = 55 * i;
+						bc.buttonMode = true;
+						bc.setStyle("backgroundColor", 0x000000);
+						bc.setStyle("borderColor", 0x00ff00);
+						_bcHeroEquip.addElement(bc);
+					}
+				}
+			}
+			
+			private var _jobs:Array = ["老百姓", "近卫军", "亲卫队", "战弓骑", "弓弩手", "霹雳车", "谋略家"];
+			private function showHeroInfo(heroObj:Object=null):void
+			{
+				if(heroObj == null)
+					heroObj = _heroObjs[0];
+				var hero:BattleHero = BattleHero(heroObj.hero);
+				
+				if(hero != null)
+				{
+					_lblHeroName.text = hero.name;
+					_bcHeroBody.setStyle("backgroundImage", new Bitmap(hero.getBodyBitmap(0)));
+					_lblPropHP.text = heroObj.hp;
+					_lblPropJob.text = _jobs[hero.job].toString();
+					_lblPropSkill.text = BattleConfigFactory.getSkill(hero.skill).name;
+					_lblPropTS.text = heroObj.ts;
+					_lblPropWY.text = heroObj.wy;
+					_lblPropZM.text = heroObj.zm;
+					
+					_bcHeroInfo.visible = true;					
+					
+					for each(var btn:Button in _heroBtns)
+					{
+						if(btn.name == heroObj.id.toString())
+							styleButton(btn, 0x666633);
+						else
+							styleButton(btn);
+					}
+				}
+			}
+			
+			private function onHeroClick(e:MouseEvent):void
+			{
+				var heroObj:Object = _heroObjs[int(e.currentTarget.name)];
+				showHeroInfo(heroObj);
 			}
 			
 		]]>
@@ -283,14 +380,40 @@
 		<s:TextArea id="_txtTalk" x="75" y="5" width="170" height="80" fontSize="18" fontFamily="微软雅黑" fontWeight="bold"/>
 		<s:BorderContainer x="75" y="5" width="170" height="80" backgroundAlpha="0" />
 	</s:BorderContainer>
-	<s:BorderContainer id="_bcHero" x="220" y="100" width="320" height="360" backgroundAlpha="0" borderVisible="true">
-		<s:BorderContainer id="_bcTitle" width="100%" height="20" backgroundColor="#888844">
-			
+	<s:BorderContainer id="_bcHeroInfo" x="220" y="100" width="320" height="360" backgroundColor="#3e3645" borderVisible="false" visible="false">
+		<s:BorderContainer width="100%" height="25" backgroundImage="{CommonResource.imageSection.get(ResourceDefs.UI_Win_Title)}">
+			<s:Label id="_lblHeroInfo" x="70" y="5" text="刘备[情谊天下]竞技排名12" color="#ffffff" fontWeight="bold" />
+		</s:BorderContainer>
+		<s:BorderContainer right="3" width="25" height="25" backgroundImage="{CommonResource.imageSection.get(ResourceDefs.UI_Win_Close)}" 
+						   click="onFormClose(event)" borderVisible="false"/>
+		<s:BorderContainer id="_bcHeroMenu" right="0" y="32" width="80" height="320" backgroundAlpha="0" borderVisible="false" />
+		<s:Label id="_lblHeroName" x="10" y="40" text="刘备" color="#ffffff" />
+		<s:Label id="_lblHeroLevel" right="90" y="40" text="1级" color="#ffffff" />
+		<s:BorderContainer id="_bcHeroEquip" left="5" y="62" width="230" height="160" backgroundAlpha="0" borderVisible="false">
+			<s:BorderContainer id="_bcHeroBody" width="48" height="64" x="90" y="43" borderVisible="false" />
+		</s:BorderContainer>
+		<s:Label x="10" y="232" text="经验" color="#ffffff" />
+		<mx:ProgressBar id="_pgbExp" x="35" y="230" width="200" height="15" label="360 / 500"
+						chromeColor="#008844" color="#ffffbb" labelPlacement="center"
+						maximum="500" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
+		<s:BorderContainer id="_bcHeroProp" left="5" bottom="5" width="230" height="100" backgroundAlpha="0" borderVisible="true">
+			<s:Label x="10" y="20" text="生命" color="#ffffff" />
+			<s:Label x="10" y="45" text="兵种" color="#ffffff" />
+			<s:Label x="10" y="70" text="绝技" color="#ffffff" />
+			<s:Label x="140" y="20" text="统率" color="#ffffff" />
+			<s:Label x="140" y="45" text="武勇" color="#ffffff" />
+			<s:Label x="140" y="70" text="智谋" color="#ffffff" />
+			<s:Label id="_lblPropHP" x="45" y="21" text="500" color="#ffffff" />
+			<s:Label id="_lblPropJob" x="45" y="45" text="近卫军" color="#ffffff" />
+			<s:Label id="_lblPropSkill" x="45" y="70" text="三国鼎立" color="#ffffff" />
+			<s:Label id="_lblPropTS" x="175" y="21" text="120" color="#ffffff" />
+			<s:Label id="_lblPropWY" x="175" y="46" text="97" color="#ffffff" />
+			<s:Label id="_lblPropZM" x="175" y="71" text="8" color="#ffffff" />
 		</s:BorderContainer>
 	</s:BorderContainer>
 	<s:BorderContainer id="_bcCopyList" x="50" y="50" width="660" height="450" visible="false">
 		<s:Label text="征战副本" fontFamily="微软雅黑" color="#ffffff" x="300" y="5" />
-		<s:BorderContainer id="_bcClose" width="20" height="20" x="637" backgroundAlpha="0" borderVisible="false" buttonMode="true" />
+		<s:BorderContainer width="20" height="20" x="637" backgroundAlpha="0" borderVisible="false" buttonMode="true" click="onFormClose(event)" />
 		<s:BorderContainer y="30" width="100%" height="30" backgroundColor="#000000">
 			<s:BorderContainer x="10" y="2" width="80" height="20" backgroundColor="#888844">
 				<s:Label text="←黄巾起义" x="10" y="5" color="#ffffff" />

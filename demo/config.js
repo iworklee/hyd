@@ -35,11 +35,12 @@ var heroFactory = {
 		{id:289, name:"诸葛亮", job:6, skill:8, face:8, body:8, unit:8},
 		{id:245, name:"周瑜", job:6, skill:9, face:9, body:9, unit:9},
 		{id:424, name:"貂禅", job:6, skill:10, face:10, body:10, unit:10},
-		{id:801, name:"近卫军", job:1, skill:0, face:100, body:101, unit:101},
-		{id:802, name:"亲卫队", job:2, skill:0, face:100, body:102, unit:102},
-		{id:803, name:"战弓骑", job:3, skill:0, face:100, body:103, unit:103},
-		{id:804, name:"弓弩手", job:4, skill:0, face:100, body:104, unit:104},
-		{id:805, name:"霹雳车", job:5, skill:0, face:100, body:105, unit:105}
+		{id:635, name:"刘备", job:2, skill:1, face:11, body:11, unit:11},
+		{id:801, name:"近卫军", job:1, skill:0, face:100, body:100, unit:101},
+		{id:802, name:"亲卫队", job:2, skill:0, face:100, body:100, unit:102},
+		{id:803, name:"战弓骑", job:3, skill:0, face:100, body:100, unit:103},
+		{id:804, name:"弓弩手", job:4, skill:0, face:100, body:100, unit:104},
+		{id:805, name:"霹雳车", job:5, skill:0, face:100, body:100, unit:105}
 	],
 	_test:{name:"cctv"},
 	getHeros : function() { return this._heros; }

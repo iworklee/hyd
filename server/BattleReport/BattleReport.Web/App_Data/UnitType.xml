@@ -224,7 +224,7 @@
 		<StrikeRange>1,0;0,-1;0,1;2,0;0,-2;0,2</StrikeRange>
 		<Health>129</Health>
 		<SkillID>10</SkillID>
-		<Charge>50</Charge>
+		<Charge>100</Charge>
 		<NormalAttack>8</NormalAttack>
 		<NormalDefence>6</NormalDefence>
 		<TacticAttack>39</TacticAttack>
@@ -267,6 +267,24 @@
 		<TacticDefence>120</TacticDefence>
 		<StrategyAttack>43</StrategyAttack>
 		<StrategyDefence>28</StrategyDefence>
+		<DodgeChance>0.2</DodgeChance>
+		<BlockChance>0.25</BlockChance>
+		<CriticalChance>0.35</CriticalChance>
+	</Unit>
+	<Unit>
+		<ID>635</ID>
+		<Name>刘备</Name>
+		<Type>Action.War.CombatTacticUnit</Type>
+		<StrikeRange>1,0;0,-1;0,1</StrikeRange>
+		<Health>358</Health>
+		<SkillID>1</SkillID>
+		<Charge>50</Charge>
+		<NormalAttack>99</NormalAttack>
+		<NormalDefence>63</NormalDefence>
+		<TacticAttack>126</TacticAttack>
+		<TacticDefence>84</TacticDefence>
+		<StrategyAttack>93</StrategyAttack>
+		<StrategyDefence>62</StrategyDefence>
 		<DodgeChance>0.2</DodgeChance>
 		<BlockChance>0.25</BlockChance>
 		<CriticalChance>0.35</CriticalChance>

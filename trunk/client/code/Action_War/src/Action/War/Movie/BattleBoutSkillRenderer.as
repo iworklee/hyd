@@ -19,7 +19,7 @@ package Action.War.Movie
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	public class BattleBoutSkillRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
+	public class BattleBoutSkillRenderer extends BattleFrameRendererBase implements IMovieFrameRenderer
 	{
 		private var _action:BattleAction;
 		public function get action():BattleAction

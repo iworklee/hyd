@@ -8,7 +8,7 @@ package Action.War.Movie
 	
 	import mx.states.OverrideBase;
 	
-	public class BattleBoutDeadRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
+	public class BattleBoutDeadRenderer extends BattleFrameRendererBase implements IMovieFrameRenderer
 	{		
 		private var _deadBUMS:Array
 		

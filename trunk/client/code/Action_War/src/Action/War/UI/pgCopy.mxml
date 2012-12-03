@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   implements="Action.Core.Page.IGamePage"
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="760" height="600">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import Action.Core.Command.GameCommandFactory;
+			import Action.Core.GamePlugins;
+			import Action.Core.Net.GameClient;
+			import Action.Core.Util.SoundPlayer;
+			import Action.Display.Drawing.CanvasGraphics;
+			import Action.Display.Drawing.Movie;
+			import Action.Display.Drawing.MoviePlayer;
+			import Action.Model.BattleReport;
+			import Action.Resource.CommonResource;
+			import Action.Resource.ResourceDefs;
+			import Action.War.BattleReportProvider;
+			import Action.War.Config.BattleConfigFactory;
+			import Action.War.Config.BattleHero;
+			import Action.War.Resource.BattleUnitResource;
+			
+			import mx.controls.Label;
+			
+			private var _soundPlayer:SoundPlayer;
+			
+			public function onLoad():void
+			{
+				this.setStyle("backgroundImage", CommonResource.imageSection.get(ResourceDefs.BG_Copy));
+				this.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+				
+				//加载背景音乐
+				if(_soundPlayer == null)
+					_soundPlayer = new SoundPlayer(CommonResource.parseUrl("sound/copy01.mp3"));
+				_soundPlayer.play(100);
+				
+				initHeroPosition();
+			}
+			
+			public function onUnload():void
+			{
+				_soundPlayer.stop();
+			}
+			
+			private function onMouseMove(e:MouseEvent):void
+			{
+				GamePlugins.console.clear();
+				GamePlugins.console.writeLine(e.localX + "," + e.localY);
+			}
+			
+			private var _heroObjs:Array = [
+				{id:0, hero:BattleConfigFactory.getHero(635), pos:new Point(650, 250), dir:2,
+					talk:"奉先，你武艺高强，为何要助纣为虐，不如及早弃暗投明。"},
+				{id:1, hero:BattleConfigFactory.getHero(289), pos:new Point(700, 200), dir:2,
+					talk:"拿下虎牢关，洛阳就不远了！"},
+				{id:2, hero:BattleConfigFactory.getHero(98), pos:new Point(650, 350), dir:2,
+					talk:"吕布，看刀！"},
+				{id:3, hero:BattleConfigFactory.getHero(432), pos:new Point(650, 150), dir:2,
+					talk:"三姓家奴，拿命来！"},
+				{id:4, hero:BattleConfigFactory.getHero(395), pos:new Point(700, 300), dir:2,
+					talk:"吕将军，请赐教！"},
+				{id:5, hero:BattleConfigFactory.getHero(660), pos:new Point(400, 250), dir:3,
+					talk:"乌合之众，让你们见识一下我吕布天下无双的武勇！"}
+				];
+			
+			private function initHeroPosition():void
+			{				
+				for(var i:int=0; i<_heroObjs.length; i++)
+					drawHeroObj(_heroObjs[i]);
+			}
+			
+			private function drawHeroObj(heroObj:Object):void
+			{
+				var hero:BattleHero = BattleHero(heroObj.hero);
+				var bitmap:BitmapData = BattleUnitResource.getInstance(hero.unit).waitBitmaps[heroObj.dir];
+				GamePlugins.console.drawBitmap(bitmap);
+				
+				var div:BorderContainer = new BorderContainer();
+				heroObj.div = div;
+				div.name = heroObj.id.toString();
+				div.buttonMode = true;
+				div.setStyle("borderVisible", false);
+				div.setStyle("backgroundImage", new Bitmap(bitmap));
+				div.width = 50;
+				div.height = 50;
+				div.x = heroObj.pos.x;
+				div.y = heroObj.pos.y;
+				div.addEventListener(MouseEvent.MOUSE_OVER, onHeroOver);
+				div.addEventListener(MouseEvent.MOUSE_OUT, onHeroOut);
+				div.addEventListener(MouseEvent.CLICK, onHeroClick);
+				_bcCanvas.addElement(div);
+				
+				var lbl:Label = new Label();
+				lbl.setStyle("color", 0xffffff);
+				lbl.text = hero.name;
+				lbl.x = div.x + 20 - lbl.text.length * 5;
+				lbl.y = div.y - 15;
+				_bcCanvas.addElement(lbl);
+			}
+			
+			private function onHeroOver(e:MouseEvent):void
+			{
+				var heroObj:Object = _heroObjs[int(e.currentTarget.name)];
+				var hero:BattleHero = BattleHero(heroObj.hero);
+				var bitmap:BitmapData = BattleUnitResource.getInstance(heroObj.hero.unit).defendBitmaps[heroObj.dir];
+				BorderContainer(heroObj.div).setStyle("backgroundImage", new Bitmap(bitmap));	
+				_imgTalk.source = new Bitmap(hero.getFaceBitmap());
+				_txtTalk.text = heroObj.talk;
+				//_bcTalk.move(heroObj.div.x - 50, heroObj.div.y - 50);
+				_bcTalk.visible = true;
+			}
+			
+			private function onHeroOut(e:MouseEvent):void
+			{
+				var heroObj:Object = _heroObjs[int(e.currentTarget.name)];
+				var bitmap:BitmapData = BattleUnitResource.getInstance(heroObj.hero.unit).waitBitmaps[heroObj.dir];
+				BorderContainer(heroObj.div).setStyle("backgroundImage", new Bitmap(bitmap));
+				_bcTalk.visible = false;
+			}
+			
+			private function onHeroClick(e:MouseEvent):void
+			{
+				var heroObj:Object = _heroObjs[int(e.currentTarget.name)];
+				if(heroObj.hero.id == 660)
+				{
+					var battleReport:BattleReport = BattleReportProvider.current
+						.createBattleReport(GamePlugins.parameters.battleReport.toString());
+					GameCommandFactory.current.getCommand(9527).execute(GameClient.current, battleReport);
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<s:BorderContainer id="_bcCanvas" width="100%" height="100%" borderVisible="false" backgroundAlpha="0" />
+	<s:BorderContainer id="_bcTalk" x="240" y="480" width="250" height="90" backgroundAlpha="1" backgroundColor="#332211"
+					   borderVisible="true" visible="false">
+		<s:Image id="_imgTalk" x="5" y="5" />
+		<s:TextArea id="_txtTalk" x="75" y="5" width="170" height="80" fontSize="18" fontFamily="微软雅黑" fontWeight="bold"/>
+		<s:BorderContainer x="75" y="5" width="170" height="80" backgroundAlpha="0" />
+	</s:BorderContainer>
+</s:BorderContainer>

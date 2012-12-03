@@ -11,7 +11,7 @@ package Action.War.Movie
 	
 	import flash.geom.Point;
 	
-	public class BattleBoutMoveRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
+	public class BattleBoutMoveRenderer extends BattleFrameRendererBase implements IMovieFrameRenderer
 	{
 		private var _action:BattleAction;
 		private var _moveBUM:BattleUnitManager;

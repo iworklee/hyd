@@ -11,7 +11,7 @@ package Action.War.Movie
 	
 	import flash.geom.Point;
 	
-	public class BattleReportInitRenderer extends MovieFrameRendererBase implements IMovieFrameRenderer
+	public class BattleReportInitRenderer extends BattleFrameRendererBase implements IMovieFrameRenderer
 	{		
 		public function BattleReportInitRenderer(reportMgr:BattleReportManager)
 		{

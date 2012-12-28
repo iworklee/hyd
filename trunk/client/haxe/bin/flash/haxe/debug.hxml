@@ -1,0 +1,14 @@
+-main ApplicationMain 
+-D fdb
+-D nme_install_tool
+-cp src
+-lib nme
+-lib svg
+-lib HaxePunk
+-D web
+-swf-version 10.1
+-swf9 bin/flash/bin/MyApplication.swf
+-swf-header 760:600:30:ffffff
+-cp bin/flash/haxe
+--no-inline
+-debug

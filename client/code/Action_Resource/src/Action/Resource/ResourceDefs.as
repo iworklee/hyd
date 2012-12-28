@@ -14,5 +14,6 @@ package Action.Resource
 		public static const UI_Lock:String = "UI/lock.png";
 		public static const UI_Win_Title:String = "UI/win_title.png";
 		public static const UI_Win_Close:String = "UI/win_close.png";
+		public static const SWF_Test:String = "test/sango.swf";
 	}
 }

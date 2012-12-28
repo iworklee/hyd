@@ -47,7 +47,8 @@ package Action.War.Commands
 				new LoadImageResourceActivity(ResourceDefs.UI_CopyList),
 				new LoadImageResourceActivity(ResourceDefs.UI_Lock),
 				new LoadImageResourceActivity(ResourceDefs.UI_Win_Title),
-				new LoadImageResourceActivity(ResourceDefs.UI_Win_Close)
+				new LoadImageResourceActivity(ResourceDefs.UI_Win_Close),
+				new LoadImageResourceActivity(ResourceDefs.SWF_Test)
 			];
 			addHeroToLoading(loadings, [635,289,98,432,395,660,424,802]);
 			

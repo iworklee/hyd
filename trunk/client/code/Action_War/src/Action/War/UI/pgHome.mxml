@@ -24,7 +24,11 @@
 			import Action.War.Report.BattleUnitManager;
 			import Action.War.Resource.BattleUnitResource;
 			
+			import avmplus.getQualifiedClassName;
+			
 			import com.greensock.TweenMax;
+			
+			import flash.utils.getDefinitionByName;
 			
 			import mx.controls.Alert;
 			import mx.controls.Image;
@@ -137,6 +141,8 @@
 						_bcCopyList.visible = true;
 					else if(btn.label == "情报")
 						showHeroInfo();
+					else if(btn.label == "搜索")
+						searchHeros();
 					for each(sb in _subBtns)
 						sb.visible = false;
 				}
@@ -343,6 +349,30 @@
 			{
 				var heroObj:Object = _heroObjs[int(e.currentTarget.name)];
 				showHeroInfo(heroObj);
+			}
+			
+			private var _swfBmps:Array = new Array();
+			private function searchHeros():void
+			{
+//				var obj:Object = CommonResource.imageSection.get(ResourceDefs.SWF_Test);
+//				GamePlugins.console.writeLine(getQualifiedClassName(obj));
+//				var mv:AVM1Movie = obj as AVM1Movie;
+//				var mc:MovieClip = obj as MovieClip;		
+//				findBmp(mc);
+//				GamePlugins.console.writeLine(_swfBmps.length);
+			}
+			
+			private function findBmp(sp:Sprite):void
+			{
+				var num:int = sp.numChildren;
+				for(var i:int=0; i<num; i++)
+				{
+					var subObj:Object = sp.getChildAt(i);
+					if(subObj is Bitmap)
+						_swfBmps.push(subObj);
+					else if(subObj is Sprite)
+						findBmp(subObj as Sprite);
+				}
 			}
 			
 		]]>

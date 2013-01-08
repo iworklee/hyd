@@ -3,6 +3,8 @@ import com.action.engine.loading.LoadingPage;
 import com.action.module.command.ConnectServerCommand;
 import com.haxepunk.Engine;
 import com.haxepunk.HXP;
+import nme.display.Sprite;
+import nme.Lib;
 
 class Main extends Engine
 {
@@ -28,6 +30,11 @@ class Main extends Engine
 	public static function main()
 	{
 		new Main();
+		//var sp:Sprite = new Sprite();
+		//Lib.current.addChild(sp);
+		//sp.graphics.beginFill(0xff00ff);
+		//sp.graphics.drawCircle(300, 300, 200);
+		//sp.graphics.endFill();
 	}
 
 }

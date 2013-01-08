@@ -48,7 +48,7 @@ class LoadResourceActivity extends BaseActivity
 	
 	private function onLoad(e:Event):Void
 	{
-		appendResource(e.currentTarget.content);
+		appendResource(e.target.content);
 		this.workflow.goon();
 	}
 	

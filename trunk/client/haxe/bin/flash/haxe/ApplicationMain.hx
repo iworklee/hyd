@@ -1,3 +1,5 @@
+#if nme
+
 import Main;
 import nme.Assets;
 import nme.events.Event;
@@ -31,22 +33,14 @@ class ApplicationMain {
 		
 		
 		
-		haxe.Log.trace = flashTrace; // null
+		
+		
 		
 
 		if (call_real)
 			begin ();
 	}
 
-	
-	private static function flashTrace( v : Dynamic, ?pos : haxe.PosInfos ) {
-		var className = pos.className.substr(pos.className.lastIndexOf('.') + 1);
-		var message = className+"::"+pos.methodName+":"+pos.lineNumber+": " + v;
-
-        if (flash.external.ExternalInterface.available)
-			flash.external.ExternalInterface.call("console.log", message);
-		else untyped flash.Boot.__trace(v, pos);
-    }
 	
 	
 	private static function begin () {
@@ -68,15 +62,18 @@ class ApplicationMain {
 		}
 		else
 		{
-			nme.Lib.current.addChild(cast (Type.createInstance(Main, []), nme.display.DisplayObject));	
+			var instance = Type.createInstance(Main, []);
+			if (Std.is (instance, nme.display.DisplayObject)) {
+				nme.Lib.current.addChild(cast instance);
+			}	
 		}
 		
 	}
 
 	static function onEnter (_) {
 		
-		var loaded:Int = nme.Lib.current.loaderInfo.bytesLoaded;
-		var total:Int = nme.Lib.current.loaderInfo.bytesTotal;
+		var loaded = nme.Lib.current.loaderInfo.bytesLoaded;
+		var total = nme.Lib.current.loaderInfo.bytesTotal;
 		mPreloader.onUpdate(loaded,total);
 		
 		if (loaded >= total) {
@@ -132,6 +129,11 @@ class ApplicationMain {
 			 return Assets.getFont ("font/04B_03__.ttf");
 		 
 		
+		if (inName=="font/04B_03__.ttf")
+			 
+			 return Assets.getFont ("font/04B_03__.ttf");
+		 
+		
 		if (inName=="font/arial.ttf")
 			 
 			 return Assets.getFont ("font/arial.ttf");
@@ -140,11 +142,6 @@ class ApplicationMain {
 		if (inName=="cfg/global.json")
 			 
 			 return Assets.getText ("cfg/global.json");
-         
-		
-		if (inName=="svg/nme.svg")
-			 
-			 return Assets.getText ("svg/nme.svg");
          
 		
 		
@@ -166,7 +163,6 @@ class ApplicationMain {
 	
 }
 
-
 class NME_gfx_debug_console_debug_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_gfx_debug_console_logo_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_gfx_debug_console_output_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
@@ -175,7 +171,44 @@ class NME_gfx_debug_console_play_png extends nme.display.BitmapData { public fun
 class NME_gfx_debug_console_step_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_gfx_preloader_haxepunk_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_font_04b_03___ttf extends nme.text.Font { }
+class NME_font_5 extends nme.text.Font { }
 class NME_font_arial_ttf extends nme.text.Font { }
 class NME_cfg_global_json extends nme.utils.ByteArray { }
-class NME_svg_nme_svg extends nme.utils.ByteArray { }
 
+
+#else
+
+import Main;
+
+class ApplicationMain {
+	
+	public static function main () {
+		
+		var hasMain = false;
+		
+		for (methodName in Type.getClassFields(Main))
+		{
+			if (methodName == "main")
+			{
+				hasMain = true;
+				break;
+			}
+		}
+		
+		if (hasMain)
+		{
+			Reflect.callMethod (Main, Reflect.field (Main, "main"), []);
+		}
+		else
+		{
+			var instance = Type.createInstance(Main, []);
+			if (Std.is (instance, flash.display.DisplayObject)) {
+				flash.Lib.current.addChild(cast instance);
+			}
+		}
+		
+	}
+
+}
+
+#end

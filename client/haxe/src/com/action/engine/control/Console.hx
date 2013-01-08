@@ -1,6 +1,9 @@
 package com.action.engine.control;
 import com.action.engine.GameContext;
+import com.haxepunk.graphics.Spritemap;
+import com.haxepunk.Preloader;
 import com.haxepunk.utils.Key;
+import nme.display.Tilesheet;
 import nme.text.TextField;
 import nme.text.TextFormat;
 import nme.display.Sprite;
@@ -78,7 +81,7 @@ class Console extends Control
 	{
 		write(obj);
 		_tfOutput.appendText("\n");
-		_tfOutput.scrollV = _tfOutput.maxScrollV;
+		//_tfOutput.scrollV = _tfOutput.maxScrollV;
 	}
 	
 	public function clear():Void

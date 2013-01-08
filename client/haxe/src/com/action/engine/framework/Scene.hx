@@ -7,8 +7,6 @@ import com.haxepunk.HXP;
 import com.haxepunk.Sfx;
 import com.haxepunk.World;
 import flash.text.TextField;
-import format.SVG;
-import format.svg.Text;
 import nme.Assets;
 import nme.display.SimpleButton;
 import nme.display.Sprite;
@@ -42,7 +40,7 @@ class Scene extends World
 		super.begin();
 		//loadPanel();
 		
-		//addGraphic(new Image(GameContext.remoteResource.getBitmap("battle/001.JPG")));
+		addGraphic(new Image(GameContext.remoteResource.getBitmap("battle/001.JPG")));
 		
 		//var sprite = cast(HXP.engine.getChildAt(1), Sprite);
 		//new SVG(Assets.getText("svg/nme.svg")).render(sprite.graphics, 100, 100, 100, 100);
@@ -70,8 +68,8 @@ class Scene extends World
 	
 	private function createLoadingFlow():Workflow
 	{
-		return null;
-		//return Workflow.create(GameContext.loading, [new LoadBitmapActivity("battle/001.JPG")]);
+		//return null;
+		return Workflow.create(GameContext.loading, [new LoadBitmapActivity("battle/001.JPG")]);
 	}
 	
 	public function preload():Void

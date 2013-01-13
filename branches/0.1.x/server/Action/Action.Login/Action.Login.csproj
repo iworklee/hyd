@@ -69,7 +69,6 @@
     </Compile>
     <Compile Include="Commands\BackdoorLoginCommand.cs" />
     <Compile Include="Commands\CreateRoleCommand.cs" />
-    <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="LoginHelper.cs" />
     <Compile Include="LoginModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

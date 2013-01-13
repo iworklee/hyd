@@ -1,0 +1,15 @@
+
+import "protobuf-net.proto";
+
+package Action.Model;
+option (protobuf_net.namespace) = "Action.Model";
+
+message BackdoorLoginArgs {
+  optional string Account = 1;
+}
+
+message CreateRoleArgs {
+  optional string Name = 1;
+  optional int32 Job = 2;
+  optional int32 Sex = 3;
+}

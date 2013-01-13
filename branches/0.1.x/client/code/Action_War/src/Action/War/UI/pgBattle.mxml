@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   implements="Action.Core.Page.IGamePage,Action.Display.Drawing.ICanvasContainer"
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="760" height="600" backgroundColor="#000000">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import Action.Core.Flow.Workflow;
+			import Action.Core.GameConfig;
+			import Action.Core.GamePlugins;
+			import Action.Core.Util.NumberWrapper;
+			import Action.Core.Util.SoundPlayer;
+			import Action.Display.Decorator.CommonDisplayDecorator;
+			import Action.Display.Decorator.DisplayDecoratorBuilder;
+			import Action.Display.Decorator.IDisplayDecorator;
+			import Action.Display.Drawing.BitmapHelper;
+			import Action.Display.Drawing.CanvasGraphics;
+			import Action.Display.Drawing.MoviePlayer;
+			import Action.Model.BattleReport;
+			import Action.Model.BattleUnit;
+			import Action.Resource.CommonResource;
+			import Action.Resource.Flow.LoadImageResourceActivity;
+			import Action.Resource.ResourceDefs;
+			import Action.War.BattleDefs;
+			import Action.War.BattleHelper;
+			import Action.War.Config.BattleConfigFactory;
+			import Action.War.Config.BattleHero;
+			import Action.War.Config.BattleSkill;
+			import Action.War.Report.BattleReportManager;
+			import Action.War.Report.BattleUnitManager;
+			import Action.War.Resource.BattleUnitResource;
+			import Action.War.WarModule;
+			
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.core.IVisualElement;
+			import mx.events.FlexEvent;
+			
+			private var _canvasGraphics:CanvasGraphics;
+			private var _moviePlayer:MoviePlayer;
+			private var _soundPlayer:SoundPlayer;
+			
+			private var _battleReportManager:BattleReportManager;
+			public function setReportManager(bum:BattleReportManager):void
+			{
+				_battleReportManager = bum;
+			}
+						
+			public function onLoad():void
+			{
+				//加载背景
+				_bcMain.setStyle("backgroundImage", CommonResource.imageSection.get(ResourceDefs.BG_Battle));
+				
+				//生成网格
+				for(var i:int = 0; i<5; i++)
+				{
+					for(var j:int = 0; j<14; j++)
+					{
+						var cell:BorderContainer = new BorderContainer();
+						cell.setStyle("borderWeight", 1);
+						cell.setStyle("backgroundAlpha", 0.3);
+						cell.setStyle("backgroundColor", "#000044");
+						cell.setStyle("borderColor", "#00ffff");
+						cell.width = cell.height = 50;
+						cell.x = j * 50;
+						cell.y = i * 50;						
+						_bcGrid.addElement(cell);
+						
+						var lbl:Label = new Label();
+						lbl.x = 20;
+						lbl.y = 20;
+						lbl.setStyle("color", "#ffff00");
+						lbl.text = (j * 5 + i).toString();
+						cell.addElement(lbl);
+					}
+				}
+
+				//加载背景音乐
+				if(_soundPlayer == null)
+					_soundPlayer = new SoundPlayer(CommonResource.parseUrl("sound/battle01.mp3"));
+				_soundPlayer.play(100);
+				
+				//test();
+				replay();				
+			}
+			
+			private function test():void
+			{
+				var array:Array = new Array();
+				array[2] = 20;
+				array[3] = 30;
+				array[5] = 50;
+				array[7] = 70;
+				delete array[3];
+				GamePlugins.console.writeLine(array[3]);
+				for each(var item:int in array)
+					GamePlugins.console.writeLine(item);
+			}
+			
+			private function replay():void
+			{
+				_bcResultHidden.visible = false;
+				_canvasGraphics = new CanvasGraphics(this);
+				_canvasGraphics.clear();
+				//GamePlugins.console.clear();
+				
+				_battleReportManager.reset();
+				_battleReportManager.play(_canvasGraphics);
+				
+				_moviePlayer = _battleReportManager.moviePlayer;
+				_sldProgress.maximum = _moviePlayer.movie.maxFrame;
+				
+				_moviePlayer.removeEventListener(MoviePlayer.Event_Goto, onMovieGoto);
+				_moviePlayer.removeEventListener(MoviePlayer.Event_Stop, onMovieStop);
+				_moviePlayer.addEventListener(MoviePlayer.Event_Goto, onMovieGoto);
+				_moviePlayer.addEventListener(MoviePlayer.Event_Stop, onMovieStop);
+				
+				refreshButton();
+			}
+			
+			private function onMovieGoto(e:Event):void
+			{
+				_sldProgress.value = _moviePlayer.currentFrame;
+				_lblProgress.text = NumberWrapper.wrap(_moviePlayer.currentFrame).toText(4)
+					+ " / " + NumberWrapper.wrap(_moviePlayer.movie.maxFrame).toText(4);
+				_lblCurRenderer.text = _moviePlayer.currentRenderer.description;				
+				
+				_pgbSituation.setProgress(_battleReportManager.unitsCount1, _battleReportManager.unitsCount1 + _battleReportManager.unitsCount2);
+				_pgbSituation.label = _battleReportManager.unitsCount1 + " VS " + _battleReportManager.unitsCount2;
+			}
+			
+			private function onMovieStop(e:Event):void
+			{
+				_btnPlay.enabled = _btnSpeed.enabled = false;
+			}
+			
+			public function onUnload():void
+			{
+				_soundPlayer.stop();
+			}
+			
+			public function get title():String
+			{
+				return _lblTitle.text;
+			}
+			
+			public function set title(value:String):void
+			{
+				_lblTitle.text = value;
+			}
+			
+			public function bindPlayers(player1:String, player2:String):void
+			{
+				_lblPlayer1.text = player1;
+				_lblPlayer2.text = player2;
+			}
+			
+			public function showMessage(text:String):void
+			{
+				_lblResult.text = text;
+				_bcResultHidden.visible = true;
+			}
+			
+			public function getCanvas():BorderContainer
+			{
+				return _bcCanvas;
+			}
+			
+			private function showUnitInfo(pos:int):void
+			{
+				var bum:BattleUnitManager = _battleReportManager.getBUMbyPos(pos);
+				if(bum != null)
+				{
+					var skill:BattleSkill = BattleConfigFactory.getSkill(bum.hero.skill);
+					_imgFace.source = bum.hero.getFaceBitmap();
+					_lblName.text = bum.hero.name;
+					_lblSkill.text = skill != null ? skill.name : "";
+					
+					_pgbHP.setProgress(bum.HP, bum.maxHP);
+					_pgbHP.label = bum.HP + " / " + bum.maxHP;
+					_pgbMP.setProgress(bum.MP, bum.maxMP);
+					_pgbMP.label = bum.MP + " / " + bum.maxMP;
+					
+					var point:Point = BattleHelper.getHeroDescPoint(bum.SID);
+					_bcUnitHidden.x = point.x;
+					_bcUnitHidden.y = point.y;
+					_bcUnitHidden.visible = true;
+				}
+				else
+					hideUnitInfo();
+			}			
+			
+			private function hideUnitInfo():void
+			{
+				_bcUnitHidden.visible = false;
+			}
+			
+			private function refreshButton():void
+			{
+				_btnPlay.label = _moviePlayer.running ? "暂停" : "播放";
+				_btnSpeed.label = "加速[×" + _moviePlayer.speed + "]";
+			}
+			
+			protected function _lblPlay_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				_canvasGraphics.clear();
+				GamePlugins.console.clear();
+				_battleReportManager.play(_canvasGraphics);
+			}
+			
+			protected function _sldProgress_valueCommitHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				//GamePlugins.console.writeLine(_sldProgress.value);
+				//_moviePlayer.goto(_sldProgress.value);
+			}
+			
+			protected function _btnReplay_clickHandler(event:MouseEvent):void
+			{
+				replay();
+				_btnPlay.enabled = _btnSpeed.enabled = true;
+				refreshButton();
+			}
+			
+			protected function _btnPlay_clickHandler(event:MouseEvent):void
+			{
+				_moviePlayer.pause(_moviePlayer.running);
+				refreshButton();
+			}
+			
+			protected function _btnSpeed_clickHandler(event:MouseEvent):void
+			{
+				_moviePlayer.speedUp();
+				refreshButton();
+			}
+			
+			protected function _btnGrid_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				_bcGrid.visible = !_bcGrid.visible;
+			}
+			
+			protected function _bcCanvas_mouseMoveHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var point:Point = new Point(event.localX, event.localY);
+				var pos:int = BattleHelper.getBattlePos(point);
+				point = BattleHelper.getPaintPoint(pos);
+				showUnitInfo(pos);
+			}
+			
+			protected function _bcCanvas_mouseOutHandler(event:MouseEvent):void
+			{
+				hideUnitInfo();
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Label id="_lblPlayer1" left="50" y="20" color="#ffff00" fontFamily="微软雅黑" fontSize="24" textAlign="left"
+			 fontWeight="bold" text=" 神仙一枝花"  buttonMode="true"/>
+	<s:Label id="_lblTitle" right="320" y="20" color="#00ff00" fontFamily="微软雅黑" fontSize="24"
+			 fontWeight="bold" text="准备战斗" />
+	<s:Label id="_lblPlayer2" right="50" y="20" color="#ffff00" fontFamily="微软雅黑" fontSize="24" textAlign="right"
+			 fontWeight="bold" text="万寿落雪"  buttonMode="true"/>
+	<mx:ProgressBar id="_pgbSituation" x="50" y="60" width="660" height="25" label="120 / 254"
+					chromeColor="#ff0000" color="#ffff00" labelPlacement="center"
+					maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin2"/>
+	<s:BorderContainer id="_bcMain" y="100" width="100%" height="400">		
+		<s:BorderContainer id="_bcGrid" width="700" height="250" borderColor="#0000ff" borderWeight="0"
+						   backgroundAlpha="0" x="27" y="60" visible="false">			
+		</s:BorderContainer>
+		<s:BorderContainer id="_bcCanvas" width="700" height="250" x="27" y="60" borderVisible="false"
+						   backgroundAlpha="0" mouseMove="_bcCanvas_mouseMoveHandler(event)"
+						   mouseOut="_bcCanvas_mouseOutHandler(event)">
+			<s:BorderContainer id="_bcLayerEffect" width="100%" height="100%" backgroundAlpha="0" borderVisible="false">
+				<s:BorderContainer id="_bcLayerText" width="100%" height="100%" backgroundAlpha="0" borderVisible="false">
+					
+				</s:BorderContainer>
+			</s:BorderContainer>
+		</s:BorderContainer>
+	</s:BorderContainer>
+	<s:Label id="_lblProgress" x="20" y="520" color="#00ff00" fontFamily="微软雅黑" fontSize="18" text="0 / 0" />
+	<s:Label id="_lblCurRenderer" x="140" y="520" color="#ffff00" fontFamily="微软雅黑" fontSize="18" text="Init" />
+	<s:HSlider id="_sldProgress" x="20" y="540" width="720" enabled="false" valueCommit="_sldProgress_valueCommitHandler(event)"/>
+	<s:Button id="_btnReplay" x="20" y="560" label="重播" click="_btnReplay_clickHandler(event)"/>
+	<s:Button id="_btnPlay" x="100" y="560" label="暂停" click="_btnPlay_clickHandler(event)"/>
+	<s:Button id="_btnSpeed" x="180" y="560" label="加速" click="_btnSpeed_clickHandler(event)"/>
+	<s:Button id="_btnGrid" x="260" y="560" label="网格" click="_btnGrid_clickHandler(event)"/>
+	<s:BorderContainer id="_bcUnitHidden" width="150" height="90" backgroundColor="#334466" backgroundAlpha="1" visible="false">
+		<s:Image id="_imgFace" x="5" y="5"/>
+		<s:Label id="_lblName" x="75" y="5" color="#ffffff" text="关羽" fontSize="12" />
+		<s:Label id="_lblLevel" x="125" y="6" color="#ffffff" text="1级" fontSize="12" />
+		<mx:ProgressBar id="_pgbHP" x="75" y="25" width="70" height="15" label="120 / 254"
+						chromeColor="#ff0000" color="#ffff00" labelPlacement="center"
+						maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
+		<mx:ProgressBar id="_pgbMP" x="75" y="45" width="70" height="15" label="50 / 100"
+						chromeColor="0x0000ff" color="#ffff00" labelPlacement="center"
+						maximum="400" minimum="0" mode="manual" trackSkin="Action.Core.UI.SparkSkin"/>
+		<s:Label id="_lblSkill" x="75" y="70" color="#ffffff" text="真武圣斩" fontSize="12" />
+	</s:BorderContainer>
+	<s:BorderContainer id="_bcResultHidden" width="400" height="100" x="180" y="250" backgroundColor="#334466"
+					   backgroundAlpha="0.7" visible="false">
+		<s:Label id="_lblResult" x="30" y="40" width="320" text="[齐天大圣] 战胜了 [二郎神杨戬]"
+				 color="#ffff00" fontSize="20" textAlign="center"/>
+	</s:BorderContainer>
+</s:BorderContainer>

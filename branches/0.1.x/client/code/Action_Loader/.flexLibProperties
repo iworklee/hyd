@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="res.ResLoaderManager"/>
+    <classEntry path="res.vo.ResBitmapVO"/>
+    <classEntry path="res.interfaces.IResVO"/>
+    <classEntry path="res.vo.ResSwfVO"/>
+    <classEntry path="res.vo.ResVO"/>
+    <classEntry path="res.vo.ResXmlVO"/>
+    <classEntry path="res.data.animation.bitmap.AnimationConfigVO"/>
+    <classEntry path="res.data.animation.bitmap.PartConfigVO"/>
+    <classEntry path="res.data.ConfigDataManager"/>
+    <classEntry path="res.data.ConfigUrlVO"/>
+    <classEntry path="res.loader.ResXmlLoader"/>
+    <classEntry path="res.ResDataPool"/>
+    <classEntry path="res.vo.PreloadXmlData"/>
+    <classEntry path="res.vo.PreloadData"/>
+    <classEntry path="res.event.ResXmlLoadEvent"/>
+    <classEntry path="res.data.ConfigUrlEnum"/>
+    <classEntry path="res.enum.ResTypeEnum"/>
+    <classEntry path="res.data.XmlDataModule"/>
+    <classEntry path="res.data.animation.XmlAnimationDataModule"/>
+    <classEntry path="res.data.animation.XmlActionDataModule"/>
+    <classEntry path="res.data.animation.enum.ActionTypeEnum"/>
+    <classEntry path="res.data.unit.UnitConfigVO"/>
+    <classEntry path="res.data.unit.XmlUnitDataModule"/>
+    <classEntry path="res.loader.ResSwfLoader"/>
+    <classEntry path="res.vo.PreloadSwfData"/>
+    <classEntry path="res.event.ResSwfLoadEvent"/>
+    <classEntry path="res.data.animation.action.ActionUnitConfig"/>
+    <classEntry path="res.data.animation.action.ActionConfigVO"/>
+    <classEntry path="res.data.animation.action.ActionConfigPart"/>
+    <classEntry path="res.data.animation.action.PartFace"/>
+    <classEntry path="res.data.animation.enum.ActionClassEnum"/>
+    <classEntry path="res.data.res.ResUrlVO"/>
+    <classEntry path="res.data.res.XmlResDataModule"/>
+    <classEntry path="res.event.ConfigDataCompleteEvent"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

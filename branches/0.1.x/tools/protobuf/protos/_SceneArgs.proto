@@ -1,0 +1,29 @@
+
+import "protobuf-net.proto";
+
+package Action.Model;
+option (protobuf_net.namespace) = "Action.Model";
+
+message SnapPlayerArgsCollection {
+  repeated SnapPlayerArgs Items = 1;
+}
+
+message SnapPlayerArgs {
+  optional string Name = 1;
+  optional int32 Job = 2;
+  optional int32 Sex = 3;
+  optional int32 Skin = 4;
+  optional int32 X = 5;
+  optional int32 Y = 6;
+}
+
+message MoveArgs { 
+  optional int32 X = 1;
+  optional int32 Y = 2;
+}
+
+message PlayerMoveArgs { 
+  optional string Name = 1;
+  optional int32 X = 2;
+  optional int32 Y = 3;
+}

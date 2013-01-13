@@ -1,0 +1,17 @@
+
+import "protobuf-net.proto";
+
+package Action.Model;
+option (protobuf_net.namespace) = "Action.Model";
+
+message Role {
+  optional string Name = 1;
+  optional int32 Job = 2;
+  optional int32 Sex = 3;
+  optional int32 Level = 4;
+  optional int32 Skin = 5;
+}
+
+message Right {
+  repeated int32 Items = 1;
+}

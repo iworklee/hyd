@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="Action.War.WarModule"/>
+    <classEntry path="Action.War.BattleReportProvider"/>
+    <classEntry path="Action.War.Commands.PlayBattleReportCommand"/>
+    <classEntry path="Action.War.Report.BattleUnitManager"/>
+    <classEntry path="Action.War.Flow.LoadBattleUnitResourceActivity"/>
+    <classEntry path="Action.War.Report.BattleReportManager"/>
+    <classEntry path="Action.War.Resource.BattleUnitResource"/>
+    <classEntry path="Action.War.Strategy.IUnitResourceStrategy"/>
+    <classEntry path="Action.War.Strategy.BattleResourceStrategyFactory"/>
+    <classEntry path="Action.War.Strategy.UnitAttackResourceStrategy"/>
+    <classEntry path="Action.War.Strategy.UnitDefendResourceStrategy"/>
+    <classEntry path="Action.War.Movie.BattleReportInitRenderer"/>
+    <classEntry path="Action.War.Movie.BattleReportOverRenderer"/>
+    <classEntry path="Action.War.BattleDefs"/>
+    <classEntry path="Action.War.Movie.BattleBoutSkillRenderer"/>
+    <classEntry path="Action.War.Movie.BattleBoutBeginRenderer"/>
+    <classEntry path="Action.War.Movie.BattleBoutMoveRenderer"/>
+    <classEntry path="Action.War.Movie.BattleFrameRendererBase"/>
+    <classEntry path="Action.War.BattleHelper"/>
+    <classEntry path="Action.War.Skill.ISkillRenderer"/>
+    <classEntry path="Action.War.Skill.SkillRendererFactory"/>
+    <classEntry path="Action.War.Config.BattleSkill"/>
+    <classEntry path="Action.War.WarPlugins"/>
+    <classEntry path="Action.War.Skill.SkillRendererBase"/>
+    <classEntry path="Action.War.Skill.CommonSkillRenderer"/>
+    <classEntry path="Action.War.Skill.SpecialSkillRenderer"/>
+    <classEntry path="Action.War.Flow.LoadBattleSkillResourceActivity"/>
+    <classEntry path="Action.War.Strategy.ISkillResourceStrategy"/>
+    <classEntry path="Action.War.Strategy.SkillNormalResourceStrategy"/>
+    <classEntry path="Action.War.Report.BattleEffectWrapper"/>
+    <classEntry path="Action.War.Config.BattleHero"/>
+    <classEntry path="Action.War.Movie.BattleBoutDeadRenderer"/>
+    <classEntry path="Action.War.Config.BattleConfigFactory"/>
+    <classEntry path="Action.War.Strategy.UnitWallResourceStrategy"/>
+    <classEntry path="Action.War.Commands.GoHomeCommand"/>
+    <classEntry path="Action.War.UI.pgHome"/>
+    <classEntry path="Action.War.Commands.EnterCopyCommand"/>
+    <classEntry path="Action.War.UI.pgCopy"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

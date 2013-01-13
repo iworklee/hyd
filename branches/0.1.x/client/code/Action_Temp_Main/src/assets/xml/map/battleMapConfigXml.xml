@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<BattleMapConfig mapId="1001" resId="1001" mapWidth="800" mapHeight="600">
+	</BattleMapConfig>
+</root>

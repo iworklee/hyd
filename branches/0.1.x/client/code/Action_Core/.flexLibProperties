@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="Action.Core.Command.IGameCommand"/>
+    <classEntry path="Action.Core.Net.GameClient"/>
+    <classEntry path="Action.Core.GamePlayer"/>
+    <classEntry path="Action.Core.Net.GameDataManager"/>
+    <classEntry path="Action.Core.Module.IGameModule"/>
+    <classEntry path="Action.Core.Module.GameModuleFactory"/>
+    <classEntry path="Action.Core.Command.GameCommandFactory"/>
+    <classEntry path="Action.Core.Net.GameReceiveData"/>
+    <classEntry path="Action.Core.GamePlugins"/>
+    <classEntry path="Action.Core.Serial.IGameDataSerializer"/>
+    <classEntry path="Action.Core.Serial.FloatSerializer"/>
+    <classEntry path="Action.Core.Serial.BoolSerializer"/>
+    <classEntry path="Action.Core.ReceiveEvent"/>
+    <classEntry path="Action.Core.IConsole"/>
+    <classEntry path="Action.Core.Page.IGamePage"/>
+    <classEntry path="Action.Core.Page.IGameFrame"/>
+    <classEntry path="Action.Core.Page.IGameDialog"/>
+    <classEntry path="Action.Core.Flow.Workflow"/>
+    <classEntry path="Action.Core.Flow.IActivity"/>
+    <classEntry path="Action.Core.Flow.ActivityBase"/>
+    <classEntry path="Action.Core.Util.NumberWrapper"/>
+    <classEntry path="Action.Core.Util.Random"/>
+    <classEntry path="Action.Core.Util.Base64"/>
+    <classEntry path="Action.Core.Util.SoundPlayer"/>
+    <classEntry path="Action.Core.GameConfig"/>
+    <classEntry path="Action.Core.Util.JsonObject"/>
+    <classEntry path="Action.Core.Util.Base64_2"/>
+    <classEntry path="Action.Core.Util.Base16"/>
+    <classEntry path="Action.Core.UI.SparkSkin"/>
+    <classEntry path="Action.Core.Page.ILoadingPage"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

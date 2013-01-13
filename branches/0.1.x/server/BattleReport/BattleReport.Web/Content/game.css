@@ -1,0 +1,54 @@
+﻿#attacker
+{
+	float: left;
+	margin-left: 3%;
+}
+
+#vs
+{
+	float: left;
+	margin-top: 20%;
+	margin-left: 5%;
+}
+
+#defender
+{
+	float: right;
+	margin-right: 3%;
+}
+
+h1
+{
+	text-align: center;
+}
+
+.units
+{
+	float: left;
+	margin: 10px;
+}
+
+.hero
+{
+	float: left;
+	margin: 0px;
+}
+
+.hero a
+{
+	text-decoration: none;
+}
+
+
+.heroSeat
+{
+	width: 60px;
+	height: 60px;
+	float: left;
+	margin: 1px;
+}
+
+.heroCloser
+{
+	float: right;
+}

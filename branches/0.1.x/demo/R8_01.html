@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+    <!-- 
+    Smart developers always View Source. 
+    
+    This application was built using Adobe Flex, an open source framework
+    for building rich Internet applications that get delivered via the
+    Flash Player or to desktops via Adobe AIR. 
+    
+    Learn more about Flex at http://flex.org 
+    // -->
+    <head>
+        <title></title>
+        <meta name="google" value="notranslate" />         
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- Include CSS to eliminate any default margins/padding and set the height of the html element and 
+             the body element to 100%, because Firefox, or any Gecko based browser, interprets percentage as 
+             the percentage of the height of its parent container, which has to be set explicitly.  Fix for
+             Firefox 3.6 focus border issues.  Initially, don't display flashContent div so it won't show 
+             if JavaScript disabled.
+        -->
+        <style type="text/css" media="screen"> 
+            html, body  { height:100%; }
+            body { margin:0; padding:0; overflow:auto; text-align:center; 
+                   background-color: #00aabb; }   
+            object:focus { outline:none; }
+            #flashContent { display:none; }
+        </style>
+        
+        <!-- Enable Browser History by replacing useBrowserHistory tokens with two hyphens -->
+        <!-- BEGIN Browser History required section -->
+        <link rel="stylesheet" type="text/css" href="history/history.css" />
+        <script type="text/javascript" src="history/history.js"></script>
+        <!-- END Browser History required section -->  
+            
+        <script type="text/javascript" src="config.js"></script>
+        <script type="text/javascript" src="config.google.js"></script>
+        <script type="text/javascript" src="swfobject.js"></script>
+        <script type="text/javascript">
+            // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+            var swfVersionStr = "11.1.0";
+            // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+            var xiSwfUrlStr = "playerProductInstall.swf";
+            var flashvars = {};
+            var params = {};
+            params.quality = "high";
+            params.bgcolor = "#00aabb";
+            params.allowscriptaccess = "sameDomain";
+            params.allowfullscreen = "true";
+            var attributes = {};
+            attributes.id = "DemoProject_East";
+            attributes.name = "DemoProject_East";
+            attributes.align = "middle";
+            
+            // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+            //swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+            
+            window.onload = function()
+            {
+	            flashvars.battleReport = "0a203738323730383965393933383465346561333264643865353030326336313166120c081e108b03181e209c032832120c081f109405181f20c0032832120c082010d702182020f8022832120c082110f501182120a4022832120c082210b003182220a5032832120a081910a306181920a202120a081a10a306181a20a202120a081b10a306181b20a202120a081c10a306181c20a202120a081d10a306181d20a202120a081410a5061814208502120a081510a5061815208502120a081610a5061816208502120a081710a5061817208502120a081810a5061818208502120a080f10a406180f208502120a081010a4061810208502120a081110a4061811208502120a081210a4061812208502120a081310a4061813208502120a080a10a106180a20bf02120a080b10a106180b20bf02120a080c10a106180c20bf02120a080d10a106180d20bf02120a080e10a106180e20bf02120320e80712070801180120e80712070802180220e80712070803180320e80712070804180420e807120c082310a80318232081012832120c082410a102182420da012832120c082510f20218252093032832120c082610e101182620ce022832120b08271062182720a4032832120a082810a106182820bf02120a082910a106182920bf02120a082a10a106182a20bf02120a082b10a106182b20bf02120a082c10a106182c20bf02120a082d10a106182d20bf02120a082e10a106182e20bf02120a082f10a106182f20bf02120a083010a106183020bf02120a083110a106183120bf02120a083210a106183220bf02120a083310a106183320bf02120a083410a106183420bf02120a083510a106183520bf02120a083610a106183620bf02120a083710a106183720bf02120a083810a106183820bf02120a083910a106183920bf02120a083a10a106183a20bf02120a083b10a106183b20bf0212070845184520e80712070844184420e80712070843184320e80712070842184220e80712070841184120e8071abe0308011217081e2204081e203222070823100318bd032204082320321217081f2204081f203222070824100318bf02220408242032121608242204082420322206081f100218672204081f20321217082022040820203222070825100318f50222040825203212170825220408252032220708201002189d012204082020321217082622040826203222070821100318c3022204082120321217082122040821203222070826100318ad012204082620321217082722040827203222070822100218bf012204082220321217082222040822203222070827100218a50122040827203212060828100218231211081a22070824100318c50122040824203212060829100218241211081b220708251002188b012204082520321211081c2207082610031885012204082620321211081d22070827100318a701220408272032120b08142207082810021885011206082d10021828120a081522060829100118411206082e100218291211081622070825100318bb01220408252032121008172206082610031871220408262032121008182206082710021861220408272032120608321002182d120608331002182e120608371002183212060838100218331a9f0408021211081e2204081e203222070828100318b1021262081f180322070829100118fd012207082e100318fb052207082d100118fd012207082a100318fb0522070828100218fd0322070825100218850322040825203222070832100118fd012207082f100118fd0122070833100118fd012205081f20c701124708201801220708201004189e012206081f100418682206081f1005206422070821100418f00122060821100520642204081b10042204081a10042204081c10042205082020c70112310826180222070826100418e8022204082b10042204082c100422070827100418f00122060827100520322205082620ab021250082118092207082610021897032204082620322204082b10002207082c100218af0522070827100218fb032204082720322207082f100218af052207083110031887082204083010002205082120ab02121a0827180422070822100218e70722040822203222050827208f03120b081a22070829100318dd01121008292206081f1002184b2204081f20321210081c220608261001182b2204082620321210081d220608271002186f2204082720321206082d10021823120b081522070829100318c70112100817220608261001182522040826203212100818220608271001182f22040827203212060832100218281206083310021829120608341002182f1206083610021831120608371002182d120608381002182e12060839100218341206083b100218361ab20208031226081e18062207082d100218df0422070832100118af02220708371003188f072205081e20c7011206081f1002182412060820100218251217082622040826203222070821100318c3022204082120321216082122040821203222060826100218732204082620321206081a1002181f1206081b100218201206082b100218261206081d10021822120608151002181a120608161002181b120b08172207082b100318c701120608301002182b120608181002181d12060832100218231206081010021815121008332206081f1002184b2204081f20321206081110021816120608341002182a12060835100218301206081310021818120608361002182c1206080b100218101206080c10021811120608391002182f1206083a100218351206080e100218131206083b100218311ad40108041211081e2204081e203222070832100318b102122f081f180322070833100118fd0122070838100318fb0522070839100318fb0522070834100118fd012205081f20c70112110820220408202032220708341002188102121108212204082120322207082b1003188302120b081a220708331002189301120b081b22070834100318dd01120b081c2207082b100318dd01120a081d22060836100118491206083010021826120b081822070836100318c701120608351002182b12060836100218271206083a100218301206083b1002182c1abc0108051206081e100218231206081f100218291211082022040820203222070830100218810212110821220408212032220708301003188302120608191002181e1206081a10021824120b081c22070830100318dd01120b081d2207083610021893011206081410021819120608151002181f120b081822070836100318c7011206080f10021814120608101002181a1206083510021826120b08362207081d10021893011206080a1002180f1206080b100218151206083a1002182b1abe0108061206081e100218281206081f1002182e12110820220408202032220708351003188103122f0821180922070835100318af052207083a100218c9032207083b100318af0522070836100218c9032205082120c70112060819100218231206081a100218291206081d10021827120608141002181e120608151002182412060818100218221206080f10021819120608101002181f120608131002181d1206080a100218141206080b1002181a1206083a100218261206080e100218181a2508071206081e1002182d1206081f10021833121108202204082020322207083a1003188103220ce58abfe5a682e7a0b4e7abb92a0ce59bbae88ba5e98791e6b1a43001";
+	            swfobject.embedSWF(
+	                "R8.swf", "flashContent", 
+	                "1060", "600", 
+	                swfVersionStr, xiSwfUrlStr, 
+	                flashvars, params, attributes);
+            }
+        </script>
+    </head>
+    <body>
+        <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
+             JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
+             when JavaScript is disabled.
+        -->
+        <div id="flashContent">
+            <p>
+                To view this page ensure that Adobe Flash Player version 
+                11.1.0 or greater is installed. 
+            </p>
+            <script type="text/javascript"> 
+                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
+                                + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
+            </script> 
+        </div>
+        
+        <noscript>
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1060" height="600" id="DemoProject_East">
+                <param name="movie" value="R8.swf" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#00aabb" />
+                <param name="allowScriptAccess" value="sameDomain" />
+                <param name="allowFullScreen" value="true" />
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="R8.swf" width="1060" height="600">
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#00aabb" />
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <param name="allowFullScreen" value="true" />
+                <!--<![endif]-->
+                <!--[if gte IE 6]>-->
+                    <p> 
+                        Either scripts and active content are not permitted to run or Adobe Flash Player version
+                        11.1.0 or greater is not installed.
+                    </p>
+                <!--<![endif]-->
+                    <a href="http://www.adobe.com/go/getflashplayer">
+                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                    </a>
+                <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
+            </object>
+        </noscript>     
+   </body>
+</html>

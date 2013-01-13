@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" implements="Action.Core.Page.IGameFrame,Action.Core.IConsole" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="1060" height="600"
+			   backgroundColor="#00aabb" creationComplete="application1_creationCompleteHandler(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import Action.Core.Command.GameCommandFactory;
+			import Action.Core.GameConfig;
+			import Action.Core.GamePlugins;
+			import Action.Core.Module.GameModuleFactory;
+			import Action.Core.Net.GameClient;
+			import Action.Core.Page.IGameDialog;
+			import Action.Core.Page.IGamePage;
+			import Action.Core.Page.ILoadingPage;
+			import Action.Core.Util.Base64;
+			import Action.Model.BattleReport;
+			import Action.War.BattleReportProvider;
+			import Action.War.Commands.EnterCopyCommand;
+			import Action.War.Commands.GoHomeCommand;
+			import Action.War.Commands.PlayBattleReportCommand;
+			import Action.War.Config.BattleConfigFactory;
+			import Action.War.Config.BattleHero;
+			import Action.War.WarModule;
+			
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.core.IVisualElement;
+			import mx.events.FlexEvent;
+			
+			private var _currentPage:IGamePage;
+			private var _loadingPage:ILoadingPage = new pgLoading();
+			
+			public function get currentPage():IGamePage
+			{
+				return _currentPage;
+			}
+			
+			public function get loadingPage():ILoadingPage
+			{
+				return _loadingPage;
+			}
+			
+			public function changePage(page:IGamePage):void
+			{
+				if(page != _currentPage)
+				{
+					if(_currentPage != null)
+					{
+						_currentPage.onUnload();
+						this.removeElement(_currentPage as IVisualElement);
+					}
+					_currentPage = page;
+					if(_currentPage != null)
+					{
+						this.addElement(_currentPage as IVisualElement);
+						_currentPage.onLoad();
+					}
+				}
+			}
+			
+			public function showDialog(page:IGameDialog):void
+			{
+				
+			}
+			
+			public function alert(text:String):void
+			{
+				Alert.show(text);
+			}
+			
+			public function write(text:Object):void
+			{
+				if(text == null)
+					text = "";
+				txtTestOutput.text += text.toString();
+			}
+			
+			public function writeLine(text:Object):void
+			{
+				write(text + "\n");
+				scrollToBottom(txtTestOutput.scroller);
+			}
+			
+			public function drawBitmap(bitmap:BitmapData):void
+			{
+				var image:Image = new Image();
+				image.source = new Bitmap(bitmap);
+				_imageContainer.addElement(image);
+				//scrollToBottom(_scroll1);
+			}
+			
+			public function clear():void
+			{
+				txtTestOutput.text = "";
+				scrollToBottom(txtTestOutput.scroller);
+				_imageContainer.removeAllElements();
+			}
+			
+			private function scrollToBottom(scroller:Scroller):void
+			{
+				scroller.verticalScrollBar.value = Math.max(0, scroller.verticalScrollBar.maximum);
+			}
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				/*var report:BattleReport = new BattleReport();
+				report.uID = "hello,world";
+				var bytes:ByteArray = new ByteArray();
+				report.writeTo(bytes);
+				var text:String = Base64.encode(bytes);
+				writeLine(text);
+				
+				report.uID = "cctv";
+				bytes = Base64.decode(text);
+				report.mergeFrom(bytes);
+				writeLine(report.uID);
+				return;*/
+				
+				var policy:String = GameConfig.getString("policy");
+				if(policy != null)
+					Security.loadPolicyFile(policy);
+				
+				parent.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
+				GameClient.create().frame = this;
+				GamePlugins.console = this;
+				GamePlugins.modules = [new WarModule()];
+				GamePlugins.commands = [new GoHomeCommand(), new EnterCopyCommand(), new PlayBattleReportCommand()];
+				GamePlugins.parameters = parent.loaderInfo.parameters;
+				GameModuleFactory.current.getModule("WarModule").onLoad();
+			
+				/*var buString:String = parent.loaderInfo.parameters.battleReport;
+				var report:BattleReport = buString != null && buString.length > 5
+					? BattleReportProvider.current.createBattleReport(buString)
+					: BattleReportProvider.current.createTestReport();
+				if(report != null)
+					GameCommandFactory.current.getCommand(9527).execute(GameClient.current,	report);
+				else
+					Alert.show("战报格式错误！");*/
+				GameCommandFactory.current.getCommand(0).execute(GameClient.current, null);
+			}
+			
+			private function onUncaughtError(event:UncaughtErrorEvent):void
+			{
+				var errorStr:String = "";
+				//synchronous Error
+				if(event.error is Error)
+				{					
+					var error:Error = event.error as Error;
+					errorStr += "Error ID:"+ error.errorID + "\n";
+					errorStr += "Error Name:"+ error.name + "\n";
+					errorStr += "Error Msg:"+ error.message + "\n";
+					if(error.getStackTrace())
+						errorStr += "Error StackTrace:"+ error.getStackTrace() + "\n";
+				}
+				else{
+					//asynchronous Error
+					var errorEvent:ErrorEvent = event.error as ErrorEvent;
+					errorStr +=  "Error ID:"+ errorEvent.errorID + "\n";
+					errorStr += "Error Msg:"+ errorEvent.toString() + "\n";
+				}
+				Alert.show(errorStr, "Error");
+			}
+			
+		]]>
+	</fx:Script>
+	<s:BorderContainer width="200" height="600" x="760">
+		<s:TextArea id="txtTestOutput" width="100%" height="100%" editable="false" color="#ff0000" text="" />
+		<s:BorderContainer width="93%" height="100%" backgroundColor="#0000ff" backgroundAlpha="0.3" />
+	</s:BorderContainer>
+	<s:BorderContainer width="100" height="600" x="960" backgroundColor="#556688">
+		<s:Scroller id="_scroll1" width="100%" height="100%"> 
+			<s:Group id="_imageContainer" width="100%" height="100%" clipAndEnableScrolling="true">			
+				<s:layout>
+					<s:VerticalLayout useVirtualLayout="true">
+					</s:VerticalLayout>
+				</s:layout>	
+			</s:Group>
+		</s:Scroller>
+	</s:BorderContainer>
+</s:Application>

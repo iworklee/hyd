@@ -1,0 +1,64 @@
+
+import "protobuf-net.proto";
+
+package Action.Model;
+option (protobuf_net.namespace) = "Action.Model";
+
+message BattleReport {
+  optional string UID = 1;				//战报唯一号
+  repeated BattleUnit Units = 2;			//战斗开始前所有作战单位的数据
+  repeated BattleBout Bouts = 3;			//战斗开始后每一回合的数据
+  optional string Player1 = 4;				//玩家1
+  optional string Player2 = 5;				//玩家2
+  optional bool Win = 6;				//是否胜利（相对玩家1）
+}
+
+message BattleUnit {
+  optional int32 SID = 1;				//作战单位唯一号
+  optional int32 Id = 2;				//作战单位编号
+  optional int32 Pos = 3;				//作战单位所处的位置
+  optional int32 HP = 4;				//作战单位的生命或耐久
+  optional int32 MP = 5;				//作战单位的士气
+}
+
+message BattleBout {
+  optional int32 SID = 1;				//回合序号，1－50
+  repeated BattleAction Actions = 2;			//本回合内每个作战单位的行为
+  repeated BattleEffect Effects = 3;			//回合开始产生的效果
+}
+
+enum BattleActionType {
+  Cast = 1;
+  Move = 2;
+}
+
+message BattleAction {
+  optional int32 UnitSID = 1;				//作战单位唯一号
+  optional BattleActionType Type = 2 [default=Cast];	//行为类型，移动和施放技能
+  optional int32 Param = 3;				//行为参数，如果类型是Cast，则为技能编号；类型是Move，则为目标位置
+  repeated BattleEffect Effects = 4;			//行为产生的效果
+}
+
+enum BattleEffectType {
+  None = -1;	//无
+  Dodge = 0;	//攻击被闪避
+  Block = 1;	//攻击被格挡
+  Attack = 2;	//普通攻击
+  Critical = 3;	//暴击攻击
+  Cure = 4;	//施法治疗
+  AddMP = 5;	//加气势
+  ReduceMP = 6;	//减气势
+  AddAttack = 7;	//加攻击力
+  ReduceAttack = 8;	//减攻击力
+  AddDefence = 9;	//加防御力
+  ReduceDefence = 10;	//减防御力
+  Stun = 11;	//眩晕
+  Poison = 12;	//中毒
+}
+
+message BattleEffect {
+  optional int32 UnitSID = 1;		 		//效果作用的作战单位唯一号
+  optional BattleEffectType Type = 2 [default=None];	//效果类型（闪避、格挡、正常、暴击）
+  optional sint32 PlusHP = 3;				//HP增加值
+  optional sint32 PlusMP = 4;				//MP增加值
+}

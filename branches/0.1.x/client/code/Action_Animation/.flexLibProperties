@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="animation.template.AnimationTemplate"/>
+    <classEntry path="animation.template.UnitAnimationTemplate"/>
+    <classEntry path="animation.AnimationTemplateManager"/>
+    <classEntry path="animation.vo.AnimationVO"/>
+    <classEntry path="animation.vo.UnitAnimationVO"/>
+    <classEntry path="animation.enum.AnimationFaceEnum"/>
+    <classEntry path="animation.vo.EffectAnimationVO"/>
+    <classEntry path="animation.template.EffectAnimationTemplate"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

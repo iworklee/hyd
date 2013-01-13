@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="scene.base.BaseScene"/>
+    <classEntry path="scene.base.SceneView"/>
+    <classEntry path="scene.main.MainScene"/>
+    <classEntry path="scene.copy.CopyScene"/>
+    <classEntry path="scene.main.MainSceneManager"/>
+    <classEntry path="scene.base.data.BaseRoleInfo"/>
+    <classEntry path="scene.base.data.BaseSceneInfo"/>
+    <classEntry path="scene.main.data.MainRoleInfo"/>
+    <classEntry path="scene.main.data.MainSceneInfo"/>
+    <classEntry path="scene.enum.RoleTypeEnum"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C3AE09BD-C508-4690-BAB0-CDBA77FADCEF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Action.War</RootNamespace>
+    <AssemblyName>Action.War</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MongoDB.Bson, Version=1.6.0.4624, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\MongoDB\CSharpDriver-1.6.0.4624\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=1.6.0.4624, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\MongoDB\CSharpDriver-1.6.0.4624\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework.Windows, Version=2.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\MonoGame\2.5.1\MonoGame.Framework.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\Reference\protobuf-net\r594\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Common, Version=1.4.5.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\SuperSocket\1.4\SuperSocket.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketBase, Version=1.4.5.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\SuperSocket\1.4\SuperSocket.SocketBase.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Area.cs" />
+    <Compile Include="Buff\BuffAttribute.cs" />
+    <Compile Include="Buff\IBuff.cs" />
+    <Compile Include="Buff\BuffFactory.cs" />
+    <Compile Include="Buff\HealBuff.cs" />
+    <Compile Include="Buff\BuffMetaData.cs" />
+    <Compile Include="Buff\ExciteBuff.cs" />
+    <Compile Include="Buff\ResetChargeBuff.cs" />
+    <Compile Include="Buff\TacticBuff.cs" />
+    <Compile Include="Buff\StrategyBuff.cs" />
+    <Compile Include="Buff\ResetHPBuff.cs" />
+    <Compile Include="Buff\ResetOwnChargeBuff.cs" />
+    <Compile Include="Skill\Effect.cs" />
+    <Compile Include="Combat.cs" />
+    <Compile Include="CombatEnum.cs" />
+    <Compile Include="CombatMilitary.cs" />
+    <Compile Include="CombatUnitFactory.cs" />
+    <Compile Include="Commands\EmbattleCommand.cs" />
+    <Compile Include="Commands\MakeWarCommand.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="RangeProvider.cs" />
+    <Compile Include="Skill\ISkill.cs" />
+    <Compile Include="Skill\SkillFactory.cs" />
+    <Compile Include="Skill\StrikeThroughSkill.cs" />
+    <Compile Include="Skill\EmbraveSkill.cs" />
+    <Compile Include="Skill\TacticSkill.cs" />
+    <Compile Include="Skill\StrategySkill.cs" />
+    <Compile Include="WarModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CombatUnit.Property.cs" />
+    <Compile Include="CombatTacticUnit.cs" />
+    <Compile Include="CombatStrategyUnit.cs" />
+    <Compile Include="CombatCampUnit.cs" />
+    <Compile Include="CombatUnit.Method.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Action.Core\Action.Core.csproj">
+      <Project>{4528F2B2-5546-4F67-9B13-D75E1058876E}</Project>
+      <Name>Action.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Action.DataAccess\Action.DataAccess.csproj">
+      <Project>{F622118C-38C5-4D06-929E-46A5DADEF618}</Project>
+      <Name>Action.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Action.Engine\Action.Engine.csproj">
+      <Project>{0348CA5E-C60B-424D-999C-55A153A637E1}</Project>
+      <Name>Action.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Action.Model\Action.Model.csproj">
+      <Project>{FCB49407-1470-44C8-8D9B-AABA921FF088}</Project>
+      <Name>Action.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Action.ResourceManager\Action.ResourceManager.csproj">
+      <Project>{07618A8F-56CE-49D5-89E4-353EDA438F0C}</Project>
+      <Name>Action.ResourceManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

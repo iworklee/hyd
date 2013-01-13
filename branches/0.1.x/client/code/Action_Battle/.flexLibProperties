@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="battle.BattlePlayManager"/>
+    <classEntry path="battle.unit.BattleUnit"/>
+    <classEntry path="battle.unit.FootBattleUnit"/>
+    <classEntry path="battle.unit.GeneralBattleUnit"/>
+    <classEntry path="battle.army.BattleArmy"/>
+    <classEntry path="battle.view.BattleUnitViewVO"/>
+    <classEntry path="battle.view.BattleArmyViewVO"/>
+    <classEntry path="battle.enum.BattleUnitTypeEnum"/>
+    <classEntry path="battle.interfaces.IBattleUnit"/>
+    <classEntry path="battle.map.BattleMap"/>
+    <classEntry path="battle.view.BattleMapViewVO"/>
+    <classEntry path="battle.map.BattleFormation"/>
+    <classEntry path="battle.view.BattleFormationViewVO"/>
+    <classEntry path="battle.vo.BattleReportVO"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

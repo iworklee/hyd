@@ -55,7 +55,7 @@
       <HintPath>..\Reference\protobuf-net\r594\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="SuperSocket.SocketBase">
-      <HintPath>..\Reference\SuperSocket\1.4\SuperSocket.SocketBase.dll</HintPath>
+      <HintPath>..\Reference\SuperSocket\1.5\SuperSocket.SocketBase.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />

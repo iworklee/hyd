@@ -8,9 +8,14 @@ using SuperSocket.SocketBase;
 
 namespace Action.Engine
 {
-    public class GameProtocol : ICustomProtocol<BinaryCommandInfo>
+    public class GameProtocol : IReceiveFilterFactory<BinaryRequestInfo>
     {
-        public ICommandReader<BinaryCommandInfo> CreateCommandReader(IAppServer appServer)
+        //public ICommandReader<BinaryRequestInfo> CreateCommandReader(IAppServer appServer)
+        //{
+        //    return new GameCommandHeaderReader(appServer);
+        //}
+
+        public IReceiveFilter<BinaryRequestInfo> CreateFilter(IAppServer appServer, IAppSession appSession, System.Net.IPEndPoint remoteEndPoint)
         {
             return new GameCommandHeaderReader(appServer);
         }

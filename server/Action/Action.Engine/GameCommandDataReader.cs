@@ -8,25 +8,50 @@ using SuperSocket.SocketBase;
 
 namespace Action.Engine
 {
-    public class GameCommandDataReader : CommandReaderBase<BinaryCommandInfo>
+    public class GameCommandDataReader : ReceiveFilterBase<BinaryRequestInfo>
     {
         public int CommandId { get; set; }
         public int DataLength { get; set; }
 
-        public ICommandReader<BinaryCommandInfo> PrevCommandReader { get; private set; }
+        public IReceiveFilter<BinaryRequestInfo> PrevReceiveFilter { get; private set; }
 
-        public GameCommandDataReader(ICommandReader<BinaryCommandInfo> previousCommandReader)
-            : base(previousCommandReader.AppServer)
+        public GameCommandDataReader(IReceiveFilter<BinaryRequestInfo> previousCommandReader)
+            : base()
         {
-            PrevCommandReader = previousCommandReader;
+            this.PrevReceiveFilter = previousCommandReader;
         }
-        public override BinaryCommandInfo FindCommandInfo(IAppSession session, byte[] readBuffer, int offset, int length, bool isReusableBuffer, out int left)
+        //public override BinaryRequestInfo FindCommandInfo(IAppSession session, byte[] readBuffer, int offset, int length, bool isReusableBuffer, out int left)
+        //{
+        //    NextCommandReader = this;
+        //    left = 0;
+        //    if (LeftBufferSize + length <= DataLength)
+        //    {
+        //        AddArraySegment(readBuffer, offset, length, isReusableBuffer);
+
+        //        if (LeftBufferSize < DataLength)
+        //            return null;
+        //    }
+        //    else
+        //    {
+        //        AddArraySegment(readBuffer, offset, DataLength - LeftBufferSize, false);
+        //        left = length - (DataLength - LeftBufferSize);
+        //    }
+        //    NextCommandReader = PrevCommandReader;
+
+        //    var cmdInfo = new BinaryRequestInfo(CommandId.ToString(), BufferSegments.ToArrayData());
+
+        //    ClearBufferSegments();
+
+        //    return cmdInfo;
+        //}
+
+        public override BinaryRequestInfo Filter(byte[] readBuffer, int offset, int length, bool toBeCopied, out int rest)
         {
-            NextCommandReader = this;
-            left = 0;
+            NextReceiveFilter = this;
+            rest = 0;
             if (LeftBufferSize + length <= DataLength)
             {
-                AddArraySegment(readBuffer, offset, length, isReusableBuffer);
+                AddArraySegment(readBuffer, offset, length, toBeCopied);
 
                 if (LeftBufferSize < DataLength)
                     return null;
@@ -34,11 +59,11 @@ namespace Action.Engine
             else
             {
                 AddArraySegment(readBuffer, offset, DataLength - LeftBufferSize, false);
-                left = length - (DataLength - LeftBufferSize);
+                rest = length - (DataLength - LeftBufferSize);
             }
-            NextCommandReader = PrevCommandReader;
+            NextReceiveFilter = PrevReceiveFilter;
 
-            var cmdInfo = new BinaryCommandInfo(CommandId.ToString(), BufferSegments.ToArrayData());
+            var cmdInfo = new BinaryRequestInfo(CommandId.ToString(), BufferSegments.ToArrayData());
 
             ClearBufferSegments();
 

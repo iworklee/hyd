@@ -9,14 +9,24 @@ namespace Action.Engine
 {
     public abstract class GameCommandFilterAttribute : CommandFilterAttribute
     {
-        public override void OnCommandExecuting(IAppSession session, ICommand command)
+        //public override void OnCommandExecuting(IAppSession session, ICommand command)
+        //{
+        //    OnCommandExecuting(session as GameSession, command as GameCommandBase);
+        //}
+
+        //public override void OnCommandExecuted(IAppSession session, ICommand command)
+        //{
+        //    OnCommandExecuted(session as GameSession, command as GameCommandBase);
+        //}
+
+        public override void OnCommandExecuting(CommandExecutingContext commandContext)
         {
-            OnCommandExecuting(session as GameSession, command as GameCommandBase);
+            OnCommandExecuting(commandContext.Session as GameSession, commandContext.CurrentCommand as GameCommandBase);
         }
 
-        public override void OnCommandExecuted(IAppSession session, ICommand command)
+        public override void OnCommandExecuted(CommandExecutingContext commandContext)
         {
-            OnCommandExecuted(session as GameSession, command as GameCommandBase);
+            OnCommandExecuted(commandContext.Session as GameSession, commandContext.CurrentCommand as GameCommandBase);
         }
 
         public abstract void OnCommandExecuted(GameSession session, GameCommandBase command);

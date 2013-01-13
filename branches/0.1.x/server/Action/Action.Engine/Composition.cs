@@ -56,7 +56,7 @@ namespace Action.Engine
                 }
                 catch (CompositionException compositionException)
                 {
-                    LogUtil.LogError(compositionException);
+                    //Logger.Error(compositionException);
                     return false;
                 }
             }

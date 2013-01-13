@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SuperSocket.SocketBase.Command;
+using SuperSocket.SocketBase.Protocol;
 
 namespace Action.Engine
 {
     public class GameCommandLogger
     {
         private Dictionary<int, DateTime> _lastCmds = new Dictionary<int, DateTime>();
-        private List<BinaryCommandInfo> _allCmds = new List<BinaryCommandInfo>();
+        private List<BinaryRequestInfo> _allCmds = new List<BinaryRequestInfo>();
 
-        public void LogCommand(int commandId, BinaryCommandInfo commandInfo)
+        public void LogCommand(int commandId, BinaryRequestInfo commandInfo)
         {
             _lastCmds[commandId] = DateTime.Now;
             //_allCmds.Add(commandInfo);

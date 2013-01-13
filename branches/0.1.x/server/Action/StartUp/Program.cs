@@ -13,25 +13,34 @@ namespace StartUp
     {
         static void Main(string[] args)
         {
-            LogUtil.Setup();
+            //LogUtil.Setup();
 
-            SocketServiceConfig serverConfig = ConfigurationManager.GetSection("socketServer") as SocketServiceConfig;
-            if (!SocketServerManager.Initialize(serverConfig))
+            //SocketServiceConfig serverConfig = ConfigurationManager.GetSection("socketServer") as SocketServiceConfig;
+            //if (!SocketServerManager.Initialize(serverConfig))
+            //{
+            //    Console.WriteLine("Failed to initialize SuperSocket server! Please check error log for more information!");
+            //    Console.WriteLine("Press any key to close!");
+            //    Console.ReadKey();
+            //    return;
+            //}
+
+            //if (!SocketServerManager.Start())
+            //{
+            //    Console.WriteLine("Failed to start SuperSocket server! Please check error log for more information!");
+            //    Console.WriteLine("Press any key to close!");
+            //    Console.ReadKey();
+            //    SocketServerManager.Stop();
+            //    return;
+            //}
+
+            var bootstrap = BootstrapFactory.CreateBootstrap();
+
+            if (!bootstrap.Initialize())
             {
-                Console.WriteLine("Failed to initialize SuperSocket server! Please check error log for more information!");
-                Console.WriteLine("Press any key to close!");
-                Console.ReadKey();
                 return;
             }
 
-            if (!SocketServerManager.Start())
-            {
-                Console.WriteLine("Failed to start SuperSocket server! Please check error log for more information!");
-                Console.WriteLine("Press any key to close!");
-                Console.ReadKey();
-                SocketServerManager.Stop();
-                return;
-            }
+            var result = bootstrap.Start();
 
             Console.WriteLine("The server has been started! Press key 'q' to stop the server.");
 
@@ -41,7 +50,7 @@ namespace StartUp
                 continue;
             }
 
-            SocketServerManager.Stop();
+            bootstrap.Stop();
 
             Console.WriteLine();
             Console.WriteLine("The server has been stopped!");

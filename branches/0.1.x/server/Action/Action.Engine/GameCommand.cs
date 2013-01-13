@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using SuperSocket.SocketBase.Command;
 using SuperSocket.Common;
+using SuperSocket.SocketBase.Protocol;
 
 namespace Action.Engine
 {
-    public abstract class GameCommandBase : CommandBase<GameSession, BinaryCommandInfo>
+    public abstract class GameCommandBase : CommandBase<GameSession, BinaryRequestInfo>
     {
         protected GameCommandBase()
         {
@@ -37,7 +38,7 @@ namespace Action.Engine
             get { return false; }
         }
 
-        public override void ExecuteCommand(GameSession session, BinaryCommandInfo commandInfo)
+        public override void ExecuteCommand(GameSession session, BinaryRequestInfo commandInfo)
         {
             //TODO:权限认证
             if (CheckRight && !session.Player.Right.Contains(ID))
@@ -54,7 +55,7 @@ namespace Action.Engine
             session.CommandLogger.LogCommand(ID, commandInfo);
         }
 
-        protected abstract void Execute(GameSession session, BinaryCommandInfo commandInfo);
+        protected abstract void Execute(GameSession session, BinaryRequestInfo commandInfo);
 
         public override string ToString()
         {
@@ -64,7 +65,7 @@ namespace Action.Engine
 
     public abstract class GameCommand : GameCommandBase
     {
-        protected override void Execute(GameSession session, BinaryCommandInfo commandInfo)
+        protected override void Execute(GameSession session, BinaryRequestInfo commandInfo)
         {
             if (Ready(session))
                 Run(session);
@@ -80,18 +81,18 @@ namespace Action.Engine
 
     public abstract class GameCommand<T> : GameCommandBase
     {
-        protected override void Execute(GameSession session, BinaryCommandInfo commandInfo)
+        protected override void Execute(GameSession session, BinaryRequestInfo commandInfo)
         {
             T args;
             try
             {
                 // UNDONE 对象池取args实例
-                args = GameCommandDataDeserializer.Deserialize<T>(commandInfo.Data);
+                args = GameCommandDataDeserializer.Deserialize<T>(commandInfo.Body);
             }
             catch (Exception ex)
             {
                 //args = default(T);
-                LogUtil.LogError(string.Format("{0} cannot deserialize data to {1}", this.ToString(), typeof(T).FullName), ex);
+                //Logger.Error(string.Format("{0} cannot deserialize data to {1}", this.ToString(), typeof(T).FullName), ex);
                 session.Close();
                 return;
             }

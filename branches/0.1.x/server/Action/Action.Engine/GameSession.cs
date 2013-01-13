@@ -7,22 +7,23 @@ using SuperSocket.SocketBase.Command;
 using System.IO;
 using ProtoBuf;
 using System.Configuration;
+using SuperSocket.SocketBase.Protocol;
 
 namespace Action.Engine
 {
-    public class GameSession : AppSession<GameSession, BinaryCommandInfo>
+    public class GameSession : AppSession<GameSession, BinaryRequestInfo>
     {
         public new GameServer AppServer
         {
             get { return (GameServer)base.AppServer; }
         }
 
-        public override void StartSession()
-        {
-            // TODO 用户会话
-        }
+        //public override void StartSession()
+        //{
+        //    // TODO 用户会话
+        //}
 
-        public override void HandleUnknownCommand(BinaryCommandInfo cmdInfo)
+        protected override void HandleUnknownRequest(BinaryRequestInfo requestInfo)
         {
             Close();
         }
@@ -67,6 +68,11 @@ namespace Action.Engine
         public GameCommandLogger CommandLogger
         {
             get { return _cmdLogger; }
+        }
+
+        public void SendResponse(byte[] data)
+        {
+            base.Send(data, 0, data.Length);
         }
 
         /// <summary>

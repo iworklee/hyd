@@ -24,7 +24,7 @@ namespace Action.Role.Commands
                 .GetCollection<Player>().AsQueryable();
             var role = players.Where(p => p.Name == name).Select(p => p.Role).FirstOrDefault();
             if (role != null)
-                session.SendResponse<Model.Role>(ID, role);
+                session.SendResponse<Model.Role>(CommandID, role);
         }
     }
 }

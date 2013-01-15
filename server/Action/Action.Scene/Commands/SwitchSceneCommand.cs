@@ -15,7 +15,7 @@ namespace Action.Scene.Commands
         protected override void Run(GameSession session, int args)
         {
             if (session.Player.World.SwitchScene(session.Player, args))
-                session.SendResponse(ID, args);
+                session.SendResponse(CommandID, args);
         }
     }
 }

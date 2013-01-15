@@ -15,7 +15,7 @@ namespace Action.Chat.Commands
         protected override void Run(GameSession session, string args)
         {
             foreach (var player in session.AppServer.World.GetOnlinePlayers())
-                player.Session.SendResponse(ID, args);
+                player.Session.SendResponse(CommandID, args);
         }
     }
 }

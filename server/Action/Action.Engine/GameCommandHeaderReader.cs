@@ -10,26 +10,74 @@ namespace Action.Engine
 {
     public class GameCommandHeaderReader : IReceiveFilter<BinaryRequestInfo>
     {
-        private byte[] buffer = new byte[8];
-        private int currentReceived = 0;
+        private byte[] _buffer = new byte[8];
+        private int _currentReceived = 0;
 
-        //private int currentIndex = 0;
-        //private const int MAX_LENGTH = 5;
-        private int cmdId = 0;
-        private int dataLen = 0;
+        //private int cmdId = 0;
+        //private int dataLen = 0;
 
-        public IAppServer AppServer { get; private set; }
+        private readonly IAppServer _appServer;
+        private readonly GameCommandDataReader _dataReader;
 
-        public int LeftBufferSize { get { return currentReceived; } }
+        public int LeftBufferSize { get { return _currentReceived; } }
 
-        public GameCommandDataReader DataReader { get; private set; }
+        public IReceiveFilter<BinaryRequestInfo> NextReceiveFilter { get; private set; }
 
-        //public IReceiveFilter<BinaryRequestInfo> NextCommandReader { get; private set; }
+        public FilterState State
+        {
+            get { return FilterState.Normal; }
+        }
 
         public GameCommandHeaderReader(IAppServer appServer)
         {
-            AppServer = appServer;
-            DataReader = new GameCommandDataReader(this);
+            _appServer = appServer;
+            _dataReader = new GameCommandDataReader(this);
+        }
+
+        public void Reset()
+        {
+            _currentReceived = 0;
+        }
+
+        public BinaryRequestInfo Filter(byte[] readBuffer, int offset, int length, bool toBeCopied, out int rest)
+        {
+            NextReceiveFilter = this;
+
+            rest = 0;
+
+            if (_currentReceived + length <= _buffer.Length)
+            {
+                Array.Copy(readBuffer, offset, _buffer, _currentReceived, length);
+                _currentReceived += length;
+
+                if (_currentReceived < _buffer.Length)
+                    return null;
+            }
+            else
+            {
+                Array.Copy(readBuffer, offset, _buffer, _currentReceived, _buffer.Length - _currentReceived);
+                rest = length - (_buffer.Length - _currentReceived);
+            }
+
+            _currentReceived = 0;
+
+            int cmdId = BitConverter.ToInt32(_buffer, 0);
+            int dataLen = BitConverter.ToInt32(_buffer, 4);
+
+            BinaryRequestInfo cmdInfo;
+            if (dataLen > 0)
+            {
+                _dataReader.CommandId = cmdId;
+                _dataReader.DataLength = dataLen;
+
+                cmdInfo = _dataReader.Filter(readBuffer, offset + (length - rest), rest, toBeCopied, out rest);
+                NextReceiveFilter = _dataReader.NextReceiveFilter;
+            }
+            else
+            {
+                cmdInfo = new BinaryRequestInfo(cmdId.ToString(), null);
+            }
+            return cmdInfo;
         }
 
         //public BinaryRequestInfo FindCommandInfo(IAppSession session, byte[] readBuffer, int offset, int length, bool isReusableBuffer, out int left)
@@ -126,59 +174,6 @@ namespace Action.Engine
         //}
 
 
-        public BinaryRequestInfo Filter(byte[] readBuffer, int offset, int length, bool toBeCopied, out int rest)
-        {
-            NextReceiveFilter = this;
-
-            rest = 0;
-
-            if (currentReceived + length <= buffer.Length)
-            {
-                Array.Copy(readBuffer, offset, buffer, currentReceived, length);
-                currentReceived += length;
-
-                if (currentReceived < buffer.Length)
-                    return null;
-            }
-            else
-            {
-                Array.Copy(readBuffer, offset, buffer, currentReceived, buffer.Length - currentReceived);
-                rest = length - (buffer.Length - currentReceived);
-            }
-
-            currentReceived = 0;
-
-            cmdId = BitConverter.ToInt32(buffer, 0);
-            dataLen = BitConverter.ToInt32(buffer, 4);
-
-            BinaryRequestInfo cmdInfo;
-            if (dataLen > 0)
-            {
-                DataReader.CommandId = cmdId;
-                DataReader.DataLength = dataLen;
-
-                cmdInfo = DataReader.Filter(readBuffer, offset + (length - rest), rest, toBeCopied, out rest);
-                NextReceiveFilter = DataReader.NextReceiveFilter;
-            }
-            else
-            {
-                cmdInfo = new BinaryRequestInfo(cmdId.ToString(), null);
-            }
-            return cmdInfo;
-
-        }
-
-        public IReceiveFilter<BinaryRequestInfo> NextReceiveFilter { get; private set; }
-
-        public void Reset()
-        {
-            throw new NotImplementedException();
-        }
-
-        public FilterState State
-        {
-            get { throw new NotImplementedException(); }
-        }
     }
 }
 

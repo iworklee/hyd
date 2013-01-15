@@ -46,7 +46,7 @@ namespace Action.Login.Commands
 
             Debug.Assert(combat.Perform());
 
-            session.SendResponse(ID, combat.Report);
+            session.SendResponse(CommandID, combat.Report);
         }
 
     }

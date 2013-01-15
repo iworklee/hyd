@@ -19,7 +19,7 @@ namespace Action.Scene.Commands
                 session.Player.MoveTo(args.X, args.Y);
                 var responseArgs = GetResponseArgs(session.Player, args);
                 foreach (var player in session.Player.Scene.GetPlayers())
-                    player.Session.SendResponse<PlayerMoveArgs>(ID, responseArgs);
+                    player.Session.SendResponse<PlayerMoveArgs>(CommandID, responseArgs);
             }
         }
 

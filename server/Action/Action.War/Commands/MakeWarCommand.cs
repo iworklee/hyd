@@ -87,7 +87,7 @@ namespace Action.Login.Commands
 
             combat.Perform();
 
-            session.SendResponse(ID, combat.Report);
+            session.SendResponse(CommandID, combat.Report);
         }
 
     }

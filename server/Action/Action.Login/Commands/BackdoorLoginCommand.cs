@@ -42,10 +42,10 @@ namespace Action.Login.Commands
                 if (player != null)
                     LoginHelper.EnterGame(session, player);
                 else
-                    session.SendResponse(ID, (int)S2C.RoleMissing);
+                    session.SendResponse(CommandID, (int)S2C.RoleMissing);
             }
             else
-                session.SendResponse(ID, (int)S2C.ErrorAccount);
+                session.SendResponse(CommandID, (int)S2C.ErrorAccount);
         }
     }
 }

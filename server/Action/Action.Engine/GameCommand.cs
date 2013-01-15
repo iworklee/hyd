@@ -13,20 +13,19 @@ namespace Action.Engine
         protected GameCommandBase()
         {
             var type = this.GetType();
-            _name = type.Name;
+            CommandName = type.Name;
 
             var attr = Attribute.GetCustomAttribute(type, typeof(GameCommandAttribute));
             if (attr == null)
-                _id = 0;
+                CommandID = 0;
             else
-                _id = ((GameCommandAttribute)attr).CommandId;
+                CommandID = ((GameCommandAttribute)attr).CommandId;
         }
 
-        private string _name;
-        public override string Name { get { return _name; } }
+        public override string Name { get { return CommandID.ToString(); } }
 
-        private int _id;
-        public int ID { get { return _id; } }
+        public int CommandID { get; private set; }
+        public string CommandName { get; private set; }
 
         protected virtual int CD
         {
@@ -41,25 +40,25 @@ namespace Action.Engine
         public override void ExecuteCommand(GameSession session, BinaryRequestInfo commandInfo)
         {
             //TODO:权限认证
-            if (CheckRight && !session.Player.Right.Contains(ID))
+            if (CheckRight && !session.Player.Right.Contains(CommandID))
                 return;
 
             //TODO:CD验证
-            if (CD > 0 && session.CommandLogger.IsCommandInCD(ID, CD))
+            if (CD > 0 && session.CommandLogger.IsCommandInCD(CommandID, CD))
                 return;
 
             //TODO:执行命令
             Execute(session, commandInfo);
 
             //TODO:记录命令
-            session.CommandLogger.LogCommand(ID, commandInfo);
+            session.CommandLogger.LogCommand(CommandID, commandInfo);
         }
 
         protected abstract void Execute(GameSession session, BinaryRequestInfo commandInfo);
 
         public override string ToString()
         {
-            return string.Format("{0}({1})", Name, ID);
+            return string.Format("{0}({1})", CommandName, CommandID);
         }
     }
 

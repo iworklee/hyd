@@ -26,7 +26,7 @@ namespace Action.Scene.Commands
                 args.Y = (int)player.Position.Y;
                 argsColl.Items.Add(args);
             }
-            session.SendResponse<SnapPlayerArgsCollection>(ID, argsColl);
+            session.SendResponse<SnapPlayerArgsCollection>(CommandID, argsColl);
         }
     }
 }

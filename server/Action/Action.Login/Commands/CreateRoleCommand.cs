@@ -39,7 +39,7 @@ namespace Action.Login.Commands
                 .GetCollection<Player>().AsQueryable();
             if (players.Where(p => p.Name == args.Name).Count() > 0)
             {
-                session.SendResponse(ID, S2C.NameExisted);
+                session.SendResponse(CommandID, S2C.NameExisted);
                 return;
             }
 

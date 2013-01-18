@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="com.hyd.joker.ui.editor.Toolbar"/>
+    <classEntry path="com.hyd.joker.ui.editor.MapEditor"/>
+    <classEntry path="com.hyd.joker.ui.editor.Statusbar"/>
+    <classEntry path="com.hyd.joker.ui.editor.Catalog"/>
+    <classEntry path="com.hyd.joker.ui.editor.Map"/>
+    <classEntry path="com.hyd.joker.ui.editor.Navigator"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

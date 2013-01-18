@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="30"
+				   implements="com.hyd.joker.core.facade.IToolbar"
+				   creationComplete="toolbar_loaded(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.hyd.joker.core.Joker;
+			import com.hyd.joker.core.facade.ICommand;
+			import com.hyd.joker.core.facade.ITool;
+			import com.hyd.joker.core.factory.CommandFactory;
+			
+			import mx.controls.Button;
+			import mx.events.FlexEvent;
+			
+			public var commandSource:String = "factory.commands";
+			private var _buttons:Array = new Array();
+			
+			protected function toolbar_loaded(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				var objCmds:Object = ExternalInterface.call(commandSource);
+				var index:int = 0;
+				for each(var objCmd:Object in objCmds)
+				{
+					var command:ICommand = CommandFactory.getCommand(objCmd.name);
+					if(command != null)
+					{
+						var button:Button = new Button();
+						button.label = objCmd.text;
+						button.setStyle("icon", command.icon);
+						button.width = button.height = 25;
+						button.x = 30 * index ++;
+						button.data = command;
+						button.addEventListener(MouseEvent.CLICK, button_click);
+						this.addElement(button);
+						_buttons.push(button);
+					}
+				}
+			}
+			
+			private function button_click(e:MouseEvent):void
+			{
+				var button:Button = Button(e.currentTarget);
+				if(button != null && button.data is ICommand)
+				{
+					var command:ICommand = ICommand(button.data);
+					command.click();
+					if(button.data is ITool)
+						Joker.context.currentTool = ITool(command);
+				}
+			}
+			
+			public function refresh():void
+			{
+				var tool:ITool = Joker.context.currentTool;
+				for each(var button:Button in _buttons)
+				{
+					if(button.data == tool)
+						button.setStyle("chromeColor", 0xffff00);
+					else
+						button.setStyle("chromeColor", 0xffffff);
+				}
+			}
+			
+		]]>
+	</fx:Script>
+</s:BorderContainer>

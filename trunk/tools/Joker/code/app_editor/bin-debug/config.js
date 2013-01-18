@@ -1,0 +1,51 @@
+﻿var config = {
+	resRoot : "http://localhost/raw/",
+	policy : "http://res.action.yuuhhe.com/crossdomain.xml",
+	getValue : function(name) { return config[name]; }
+};
+
+var factory = {
+	_commands : [
+		{name:"MapPanTool", text:"平移"},
+		{name:"MapZoomInCommand", text:"放大"},
+		{name:"MapZoomOutCommand", text:"缩小"},
+		{name:"DistanceTool", text:"测距"}
+	],
+	commands : function() { return this._commands; },
+	
+	_topLayer : {
+		name : "top", 
+		text : "所有资源",
+		childs : [
+			{
+				name : "Employee",
+				text : "员工",
+				classes : [
+					{name:"e001", text:"曹操", type:"image", label:"【曹操】", data:"Action/wait/w001.png"},
+					{name:"e002", text:"司马懿", type:"image", label:"【司马懿】", data:"Action/wait/w002.png"},
+					{name:"e003", text:"吕布", type:"image", label:"【吕布】", data:"Action/wait/w003.png"}
+				]
+			},
+			{
+				name : "Equipment",
+				text : "设备",
+				classes : []
+			}
+		]
+	},
+	topLayer : function() { return this._topLayer; }
+};
+
+var url = {
+	getParam : function(param) {
+		param += "=";
+		var p = location.href.indexOf(param);
+		if(p < 0)
+			return "";
+		var result = location.href.substring(p + param.length);
+		var q = result.indexOf("&");
+		if(q < 0)
+			return result;
+		return result.substring(0, q);
+	}
+}

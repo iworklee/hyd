@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="com.hyd.joker.core.Joker"/>
+    <classEntry path="com.hyd.joker.core.factory.CommandFactory"/>
+    <classEntry path="com.hyd.joker.core.facade.ICommand"/>
+    <classEntry path="com.hyd.joker.core.facade.Context"/>
+    <classEntry path="com.hyd.joker.core.facade.IControl"/>
+    <classEntry path="com.hyd.joker.core.facade.IMap"/>
+    <classEntry path="com.hyd.joker.core.facade.IDisplay"/>
+    <classEntry path="com.hyd.joker.core.facade.ICatalog"/>
+    <classEntry path="com.hyd.joker.core.facade.INavigator"/>
+    <classEntry path="com.hyd.joker.core.facade.IPropertyGrid"/>
+    <classEntry path="com.hyd.joker.core.facade.ITool"/>
+    <classEntry path="com.hyd.joker.core.facade.IToolbar"/>
+    <classEntry path="com.hyd.joker.core.facade.IStatusbar"/>
+    <classEntry path="com.hyd.joker.core.facade.IBar"/>
+    <classEntry path="com.hyd.joker.core.facade.IDoc"/>
+    <classEntry path="com.hyd.joker.core.map.BaseDoc"/>
+    <classEntry path="com.hyd.joker.core.map.BmpDoc"/>
+    <classEntry path="com.hyd.joker.core.map.SvgDoc"/>
+    <classEntry path="com.hyd.joker.core.map.BmpDisplay"/>
+    <classEntry path="com.hyd.joker.core.map.SvgDisplay"/>
+    <classEntry path="com.hyd.joker.core.factory.DocumentFactory"/>
+    <classEntry path="com.hyd.joker.core.Config"/>
+    <classEntry path="com.hyd.joker.core.map.Drawer"/>
+    <classEntry path="com.hyd.joker.core.facade.IShape"/>
+    <classEntry path="com.hyd.joker.core.shape.Line"/>
+    <classEntry path="com.hyd.joker.core.util.MathEx"/>
+    <classEntry path="com.hyd.joker.core.map.MapDisplay"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

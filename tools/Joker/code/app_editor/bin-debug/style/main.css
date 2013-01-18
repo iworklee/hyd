@@ -1,0 +1,11 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace spark "spark.skins.spark.*";
+
+s|BorderContainer
+{
+	cornerRadius:5;
+	backgroundColor:0x333333;
+}
+

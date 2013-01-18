@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+				   xmlns:editor="com.hyd.joker.ui.editor.*"
+				   creationComplete="appStart(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import com.hyd.joker.core.Joker;
+			
+			import mx.events.FlexEvent;
+			
+			protected function appStart(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				Joker.context.toolbar = _toolbar;
+				Joker.context.navigator = _navigator;
+				Joker.context.catalog = _resourceBox;
+				Joker.context.map = _map;
+				Joker.context.propertyGrid = null;
+				Joker.context.statusbar = _statusbar;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+		<s:layout>
+			<s:VerticalLayout paddingLeft="5" paddingRight="5" paddingTop="5" paddingBottom="5"/>
+		</s:layout>	
+		<editor:Toolbar id="_toolbar" styleName="container" />
+		<s:BorderContainer width="100%" height="100%" backgroundAlpha="0">		
+			<s:layout>
+				<s:HorizontalLayout />
+			</s:layout>
+			<s:BorderContainer width="200" height="100%">
+				<s:layout>
+					<s:VerticalLayout />
+				</s:layout>		
+				<editor:Navigator id="_navigator" styleName="container" />
+				<editor:Catalog id="_resourceBox" styleName="container" />
+			</s:BorderContainer>
+			<editor:Map id="_map" styleName="container" />
+		</s:BorderContainer>	
+	<editor:Statusbar id="_statusbar" />
+</s:BorderContainer>

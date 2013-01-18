@@ -1,0 +1,31 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace spark "spark.skins.spark.*";
+
+#_mapEditor
+{
+	backgroundAlpha:1;
+	backgroundImage:Embed(source='assets/bg.png');
+}
+
+s|BorderContainer
+{
+	borderVisible:false;	
+	backgroundAlpha:0;
+}
+
+.container
+{
+	cornerRadius:5;
+	backgroundAlpha:0;
+	borderColor:#8888ff;
+	borderVisible:true;
+}
+
+#_map
+{
+	backgroundColor:#000000;
+	backgroundAlpha:0;
+}
+

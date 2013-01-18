@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   implements="com.hyd.joker.core.facade.INavigator" buttonMode="true"
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="150"
+				   click="nav_click(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[			
+			import com.hyd.joker.core.Joker;
+			import com.hyd.joker.core.facade.IMap;
+			
+			private var _map:IMap;
+			private var _scaleX:Number;
+			private var _scaleY:Number;
+			
+			public function load(map:IMap):void
+			{
+				_navImage.source = (_map = map).display.source;
+				_scaleX = _map.contentWidth / this.width;
+				_scaleY = _map.contentHeight / this.height;
+				refresh();
+			}
+			
+			public function refresh():void
+			{
+				var mapCenter:Point = _map.getMapCenter();
+				var fx:int = mapCenter.x / _scaleX;
+				var fy:int = mapCenter.y / _scaleY;
+				if(fx >= 0 && fx < width - 12 && fy >= 0 && fy < height - 12)
+				{
+					_focusRect.visible = true;
+					_focusRect.x = fx - 4;
+					_focusRect.y = fy - 4;
+				}
+				else
+					_focusRect.visible = false;
+			}
+			
+			protected function nav_click(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var mapPoint:Point = new Point(event.localX * _scaleX, event.localY * _scaleY);
+				_map.zoomTo(mapPoint);
+			}
+			
+		]]>
+	</fx:Script>		
+	<s:Image id="_navImage" width="100%" height="100%" scaleMode="stretch" />
+	<s:Group>
+		<s:Rect id="_focusRect" width="10" height="10">
+			<s:stroke>
+				<s:SolidColorStroke color="#ff0000" weight="1" />
+			</s:stroke>
+		</s:Rect>
+	</s:Group> 
+</s:BorderContainer>

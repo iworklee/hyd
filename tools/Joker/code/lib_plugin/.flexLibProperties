@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="com.hyd.joker.plugin.command.HelloCommand"/>
+    <classEntry path="assets.IconAssects"/>
+    <classEntry path="com.hyd.joker.plugin.command.BaseCommand"/>
+    <classEntry path="com.hyd.joker.plugin.tool.BaseTool"/>
+    <classEntry path="com.hyd.joker.plugin.tool.MapPanTool"/>
+    <classEntry path="com.hyd.joker.plugin.command.MapZoomInCommand"/>
+    <classEntry path="com.hyd.joker.plugin.command.MapZoomOutCommand"/>
+    <classEntry path="com.hyd.joker.plugin.tool.DistanceTool"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

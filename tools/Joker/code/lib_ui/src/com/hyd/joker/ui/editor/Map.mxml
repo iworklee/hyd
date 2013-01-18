@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+				   implements="com.hyd.joker.core.facade.IMap"
+				   >
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[			
+			import avmplus.getQualifiedClassName;
+			
+			import com.hyd.joker.core.Joker;
+			import com.hyd.joker.core.facade.IDisplay;
+			import com.hyd.joker.core.facade.IDoc;
+			import com.hyd.joker.core.facade.IStatusbar;
+			import com.hyd.joker.core.map.BmpDisplay;
+			import com.hyd.joker.core.map.Drawer;
+			
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.core.IVisualElement;
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			import mx.graphics.BitmapFillMode;
+			
+			private var _doc:IDoc;
+			private var _display:IDisplay;
+			
+			public function refresh():void
+			{
+				_sketch.draw(_display.canvas.graphics);
+			}
+			
+			public function get doc():IDoc
+			{
+				return _doc;
+			}
+			
+			public function get display():IDisplay
+			{
+				return _display;
+			}
+			
+			public function get isEmpty():Boolean
+			{
+				return _display.source == null;
+			}
+			
+			private var _contentWidth:Number;
+			public function get contentWidth():Number
+			{
+				return _contentWidth;
+			}
+			
+			private var _contentHeight:Number;
+			public function get contentHeight():Number
+			{
+				return _contentHeight;
+			}			
+			
+			private var _scale:int = 1;
+			public function get scale():int
+			{
+				return _scale;
+			}
+			public function set scale(value:int):void
+			{
+				_scale = value;
+			}			
+			
+			private var _sketch:Drawer = new Drawer();
+			public function get sketch():Drawer
+			{
+				return _sketch;
+			}
+			
+			public function load(doc:IDoc):void
+			{		
+				_doc = doc;
+				_display = _doc.display;	
+				_doc.load(this);
+			}
+			
+			public function onload():void
+			{			
+				_group.removeAllElements();
+				_group.addElement(UIComponent(_display));
+				_contentWidth = _display.source.width;
+				_contentHeight = _display.source.height;
+				Joker.context.navigator.load(this);
+				Joker.context.statusbar.refresh();
+				Joker.context.useDefaultTool();
+			}
+			
+			public function zoom(scale:int):void
+			{
+				if(scale < 1)
+					scale = 1;
+				else if(scale > Joker.config.maxScale) //Global.config.maxScale
+					scale = Joker.config.maxScale;
+				_scale = scale;
+				if(_display.source != null)
+				{
+					_display.width = _contentWidth / scale;
+					_display.height = _contentHeight / scale;
+				}
+				else
+					_display.width = _display.height = 0;
+				zoomTo(getMapCenter());
+				Joker.context.statusbar.refresh();
+			}
+			
+			public 	function zoomTo(mapPoint:Point):void
+			{
+				var point:Point = toScreenPoint(mapPoint);
+				panTo(this.width / 2 - point.x, this.height / 2 - point.y);
+			}
+			
+			public function toScreenSize(size:Number):Number
+			{
+				return size / _scale;
+			}
+			
+			public function toMapSize(size:Number):Number
+			{
+				return size * _scale;
+			}
+			
+			public function toScreenPoint(point:Point):Point
+			{
+				return new Point(toScreenSize(point.x), toScreenSize(point.y));
+			}
+			
+			public function toMapPoint(point:Point):Point
+			{
+				return new Point(toMapSize(point.x), toMapSize(point.y));
+			}
+			
+			public function pan(x:Number, y:Number):void
+			{
+				panTo(_display.x + x, _display.y + y);
+			}
+			
+			public function panTo(x:Number, y:Number):void
+			{
+				_display.x = x;
+				_display.y = y;
+				Joker.context.navigator.refresh();
+			}
+			
+			public function getScreenCenter():Point
+			{
+				return new Point(width / 2 - _display.x, height / 2 - _display.y);
+			}
+			
+			public function getMapCenter():Point
+			{
+				return toMapPoint(getScreenCenter());
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Scroller id="_scroll" width="100%" height="100%" > 
+		<s:Group id="_group">
+			<s:Rect width="100%" height="100%">  
+				<s:fill>
+					<s:SolidColor alpha="0"/>  
+				</s:fill>  
+			</s:Rect>
+		</s:Group>
+	</s:Scroller>
+</s:BorderContainer>

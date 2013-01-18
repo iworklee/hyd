@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   minWidth="640" minHeight="400"
+			   preinitialize="appInit(event)"
+			   creationComplete="appStart(event)"
+			   xmlns:editor="com.hyd.joker.ui.editor.*">
+	<fx:Style source="assets/main.css" />
+	<fx:Script>
+		<![CDATA[
+			import com.hyd.joker.core.Joker;
+			import com.hyd.joker.core.factory.DocumentFactory;
+			import com.hyd.joker.core.map.BmpDoc;
+			import com.hyd.joker.core.map.SvgDoc;
+			import com.hyd.joker.plugin.command.HelloCommand;
+			import com.hyd.joker.plugin.command.MapZoomInCommand;
+			import com.hyd.joker.plugin.command.MapZoomOutCommand;
+			import com.hyd.joker.plugin.tool.DistanceTool;
+			import com.hyd.joker.plugin.tool.MapPanTool;
+			
+			import mx.events.FlexEvent;
+			
+			import spark.skins.spark.ImageSkin;
+
+			
+			protected function appInit(event:FlexEvent):void
+			{
+				// init commands
+				Joker.commands = [new HelloCommand(), new MapPanTool(), new MapZoomInCommand(),
+				new MapZoomOutCommand(), new DistanceTool()];
+				
+				// init config
+				Joker.config.maxScale = 10;
+				//Joker.config.mapAlpha = 0;
+			}
+			
+			protected function appStart(event:FlexEvent):void
+			{
+				Joker.context.map.load(DocumentFactory.createDocument("map/Main.png"));
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<editor:MapEditor id="_mapEditor" />
+</s:Application>

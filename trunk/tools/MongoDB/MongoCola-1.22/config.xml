@@ -20,6 +20,25 @@
       <ReplSetName />
       <ReplsetList />
     </MongoConnectionConfig>
+    <MongoConnectionConfig>
+      <ConnectionString />
+      <ConnectionName>server</ConnectionName>
+      <Host>192.168.1.18</Host>
+      <Port>27017</Port>
+      <UserName />
+      <Password />
+      <DataBaseName />
+      <IsSlaveOk>false</IsSlaveOk>
+      <IsSafeMode>false</IsSafeMode>
+      <WaitQueueSize>0</WaitQueueSize>
+      <wtimeoutMS>0</wtimeoutMS>
+      <fsync>false</fsync>
+      <journal>false</journal>
+      <connectTimeoutMS>0</connectTimeoutMS>
+      <socketTimeoutMS>0</socketTimeoutMS>
+      <ReplSetName />
+      <ReplsetList />
+    </MongoConnectionConfig>
   </SaveConnectionList>
   <ConfigVer>1</ConfigVer>
   <MongoBinPath>..\mongodb-win32-i386-2.0.7\bin</MongoBinPath>

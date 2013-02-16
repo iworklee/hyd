@@ -9,6 +9,8 @@
 	<fx:Style source="assets/main.css" />
 	<fx:Script>
 		<![CDATA[
+			import assets.MainAssects;
+			
 			import com.hyd.joker.core.Joker;
 			import com.hyd.joker.core.factory.DocumentFactory;
 			import com.hyd.joker.core.map.BmpDoc;
@@ -18,6 +20,8 @@
 			import com.hyd.joker.plugin.command.MapZoomOutCommand;
 			import com.hyd.joker.plugin.tool.DistanceTool;
 			import com.hyd.joker.plugin.tool.MapPanTool;
+			import com.hyd.joker.plugin.tool.MapZoomInTool;
+			import com.hyd.joker.plugin.tool.MapZoomOutTool;
 			
 			import mx.events.FlexEvent;
 			
@@ -27,8 +31,8 @@
 			protected function appInit(event:FlexEvent):void
 			{
 				// init commands
-				Joker.commands = [new HelloCommand(), new MapPanTool(), new MapZoomInCommand(),
-				new MapZoomOutCommand(), new DistanceTool()];
+				Joker.commands = [new HelloCommand(), new MapPanTool(), new MapZoomInTool(),
+				new MapZoomOutTool(),  new DistanceTool()];
 				
 				// init config
 				Joker.config.maxScale = 10;

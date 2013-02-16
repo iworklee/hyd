@@ -34,6 +34,14 @@ package com.hyd.joker.plugin.tool
 		{
 		}
 		
+		public function mouseOver(e:MouseEvent):void
+		{			
+		}
+		
+		public function mouseOut(e:MouseEvent):void
+		{			
+		}
+		
 		public function mouseDown(e:MouseEvent):void
 		{
 		}

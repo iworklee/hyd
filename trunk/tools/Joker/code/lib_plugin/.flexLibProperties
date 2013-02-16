@@ -9,6 +9,7 @@
     <classEntry path="com.hyd.joker.plugin.command.MapZoomInCommand"/>
     <classEntry path="com.hyd.joker.plugin.command.MapZoomOutCommand"/>
     <classEntry path="com.hyd.joker.plugin.tool.DistanceTool"/>
+    <classEntry path="com.hyd.joker.plugin.tool.MapZoomInTool"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

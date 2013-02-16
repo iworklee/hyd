@@ -17,7 +17,7 @@ package com.hyd.joker.core.facade
 		function load(doc:IDoc):void;
 		function onload():void;
 		function zoom(scale:int):void;
-		function zoomTo(mapPoint:Point):void;
+		function match(mapPoint:Point, scrPoint:Point):void;
 		function toScreenSize(size:Number):Number;
 		function toMapSize(size:Number):Number;
 		function toScreenPoint(point:Point):Point;

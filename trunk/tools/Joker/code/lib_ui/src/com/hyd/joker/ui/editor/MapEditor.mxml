@@ -17,7 +17,7 @@
 				// TODO Auto-generated method stub
 				Joker.context.toolbar = _toolbar;
 				Joker.context.navigator = _navigator;
-				Joker.context.catalog = _resourceBox;
+				Joker.context.catalog = _catalog;
 				Joker.context.map = _map;
 				Joker.context.propertyGrid = null;
 				Joker.context.statusbar = _statusbar;
@@ -41,7 +41,7 @@
 					<s:VerticalLayout />
 				</s:layout>		
 				<editor:Navigator id="_navigator" styleName="container" />
-				<editor:Catalog id="_resourceBox" styleName="container" />
+				<editor:Catalog id="_catalog" styleName="container" />
 			</s:BorderContainer>
 			<editor:Map id="_map" styleName="container" />
 		</s:BorderContainer>	

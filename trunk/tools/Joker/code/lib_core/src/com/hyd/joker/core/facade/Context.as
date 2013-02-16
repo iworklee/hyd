@@ -84,6 +84,18 @@ package com.hyd.joker.core.facade
 				_currentTool.keyUp(e);
 		}
 		
+		public function mouseOver(e:MouseEvent):void
+		{
+			if(_currentTool != null)
+				_currentTool.mouseOver(e);
+		}
+		
+		public function mouseOut(e:MouseEvent):void
+		{
+			if(_currentTool != null)
+				_currentTool.mouseOut(e);
+		}
+		
 		public function mouseDown(e:MouseEvent):void
 		{
 			if(_currentTool != null)

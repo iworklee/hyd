@@ -17,13 +17,13 @@
 			import mx.controls.Button;
 			import mx.events.FlexEvent;
 			
-			public var commandSource:String = "factory.commands";
+			public var dataSource:String = "factory.commands";
 			private var _buttons:Array = new Array();
 			
 			protected function toolbar_loaded(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				var objCmds:Object = ExternalInterface.call(commandSource);
+				var objCmds:Object = ExternalInterface.call(dataSource);
 				var index:int = 0;
 				for each(var objCmd:Object in objCmds)
 				{

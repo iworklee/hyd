@@ -16,6 +16,11 @@ package com.hyd.joker.plugin.tool
 		private var _startX:Number;
 		private var _startY:Number;
 		
+		public override function mouseOut(e:MouseEvent):void
+		{
+			_mouseDown = false;
+		}
+		
 		public override function mouseDown(e:MouseEvent):void
 		{
 			_mouseDown = true;

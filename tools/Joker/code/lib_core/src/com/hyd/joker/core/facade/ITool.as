@@ -13,6 +13,8 @@ package com.hyd.joker.core.facade
 		function dispose():void;
 		function keyDown(e:KeyboardEvent):void;
 		function keyUp(e:KeyboardEvent):void;
+		function mouseOver(e:MouseEvent):void;
+		function mouseOut(e:MouseEvent):void;
 		function mouseDown(e:MouseEvent):void;
 		function mouseMove(e:MouseEvent):void;
 		function mouseUp(e:MouseEvent):void;

@@ -28,6 +28,10 @@
     <classEntry path="com.hyd.joker.core.shape.Line"/>
     <classEntry path="com.hyd.joker.core.util.MathEx"/>
     <classEntry path="com.hyd.joker.core.map.MapDisplay"/>
+    <classEntry path="com.hyd.joker.core.util.ObjectEx"/>
+    <classEntry path="com.hyd.joker.core.layer.CategoryLayer"/>
+    <classEntry path="com.hyd.joker.core.layer.FeatureLayer"/>
+    <classEntry path="com.hyd.joker.core.layer.LayerBase"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

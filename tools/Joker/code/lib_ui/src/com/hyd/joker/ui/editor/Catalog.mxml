@@ -10,14 +10,22 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[			
+			import com.hyd.joker.core.layer.CategoryLayer;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Tree;
 			import mx.events.FlexEvent;
 			
-			public var topLayerSource:String = "factory.topLayer";
+			public var dataSource:String = "factory.catalog";
+			private var _data:XML;
 			
 			protected function catalog_loaded(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				
+				var layer:CategoryLayer = new CategoryLayer();
+				layer.copyFrom(ExternalInterface.call(dataSource));
+				_tree.dataProvider = new ArrayCollection([layer]);
+				_tree.labelField = "text";
 			}
 			
 			public function refresh():void
@@ -27,4 +35,5 @@
 			
 		]]>
 	</fx:Script>
+	<mx:Tree id="_tree" width="100%" height="100%" itemRenderer="com.hyd.joker.core.util.TreeCheckBoxRenderer" />
 </s:BorderContainer>

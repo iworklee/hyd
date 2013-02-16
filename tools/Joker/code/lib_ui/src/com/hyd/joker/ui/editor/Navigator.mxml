@@ -43,7 +43,7 @@
 			{
 				// TODO Auto-generated method stub
 				var mapPoint:Point = new Point(event.localX * _scaleX, event.localY * _scaleY);
-				_map.zoomTo(mapPoint);
+				_map.match(mapPoint, new Point(_map.width / 2, _map.height / 2));
 			}
 			
 		]]>

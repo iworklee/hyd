@@ -29,18 +29,19 @@ package com.hyd.joker.core.map
 			this.addEventListener(MouseEvent.MOUSE_MOVE, mouseMove);
 			this.addEventListener(MouseEvent.MOUSE_UP, Joker.context.mouseUp);
 			this.addEventListener(MouseEvent.DOUBLE_CLICK, Joker.context.mouseDoubleClick);
-			this.addEventListener(Event.ENTER_FRAME, enterFrame);
 		}
 		
 		protected function mouseOver(e:MouseEvent):void
 		{
 			_cursorId = cursorManager.setCursor(_cursor);
+			Joker.context.mouseOver(e);
 		}
 		
 		protected function mouseOut(e:MouseEvent):void
 		{
 			if(_cursorId != -1)
 				cursorManager.removeCursor(_cursorId);
+			Joker.context.mouseOut(e);
 		}
 		
 		private function mouseMove(e:MouseEvent):void
@@ -52,11 +53,6 @@ package com.hyd.joker.core.map
 			mapPoint.y = map.toMapSize(scrPoint.y = e.localY);
 			Joker.context.statusbar.refresh();
 			Joker.context.mouseMove(e);
-		}
-		
-		private function enterFrame(e:Event):void
-		{
-			Joker.context.outputText = new Date().toString();
 		}
 		
 		public function get source():Object

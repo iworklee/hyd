@@ -15,10 +15,10 @@ package assets
 		public static var MapPanTool:Class;
 		
 		[Embed(source="assets/icon/ZoomIn.png")]
-		public static var MapZoomInCommand:Class;
+		public static var MapZoomInTool:Class;
 		
 		[Embed(source="assets/icon/ZoomOut.png")]
-		public static var MapZoomOutCommand:Class;
+		public static var MapZoomOutTool:Class;
 		
 		[Embed(source="assets/icon/Distance.png")]
 		public static var DistanceTool:Class;

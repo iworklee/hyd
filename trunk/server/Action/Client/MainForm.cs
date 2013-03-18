@@ -12,6 +12,8 @@ using System.Reflection;
 using ProtoBuf;
 using MongoDB.Bson;
 using Action.Model;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.IO;
 
 namespace Client
 {
@@ -175,6 +177,12 @@ namespace Client
         {
             var className = ddlParamType3.Text;
             var classType = (Type)ddlParamType3.SelectedValue;
+            var o = Activator.CreateInstance(classType);
+            //var sb = new StringBuilder();
+            //var textWriter = new StringWriter(sb);
+            //BsonSerializer.Serialize(new JsonWriter(textWriter, new JsonWriterSettings()), o);
+            //txtBson.Text = sb.ToString();
+            txtBson.Text = o.ToJson();
         }
     }
 }

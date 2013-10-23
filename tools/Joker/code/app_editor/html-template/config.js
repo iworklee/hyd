@@ -1,5 +1,5 @@
 ﻿var config = {
-	resRoot : "http://localhost/raw/",
+	resRoot : "http://localhost:1024/caocao/",
 	policy : "http://res.action.yuuhhe.com/crossdomain.xml",
 	getValue : function(name) { return config[name]; }
 };
@@ -18,8 +18,8 @@ var factory = {
 		text : "所有资源",
 		children : [
 			{
-				name : "Employee",
-				text : "员工",
+				name : "Hero",
+				text : "英雄",
 				children : [
 					{name:"e001", text:"曹操", type:"image", label:"【曹操】", data:"Action/wait/w001.png", checked:true},
 					{name:"e002", text:"司马懿", type:"image", label:"【司马懿】", data:"Action/wait/w002.png"},
@@ -27,8 +27,8 @@ var factory = {
 				]
 			},
 			{
-				name : "Equipment",
-				text : "设备",
+				name : "Building",
+				text : "建筑",
 				children : []
 			}
 		]

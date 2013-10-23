@@ -41,7 +41,7 @@
 			
 			protected function appStart(event:FlexEvent):void
 			{
-				Joker.context.map.load(DocumentFactory.createDocument("map/Main.png"));
+				Joker.context.map.load(DocumentFactory.createDocument("map/m001.png"));
 			}
 			
 		]]>
